@@ -1,0 +1,8 @@
+crawler:
+  sites_folder_path: 'public/sites'
+  years:
+    - 'current'
+    - '2008'
+    - '2004'
+    - '1998'
+    - '1994'

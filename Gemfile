@@ -8,6 +8,8 @@ gem 'rails', '3.2.12'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'mongoid'
+gem 'mongoid_token'
+gem 'rails_config'
 
 gem 'haml-rails'
 gem 'less-rails'
