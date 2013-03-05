@@ -1,2 +1,10 @@
 %h1 Welcome to Timewarp
 %p Some epic shit happens here! ;)
+
+.timewarp_form
+  %p
+    %b Let's Timewarp!
+    Adresse eingeben und los geht's!
+  = simple_form_for @site do |f|
+    = f.input_field :url, :placeholder => 'www.timewarp.com'
+    = f.submit 'Warp!'
