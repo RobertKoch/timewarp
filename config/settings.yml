@@ -1,5 +1,5 @@
 crawler:
-  sites_folder_path: 'public/sites'
+  sites_folder_path: 'tmp/sites'
   years:
     - 'current'
     - '2008'
