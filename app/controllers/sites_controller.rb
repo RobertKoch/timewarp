@@ -3,8 +3,7 @@ class SitesController < ApplicationController
   end
 
   def create
-    url = params[:site][:url]
-    if url && !url.blank?
+    if url = params[:site][:url]
       unless existing_entry = Site.find_by(url: url)
         # no record found, save and start crawler
       else
