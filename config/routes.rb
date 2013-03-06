@@ -5,7 +5,9 @@ Timewarp::Application.routes.draw do
 
   resources :sites, :only => [:index, :show, :create]
 
-  get "team"         => "pages#about"
-  get "impressum"       => "pages#imprint"
-  get "agb" => "pages#general_terms"
+  get "archive"   => "sites#index", :as => "archive"
+
+  get "team"      => "pages#about"
+  get "impressum" => "pages#imprint"
+  get "agb"       => "pages#general_terms"
 end
