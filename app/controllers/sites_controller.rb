@@ -3,14 +3,15 @@ class SitesController < ApplicationController
   end
 
   def create
-    if url = params[:site][:url]
-      unless existing_entry = Site.find_by(url: url)
-        # no record found, save and start crawler
-      else
-        # record found, link to archive
-      end
+    url = params[:site][:url]
+    @site = Site.new(:url => url)
+
+    #todo: if entry already exist, redirect to archive
+    #unless existing_entry = Site.find_by(url: url)
+
+    if @site.save
+      #start crawler and do something
     else
-      @site = Site.new
       render 'home/index'
     end
   end

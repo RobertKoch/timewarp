@@ -8,3 +8,4 @@
   = simple_form_for @site do |f|
     = f.input_field :url, :placeholder => 'www.timewarp.com'
     = f.submit 'Warp!'
+  %p= error_helper @site

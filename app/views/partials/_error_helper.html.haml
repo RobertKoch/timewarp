@@ -1,0 +1,5 @@
+- unless object.errors.blank?
+  .errors
+    - object.errors.full_messages.each do |error|
+      = error
+      %br
