@@ -5,7 +5,7 @@ class Site
 
   store_in collection: 'sites'
 
-  validates :url, :presence => true, :format => {:with => /(http|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&amp;:\/~\+#]*[\w\-\@?^=%&amp;\/~\+#])?}/}
+  validates :url, :presence => true, :format => {:with => /^(http(?:s)?\:\/\/[a-zA-Z0-9\-]+(?:\.[a-zA-Z0-9\-]+)*\.[a-zA-Z]{2,6}(?:\/?|(?:\/[\w\-]+)*)(?:\/?|\/\w+\.[a-zA-Z]{2,4}(?:\?[\w]+\=[\w\-]+)?)?(?:\&[\w]+\=[\w\-]+)*)$/}
 
   after_initialize :add_http
 
@@ -25,3 +25,4 @@ private
     self.url = "http://" + self.url if (self.url && self.url.match(/^https?\:\/\/.+$/).nil?)
   end
 end
+
