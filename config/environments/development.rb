@@ -34,8 +34,4 @@ Timewarp::Application.configure do
 
   # Expands the lines which load the assets
   config.assets.debug = true
-
-  #less
-  config.less.paths << "#{Rails.root}/lib/less/protractor/stylesheets"
-  config.less.compress = true
 end

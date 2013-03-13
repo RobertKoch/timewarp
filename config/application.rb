@@ -63,8 +63,5 @@ module Timewarp
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
-
-    #set stylesheet-engine to less
-    config.app_generators.stylesheet_engine :less
   end
 end
