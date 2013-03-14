@@ -1,4 +1,11 @@
-%a{:href => team_path} team
-%a{:href => archive_path} archiv
-%a{:href => history_path} geschichte
-%a{:href => root_path} timewarp
+%ul
+  %li
+    %a{:href => root_path, :class => 'active'} timewarp
+  %li
+    %a{:href => archive_path} archiv
+  %li
+    %a{:href => history_path} geschichte
+  %li
+    %a{:href => team_path} team
+  %span{:class => 'curve'}
+
