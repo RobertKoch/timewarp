@@ -9,3 +9,11 @@
     = f.input_field :url, :placeholder => 'www.timewarp.com'
     = f.submit 'Warp!'
   %p= error_helper @site
+
+
+.debug_all_sites
+  = @sites.each do |site|
+    %p
+      = link_to site.url, site_analyse_path(site.token)
+      = " | "
+      = link_to "löschen", site_path(site.token), :method => :delete, :confirm => "Wirklich löschen?"
