@@ -8,6 +8,14 @@ class Crawler
     #create folders and save site to current
     create_folders
     system("wget --convert-links --force-html --output-document=#{@site_dir}/current/index.html #{@site.url}")
+
+    #check if wget was successful
+    #todo: this does not work, find solution for exception handling for wget
+    if File.exists? "#{@site_dir}/current/index.html"
+      true
+    else
+      false
+    end
   end
 
   def get_site_title
