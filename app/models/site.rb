@@ -8,6 +8,7 @@ class Site
   validates :url, :presence => true, :format => {:with => /^(http(?:s)?\:\/\/[a-zA-Z0-9\-]+(?:\.[a-zA-Z0-9\-]+)*\.[a-zA-Z]{2,6}(?:\/?|(?:\/[\w\-]+)*)(?:\/?|\/\w+\.[a-zA-Z]{2,4}(?:\?[\w]+\=[\w\-]+)?)?(?:\&[\w]+\=[\w\-]+)*)$/}
 
   after_initialize :add_http
+  after_save :crawl_site_if_possible
 
   token :length => 6, :contains => :alphanumeric
 
@@ -23,6 +24,13 @@ class Site
 private
   def add_http
     self.url = "http://" + self.url if (self.url && self.url.match(/^https?\:\/\/.+$/).nil?)
+  end
+
+  def crawl_site_if_possible
+    crawler = Crawler.new(self)
+    unless crawler.crawl_site
+      #todo: error handling for crawler
+    end
   end
 end
 
