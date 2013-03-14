@@ -21,6 +21,18 @@ class Site
 
   attr_accessible :url, :title
 
+  def self.latest(limit = 5)
+    order_by('created_at DESC').limit(limit)
+  end
+
+  def self.most_viewed(limit = 5)
+    order_by('visits DESC').limit(limit)
+  end
+
+  def self.top_rated(limit = 5)
+    order_by('likes DESC').limit(limit)
+  end
+
 private
   def add_http
     self.url = "http://" + self.url if (self.url && self.url.match(/^https?\:\/\/.+$/).nil?)
