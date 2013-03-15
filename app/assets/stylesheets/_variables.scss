@@ -1,0 +1,26 @@
+/* colors */
+$white: #fff;
+$beige: #fef8ea;
+$green: #b6c02f;
+$blue: #34a6de;
+$grey-dark: #333;
+$grey-medium: #666;
+
+/* fonts */
+$font-size-normal: 12px;
+$font-size-medium: 18px;
+
+@mixin font-default {
+  font: {
+    family: Helvetica, Arial, sans-serif;
+    size: $font-size-normal;
+    weight: normal;
+  }
+  color: $grey-dark;
+}
+@mixin font-michroma {
+  font: {
+    family: 'Michroma', sans-serif;
+  }
+  letter-spacing: 0.05em;
+}

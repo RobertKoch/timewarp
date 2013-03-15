@@ -1,21 +1,102 @@
-#header {
-  width: 100%;
-  margin: 20px 0 20px 0;
-  a {
-    color: green;
+@import 'variables';
+
+body, input, select, textarea {
+  @include font-default;
+}
+body {
+  background: {
+    image: url('bg-body.png');
+    color: $beige;
+    position: 0 0;
+    repeat: repeat;
   }
 }
 
-#content {
-  width: 70%;
-  height: 400px;
-  border: 1px dotted black;
-  padding: 10px;
+#header {
+  position: relative;
+  width: 97%;
+  height: 130px;
 }
 
-#footer {
-  width: auto;
-  border-top: 1px solid #dedede;
-  margin: 20px 0 0 0;
-  padding: 5px;
+#logo {
+  position: absolute;
+  top: 3px;
+  right: -21px;
+  a, .shadow {
+    display: block;
+    text-indent: -19999px;
+    overflow: hidden;
+    width: 151px;
+    height: 151px;
+    background: {
+      position: 0 0;
+      repeat: no-repeat;
+    }
+  }
+  a {
+    position: relative;
+    background: {
+      image: url('logo.png');
+    }
+    z-index: 2;
+  }
+  .shadow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: {
+      image: url('logo-shadow.png');
+    }
+    z-index: 1;
+  }
+}
+
+#navigation {
+  position: relative;
+  float: left;
+  width: 90%;
+  @include font-michroma;
+  background: {
+    color: $green;
+  }
+  font: {
+    size: $font-size-medium;
+  }
+  padding: 8px 0 13px 0;
+  margin: 60px 0 0 0;
+  li {
+    float: right; 
+    margin-left: 30px;
+    &:first-child {
+      margin-right: 30px;
+    }
+  }
+  a {
+    color: $grey-medium;
+    text-decoration: none;
+    &:hover, &.active {
+      color: $white;
+    }
+  }
+  .curve {
+    position: absolute;
+    top: 0;
+    right: -5px;
+    display: block;
+    width: 5px;
+    height: 39px;
+    background: {
+      image: url('curve-green.png');
+      position: 0 0;
+      repeat: no-repeat;
+    }
+  }
+}
+
+#wrapper {
+  position: relative;
+  margin: 0 3%;
+  background-color: white;
+  width: 94%;
+
 }
