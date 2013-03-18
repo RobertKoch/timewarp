@@ -7,5 +7,6 @@
 2. Clone Respository
 3. run "bundle install"
 4. To generate the mongoid.yml run "rails g mongoid:config"
-5. Modify your mongoid.yml if nessecary
+4. Set the "raise_not_found_error"-option in mongoid.yml to false
+5. Modify the other options in mongoid.yml if nessecary
 6. Start the Rails Server and enjoy ;)
