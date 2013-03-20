@@ -12,7 +12,7 @@
 
 
 .debug_all_sites
-  = @sites.each do |site|
+  - @sites.each do |site|
     %p
       = link_to site.url, site_analyse_path(site.token)
       = " | "
