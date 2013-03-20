@@ -1,3 +1,3 @@
 %h2= @site.url
 #website_container
-  %iframe{:src => Rails.root.join("#{Settings.crawler.sites_folder_path}/#{@site.token}/current/index.html"), :width => "100%", :height => "100%"}
+  %iframe{:src => "#{Settings.host}/#{Settings.sites_folder}/#{@site.token}/current/index.html", :width => "100%", :height => "100%"}
