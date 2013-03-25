@@ -18,3 +18,4 @@ pickle-email-*.html
 *sublime*
 mongoid.yml
 .DS_Store
+.rvmrc
