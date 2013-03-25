@@ -6,7 +6,7 @@ Timewarp::Application.routes.draw do
   resources :sites, :only => [:index, :show, :create, :destroy]
 
   get "archive" => "sites#index", :as => "archive"
-  get "sites/:id/analyse" => "sites#analyse", :as => "site_analyse"
+  get "sites/:id/analyse" => "sites#analyse", :as => "sites_analyse"
 
   get "team"           => "pages#about", :as => "team"
   get "history_of_web" => "pages#history_of_web", :as => "history"
