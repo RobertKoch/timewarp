@@ -7,7 +7,7 @@
 
   .debug
     %ul
-      = @sites.each do |site|
+      - @sites.each do |site|
         %li
           = link_to site.url, site_analyse_path(site.token)
           = ' | '
@@ -37,3 +37,4 @@
     %p
       %img{ :src => '/assets/dummy-img-grey.png', :width => '300', :height => 'auto', :alt => ' ' }
       Zuerst muss die WWW-Adresse ins Eingabefeld getippt werden. Danach den warp!-Butto betätigen. Wurde die Seite bereits von einem anderen Benutzer gewarpt, gelangt man sofort ins Archiv und kann die Seite dort ansehen.
+

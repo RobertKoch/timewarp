@@ -1,11 +1,12 @@
 %ul
   %li
-    %a{:href => root_path, :class => 'active'} timewarp
+    - on_analyse_path = (controller.controller_name == 'sites' && controller.action_name == 'analyse')
+    %a{:href => root_path, :class => (current_page?(root_path) || on_analyse_path ) ? 'active' : ''} timewarp
   %li
-    %a{:href => archive_path} archiv
+    %a{:href => archive_path, :class => current_page?(archive_path) ? 'active' : ''} archiv
   %li
-    %a{:href => history_path} geschichte
+    %a{:href => history_path, :class => current_page?(history_path) ? 'active' : ''} geschichte
   %li
-    %a{:href => team_path} team
+    %a{:href => team_path, :class => current_page?(team_path) ? 'active' : ''} team
   %span{:class => 'curve'}
 

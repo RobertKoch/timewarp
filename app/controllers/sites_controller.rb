@@ -14,7 +14,7 @@ class SitesController < ApplicationController
     #todo: if entry already exist, redirect to archive
     unless existing_entry = Site.find_by(url: @site.url)
       if @site.save
-        redirect_to site_analyse_path(@site.token)
+        redirect_to sites_analyse_path(@site.token)
       else
         render 'home/index'
       end
