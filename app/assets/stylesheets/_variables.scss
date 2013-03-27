@@ -1,26 +1,31 @@
 /* colors */
 $white: #fff;
+$red: #dd1717;
 $beige: #fef8ea;
 $green: #b6c02f;
 $blue: #34a6de;
-$grey-dark: #333;
-$grey-medium: #666;
+$grey_dark: #333;
+$grey_medium: #666;
+$grey_light: #ccc;
 
 /* fonts */
-$font-size-normal: 12px;
-$font-size-medium: 18px;
+$font_size_normal: 12px;
+$font_size_medium: 18px;
 
-@mixin font-default {
+@mixin font_default {
   font: {
     family: Helvetica, Arial, sans-serif;
-    size: $font-size-normal;
+    size: $font_size_normal;
     weight: normal;
   }
-  color: $grey-dark;
+  color: $grey_dark;
 }
-@mixin font-michroma {
+@mixin font_michroma {
   font: {
     family: 'Michroma', sans-serif;
   }
   letter-spacing: 0.05em;
 }
+
+/* widths */
+$input_width: 100%;

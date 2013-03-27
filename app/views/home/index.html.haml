@@ -1,19 +1,39 @@
-%h1 Welcome to Timewarp
-%p Some epic shit happens here! ;)
+%section#timewarp
+  .timewarp_form
+    = simple_form_for @site do |f|
+      = f.input_field :url, :placeholder => 'http://www.timewarp.com'
+      = f.submit 'Warp!'
+    %p= error_helper @site
 
-.timewarp_form
-  %p
-    %b Let's Timewarp!
-    Adresse eingeben und los geht's!
-  = simple_form_for @site do |f|
-    = f.input_field :url, :placeholder => 'www.timewarp.com'
-    = f.submit 'Warp!'
-  %p= error_helper @site
+  .debug
+    %ul
+      = @sites.each do |site|
+        %li
+          = link_to site.url, site_analyse_path(site.token)
+          = ' | '
+          = link_to 'löschen', site_path(site.token), :method => :delete, :confirm => 'Wirklich löschen?'
 
-
-.debug_all_sites
-  = @sites.each do |site|
+%section#instructions
+  .steps#step_1
+    %span
+      1
     %p
-      = link_to site.url, site_analyse_path(site.token)
-      = " | "
-      = link_to "löschen", site_path(site.token), :method => :delete, :confirm => "Wirklich löschen?"
+      Zuerst muss die WWW-Adresse ins Eingabefeld getippt werden. Danach den warp!-Butto betätigen. Wurde die Seite bereits von einem anderen Benutzer gewarpt, gelangt man sofort ins Archiv und kann die Seite dort ansehen.
+  .steps#step_2
+    %span
+      2
+    %p
+      %img{ :src => '/assets/dummy-img-grey.png', :width => '300', :height => 'auto', :alt => ' ' }
+      Zuerst muss die WWW-Adresse ins Eingabefeld getippt werden. Danach den warp!-Butto betätigen. Wurde die Seite bereits von einem anderen Benutzer gewarpt, gelangt man sofort ins Archiv und kann die Seite dort ansehen.
+  .steps#step_3
+    %span
+      3
+    %p
+      %img{ :src => '/assets/dummy-img-grey.png', :width => '300', :height => 'auto', :alt => ' ' }
+      Zuerst muss die WWW-Adresse ins Eingabefeld getippt werden. Danach den warp!-Butto betätigen. Wurde die Seite bereits von einem anderen Benutzer gewarpt, gelangt man sofort ins Archiv und kann die Seite dort ansehen.
+  .steps#step_4
+    %span
+      4
+    %p
+      %img{ :src => '/assets/dummy-img-grey.png', :width => '300', :height => 'auto', :alt => ' ' }
+      Zuerst muss die WWW-Adresse ins Eingabefeld getippt werden. Danach den warp!-Butto betätigen. Wurde die Seite bereits von einem anderen Benutzer gewarpt, gelangt man sofort ins Archiv und kann die Seite dort ansehen.
