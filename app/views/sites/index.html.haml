@@ -1,2 +1,22 @@
-%h1 Archiv
-%p Find me in app/views/sites/index.html.haml
+%h1 warped sites
+
+%section#archive
+  - @sites.each do |site|
+
+    // todo: make "real" condition
+    - has_img = false
+
+    - if has_img
+      - archive_img = ''
+      - archive_img_hover = ''
+    - else 
+      - archive_img = 'dummy-img-grey.png'
+      - archive_img_hover = 'dummy-img.png'
+
+    %article
+      %a{:href => site_path(site.token)}
+        = image_tag(archive_img)
+        = image_tag(archive_img_hover, :class => 'hover')
+        %span{:class => 'site_title'}
+          // todo: show site title instead of url
+          = site.url

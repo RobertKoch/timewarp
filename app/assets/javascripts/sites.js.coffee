@@ -1,3 +1,24 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
+setArchiveArticleHeight = () ->
+  archiveImageHeight = $('#archive article img').height();
+  $('#archive article').css
+    'height' : archiveImageHeight
+
+$(document).ready ->
+  setArchiveArticleHeight();
+
+  $.each $('#archive article'), (i) ->
+    $(this).mouseenter ->
+      $(this).find('.hover')
+        .css
+          'display' : 'block'
+        .animate
+          'opacity' : 1
+          500
+    $(this).mouseleave ->
+      $(this).find('.hover')
+        .animate
+          'opacity' : 0
+          500
+
+$(window).resize ->
+  setArchiveArticleHeight();
