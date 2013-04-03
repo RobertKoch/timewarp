@@ -1,5 +1,10 @@
 @import 'variables';
 
+#wrapper {
+  margin: {
+    top: -30px;
+  }
+}
 #content {
   float: left;
 }
@@ -25,17 +30,133 @@
         opacity: 0;
       }
     }
-    .site_title {
+    div {
       position: absolute;
-      bottom: 0;
       left: 0;
       right: 0;
-      background-color: $green;
-      z-index: 10;
       display: block;
       padding: 10px;
+    }
+    .sites_title {
+      bottom: 0;
+      height: 15px;
+      background-color: $green;
       @include font_michroma;
       color: $white;
+      z-index: 10;
+    }
+    .sites_meta {
+      bottom: 0;
+      padding: {
+        top: 7px;
+        bottom: 7px;
+      }
+      background-color: $white;
+      color: $grey_medium;
+      z-index: 9;
+      .sites_date {
+        float: left;
+        margin: {
+          top: 2px;
+        }
+      }
+      .sites_likes {
+          float: right;
+        .icon {
+          background-position: 0 0;
+        }
+      }
+    }
+  }
+}
+#archive_detail {
+  #site_images {
+    float: left;
+    width: 65%;
+    margin-bottom: 40px;
+    img {
+
+      &.first {
+        width: 100%;
+        height: auto;
+      }
+    }
+  }
+  #site_meta {
+    float: right;
+    width: 31%;
+    margin: {
+      left: 4%;
+    }
+    ul {
+      list-style-type: none;
+      margin: {
+        left: 0;
+        bottom: 40px;
+      }
+      a {
+        color: $grey_medium;
+        text-decoration: none;
+      }
+    }
+    .meta {
+      color: $grey_medium;
+      li {
+        border-bottom: 1px solid $grey_light;
+        padding: 8px 10px 7px;
+        a {
+          .icon {
+            opacity: .8;
+          }
+          &:hover {
+            color: $grey_dark;
+            .icon {
+              opacity: 1;
+            }
+          }
+        }
+        &.site_date {
+          border-top: 1px solid $grey_light;
+          .icon {
+            background-position: -14px 0;
+          }
+        }
+        &.site_views {
+          .icon {
+            background-position: 0 -14px;
+          }
+        }
+        &.site_share {
+          .icon {
+            background-position: -14px -14px;
+          }
+        }
+      }
+    }
+    h5 {
+      padding-left: 10px;
+    }
+    .tags {
+      a {
+        display: block;
+        padding: 3px 10px;
+        &:hover {
+          background-color: $white;
+          -webkit-border-radius: 8px; 
+          -moz-border-radius: 8px; 
+          border-radius: 8px; 
+        }
+        span {float: right;}
+      }
+    }
+  }
+  #site_comments {
+    width: 65%;
+    clear: both;
+    margin-bottom: 40px;
+    h3 {
+      border-bottom: 1px solid $grey_light;
+      padding-bottom: 6px;
     }
   }
 }

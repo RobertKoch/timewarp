@@ -1,7 +1,10 @@
+animationTimeSlow = 500;
+animationTimeFast = 300;
+
 setArchiveArticleHeight = () ->
   archiveImageHeight = $('#archive article img').height();
   $('#archive article').css
-    'height' : archiveImageHeight
+    'height' : archiveImageHeight + 35
 
 $(document).ready ->
   setArchiveArticleHeight();
@@ -13,12 +16,20 @@ $(document).ready ->
           'display' : 'block'
         .animate
           'opacity' : 1
-          500
+          animationTimeSlow
+      $(this).find('.sites_meta')
+        .animate
+          'bottom' : 37
+          animationTimeFast
     $(this).mouseleave ->
       $(this).find('.hover')
         .animate
           'opacity' : 0
-          500
+          animationTimeSlow
+      $(this).find('.sites_meta')
+        .animate
+          'bottom' : 0
+          animationTimeFast
 
 $(window).load ->
   setArchiveArticleHeight();

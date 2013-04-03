@@ -12,6 +12,8 @@ $(document).ready ->
   setNavigationWidth();
   setNarrowWrapperWidth();
 
+  $('a.fancybox').fancybox();
+
 $(window).load ->
   setNavigationWidth();
   setNarrowWrapperWidth();

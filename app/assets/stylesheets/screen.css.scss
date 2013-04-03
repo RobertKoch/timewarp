@@ -28,6 +28,19 @@ a {
     color: $white;
   }
 }
+.icon {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  background: {
+    image: url('sprite-icons.png');
+    repeat: no-repeat;
+  }
+  margin: {
+    right: 3px;
+    bottom: -2px;
+  }
+}
 
 // layout
 #header {
@@ -88,7 +101,7 @@ a {
     }
   }
   a {
-    color: $grey_medium;
+    color: $grey_dark;
     text-decoration: none;
     &:hover, &.active {
       color: $white;
@@ -123,11 +136,21 @@ a {
   }
 }
 #content {
-  h1 {
+  h1, h2, h3, h4, h5, h6 {
     @include font_michroma;
+    margin-bottom: 1em;
+  }
+  h1 {
     color: $grey_light;
     font-size: $font_size_large;
-    margin-bottom: 1em;
+  }
+  h3 {
+    color: $grey_dark;
+    font-size: $font_size_medium;
+  }
+  h5 {
+    color: $grey_dark;
+    font-size: $font_size_normal;
   }
 }
 #footer {

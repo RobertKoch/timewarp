@@ -4,19 +4,20 @@ $red: #dd1717;
 $beige: #fef8ea;
 $green: #b6c02f;
 $blue: #34a6de;
-$grey_dark: #333;
-$grey_medium: #666;
+$grey_dark: #666;
+$grey_medium: #999;
 $grey_light: #ccc;
 
 /* fonts */
-$font_size_normal: 12px;
+$font_size_small: 12px;
+$font_size_normal: 14px;
 $font_size_medium: 18px;
 $font_size_large: 24px;
 
 @mixin font_default {
   font: {
     family: Helvetica, Arial, sans-serif;
-    size: $font_size_normal;
+    size: $font_size_small;
     weight: normal;
   }
   color: $grey_dark;
@@ -26,6 +27,9 @@ $font_size_large: 24px;
     family: 'Michroma', sans-serif;
   }
   letter-spacing: 0.05em;
+  text: {
+    transform: lowercase;
+  }
 }
 
 /* widths */

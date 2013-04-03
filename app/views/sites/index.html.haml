@@ -3,20 +3,28 @@
 %section#archive
   - @sites.each do |site|
 
-    // todo: make "real" condition
+    // todo: make a "real" condition
     - has_img = false
 
     - if has_img
       - archive_img = ''
       - archive_img_hover = ''
     - else 
-      - archive_img = 'dummy-img-grey.png'
-      - archive_img_hover = 'dummy-img.png'
+      - archive_img = 'dummy-website-grey.png'
+      - archive_img_hover = 'dummy-website.png'
 
     %article
       %a{:href => site_path(site.token)}
         = image_tag(archive_img)
         = image_tag(archive_img_hover, :class => 'hover')
-        %span{:class => 'site_title'}
+        %div.sites_title
           // todo: show site title instead of url
           = site.url
+        %div.sites_meta
+          %span.sites_date
+            = to_german_date(site.created_at)
+          %strong.sites_likes
+            %span.icon
+            = site.likes
+            
+          

@@ -1,2 +1,65 @@
-%h1 
-  = @site.url
+%section#archive_detail
+  // todo: show site title instead of url
+  %h1 
+    = @site.url
+
+  // todo: make a "real" condition
+  - has_img = false
+
+  - if has_img
+    - archive_img = ''
+  - else 
+    - archive_img = 'dummy-website.png'
+
+  #site_images
+    %a{:href => image_path(archive_img), :class => 'fancybox'}
+      = image_tag(archive_img, :class => 'first')
+
+  #site_meta
+    %ul.meta
+      %li.site_date
+        %span.icon
+        = to_german_date(@site.created_at)
+      %li.site_likes
+        %a{:href => '/'}
+          %span.icon
+          = @site.likes
+          likes
+      %li.site_views
+        %a{:href => '/'}
+          %span.icon
+          = @site.visits
+          views
+      %li.site_share
+        %a{:href => '/'}
+          %span.icon
+          Share
+
+    %h5
+      Tags
+
+    // todo: list real tags
+    %ul.tags
+      %li
+        %a{:href => '/'} 
+          design
+          %span 10
+      %li 
+        %a{:href => '/'} 
+          development
+          %span 5 
+      %li 
+        %a{:href => '/'} 
+          rails
+          %span 3
+      %li 
+        %a{:href => '/'} 
+          html
+          %span 1 
+
+
+  #site_comments
+    %h3
+      Kommentare
+    %p 
+      Hier stehen später dann die Kommentare...
