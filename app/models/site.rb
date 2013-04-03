@@ -18,19 +18,25 @@ class Site
   field :likes, type: Integer, default: 0
   field :dislikes, type: Integer, default: 0
   field :visits, type: Integer, default: 0
+  field :site_crawled, type: Boolean, default: false
+  field :published, type: Boolean, default: false
 
   attr_accessible :url, :title
 
   def self.latest(limit = 5)
-    order_by('created_at DESC').limit(limit)
+    published.order_by('created_at DESC').limit(limit)
   end
 
   def self.most_viewed(limit = 5)
-    order_by('visits DESC').limit(limit)
+    published.order_by('visits DESC').limit(limit)
   end
 
   def self.top_rated(limit = 5)
-    order_by('likes DESC').limit(limit)
+    published.order_by('likes DESC').limit(limit)
+  end
+
+  def self.published
+    where(:published => true)
   end
 
 private
@@ -39,9 +45,13 @@ private
   end
 
   def crawl_site_if_possible
-    crawler = Crawler.new(self)
-    unless crawler.crawl_site
-      #todo: error handling for crawler
+    unless self.site_crawled
+      crawler = Crawler.new(self)
+      unless crawler.crawl_site
+        #todo: error handling for crawler
+      else
+        self.update_attribute :site_crawled, true
+      end
     end
   end
 end
