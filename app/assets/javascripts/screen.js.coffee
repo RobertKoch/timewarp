@@ -12,6 +12,10 @@ $(document).ready ->
   setNavigationWidth();
   setNarrowWrapperWidth();
 
+$(window).load ->
+  setNavigationWidth();
+  setNarrowWrapperWidth();
+
 $(window).resize ->
   setNavigationWidth();
   setNarrowWrapperWidth();

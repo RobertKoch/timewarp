@@ -20,5 +20,8 @@ $(document).ready ->
           'opacity' : 0
           500
 
+$(window).load ->
+  setArchiveArticleHeight();
+
 $(window).resize ->
   setArchiveArticleHeight();
