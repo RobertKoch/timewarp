@@ -4,13 +4,13 @@
   float: left;
 }
 #archive {
-
+  /* 4 columns */
   article {
     position: relative;
-    width: 32%;
+    width: 23.5%;
     margin: 0 2% 2% 0;
     float: left;
-    &:nth-child(3n+3) {
+    &:nth-child(4n+4) {
       margin-right: 0;
     }
     img {
