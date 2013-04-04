@@ -15,6 +15,10 @@ $(document).ready ->
       height: 300
     });
 
+  if $('#site_analyse').length != 0
+    $('#crawled_site').attr
+      'height' : $(window).height() - 260
+
   setArchiveArticleHeight();
 
   $.each $('#archive article'), (i) ->

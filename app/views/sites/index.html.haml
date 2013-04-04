@@ -18,8 +18,10 @@
         = image_tag(archive_img)
         = image_tag(archive_img_hover, :class => 'hover')
         %div.sites_title
-          // todo: show site title instead of url
-          = site.url
+          - if site.title
+            = site.title
+          - else 
+            = site.url
         %div.sites_meta
           %span.sites_date
             = to_german_date(site.created_at)

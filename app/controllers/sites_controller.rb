@@ -11,6 +11,7 @@ class SitesController < ApplicationController
 
   def show
     @site = Site.find_by_token(params[:id])
+    @site.update_attribute(:visits, @site.visits + 1)
   end
 
   def create

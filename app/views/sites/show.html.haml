@@ -1,7 +1,10 @@
 %section#archive_detail
-  // todo: show site title instead of url
+
   %h1 
-    = @site.url
+    - if @site.title
+      = @site.title
+    - else 
+      = @site.url
 
   // todo: make a "real" condition
   - has_img = false
@@ -20,16 +23,15 @@
       %li.site_date
         %span.icon
         = to_german_date(@site.created_at)
+      %li.site_views
+        %span.icon
+        = @site.visits
+        views
       %li.site_likes
         %a{:href => '/'}
           %span.icon
           = @site.likes
           likes
-      %li.site_views
-        %a{:href => '/'}
-          %span.icon
-          = @site.visits
-          views
       %li.site_share
         %a{:href => '/'}
           %span.icon
@@ -37,26 +39,13 @@
 
     %h5
       Tags
-
-    // todo: list real tags
     %ul.tags
-      %li
-        %a{:href => '/'} 
-          design
-          %span 10
-      %li 
-        %a{:href => '/'} 
-          development
-          %span 5 
-      %li 
-        %a{:href => '/'} 
-          rails
-          %span 3
-      %li 
-        %a{:href => '/'} 
-          html
-          %span 1 
-
+      // todo: use "tags_with_weight" from mongoid_taggable to show the numbers
+      - @site.tags_array.each do |tag|
+        %li 
+          %a{:href => '/'} 
+            = tag
+            %span 1
 
   #site_comments
     %h3
