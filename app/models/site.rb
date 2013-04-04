@@ -2,6 +2,7 @@ class Site
   include Mongoid::Document
   include Mongoid::Timestamps
   include Mongoid::Token
+  include Mongoid::Taggable
 
   store_in collection: 'sites'
 

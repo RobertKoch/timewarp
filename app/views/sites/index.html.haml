@@ -20,3 +20,9 @@
         %span{:class => 'site_title'}
           // todo: show site title instead of url
           = site.url
+
+%section#tags
+  %h1 Tag-Cloud
+  #tagcloud
+    #tagcloud_config.hidden{:tags => @tags.to_json}
+  %br

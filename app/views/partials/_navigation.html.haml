@@ -1,6 +1,6 @@
 %ul
   %li
-    - on_analyse_path = (controller.controller_name == 'sites' && controller.action_name == 'analyse')
+    - on_analyse_path = (controller.controller_name == 'sites' && (controller.action_name == 'analyse' || controller.action_name == 'timeline') )
     %a{:href => root_path, :class => (current_page?(root_path) || on_analyse_path ) ? 'active' : ''} timewarp
   %li
     %a{:href => archive_path, :class => current_page?(archive_path) ? 'active' : ''} archiv

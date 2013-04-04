@@ -1,0 +1,15 @@
+= simple_form_for site, :as => :site, :url => sites_publish_path do |f|
+  %ul
+    %li
+      = f.input :title
+    %li
+      :javascript
+        tag_search_url = "#{tag_search_url(:format => :json)}";
+      = f.simple_fields_for :ac do |a|
+        = a.input :tags_input, :label => 'Tags', :required => false, :input_html => {:class => 'autocomplete'}
+        = link_to "Tag hinzufügen", "javascript:void(0)", :class => 'add_tag '
+      =f.input :tags, :label => false, :readonly => true, :input_html => {:class => 'taglist hidden'}
+    %li#chosen_tags
+    %li
+      = link_to "Nein, lieber doch nicht speichern!", '#'
+      = f.submit "Ins Archiv speichern!"

@@ -29,6 +29,10 @@ a {
   }
 }
 
+.hidden {
+  display: none;
+}
+
 // layout
 #header {
   position: relative;
@@ -134,4 +138,8 @@ a {
   clear: both;
   padding: 15px 0 30px 0;
   border-top: 1px solid $grey_light;
+}
+
+#chosen_tags span {
+  padding: 3px;
 }

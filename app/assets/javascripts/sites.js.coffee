@@ -4,6 +4,14 @@ setArchiveArticleHeight = () ->
     'height' : archiveImageHeight
 
 $(document).ready ->
+
+  if $('#tagcloud_config').length != 0    
+    tag_list = JSON.parse $('#tagcloud_config').attr('tags')
+    $("#tagcloud").jQCloud( tag_list, {
+      width: 600,
+      height: 300
+    });
+
   setArchiveArticleHeight();
 
   $.each $('#archive article'), (i) ->

@@ -7,11 +7,13 @@ gem 'rails', '3.2.12'
 
 gem 'mongoid'
 gem 'mongoid_token'
+gem 'mongoid_taggable'
 gem 'rails_config'
 
 gem 'haml-rails'
 
 gem 'simple_form'
+gem 'jqcloud-rails'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -26,6 +28,7 @@ group :assets do
 end
 
 gem 'jquery-rails'
+gem 'jquery-ui-rails'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
