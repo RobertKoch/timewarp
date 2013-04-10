@@ -1,22 +1,39 @@
 chosen_tags = []
 
-$(".autocomplete").autocomplete {
-  source: tag_search_url,
-  minLength: 3,
-  select: (event, ui) ->
-    chosen_tags.push ui.item.value if !isValueInArray(chosen_tags, ui.item.value)
-    return
-  close: () ->
-    saveAndPrintTagList()
-    $(this).val ''
-}
+$(document).ready ->
 
-$("a.add_tag").on 'click', ->
-  input = $("input.autocomplete")
-  if !isValueInArray(chosen_tags, input.val()) && input.val() != ''
-    chosen_tags.push input.val() 
-    saveAndPrintTagList()
-  input.val ''
+  if $("form#edit_site").length > 0
+    $(".autocomplete").autocomplete {
+      source: tag_search_url,
+      minLength: 3,
+      select: (event, ui) ->
+        chosen_tags.push ui.item.value if !isValueInArray(chosen_tags, ui.item.value)
+        return
+      close: () ->
+        saveAndPrintTagList()
+        $(this).val ''
+    }
+
+    #possibility to enter tags with enter-key
+    $("input.autocomplete").on 'keyup', ->
+      if(event.keyCode == 13)
+          $("a.add_tag").trigger 'click';
+
+    $("a.add_tag").on 'click', ->
+      input = $("input.autocomplete")
+      if !isValueInArray(chosen_tags, input.val()) && input.val() != ''
+        chosen_tags.push input.val() 
+        saveAndPrintTagList()
+      input.val ''
+
+    $("a.submit_form").on 'click', ->
+      $("form#edit_site").trigger 'submit'
+
+    $("a.cancel_form").on 'click', ->
+      #todo: hide form_container to go back to timeline
+      chosen_tags = []
+      $('input.taglist').val ''
+      $('#chosen_tags').empty()
 
 
 saveAndPrintTagList = () ->
