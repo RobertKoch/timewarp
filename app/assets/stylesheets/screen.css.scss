@@ -6,10 +6,7 @@ body, input, select, textarea {
 }
 body {
   background: {
-    image: url('bg-body.png');
-    color: $beige;
-    position: 0 0;
-    repeat: repeat;
+    color: $grey_dark;
   }
 }
 a {
@@ -25,7 +22,7 @@ a {
   }
   padding: 10px;
   background: {
-    color: $white;
+    color: $grey_medium;
   }
 }
 .icon {
@@ -41,27 +38,49 @@ a {
     bottom: -2px;
   }
 }
+.hidden {display: none;}
+.margin-left {margin-left: $margin_default;}
 
-.hidden {
-  display: none;
+// grid
+.grid {
+  float: left;
+  margin: 0 $margin_default;
 }
+
+// 5 columns
+.grid_5col_5n {width: $width_5col_5n;}
+.grid_5col_4n {width: $width_5col_4n;}
+.grid_5col_4n_full {
+  width: $width_5col_4n_full;
+  margin-right: 0;
+}
+.grid_5col_3n {width: $width_5col_3n;}
+.grid_5col_2n {width: $width_5col_2n;}
+.grid_5col_1n {width: $width_5col_1n;}
+
+// 4 columns
+.grid_4n {width: $width_4n;}
+.grid_3n {width: $width_3n;}
+.grid_3n_full {
+  width: $width_3n_full;
+  margin-right: 0;
+}
+.grid_2n {width: $width_2n;}
+.grid_1n {width: $width_1n;}
 
 // layout
 #header {
   position: relative;
-  width: 97%;
-  height: 160px;
+  height: 320px;
 }
 #logo {
-  position: absolute;
-  top: -7px;
-  right: -21px;
+  position: relative;
   a, .shadow {
     display: block;
     text-indent: -19999px;
     overflow: hidden;
-    width: 151px;
-    height: 151px;
+    width: 320px;
+    height: 320px;
     background: {
       position: 0 0;
       repeat: no-repeat;
@@ -69,25 +88,36 @@ a {
   }
   a {
     position: relative;
+    margin: 0 auto;
     background: {
-      image: url('logo.png');
+      image: url('logo-large.png');
     }
     z-index: 2;
   }
-  .shadow {
+  /* .shadow {
     position: absolute;
     top: 0;
-    left: 0;
+    left: 50%;
+    margin-left: -75px;
     background: {
       image: url('logo-shadow.png');
     }
     z-index: 1;
+  } */
+}
+#navigation_rail {
+  position: absolute;
+  top: 140px;
+  left: 0;
+  display: block;
+  width: 50%;
+  height: 40px;
+  background: {
+    color: $green;
   }
 }
 #navigation {
   position: relative;
-  float: left;
-  width: 90%;
   @include font_michroma;
   background: {
     color: $green;
@@ -95,8 +125,9 @@ a {
   font: {
     size: $font_size_medium;
   }
-  padding: 8px 0 13px 0;
-  margin: 50px 0 0 0;
+  height: 18px;
+  padding: 9px 0 13px 0;
+  margin-top: 140px;
   li {
     float: right; 
     margin-left: 30px;
@@ -114,12 +145,12 @@ a {
   .curve {
     position: absolute;
     top: 0;
-    right: -5px;
+    right: -6px;
     display: block;
-    width: 5px;
-    height: 39px;
+    width: 6px;
+    height: 40px;
     background: {
-      image: url('curve-green.png');
+      image: url('curve-green-large.png');
       position: 0 0;
       repeat: no-repeat;
     }
@@ -127,8 +158,27 @@ a {
 }
 #wrapper {
   position: relative;
-  width: 94%;
-  margin: 0 3%;
+  /* width: 94.11764705%; 960px -> 1020px */
+  /* width: 96.07843137%; 980px -> 1020px */
+  width: 100%;
+  margin: 0 auto;
+}
+#content {
+
+  h1, h2, h3, h4, h5, h6 {
+    @include font_michroma;
+    color: $grey_light;
+    margin-bottom: 1em;
+  }
+  h1 {
+    font-size: $font_size_large;
+  }
+  h3 {
+    font-size: $font_size_medium;
+  }
+  h5 {
+    font-size: $font_size_normal;
+  }
   p, ul, ol {
     line-height: 1.5em;
   }
@@ -137,24 +187,6 @@ a {
       type: circle;
     }
     margin-left: 15px;
-  }
-}
-#content {
-  h1, h2, h3, h4, h5, h6 {
-    @include font_michroma;
-    margin-bottom: 1em;
-  }
-  h1 {
-    color: $grey_light;
-    font-size: $font_size_large;
-  }
-  h3 {
-    color: $grey_dark;
-    font-size: $font_size_medium;
-  }
-  h5 {
-    color: $grey_dark;
-    font-size: $font_size_normal;
   }
 }
 #footer {

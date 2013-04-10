@@ -1,6 +1,7 @@
-%h1 warped sites
+%section#archive.grid.grid_5col_4n_full
+  %h1.margin-left 
+    warped sites
 
-%section#archive
   - @sites.each do |site|
 
     // todo: make a "real" condition
@@ -13,7 +14,7 @@
       - archive_img = 'dummy-website-grey.png'
       - archive_img_hover = 'dummy-website.png'
 
-    %article
+    %article.grid.grid_1n
       %a{:href => site_path(site.token)}
         = image_tag(archive_img)
         = image_tag(archive_img_hover, :class => 'hover')
@@ -29,8 +30,19 @@
             %span.icon
             = site.likes
 
-%section#tags
-  %h1 Tag-Cloud
+%section#sidebar.grid.grid_5col_1n
+  %nav#archive_navigation
+    %ul
+      %li 
+        %a latest
+      %li 
+        %a most viewed
+      %li 
+        %a top rated
+
+%section#tags.grid.grid_5col_4n
+  %h1.margin-left 
+    Tag-Cloud
   #tagcloud
     #tagcloud_config.hidden{:tags => @tags.to_json}
   %br

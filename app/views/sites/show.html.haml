@@ -1,6 +1,6 @@
-%section#archive_detail
+%section#archive_detail.grid.grid_5col_4n_full
 
-  %h1 
+  %h1.margin-left
     - if @site.title
       = @site.title
     - else 
@@ -8,17 +8,16 @@
 
   // todo: make a "real" condition
   - has_img = false
-
   - if has_img
     - archive_img = ''
   - else 
     - archive_img = 'dummy-website.png'
 
-  #site_images
+  #site_images.grid.grid_3n
     %a{:href => image_path(archive_img), :class => 'fancybox'}
       = image_tag(archive_img, :class => 'first')
 
-  #site_meta
+  #site_meta.grid.grid_1n
     %ul.meta
       %li.site_date
         %span.icon
@@ -40,14 +39,14 @@
     %h5
       Tags
     %ul.tags
-      // todo: use "tags_with_weight" from mongoid_taggable to show the numbers
-      - @site.tags_array.each do |tag|
-        %li 
-          %a{:href => '/'} 
-            = tag
-            %span 1
+      -@tags.each do |tag|
+        %li
+          %a{:href => '#'}
+            = tag[0]
+            %span
+              = tag[1].to_i
 
-  #site_comments
+  #site_comments.grid.grid_3n
     %h3
       Kommentare
     %p 

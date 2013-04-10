@@ -17,7 +17,7 @@ $(document).ready ->
 
   if $('#site_analyse').length != 0
     $('#crawled_site').attr
-      'height' : $(window).height() - 260
+      'height' : $(window).height() - 300
 
   setArchiveArticleHeight();
 

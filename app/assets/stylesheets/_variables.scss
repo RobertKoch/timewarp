@@ -1,12 +1,12 @@
 /* colors */
 $white: #fff;
-$red: #dd1717;
-$beige: #fef8ea;
+$grey_dark: #656560;
+$grey_dark_medium: #949492;
+$grey_medium: #c1c1bf;
+$grey_light: #e8e8e7;
 $green: #b6c02f;
 $blue: #34a6de;
-$grey_dark: #666;
-$grey_medium: #999;
-$grey_light: #ccc;
+$red: #dd1717;
 
 /* fonts */
 $font_size_small: 12px;
@@ -20,7 +20,7 @@ $font_size_large: 24px;
     size: $font_size_small;
     weight: normal;
   }
-  color: $grey_dark;
+  color: $grey_medium;
 }
 @mixin font_michroma {
   font: {
@@ -33,4 +33,20 @@ $font_size_large: 24px;
 }
 
 /* widths */
-$input_width: 100%;
+$margin_default: 1.04166667%; /* 10px -> 960px */
+
+$width_5col_5n: 97.91666666%; /* 940px -> 960px */
+$width_5col_4n: 77.91666666%;
+$width_5col_4n_full: 78.95833333%;
+$width_5col_3n: 57.91666666%;
+$width_5col_2n: 37.91666666%;
+$width_5col_1n: 17.91666666%; /* 172px -> 960px */
+
+$width_4n: 97.91666666%; /* 940px -> 960px */
+$width_3n: 72.91666666%; /* 700px -> 960px */
+$width_3n_full: 73.95833333%; /* 710px -> 960px */
+$width_2n: 47.91666666%; /* 460px -> 960px */
+$width_1n: 22.91666666%; /* 220px -> 960px */
+
+$width_3column_1n: 31.25%;
+$width_2column_1n: 47.91666666%;

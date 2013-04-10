@@ -1,11 +1,11 @@
-%section#timewarp
+%section#timewarp.grid.grid_5col_4n
   .timewarp_form
     = simple_form_for @site do |f|
       = f.input_field :url, :placeholder => 'http://www.timewarp.com'
       = f.submit 'Warp!'
     %p= error_helper @site
 
-  .debug
+  .debug.hidden
     %ul
       - @sites.each do |site|
         %li
@@ -13,31 +13,34 @@
           = ' | '
           = link_to 'löschen', site_path(site.token), :method => :delete, :confirm => 'Wirklich löschen?'
 
-%section#instructions
-  .steps#step_1
-    %span
-      1
+%section#instructions.grid.grid_5col_4n
+  #step_1.grid.grid_1n
+    %a{:href => '/assets/home/symbol_1.png', :class => 'fancybox'}
+      %img{ :src => '/assets/home/symbol_1.png', :width => 'auto', :height => '200', :alt => ' ' }
+    %h3
+      Analyse
     %p
-      Zuerst muss die WWW-Adresse ins Eingabefeld getippt werden. Danach den warp!-Butto betätigen. Wurde die Seite bereits von einem anderen Benutzer gewarpt, gelangt man sofort ins Archiv und kann die Seite dort ansehen.
-  .steps#step_2
-    %span
-      2
+      Hier steht eine kurze Beschreibung dieses Schrittes.
+      
+  #step_2.grid.grid_1n
+    %a{:href => '/assets/home/symbol_2.png', :class => 'fancybox'}
+      %img{ :src => '/assets/home/symbol_2.png', :width => 'auto', :height => '200', :alt => ' ' }
+    %h3
+      Edit
     %p
-      %a{:href => '/assets/dummy-img-grey.png', :class => 'fancybox'}
-        %img{ :src => '/assets/dummy-img-grey.png', :width => '300', :height => 'auto', :alt => ' ' }
-      Zuerst muss die WWW-Adresse ins Eingabefeld getippt werden. Danach den warp!-Butto betätigen. Wurde die Seite bereits von einem anderen Benutzer gewarpt, gelangt man sofort ins Archiv und kann die Seite dort ansehen.
-  .steps#step_3
-    %span
-      3
+      Hier steht eine kurze Beschreibung dieses Schrittes.
+  #step_3.grid.grid_1n
+    %a{:href => '/assets/home/symbol_3.png', :class => 'fancybox'}
+      %img{ :src => '/assets/home/symbol_3.png', :width => 'auto', :height => '200', :alt => ' ' }
+    %h3
+      Magic happens
     %p
-      %a{:href => '/assets/dummy-img-grey.png', :class => 'fancybox'}
-        %img{ :src => '/assets/dummy-img-grey.png', :width => '300', :height => 'auto', :alt => ' ' }
-      Zuerst muss die WWW-Adresse ins Eingabefeld getippt werden. Danach den warp!-Butto betätigen. Wurde die Seite bereits von einem anderen Benutzer gewarpt, gelangt man sofort ins Archiv und kann die Seite dort ansehen.
-  .steps#step_4
-    %span
-      4
+      Hier steht eine kurze Beschreibung dieses Schrittes.
+  #step_4.grid.grid_1n
+    %a{:href => '/assets/home/symbol_4.png', :class => 'fancybox'}
+      %img{ :src => '/assets/home/symbol_4.png', :width => 'auto', :height => '200', :alt => ' ' }
+    %h3
+      View
     %p
-      %a{:href => '/assets/dummy-img-grey.png', :class => 'fancybox'}
-        %img{ :src => '/assets/dummy-img-grey.png', :width => '300', :height => 'auto', :alt => ' ' }
-      Zuerst muss die WWW-Adresse ins Eingabefeld getippt werden. Danach den warp!-Butto betätigen. Wurde die Seite bereits von einem anderen Benutzer gewarpt, gelangt man sofort ins Archiv und kann die Seite dort ansehen.
+      Hier steht eine kurze Beschreibung dieses Schrittes.
 

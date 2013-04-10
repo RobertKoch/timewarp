@@ -1,17 +1,13 @@
 class SitesController < ApplicationController
   def index
     @sites = Site.published
-    #todo: outsource the following code in a function or module and replace dummy-links
-    taglist = Site.tags_with_weight
-    @tags = []
-    taglist.each do |t|
-      @tags << {text: t[0], weight: t[1], link: '#'}
-    end
+    @tags = get_tags_with_weight
   end
 
   def show
     @site = Site.find_by_token(params[:id])
     @site.update_attribute(:visits, @site.visits + 1)
+    @tags = get_tags_with_weight @site
   end
 
   def create
