@@ -29,6 +29,9 @@ class SitesController < ApplicationController
       if @site.save
         redirect_to sites_analyse_path(@site.token)
       else
+        #only for debugging
+        @sites = Site.all
+        
         render 'home/index'
       end
     else
