@@ -1,4 +1,6 @@
 class SitesController < ApplicationController
+  before_filter :site_exists_and_not_published, :only => [:analyse, :timeline]
+  
   def index
     @sites = Site.published
     #todo: outsource the following code in a function or module and replace dummy-links
@@ -11,7 +13,11 @@ class SitesController < ApplicationController
 
   def show
     @site = Site.find_by_token(params[:id])
-    @site.update_attribute(:visits, @site.visits + 1)
+    if @site && @site.published?
+      @site.update_attribute(:visits, @site.visits + 1)
+    else
+      redirect_to root_path
+    end
   end
 
   def create
@@ -38,28 +44,29 @@ class SitesController < ApplicationController
   end
 
   def analyse
-    if @site = Site.find_by_token(params[:id])
-    else
-      redirect_to root_path
-    end
   end
 
   def timeline
-    if @site = Site.find_by_token(params[:id])
-    else
-      redirect_to root_path
-    end   
   end
 
   def publish
     @site = Site.find_by_token(params[:id])
     @site.title = params[:site][:title]
     @site.tags = params[:site][:tags]
+    @site.published = true
 
     if @site.update_attributes
       redirect_to site_path(@site)
     else
       render 'sites/publish'
+    end
+  end
+private
+  def site_exists_and_not_published
+    if @site = Site.find_by_token(params[:id])
+      redirect_to site_path(@site) if @site.published
+    else
+      redirect_to root_path
     end
   end
 end
