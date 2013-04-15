@@ -1,4 +1,6 @@
 class SitesController < ApplicationController
+  before_filter :site_exists_and_not_published, :only => [:analyse, :timeline]
+  
   def index
     # @sites = Site.published
     @sites = Site.published.order_by('created_at DESC').paginate(:page => params[:page], :per_page => 3)
@@ -7,8 +9,12 @@ class SitesController < ApplicationController
 
   def show
     @site = Site.find_by_token(params[:id])
-    @site.update_attribute(:visits, @site.visits + 1)
-    @tags = get_tags_with_weight @site
+    if @site && @site.published?
+      @site.update_attribute(:visits, @site.visits + 1)
+      @tags = get_tags_with_weight @site
+    else
+      redirect_to root_path
+    end
   end
 
   def create
@@ -20,6 +26,9 @@ class SitesController < ApplicationController
       if @site.save
         redirect_to sites_analyse_path(@site.token)
       else
+        #only for debugging
+        @sites = Site.all
+        
         render 'home/index'
       end
     else
@@ -35,17 +44,9 @@ class SitesController < ApplicationController
   end
 
   def analyse
-    if @site = Site.find_by_token(params[:id])
-    else
-      redirect_to root_path
-    end
   end
 
   def timeline
-    if @site = Site.find_by_token(params[:id])
-    else
-      redirect_to root_path
-    end   
   end
 
   def publish
@@ -58,6 +59,14 @@ class SitesController < ApplicationController
       redirect_to site_path(@site)
     else
       render 'sites/publish'
+    end
+  end
+private
+  def site_exists_and_not_published
+    if @site = Site.find_by_token(params[:id])
+      redirect_to site_path(@site) if @site.published
+    else
+      redirect_to root_path
     end
   end
 end

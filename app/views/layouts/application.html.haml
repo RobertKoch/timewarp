@@ -24,3 +24,6 @@
       = render :partial => 'partials/footer'
 
     = javascript_include_tag 'application'
+    
+    - if (controller.controller_name == 'sites' && (controller.action_name == 'analyse'))
+      = javascript_include_tag "analyse"

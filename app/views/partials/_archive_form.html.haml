@@ -11,5 +11,5 @@
       =f.input :tags, :label => false, :readonly => true, :input_html => {:class => 'taglist hidden'}
     %li#chosen_tags
     %li
-      = link_to "Nein, lieber doch nicht speichern!", '#'
-      = f.submit "Ins Archiv speichern!"
+      = link_to "Nein, lieber doch nicht speichern!", 'javascript:void(0)', :class => "cancel_form"
+      = link_to "Ins Archiv speichern!", 'javascript:void(0)', :class => "submit_form"
