@@ -1,7 +1,7 @@
 -# error_helper comment
 = simple_form_for comment, html: {novalidate: true}, :as => :comment do |f|
   = simple_fields_for comment.site, :as => :site do |s|
-    = s.input :token, :value => comment.site.token,  :input_html => {:hidden => true}
+    = s.input :token, :value => comment.site.token, :label => false,  :input_html => {:hidden => true}
   %ul
     %li
       = f.input :name, :required => true
