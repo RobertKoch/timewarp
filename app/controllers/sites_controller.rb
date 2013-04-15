@@ -1,6 +1,7 @@
 class SitesController < ApplicationController
   def index
-    @sites = Site.published
+    # @sites = Site.published
+    @sites = Site.published.order_by('created_at DESC').paginate(:page => params[:page], :per_page => 3)
     @tags = get_tags_with_weight
   end
 
@@ -51,6 +52,7 @@ class SitesController < ApplicationController
     @site = Site.find_by_token(params[:id])
     @site.title = params[:site][:title]
     @site.tags = params[:site][:tags]
+    @site.published = true
 
     if @site.update_attributes
       redirect_to site_path(@site)

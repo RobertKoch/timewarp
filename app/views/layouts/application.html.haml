@@ -20,7 +20,7 @@
         = render :partial => 'partials/header'
       %section#content.grid.grid_4n
         = yield
-      %footer#footer.grid.grid_4n
-        = render :partial => 'partials/footer'
+    %footer#footer
+      = render :partial => 'partials/footer'
 
     = javascript_include_tag 'application'

@@ -19,7 +19,7 @@
         = image_tag(archive_img)
         = image_tag(archive_img_hover, :class => 'hover')
         %div.sites_title
-          - if site.title
+          - if !site.title.blank?
             = site.title
           - else 
             = site.url
@@ -29,6 +29,8 @@
           %strong.sites_likes
             %span.icon
             = site.likes
+
+  = will_paginate @sites, :previous_label => '&laquo;', :next_label => '&raquo;'
 
 %section#sidebar.grid.grid_5col_1n
   %nav#archive_navigation
@@ -40,7 +42,8 @@
       %li 
         %a top rated
 
-%section#tags.grid.grid_5col_4n
+// hide for presentation on monday 15.04.
+%section#tags.grid.grid_5col_4n.hidden
   %h1.margin-left 
     Tag-Cloud
   #tagcloud

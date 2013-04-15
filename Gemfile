@@ -12,8 +12,12 @@ gem 'rails_config'
 
 gem 'haml-rails'
 
+gem 'jquery-rails'
+gem 'jquery-ui-rails'
 gem 'simple_form'
 gem 'jqcloud-rails'
+gem 'fancybox2-rails', '~> 0.2.4'
+gem 'will_paginate_mongoid'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -26,10 +30,6 @@ group :assets do
 
   gem 'uglifier', '>= 1.0.3'
 end
-
-gem 'jquery-rails'
-gem 'jquery-ui-rails'
-gem 'fancybox2-rails', '~> 0.2.4'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

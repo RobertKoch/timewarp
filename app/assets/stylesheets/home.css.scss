@@ -51,69 +51,21 @@
           left: 15px;
         }
         color: $white;
+        cursor: pointer;
       }
     }
   }
 }
 #instructions {
-  margin-top: 50px;
-
-  .steps {
-    position: relative;
-    background: {
-      color: $white;
-    }
-    padding: 10px;
-    margin: 0 40px 50px 40px;
-    float: left;
-    span {
-      position: absolute;
-      top: -40px;
-      left: -40px;
-      display: block;
-      text-indent: -19999px;
-      overflow: hidden;
-      background: {
-        image: url('sprite-steps.png');
-        position: 0 0;
-        repeat: no-repeat;
-      }
-      width: 80px;
-      height: 80px;
-    }
-    img {
-      float: right;
-    }
-    p {
-      padding: 30px;
-    }
-    &#step_2, &#step_4 {
-      img {
-        float: left;
-      }
-    }
-    &#step_1 {
-      span {}
-    }
-    &#step_2 {
-      span {
-        left: auto;
-        right: -40px;
-        background-position: -80px 0;
-      }
-    }
-    &#step_3 {
-      span {
-        background-position: 0 -80px;
-      }
-    }
-    &#step_4 {
-      span {
-        left: auto;
-        right: -40px;
-        background-position: -80px -80px;
-      }
-    }
+  margin: {
+    top: 50px;
+    bottom: 50px;
   }
-
+  img {
+    display: block;
+    margin: 0 auto 30px;
+  }
+  h3, p {
+    text-align: center;
+  }
 }

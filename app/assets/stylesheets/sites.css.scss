@@ -1,12 +1,9 @@
 @import 'variables';
 
 #wrapper {
-  margin: {
 
-  }
 }
 #content {
-  float: left;
 }
 #crawled_site {
   margin: {
@@ -14,6 +11,9 @@
   }
 }
 #archive {
+  margin: {
+    top: -28px;
+  }
   article {
     position: relative;
     margin: {
@@ -69,6 +69,52 @@
       }
     }
   }
+  .pagination {
+    padding: 20px 0;
+    border-top: 1px solid $grey_dark_medium;
+    display: block;
+    clear: both;
+    margin: 0 $margin_default 50px;
+    @include font_michroma;
+    font: {
+      size: $font_size_small;
+    }
+    a, span, em {
+      display: block;
+      float: left;
+      margin-right: 6px;
+      padding: 3px 6px 4px;
+      border: {
+        width: 1px 0;
+        style: solid;
+        color: $grey_medium;
+      }
+      color: $grey_medium;
+    }
+    a {
+      text-decoration: none;
+      &:hover {
+        border: {
+          color: $green;
+        }
+        color: $green;
+      }
+    }
+    .previous_page {}
+    .next_page {}
+    .current {
+      border: {
+        color: $blue;
+      }
+      color: $blue;
+    }
+    .disabled {
+      border: {
+        color: $grey_dark_medium;
+      }
+      color: $grey_dark_medium;
+    }
+  }
 }
 #archive_navigation {
   ul {
@@ -79,7 +125,7 @@
     list-style: {
       type: none;
     }
-    margin: 0 auto;
+    margin: 20px auto 0;
     width: 320px;
     li {
       position: relative;

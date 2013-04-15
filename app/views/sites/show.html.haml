@@ -1,7 +1,7 @@
 %section#archive_detail.grid.grid_5col_4n_full
 
   %h1.margin-left
-    - if @site.title
+    - if !@site.title.blank?
       = @site.title
     - else 
       = @site.url
