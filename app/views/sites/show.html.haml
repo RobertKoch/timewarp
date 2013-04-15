@@ -49,5 +49,9 @@
   #site_comments.grid.grid_3n
     %h3
       Kommentare
-    %p 
-      Hier stehen später dann die Kommentare...
+    = render :partial => 'partials/comments_form', :locals => {:comment => @comment}
+    - @site.comments.each do |comment|
+      .comment
+        %p= comment.name
+        %p= "---------------------------"
+        %p= comment.text

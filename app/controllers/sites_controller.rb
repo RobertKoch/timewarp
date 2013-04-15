@@ -12,6 +12,7 @@ class SitesController < ApplicationController
     if @site && @site.published?
       @site.update_attribute(:visits, @site.visits + 1)
       @tags = get_tags_with_weight @site
+      @comment = @site.comments.build
     else
       redirect_to root_path
     end

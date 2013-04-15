@@ -6,12 +6,10 @@ class Site
 
   store_in collection: 'sites'
 
-  validates :url, :presence => true, :format => {:with => /^(http(?:s)?\:\/\/[a-zA-Z0-9\-]+(?:\.[a-zA-Z0-9\-]+)*\.[a-zA-Z]{2,6}(?:\/?|(?:\/[\w\-]+)*)(?:\/?|\/\w+\.[a-zA-Z]{2,4}(?:\?[\w]+\=[\w\-]+)?)?(?:\&[\w]+\=[\w\-]+)*)$/}
+  has_many :comments
 
   after_initialize :add_http
   after_save :crawl_site_if_possible
-
-  token :length => 6, :contains => :alphanumeric
 
   field :url, type: String
   field :title, type: String
@@ -22,7 +20,11 @@ class Site
   field :site_crawled, type: Boolean, default: false
   field :published, type: Boolean, default: false
 
+  token :length => 6, :contains => :alphanumeric
+  
   attr_accessible :url, :title
+  
+  validates :url, :presence => true, :format => {:with => /^(http(?:s)?\:\/\/[a-zA-Z0-9\-]+(?:\.[a-zA-Z0-9\-]+)*\.[a-zA-Z]{2,6}(?:\/?|(?:\/[\w\-]+)*)(?:\/?|\/\w+\.[a-zA-Z]{2,4}(?:\?[\w]+\=[\w\-]+)?)?(?:\&[\w]+\=[\w\-]+)*)$/}
 
   def self.latest(limit = 5)
     published.order_by('created_at DESC').limit(limit)
