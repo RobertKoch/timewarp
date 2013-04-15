@@ -94,7 +94,8 @@ a {
     }
     z-index: 2;
   }
-  /* .shadow {
+  .shadow {
+    display: none;
     position: absolute;
     top: 0;
     left: 50%;
@@ -103,7 +104,7 @@ a {
       image: url('logo-shadow.png');
     }
     z-index: 1;
-  } */
+  }
 }
 #navigation_rail {
   position: absolute;
