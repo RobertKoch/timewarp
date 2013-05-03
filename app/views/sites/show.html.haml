@@ -41,7 +41,7 @@
     %ul.tags
       -@tags.each do |tag|
         %li
-          %a{:href => '#'}
+          %a{:href => tag_path(tag[0])}
             = tag[0]
             %span
               = tag[1].to_i

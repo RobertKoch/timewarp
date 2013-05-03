@@ -3,6 +3,8 @@ class TagsController < ApplicationController
   end
 
   def show
+    @tag = params[:id]
+    @sites = Site.published.tagged_with @tag
   end
 
   def search

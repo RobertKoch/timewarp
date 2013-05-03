@@ -1,2 +1,4 @@
-%h1 Tags#show
-%p Find me in app/views/tags/show.html.haml
+%section#archive
+  %h1.margin-left= "all sites tagged with '#{@tag}'"
+  - @sites.each do |site|
+    = render :partial => 'partials/site', :locals => {:site => site}
