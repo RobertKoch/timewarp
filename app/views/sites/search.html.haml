@@ -1,0 +1,17 @@
+//seems the backend-developer needs a designerin here ^^
+
+%h1= "Suchergebnisse für '#{@term}'"
+
+%p= "Kleine Erklärung vielleicht?"
+%br
+%br
+%br
+%section#archive
+  %h3= "Titel-Suche"
+  - @sites_title.each do |site|
+    = render :partial => 'partials/site', :locals => {:site => site}
+
+%section#archive
+  %h3= "Tag-Suche"
+  - @sites_tags.each do |site|
+    = render :partial => 'partials/site', :locals => {:site => site}

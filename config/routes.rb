@@ -6,6 +6,7 @@ Timewarp::Application.routes.draw do
   resources :sites, :only => [:index, :show, :create, :destroy]
   resources :tags, :sites
 
+  get "search" => "sites#search", :as => "search"
   get "tag_search" => "tags#search", :as => "tag_search"
 
   get "archive" => "sites#index", :as => "archive"
