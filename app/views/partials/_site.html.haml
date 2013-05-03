@@ -1,0 +1,25 @@
+// todo: make a "real" condition
+- has_img = false
+
+- if has_img
+  - archive_img = ''
+  - archive_img_hover = ''
+- else 
+  - archive_img = 'dummy-website-grey.png'
+  - archive_img_hover = 'dummy-website.png'
+
+%article.grid.grid_1n
+  %a{:href => site_path(site.token)}
+    = image_tag(archive_img)
+    = image_tag(archive_img_hover, :class => 'hover')
+    %div.sites_title
+      - if !site.title.blank?
+        = site.title
+      - else 
+        = site.url
+    %div.sites_meta
+      %span.sites_date
+        = to_german_date(site.created_at)
+      %strong.sites_likes
+        %span.icon
+        = site.likes
