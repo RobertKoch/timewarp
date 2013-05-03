@@ -52,7 +52,7 @@ class SitesController < ApplicationController
   def publish
     @site = Site.find_by_token(params[:id])
     @site.title = params[:site][:title]
-    @site.tags = params[:site][:tags]
+    @site.tags = params[:site][:tags].downcase
     @site.published = true
 
     if @site.update_attributes

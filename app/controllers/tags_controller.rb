@@ -9,7 +9,7 @@ class TagsController < ApplicationController
 
   def search
     term = params[:term]
-    @taglist = Site.tags.find_all { |tag| /#{term}/ =~ tag }
+    @taglist = Site.tags.find_all { |tag| /#{term}/i =~ tag }
     respond_to do |format|
       format.json { render :json => @taglist.to_json }
     end
