@@ -49,9 +49,14 @@
   #site_comments.grid.grid_3n
     %h3
       Kommentare
-    = render :partial => 'partials/comments_form', :locals => {:comment => @comment}
-    - @site.comments.each do |comment|
-      .comment
-        %p= comment.name
-        %p= "---------------------------"
-        %p= comment.text
+    #comment_form_box= render :partial => 'create_comment_form', :locals => {:comment => @comment}
+    #comment_list
+      - @site.comments.each do |comment|
+        - if comment.created_at
+          .comment
+            = "-----------------------------------------"
+            %p= "#{comment.name}, am #{comment.created_at.strftime("%d.%m.%Y, %T")}"
+            %p= comment.text
+
+%script#comment_container{ :type => 'text/html' }
+  = render :partial => 'partials/single_comment'

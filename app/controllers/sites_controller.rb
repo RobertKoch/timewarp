@@ -68,6 +68,21 @@ class SitesController < ApplicationController
     @sites_title = Site.published.where(title: /#{@term}/i)
     @sites_tags = Site.published.tagged_with(/#{@term}/i)
   end
+
+  def create_comment
+    @site = Site.find_by_token(params[:site][:token])
+    @comment = @site.comments.build(params[:comment])
+
+
+    if @comment.save
+      @comments = @site.comments.reject {|c| !c.created_at}
+      render :reload_comments
+    else
+      @tags = get_tags_with_weight @site
+      render :create_comment
+    end
+  end
+
 private
   def site_exists_and_not_published
     if @site = Site.find_by_token(params[:id])

@@ -1,0 +1,7 @@
+- html = render :partial => 'create_comment_form', :locals => { :comment => @comment}
+
+:plain
+  $('#comment_form_box').hide();
+  $('#comment_form_box').html('#{escape_javascript html}');
+  $('#comment_form_box').show();
+

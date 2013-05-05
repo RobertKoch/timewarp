@@ -3,9 +3,14 @@ Timewarp::Application.routes.draw do
   root :to => 'home#index'
   get "home/index"
 
-  resource :sites, :only => [:index, :show, :create, :destroy]
-  resource :comments, :only => [:show, :create, :destroy] 
-  resources :tags, :sites
+  resources :sites do 
+    resources :comments, :only => [:create, :destroy] 
+    member do
+      post :create_comment
+    end
+  end
+  
+  resources :tags
 
   get "search" => "sites#search", :as => "search"
   get "tag_search" => "tags#search", :as => "tag_search"

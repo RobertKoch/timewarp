@@ -1,0 +1,13 @@
+- comments = []
+- comments = @comments.reverse.to_json
+
+:plain
+  $('#new_comment')[0].reset();
+  $('#comment_list').empty();
+
+  comments = JSON.parse('#{comments}');
+  comments.forEach(function(comment) {
+    date = new Date(comment.created_at);
+    comment.created_at = date.toLocaleDateString() + ", "+ date.toLocaleTimeString();
+    $('#comment_list').append( ich.comment_container(comment) );
+  });
