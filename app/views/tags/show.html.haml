@@ -1,4 +1,7 @@
 %section#archive
   %h1.margin-left= "all sites tagged with '#{@tag}'"
-  - @sites.each do |site|
-    = render :partial => 'partials/site', :locals => {:site => site}
+  -if @sites.count > 0
+    - @sites.each do |site|
+      = render :partial => 'partials/site', :locals => {:site => site}
+  -else
+    %p= "Keine Seiten gefunden."
