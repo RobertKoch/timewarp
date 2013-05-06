@@ -3,8 +3,9 @@
   %h3= letter
   %ul.tags
     -(@taglist.reject {|t| t[0][0] != letter.downcase}).each do |tag|
-      %li
-        %a{:href => tag_path(tag[0])}
-          = tag[0]
-        %span
-          = tag[1].to_i
+      -if Site.published.tagged_with(tag[0]).count > 0
+        %li
+          %a{:href => tag_path(tag[0])}
+            = tag[0]
+          %span
+            = tag[1].to_i
