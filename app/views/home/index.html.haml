@@ -1,9 +1,12 @@
-%section#timewarp.grid.grid_5col_4n
+%section#timewarp.grid.grid_5col_5n
   .timewarp_form
     = simple_form_for @site do |f|
       = f.input_field :url, :placeholder => 'http://www.timewarp.com'
       = f.submit 'Warp!'
     %p= error_helper @site
+    %h3
+    %h3
+      Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et
 
   // hide for presentation on monday 15.04.
   .debug.hidden
@@ -14,7 +17,7 @@
           = ' | '
           = link_to 'löschen', site_path(site.token), :method => :delete, :confirm => 'Wirklich löschen?'
 
-%section#instructions.grid.grid_5col_4n
+%section#instructions.grid.grid_5col_5n
   #step_1.grid.grid_1n
     %a{:href => '/assets/home/symbol_1.png', :class => 'fancybox'}
       %img{ :src => '/assets/home/symbol_1.png', :width => 'auto', :height => '200', :alt => ' ' }

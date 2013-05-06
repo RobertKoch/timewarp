@@ -4,6 +4,7 @@ module ApplicationHelper
   end
 
   def to_german_date(date)
-    date.strftime('%d. %b. %Y')
+    # todo: monat als namen in deutsch ausgeben, falls es eine einfache möglichkeit gibt
+    date.strftime('%d. %m. %Y')
   end
 end

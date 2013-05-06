@@ -8,6 +8,7 @@
   comments = JSON.parse('#{comments}');
   comments.forEach(function(comment) {
     date = new Date(comment.created_at);
+    console.log(comment);
     comment.created_at = date.toLocaleDateString() + ", "+ date.toLocaleTimeString();
     $('#comment_list').append( ich.comment_container(comment) );
   });

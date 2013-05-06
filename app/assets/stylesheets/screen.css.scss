@@ -46,7 +46,15 @@ a {
   float: left;
   margin: 0 $margin_default;
 }
-
+.grid_padding {
+  float: left; 
+  padding: 0 $margin_default;
+}
+.grid_full {
+  float: left;
+  margin: 0;
+  padding: 0;
+}
 // 5 columns
 .grid_5col_5n {width: $width_5col_5n;}
 .grid_5col_4n {width: $width_5col_4n;}
@@ -67,6 +75,11 @@ a {
 }
 .grid_2n {width: $width_2n;}
 .grid_1n {width: $width_1n;}
+
+// 4 columns full width (without margin left and right)
+.grid_full.grid_4n {
+  width: 100%;
+}
 
 // layout
 #header {

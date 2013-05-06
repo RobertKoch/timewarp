@@ -132,17 +132,14 @@
       position: relative;
       display: block;
       width: 236px;
-      margin: 0 auto 10px;
+      margin: 0 auto 30px;
       a {
         display: block;
-        color: $grey_dark;
-        background: {
-          color: $grey_light;
-        }
+        color: $grey_medium;
         border: {
-          width: 2px;
+          width: 1px 0;
           style: solid;
-          color: $green;
+          color: $grey_medium;
         }
         padding: 5px 10px 8px;
         text-align: center;
@@ -221,9 +218,9 @@
         &:hover {
           color: $grey_dark;
           background-color: $grey_medium;
-          -webkit-border-radius: 8px; 
+          /* -webkit-border-radius: 8px; 
           -moz-border-radius: 8px; 
-          border-radius: 8px; 
+          border-radius: 8px; */
         }
         span {float: right;}
       }
