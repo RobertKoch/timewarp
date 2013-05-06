@@ -1,2 +1,10 @@
-%h1 Tags#index
-%p Find me in app/views/tags/index.html.haml
+%h1 Tags
+-('A'..'Z').to_a.each do |letter|
+  %h3= letter
+  %ul.tags
+    -(@taglist.reject {|t| t[0][0] != letter.downcase}).each do |tag|
+      %li
+        %a{:href => tag_path(tag[0])}
+          = tag[0]
+        %span
+          = tag[1].to_i

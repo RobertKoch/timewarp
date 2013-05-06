@@ -1,5 +1,6 @@
 class TagsController < ApplicationController
   def index
+    @taglist = Site.tags_with_weight
   end
 
   def show
