@@ -22,6 +22,10 @@
   background-color: rgba(0, 255, 0, 0.2);
 }
 
+.tw_overlay_warp_hover {
+  z-index: 9999 !important;
+}
+
 .tw_overlay_text {
   display: block;
   text-align: center;
@@ -46,6 +50,7 @@
   background-color: #ccc;
   padding: 5px;
   z-index: 9999;
+  color: #000;
 }
 
 .tw_navigation_change ul {

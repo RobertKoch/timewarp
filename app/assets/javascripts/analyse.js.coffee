@@ -1,7 +1,7 @@
 $(window).load ->
   frameContent = $('#crawled_site').contents().find('html');
 
-  defineAdditionalTags(frameContent);
+  defineAdditionalAddons(frameContent);
 
   recursiveIterate(frameContent);
 
@@ -23,17 +23,13 @@ removeUnsolicitedTags = (frameContent) ->
   #    frameContent = frameContent.replace(regex[i], ""); 
   #  i++;
 
-defineAdditionalTags = (frameContent) ->
-  box  = '<div class="tw_navigation_change">';
-  box += '<ul>';
-  box += '<li class="tw_editOverlay">Header</li>';
-  box += '<li class="tw_editOverlay">Content</li>';
-  box += '<li class="tw_editOverlay">Navigation</li>';
-  box += '<li class="tw_editOverlay">usw.</li>';
-  box += '</ul>';
-  box += '</div>';
-
-  $(frameContent).find('body').append box;
+defineAdditionalAddons = (frameContent) ->
+  $.ajax(
+    url: "/assets/templates/overlay.html",
+    async: false
+  ).done (fileContent) ->
+    $(frameContent).find('body').append fileContent
+  
   $(frameContent).find('head').append '<link rel="stylesheet" href="http://localhost:3000/assets/stylesheets/analyse.css" type="text/css" media="screen" />';
 
 # recursive iteration through every element
@@ -111,10 +107,33 @@ generateOverlay = (node, value) ->
 
   window.overlayCnt++;
 
+getBreadcrumbs = (frameContent, pNodes) ->
+  path = ''
+
+  $.each pNodes, (i) ->
+    # get localName 'div' etc.
+    breadcrumb = $(this)[0].localName
+
+    # add value of id if exists
+    if ($(this)[0].id)
+      breadcrumb += '#'+$(this)[0].id
+
+    if (i > 0)
+      breadcrumb += ' > '  
+    
+    # build breadcrumb navigation
+    path = breadcrumb + path
+
+  $(frameContent).find('.tw_editOverlay_breadcrumbs').html(path)
+
 declareListener = (frameContent) ->
   el = $(frameContent).find('.tw_navigation_change');
 
-  $(frameContent).click (e) ->
+  $(frameContent).on 'click': (e) ->
+    # define breadcrumb navigation for current element
+    pNodes = $(e.target.parentNode).parents('*')
+    getBreadcrumbs(frameContent, pNodes)
+    
     if (e.target.className.indexOf('tw_highlight') >= 0)
       console.log (e.pageY + ' - ' + e.pageX);
       $(e.target).addClass 'highlight_current';
@@ -125,7 +144,6 @@ declareListener = (frameContent) ->
       window.activeOverlay = e;
       window.setOverlay = 1;
     else  
-
       switch e.target.className
         when 'tw_overlay_text' 
           $(el).css
@@ -147,14 +165,19 @@ declareListener = (frameContent) ->
             $(window.activeOverlay.target).addClass 'tw_' + e.target.innerText.toLowerCase();
           $(el).fadeOut();
 
-        
+        when 'tw_editOverlay_close'
+          $(el).fadeOut();  
 
   $(frameContent).mouseover (e) ->
     switch e.target.className 
       when 'tw_overlay_text' 
+        # bring overlay to front -> z-index: 9999
+        $(e.target.parentNode).addClass 'tw_overlay_warp_hover'
+        # highlight overlay container
         $(e.target.previousSibling).addClass 'tw_overlay_hover';
 
         $(e.target).mouseout (e) ->
+          $(e.target.parentNode).removeClass 'tw_overlay_warp_hover'
           $(e.target.previousSibling).removeClass 'tw_overlay_hover';
       else
         # dont highlight overlay
