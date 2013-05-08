@@ -8,16 +8,7 @@
   = will_paginate @sites, :previous_label => '&laquo;', :next_label => '&raquo;'
 
 %section#sidebar.grid.grid_5col_1n
-  %nav#archive_navigation
-    %ul
-      %li 
-        = link_to "latest", archive_path
-      %li 
-        = link_to "most viewed", archive_path(:sort => 'mostviewed')
-      %li 
-        = link_to "top rated", archive_path(:sort => 'toprated')
-      %li
-        = link_to "tag search", tags_path
+  = render :partial => 'partials/archive_navigation'
 
 
 // hide for presentation on monday 15.04.
