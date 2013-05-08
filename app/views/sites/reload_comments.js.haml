@@ -9,6 +9,6 @@
   comments.forEach(function(comment) {
     date = new Date(comment.created_at);
     console.log(comment);
-    comment.created_at = date.toLocaleDateString() + ", "+ date.toLocaleTimeString();
+    comment.created_at = date.toLocaleFormat("%d. %m. %Y");
     $('#comment_list').append( ich.comment_container(comment) );
   });

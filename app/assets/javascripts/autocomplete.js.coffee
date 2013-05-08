@@ -15,8 +15,8 @@ $(document).ready ->
     }
 
     #possibility to enter tags with enter-key
-    $("input.autocomplete").on 'keyup', ->
-      if(event.keyCode == 13)
+    $("input.autocomplete").on 'keyup', (evt) ->
+      if(evt.keyCode == 13)
           $("a.add_tag").trigger 'click';
 
     $("a.add_tag").on 'click', ->
@@ -44,7 +44,7 @@ saveAndPrintTagList = () ->
   bindClickHandler()
 
 printTag = (tag) ->
-  $('#chosen_tags').append('<span>'+tag+' <a href="javascript:void(0)" class="delete_tag" attr-tag="'+tag+'">löschen</a></span>')
+  $('#chosen_tags').append('<span>'+tag+'&nbsp;<a href="javascript:void(0)" class="delete_tag" attr-tag="'+tag+'">löschen</a></span>')
 
 deleteTag = (tag) ->
   idx = chosen_tags.indexOf tag

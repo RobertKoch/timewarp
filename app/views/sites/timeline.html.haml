@@ -1,7 +1,14 @@
-#show_container
-  %p= "Anzeige der veränderten Seiten"
+%section#site_show.grid.grid_5col_4n
+  %h1 
+    %span warped site: 
+    = @site.url
+  %iframe{:src => "#{Settings.host}/#{Settings.sites_folder}/#{@site.token}/current/index.html", :width => "100%"}
 
-= link_to "Ins Archiv speichern", "javascript:void(0)"
+  = link_to "Weiter", "#archive_form", :class => "fancybox_inline button"
 
-//todo niki: fancybox
-= render :partial => 'partials/archive_form', :locals => {:site => @site}
+  #archive_form
+    = render :partial => 'partials/archive_form', :locals => {:site => @site}
+
+%section#sidebar.grid.grid_5col_1n
+  %p
+    = "Timeline"

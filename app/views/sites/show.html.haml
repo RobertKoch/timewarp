@@ -49,12 +49,12 @@
   #site_comments.grid.grid_3n
     %h3
       Kommentare
-    #comment_form
-      = render :partial => 'create_comment_form', :locals => {:comment => @comment}
     #comment_list
-      - @site.comments.each do |comment|
+      - @site.comments.reverse.each do |comment|
         - if comment.created_at
           = render :partial => 'partials/single_comment', :locals => {:comment => comment}
+    #comment_form
+      = render :partial => 'create_comment_form', :locals => {:comment => @comment}
 
 %script#comment_container{ :type => 'text/html' }
   = render :partial => 'partials/single_comment_template'

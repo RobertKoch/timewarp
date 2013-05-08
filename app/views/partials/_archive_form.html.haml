@@ -1,15 +1,20 @@
+%h3.grid.grid_4n
+  Website im Archiv speichern
+
 = simple_form_for site, :as => :site, :url => sites_publish_path do |f|
-  %ul
+  %ul.grid.grid_4n
     %li
-      = f.input :title
+      = f.input :title, :label => 'Website-Titel:', :input_html => {:class => 'grid_padding grid_3n'}
     %li
       :javascript
         tag_search_url = "#{tag_search_url(:format => :json)}";
       = f.simple_fields_for :ac do |a|
-        = a.input :tags_input, :label => 'Tags', :required => false, :input_html => {:class => 'autocomplete'}
-        = link_to "Tag hinzufügen", "javascript:void(0)", :class => 'add_tag '
+        = a.input :tags_input, :label => 'Tag:', :required => false, :input_html => {:class => 'autocomplete grid_padding grid_3n'}
+        = link_to "Tag hinzufügen", "javascript:void(0)", :class => 'add_tag button'
       =f.input :tags, :label => false, :readonly => true, :input_html => {:class => 'taglist hidden'}
-    %li#chosen_tags
-    %li
-      = link_to "Nein, lieber doch nicht speichern!", root_path, :confirm => "Bist du sicher?", :class => "cancel_form"
-      = link_to "Ins Archiv speichern!", 'javascript:void(0)', :class => "submit_form"
+    %li#chosen_tags.clear
+    %li.clear
+      = link_to "Speichern", 'javascript:void(0)', :class => "button submit_form"
+      // todo: wording der confirmation bei abbruch des vorgangs
+      = link_to "Abbrechen", root_path, :confirm => "Bist du sicher?", :class => "button cancel_form"
+      
