@@ -1,7 +1,7 @@
 $(window).load ->
   frameContent = $('#crawled_site').contents().find('html');
 
-  defineAdditionalTags(frameContent);
+  defineAdditionalAddons(frameContent);
 
   recursiveIterate(frameContent);
 
@@ -23,17 +23,18 @@ removeUnsolicitedTags = (frameContent) ->
   #    frameContent = frameContent.replace(regex[i], ""); 
   #  i++;
 
-defineAdditionalTags = (frameContent) ->
-  box  = '<div class="tw_navigation_change">';
-  box += '<ul>';
-  box += '<li class="tw_editOverlay">Header</li>';
-  box += '<li class="tw_editOverlay">Content</li>';
-  box += '<li class="tw_editOverlay">Navigation</li>';
-  box += '<li class="tw_editOverlay">usw.</li>';
-  box += '</ul>';
-  box += '</div>';
+defineAdditionalAddons = (frameContent) ->
+  $.ajax(
+    url: "/assets/templates/overlay.html",
+    async: false
+  ).done (fileContent) ->
+    $(frameContent).find('body').append fileContent
+  
+  $(frameContent).find('body').append '<span class="tw_background_overlay"></span>'
 
-  $(frameContent).find('body').append box;
+  $(frameContent).find('.tw_background_overlay').css 'height': frameContent[0].offsetHeight
+
+
   $(frameContent).find('head').append '<link rel="stylesheet" href="http://localhost:3000/assets/stylesheets/analyse.css" type="text/css" media="screen" />';
 
 # recursive iteration through every element
@@ -53,21 +54,22 @@ recursiveIterate = (node) ->
 
     recursiveIterate($(this));    
 
-exploreAttributes = (_node) ->
+exploreAttributes = (node) ->
   objArr = new Object(
     navi: ["tw_navigation", "Navigation"], 
     header: ["tw_header", "Header"], 
-    content: ["tw_content", "Content"]
+    content: ["tw_content", "Content"],
+    footer: ["tw_footer", "Footer"]
   );
 
   # get attributes of node reference
-  attributes = _node[0].attributes;
+  attributes = node[0].attributes;
 
   $.each attributes, (i) ->
     if objArr[$(this)[0].nodeValue] != undefined
       # add appropriated class to node element
-      $(_node).addClass objArr[$(this)[0].nodeValue][0]
-      generateOverlay($(_node), objArr[$(this)[0].nodeValue][1])
+      $(node).addClass objArr[$(this)[0].nodeValue][0]
+      generateOverlay($(node), objArr[$(this)[0].nodeValue][1])
 
 
 exploreTagUl = (node) ->
@@ -78,14 +80,17 @@ exploreTagUl = (node) ->
     el = $(this)[0].children[0];
 
     if el != undefined
-      # element only a link tag 
+      # element contains only one tag, spezially a link tag 
       if $(el).length == 1 && $(el)[0].localName == 'a'
-        window.cnt++;
+        # increment navigation-count if the <a> tag doesnt contain an image tag
+        if $(el)[0].innerHTML.indexOf('<img') < 0
+          window.cnt++;
 
-  if window.cnt > 3 && window.cnt == length
+  # additional increment to allow 1 extra element like span in navigation-block
+  if window.cnt > 3 && (window.cnt == length || window.cnt+1 == length)
     generateOverlay($(node), 'Navigation');
 
-generateOverlay = (node, value) ->
+generateOverlay = (node, value) -> 
   window.overlayCnt = window.overlayCnt || 0;
   
   classParam = value.toLowerCase();
@@ -97,69 +102,119 @@ generateOverlay = (node, value) ->
 
   $(node).append overlay;
 
-  attributes = $(node)[0];
+  # chose parentNode if no height or width is available
+  if $(node)[0].offsetHeight > 0 && $(node)[0].offsetWidth > 0
+    attributes = $(node)[0];
+  else
+    attributes = $(node)[0].parentNode;  
+    #check for height otherwise usw default
 
-  console.log node;
+  # set height if not available
+  attributeHeight = (if (attributes.offsetHeight > 0) then attributes.offsetHeight else 20)  
 
   $(node).find('.overlay_wrap')
     .css
       'width': attributes.offsetWidth,
-      'height': attributes.offsetHeight,
+      'height': attributeHeight,
       'z-index': window.overlayCnt,
       'left': attributes.offsetLeft,
       'top': attributes.offsetTop;
-
+  
+  # increase cnt for increasing z-index
   window.overlayCnt++;
+
+getBreadcrumbs = (frameContent, node) ->
+  path = ''
+  pNodes = $(node).parents('*')
+
+  $.each pNodes, (i) ->
+    # get localName 'div' etc.
+    breadcrumb = $(this)[0].localName
+
+    # add value of id if exists
+    if ($(this)[0].id)
+      breadcrumb += '#'+$(this)[0].id
+
+    if (i > 0)
+      breadcrumb += ' > '  
+    
+    # build breadcrumb navigation
+    path = breadcrumb + path
+
+  $(frameContent).find('.tw_overlayBreadcrumbs').html(path)
+
+fadeOutOverlays = (frameContent, changeOverlay) ->
+  $(changeOverlay).fadeOut 'slow', ->
+    $(frameContent).find('.tw_background_overlay').fadeOut() 
 
 declareListener = (frameContent) ->
   el = $(frameContent).find('.tw_navigation_change');
 
   $(frameContent).click (e) ->
-    if (e.target.className.indexOf('tw_highlight') >= 0)
-      console.log (e.pageY + ' - ' + e.pageX);
-      $(e.target).addClass 'highlight_current';
-      $(el).css
-        'top': e.pageY,
-        'left': e.pageX;
-      $(el).fadeIn();
-      window.activeOverlay = e;
-      window.setOverlay = 1;
-    else  
+    switch e.target.className
+      when 'tw_overlayClose', 'tw_background_overlay'
+        fadeOutOverlays(frameContent, el)
 
-      switch e.target.className
-        when 'tw_overlay_text' 
-          $(el).css
-            'top': e.pageY,
-            'left': e.pageX;
-          $(el).fadeIn(); 
-          window.activeOverlay = e;
+      when 'tw_overlayRemove'
+        fadeOutOverlays(frameContent, el)
 
-        when 'tw_editOverlay'  
-          if window.setOverlay == undefined
-            # change field value
-            window.activeOverlay.target.innerText = e.target.innerText;
-          else
-            # generate overlay
-            generateOverlay($(window.activeOverlay.target), e.target.innerText);
-            # remove class highlighed 
-            $(window.activeOverlay.target).removeClass 'highlight_current';
-            # add class of type like tw_navigation
-            $(window.activeOverlay.target).addClass 'tw_' + e.target.innerText.toLowerCase();
-          $(el).fadeOut();
-
+        # remove block
+        clickedOverlay = window.activeOverlay.target.parentNode
+        $(clickedOverlay).remove()
         
+      else 
+        if e.target.className == 'tw_highlight'
+          $(e.target).addClass 'highlight_current';
+          window.setOverlay = 1;
+
+        # define breadcrumb navigation for current element
+        getBreadcrumbs(frameContent, e.target.parentNode)
+
+        $(el).css
+          'top': e.pageY,
+          'left': e.pageX;
+
+        window.activeOverlay = e;
+
+        $(frameContent).find('.tw_background_overlay').fadeIn "slow", ->
+          $(el).fadeIn();
+
+  $(frameContent).find('.tw_overlayDefinition').change (e) ->
+    value         = e.currentTarget.value;
+    overlayTarget = $(window.activeOverlay.target);
+
+    if window.setOverlay == undefined
+      # change field value
+      window.activeOverlay.target.innerText = value
+    else
+      # generate overlay
+      generateOverlay(overlayTarget, value);
+      # remove class highlighed 
+      overlayTarget.removeClass 'highlight_current';
+      # add class of type like tw_navigation
+      overlayTarget.addClass 'tw_' + value.toLowerCase();
+
+    # reset select-box to first option
+    e.currentTarget.selectedIndex = 0
+    
+    #fadeOut overlays
+    fadeOutOverlays(frameContent, el)
 
   $(frameContent).mouseover (e) ->
     switch e.target.className 
       when 'tw_overlay_text' 
+        # bring overlay to front -> z-index: 9999
+        $(e.target.parentNode).addClass 'tw_overlay_warp_hover'
+        # highlight overlay container
         $(e.target.previousSibling).addClass 'tw_overlay_hover';
 
         $(e.target).mouseout (e) ->
+          $(e.target.parentNode).removeClass 'tw_overlay_warp_hover'
           $(e.target.previousSibling).removeClass 'tw_overlay_hover';
       else
         # dont highlight overlay
-        if !$(frameContent).find('.tw_navigation_change').is(':visible')
+        if e.target.className != 'tw_overlay_text' && $(frameContent).find('.tw_navigation_change').is(':hidden')
           $(e.target).addClass 'tw_highlight';
-
+          
           $(e.target).mouseout (e) ->
             $(e.target).removeClass 'tw_highlight';

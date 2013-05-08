@@ -1,3 +1,14 @@
+.tw_background_overlay {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 255, 0.2);
+  z-index: 9998;
+}
+
 .tw_pos_rel {
   position: relative;
 }
@@ -18,13 +29,16 @@
   z-index: 1;
 }
 
-.tw_overlay_hover {
+.tw_overlay_warp_hover {
   background-color: rgba(0, 255, 0, 0.2);
+  z-index: 9999 !important;
 }
 
 .tw_overlay_text {
+  width: 100px !important;
+  height: 10px !important;
+
   display: block;
-  text-align: center;
   padding: 10px;
   background-color: #ccc;
   color: #000;
@@ -46,6 +60,7 @@
   background-color: #ccc;
   padding: 5px;
   z-index: 9999;
+  color: #000;
 }
 
 .tw_navigation_change ul {
