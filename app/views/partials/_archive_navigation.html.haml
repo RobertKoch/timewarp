@@ -1,0 +1,10 @@
+%nav#archive_navigation
+  %ul
+    %li 
+      = link_to "latest", archive_path, :class => (@sort == nil && controller.controller_name != 'tags') ? 'active' : '' 
+    %li 
+      = link_to "most viewed", archive_path(:sort => 'mostviewed'), :class => (@sort == 'mostviewed') ? 'active' : ''
+    %li 
+      = link_to "top rated", archive_path(:sort => 'toprated'), :class => (@sort == 'toprated') ? 'active' : ''
+    %li
+      = link_to "tag search", tags_path, :class => current_page?(tags_path) ? 'active' : ''

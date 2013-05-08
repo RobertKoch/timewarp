@@ -1,3 +1,32 @@
-// Place all the styles related to the Tags controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+@import 'variables';
+
+.letter_list { 
+  margin-bottom: $margin_default * 4;
+  &:nth-child(3n+4) {
+    clear: left;
+  }
+  h3 {
+    border: {
+      width: 1px 0;
+      style: solid;
+      color: $grey_dark_medium;
+    }
+    text-transform: uppercase !important;
+    padding: 4px 10px 6px;
+  }
+  ul {
+    list-style: none !important;
+    margin: 0 !important;
+    a {
+      padding: 3px 10px;
+      display: block;
+      text-decoration: none;
+      color: $grey_medium;
+      &:hover {
+        color: $grey_dark;
+        background-color: $grey_medium;
+      }
+      span {float: right;}
+    }
+  }
+}
