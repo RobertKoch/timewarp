@@ -1,8 +1,0 @@
-= error_helper comment
-= simple_form_for comment, :html => {:novalidate => true}, :as => :comment, :remote => true, :url => create_comment_site_path do |f|
-  = simple_fields_for comment.site, :as => :site do |s|
-    = s.input :token, :value => comment.site.token, :label => false,  :input_html => {:hidden => true}
-  = f.input :text, :as => :text, :required => true, :label => false
-  = f.input :name, :required => true
-  = f.input :email, :as => :email, :required => true
-  = f.button :submit, "Ok"

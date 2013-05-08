@@ -1,0 +1,7 @@
+.comment.grid_full.grid_4n
+  %h5
+    = "#{comment.name}"
+    %span
+      = " am #{to_german_date(comment.created_at)}"
+  %p
+    = comment.text

@@ -1,3 +1,61 @@
-// Place all the styles related to the Comments controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+@import 'variables';
+
+#comment_form {
+  margin: {
+    bottom: 20px;
+  }
+  label {
+    float: left;
+    width: $width_1n;
+    margin: {
+      right: $margin_default * 2;
+    }
+    font: {
+      size: $font_size_normal;
+    }
+    padding: {
+      top: $margin_default;
+    }
+    display:block;
+  }
+  input, textarea {
+    background: {
+      color: $grey_darker;
+    }
+    font: {
+      size: $font_size_normal;
+    }
+    padding: {
+      top: $margin_default;
+      bottom: $margin_default;
+    }
+    margin: {
+      bottom: 10px;
+    }
+  }
+  textarea {
+    height: 100px;
+  }
+  .required abbr {
+    color: $red;
+    float: right
+  }
+}
+#comment_list {
+  float: left;
+  padding-bottom: 20px;
+  .comment {
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid $grey_dark_medium;
+    h5 {
+      span {
+        font-size: $font_size_small;
+        color: $grey_medium;
+        margin-left: 5px;
+      }
+
+    }
+  }
+
+}

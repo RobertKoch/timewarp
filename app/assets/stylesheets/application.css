@@ -16,5 +16,6 @@
  *= require screen
  *= require home
  *= require sites
+ *= require comments
  *= require media-queries
 */
