@@ -9,6 +9,8 @@ $(window).load ->
 
   removeUnsolicitedTags(frameContent);
 
+  validateNavigations(frameContent)
+
   # if everything has finished set opacity to 1
   $('#crawled_site').css opacity: 1
 
@@ -73,7 +75,9 @@ exploreAttributes = (node) ->
 
 
 exploreTagUl = (node) ->
+  # reset variables
   window.cnt = 0;
+  window.galleryCnt = 0;
   length = $(node).children().length;
 
   $.each $(node).children(), (i) ->
@@ -85,18 +89,31 @@ exploreTagUl = (node) ->
         # increment navigation-count if the <a> tag doesnt contain an image tag
         if $(el)[0].innerHTML.indexOf('<img') < 0
           window.cnt++;
+        else
+          window.galleryCnt++; 
 
   # additional increment to allow 1 extra element like span in navigation-block
   if window.cnt > 3 && (window.cnt == length || window.cnt+1 == length)
-    generateOverlay($(node), 'Navigation');
+    generateOverlay($(node), 'SubNavigation');
+  else 
+    if window.galleryCnt > 3
+      generateOverlay($(node), 'Gallery');
+
+setClass = (node, value) ->
+  $(node).addClass 'tw_root_'+value
 
 generateOverlay = (node, value) -> 
-  window.overlayCnt = window.overlayCnt || 0;
+  classParam = value.toLowerCase()
   
-  classParam = value.toLowerCase();
+  # set class to overlay root
+  setClass(node, classParam)
+
+  # overlayCnt correlates to z-index
+  window.overlayCnt = window.overlayCnt || 0
 
   overlay    = '<div class="overlay_wrap">';
-  overlay   += '<span class="tw_overlay tw_' + classParam + '"></span>';
+  #overlay   += '<span class="tw_overlay tw_' + classParam + '"></span>';
+  overlay   += '<span class="tw_overlay"></span>';  
   overlay   += '<span class="tw_overlay_text">' + value + '</span>';
   overlay   += '</div>';
 
@@ -161,10 +178,15 @@ declareListener = (frameContent) ->
         # remove block
         clickedOverlay = window.activeOverlay.target.parentNode
         $(clickedOverlay).remove()
-        
+
       else 
         if e.target.className == 'tw_highlight'
           $(e.target).addClass 'highlight_current';
+
+        # if overlay even exists, set value to create new to undefined
+        if e.target.parentNode.className.indexOf('overlay_wrap') >= 0
+          window.setOverlay = undefined;
+        else
           window.setOverlay = 1;
 
         # define breadcrumb navigation for current element
@@ -174,8 +196,10 @@ declareListener = (frameContent) ->
           'top': e.pageY,
           'left': e.pageX;
 
+        # set current overlay
         window.activeOverlay = e;
 
+        # show overlay
         $(frameContent).find('.tw_background_overlay').fadeIn "slow", ->
           $(el).fadeIn();
 
@@ -184,9 +208,17 @@ declareListener = (frameContent) ->
     overlayTarget = $(window.activeOverlay.target);
 
     if window.setOverlay == undefined
+      # change class of parent element
+      parentElement = window.activeOverlay.target.parentNode.parentNode
+      $(parentElement).alterClass 'tw_*', 'tw_root_'+value.toLowerCase()
+
       # change field value
-      window.activeOverlay.target.innerText = value
+      if window.activeOverlay.target.className == 'tw_overlay_text'
+        window.activeOverlay.target.innerText = value
+      else
+        window.activeOverlay.target.nextSibling.innerText = value
     else
+      console.log 'doch da'
       # generate overlay
       generateOverlay(overlayTarget, value);
       # remove class highlighed 
@@ -218,3 +250,36 @@ declareListener = (frameContent) ->
           
           $(e.target).mouseout (e) ->
             $(e.target).removeClass 'tw_highlight';
+
+validateNavigations = (frameContent) -> 
+  #navFooterValues = new Array('Kontakt', 'Impressum', 'Datenschutz')
+
+  # array of elements
+  listMain = new Array('startseite', 'home', 'über uns')
+  # array which stores navigation points
+  navCnt = new Array();
+  # list that contains every subnavigation
+  subNav = $(frameContent).find('.tw_root_subnavigation')
+  
+  $.each subNav, (i) ->
+    # first navigation will be rated better
+    if i == 0 then cnt = 2 else cnt = 0
+    $.each this.children, (j) ->
+      if this.innerText && this.innerText != 'SubNavigation'
+        # is current value part of array
+        if this.innerText.toLowerCase() in listMain
+          cnt++
+    # push final points to array      
+    navCnt.push(cnt)  
+
+  # get max value of cnt array
+  maxCnt = Math.max.apply(Math, navCnt);
+  # get array index of max value
+  posOfMax = navCnt.indexOf(maxCnt);
+
+  # change subnavigation to main navigation
+  elem = subNav[posOfMax]
+
+  # change subnavigation to navigation
+  $(elem).alterClass 'tw_*', 'tw_root_navigation'
+  $(elem).find('.tw_overlay_text').text 'Navigation'

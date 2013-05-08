@@ -21,3 +21,4 @@
 //= require autocomplete
 
 //= require ICanHaz
+//= require alterClass
