@@ -2,8 +2,16 @@ class SitesController < ApplicationController
   before_filter :site_exists_and_not_published, :only => [:analyse, :timeline]
   
   def index
-    # @sites = Site.published
-    @sites = Site.published.order_by('created_at DESC').paginate(:page => params[:page], :per_page => 3)
+    case params[:sort]
+      when 'mostviewed'
+        sort_term = 'visits DESC'
+      when 'toprated'
+        sort_term = 'likes DESC'
+      else
+        sort_term = 'created_at DESC'
+    end
+      
+    @sites = Site.published.order_by("#{sort_term}").paginate(:page => params[:page], :per_page => 3)
     @tags = get_tags_with_weight
   end
 

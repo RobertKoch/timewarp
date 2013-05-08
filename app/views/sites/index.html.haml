@@ -11,11 +11,13 @@
   %nav#archive_navigation
     %ul
       %li 
-        %a latest
+        = link_to "latest", archive_path
       %li 
-        %a most viewed
+        = link_to "most viewed", archive_path(:sort => 'mostviewed')
       %li 
-        %a top rated
+        = link_to "top rated", archive_path(:sort => 'toprated')
+      %li
+        = link_to "tag search", tags_path
 
 // hide for presentation on monday 15.04.
 %section#tags.grid.grid_5col_4n.hidden
