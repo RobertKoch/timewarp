@@ -31,6 +31,10 @@ defineAdditionalAddons = (frameContent) ->
     $(frameContent).find('body').append fileContent
   
   $(frameContent).find('body').append '<span class="tw_background_overlay"></span>'
+
+  $(frameContent).find('.tw_background_overlay').css 'height': frameContent[0].offsetHeight
+
+
   $(frameContent).find('head').append '<link rel="stylesheet" href="http://localhost:3000/assets/stylesheets/analyse.css" type="text/css" media="screen" />';
 
 # recursive iteration through every element
@@ -137,7 +141,7 @@ getBreadcrumbs = (frameContent, node) ->
     # build breadcrumb navigation
     path = breadcrumb + path
 
-  $(frameContent).find('.tw_editOverlay_breadcrumbs').html(path)
+  $(frameContent).find('.tw_overlayBreadcrumbs').html(path)
 
 fadeOutOverlays = (frameContent, changeOverlay) ->
   $(changeOverlay).fadeOut 'slow', ->
@@ -148,7 +152,17 @@ declareListener = (frameContent) ->
 
   $(frameContent).click (e) ->
     switch e.target.className
-      when 'tw_highlight', 'tw_overlay_text'
+      when 'tw_overlayClose', 'tw_background_overlay'
+        fadeOutOverlays(frameContent, el)
+
+      when 'tw_overlayRemove'
+        fadeOutOverlays(frameContent, el)
+
+        # remove block
+        clickedOverlay = window.activeOverlay.target.parentNode
+        $(clickedOverlay).remove()
+        
+      else 
         if e.target.className == 'tw_highlight'
           $(e.target).addClass 'highlight_current';
           window.setOverlay = 1;
@@ -164,10 +178,6 @@ declareListener = (frameContent) ->
 
         $(frameContent).find('.tw_background_overlay').fadeIn "slow", ->
           $(el).fadeIn();
-
-      when 'tw_editOverlay_close', 'tw_background_overlay'
-        fadeOutOverlays(frameContent, el)
-           
 
   $(frameContent).find('.tw_overlayDefinition').change (e) ->
     value         = e.currentTarget.value;
@@ -203,8 +213,8 @@ declareListener = (frameContent) ->
           $(e.target.previousSibling).removeClass 'tw_overlay_hover';
       else
         # dont highlight overlay
-        if !$(frameContent).find('.tw_navigation_change').is(':visible')
+        if e.target.className != 'tw_overlay_text' && $(frameContent).find('.tw_navigation_change').is(':hidden')
           $(e.target).addClass 'tw_highlight';
-
+          
           $(e.target).mouseout (e) ->
             $(e.target).removeClass 'tw_highlight';
