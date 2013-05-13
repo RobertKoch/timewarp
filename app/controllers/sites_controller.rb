@@ -65,6 +65,11 @@ class SitesController < ApplicationController
     @site.published = true
 
     if @site.update_attributes
+      Settings.crawler.years.each do |year|
+        token = @site.token
+        kit = IMGKit.new(File.new(Rails.root.join("public/saved_sites/#{token}/#{year}/index.html")), :quality => 100, :width => 1400)
+        kit.to_file(Rails.root.join("public/saved_sites/#{token}/#{year}.jpg"))
+      end 
       redirect_to site_path(@site)
     else
       render 'sites/publish'

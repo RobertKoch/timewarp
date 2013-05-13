@@ -26,6 +26,13 @@ class Site
   
   validates :url, :presence => true, :format => {:with => /^(http(?:s)?\:\/\/[a-zA-Z0-9\-]+(?:\.[a-zA-Z0-9\-]+)*\.[a-zA-Z]{2,6}(?:\/?|(?:\/[\w\-]+)*)(?:\/?|\/\w+\.[a-zA-Z]{2,4}(?:\?[\w]+\=[\w\-]+)?)?(?:\&[\w]+\=[\w\-]+)*)$/}
 
+  def take_snapshots
+    Settings.crawler.years.each do |year|
+      kit = IMGKit.new(File.new(Rails.root.join("public/saved_sites/#{self.token}/#{year}/index.html")), :quality => 85, :width => 1400)
+      kit.to_file(Rails.root.join("public/saved_sites/#{self.token}/#{year}.jpg"))
+    end 
+  end 
+
   def self.latest(limit = 5)
     published.order_by('created_at DESC').limit(limit)
   end
