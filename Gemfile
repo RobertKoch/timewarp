@@ -18,7 +18,9 @@ gem 'simple_form'
 gem 'jqcloud-rails'
 gem 'fancybox2-rails', '~> 0.2.4'
 gem 'will_paginate_mongoid'
+
 gem 'imgkit'
+gem "rmagick", "~> 2.13.2"
 
 # Gems used only for assets and not required
 # in production environments by default.
