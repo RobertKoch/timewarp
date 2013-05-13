@@ -38,8 +38,12 @@ class Site
 
       #create small version of pic
       img = Magick::ImageList.new(pics_path + "#{year}.jpg")
+
       small_img = img.minify.crop 0, 0, 700, 400
       small_img.write(pics_path + "#{year}_preview.jpg"){self.quality = 100}
+
+      small_img_greyscale = small_img.quantize(256, Magick::GRAYColorspace)
+      small_img_greyscale.write(pics_path + "#{year}_preview_grey.jpg"){self.quality = 100}
     end 
   end 
 
