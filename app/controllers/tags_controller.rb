@@ -5,7 +5,9 @@ class TagsController < ApplicationController
 
   def show
     @tag = params[:id]
+    
     @sites = Site.published.tagged_with @tag
+    @sites = @sites.order_by('created_at DESC').paginate(:page => params[:page], :per_page => 12)
   end
 
   def search

@@ -16,6 +16,5 @@
       = "Keine Tags hinzugefügt"
     %li.clear
       = link_to "Speichern", 'javascript:void(0)', :class => "button submit_form"
-      // todo: wording der confirmation bei abbruch des vorgangs
-      = link_to "Abbrechen", root_path, :confirm => "Bist du sicher?", :class => "button cancel_form"
+      = link_to "Abbrechen", 'javascript:$.fancybox.close();', :class => "button cancel_form"
       

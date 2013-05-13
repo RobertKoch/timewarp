@@ -4,7 +4,7 @@
     %a{:href => root_path, :class => (current_page?(root_path) || on_analyse_path ) ? 'active' : ''} timewarp
   %li
     - on_show_path = (controller.controller_name == 'sites' && controller.action_name == 'show')
-    %a{:href => archive_path, :class => (current_page?(archive_path) || on_show_path || current_page?(tags_path)) ? 'active' : ''} archiv
+    %a{:href => archive_path, :class => (current_page?(archive_path) || on_show_path || controller.controller_name == 'tags') ? 'active' : ''} archiv
   %li
     %a{:href => history_path, :class => current_page?(history_path) ? 'active' : ''} geschichte
   %li

@@ -7,4 +7,4 @@
     %li 
       = link_to "top rated", archive_path(:sort => 'toprated'), :class => (@sort == 'toprated') ? 'active' : ''
     %li
-      = link_to "tag search", tags_path, :class => current_page?(tags_path) ? 'active' : ''
+      = link_to "tag search", tags_path, :class => (current_page?(tags_path) || controller.controller_name == 'tags') ? 'active' : ''

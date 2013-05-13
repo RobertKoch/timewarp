@@ -66,6 +66,9 @@ a {
     color: $grey_light;
   }
   float: right;
+  &.cancel {
+    margin-right: $margin_default;
+  }
 }
 input.button {
   height: 35px;

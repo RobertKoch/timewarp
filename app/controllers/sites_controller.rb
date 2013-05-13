@@ -11,7 +11,7 @@ class SitesController < ApplicationController
         sort_term = 'created_at DESC'
     end
 
-    @sites = Site.published.order_by("#{sort_term}").paginate(:page => params[:page], :per_page => 3)
+    @sites = Site.published.order_by("#{sort_term}").paginate(:page => params[:page], :per_page => 12)
     @tags = get_tags_with_weight
   end
 
