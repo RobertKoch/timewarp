@@ -10,3 +10,7 @@
 4. Set the "raise_not_found_error"-option in mongoid.yml to false
 5. Modify the other options in mongoid.yml if nessecary
 6. Start the Rails Server and enjoy ;)
+
+Dependencies:
+- ImageMagick
+- wkhtmltoimage
