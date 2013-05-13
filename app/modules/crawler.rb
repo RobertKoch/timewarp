@@ -7,16 +7,12 @@ class Crawler
   def crawl_site
     #create folders and save site to current
     create_folders
-    wget = system("wget --page-requisites --convert-links --directory-prefix='#{@site_dir}/current/' --force-html --html-extension -e robots=off #{@site.url}")
+    wget = system("wget --convert-links --force-html --output-document=#{@site_dir}/current/index.html #{@site.url}")
+    
+    #this would crawl site with all assets
+    #wget = system("wget --page-requisites --convert-links --directory-prefix='#{@site_dir}/current/' --force-html --html-extension -e robots=off #{@site.url}")
     
     wget
-    #check if wget was successful
-    #todo: this does not work, find solution for exception handling for wget
-    # if File.exists? "#{@site_dir}/current/index.html"
-    #   true
-    # else
-    #   false
-    # end
   end
 
   def get_site_title
