@@ -1,3 +1,5 @@
+require "RMagick"
+
 class Site
   include Mongoid::Document
   include Mongoid::Timestamps
@@ -27,9 +29,17 @@ class Site
   validates :url, :presence => true, :format => {:with => /^(http(?:s)?\:\/\/[a-zA-Z0-9\-]+(?:\.[a-zA-Z0-9\-]+)*\.[a-zA-Z]{2,6}(?:\/?|(?:\/[\w\-]+)*)(?:\/?|\/\w+\.[a-zA-Z]{2,4}(?:\?[\w]+\=[\w\-]+)?)?(?:\&[\w]+\=[\w\-]+)*)$/}
 
   def take_snapshots
+    pics_path = Rails.root.join("public/saved_sites/#{self.token}")
+
+    #snapshots for all versions
     Settings.crawler.years.each do |year|
-      kit = IMGKit.new(File.new(Rails.root.join("public/saved_sites/#{self.token}/#{year}/index.html")), :quality => 85, :width => 1400)
-      kit.to_file(Rails.root.join("public/saved_sites/#{self.token}/#{year}.jpg"))
+      kit = IMGKit.new(File.new(pics_path + "#{year}/index.html"), :quality => 85, :width => 1400)
+      kit.to_file pics_path + "#{year}.jpg"
+
+      #create small version of pic
+      img = Magick::ImageList.new(pics_path + "#{year}.jpg")
+      small_img = img.minify.crop 0, 0, 700, 400
+      small_img.write(pics_path + "#{year}_preview.jpg"){self.quality = 100}
     end 
   end 
 
