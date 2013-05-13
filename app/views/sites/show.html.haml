@@ -6,16 +6,16 @@
     - else 
       = @site.url
 
-  // todo: make a "real" condition
-  - has_img = false
-  - if has_img
-    - archive_img = ''
-  - else 
-    - archive_img = 'dummy-website.png'
+  - site_img = Rails.root.join("public/saved_sites/#{@site.token}/current.jpg")
+  - if File.exist?(site_img)
+    - img_path = "#{Settings.host}/saved_sites/#{@site.token}/current.jpg"
+    - preview_img_path = "#{Settings.host}/saved_sites/#{@site.token}/current_preview.jpg"
+  - else
+    - img_path = preview_img_path = 'dummy-img.png'
 
   #site_images.grid.grid_3n
-    %a{:href => image_path(archive_img), :class => 'fancybox'}
-      = image_tag(archive_img, :class => 'first')
+    %a{:href => image_path(img_path), :class => 'fancybox'}
+      = image_tag(preview_img_path, :class => 'first')
 
   #site_meta.grid.grid_1n
     %ul.meta
