@@ -40,7 +40,12 @@ saveAndPrintTagList = () ->
   chosen_tags.sort()
   $('input.taglist').val chosen_tags.join ','
   $('#chosen_tags').empty()
-  printTag(i) for i in chosen_tags
+  
+  if chosen_tags.length == 0
+    $('#chosen_tags').html('Keine Tags hinzugefügt.');
+  else
+    printTag(i) for i in chosen_tags
+    
   bindClickHandler()
 
 printTag = (tag) ->

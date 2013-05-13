@@ -13,6 +13,7 @@
         = link_to "Tag hinzufügen", "javascript:void(0)", :class => 'add_tag button'
       =f.input :tags, :label => false, :readonly => true, :input_html => {:class => 'taglist hidden'}
     %li#chosen_tags.clear
+      = "Keine Tags hinzugefügt"
     %li.clear
       = link_to "Speichern", 'javascript:void(0)', :class => "button submit_form"
       // todo: wording der confirmation bei abbruch des vorgangs
