@@ -6,19 +6,23 @@ setArchiveArticleHeight = () ->
   $('#archive article').css
     'height' : archiveImageHeight + 35
 
+addLikeListener = () ->
+  $('a.likes').on 'click', ->
+    $.ajax $('#likes_config').attr('attr_link'),
+      type: 'GET'
+      dataType: 'json'
+      success: (data, textStatus, jqXHR) ->
+        $('a.likes span.number').html(data);
+        $('a.likes').off 'click'
+
 $(document).ready ->
-
-  if $('#tagcloud_config').length != 0    
-    tag_list = JSON.parse $('#tagcloud_config').attr('tags')
-    $("#tagcloud").jQCloud( tag_list, {
-      width: 600,
-      height: 300
-    });
-
   if $('#site_analyse').length != 0
     $('#crawled_site').attr
       'height' : 500
       #$(window).height() - 350 
+
+  if $('#site_meta').length != 0
+    addLikeListener()
 
   setArchiveArticleHeight();
 

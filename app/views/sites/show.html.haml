@@ -27,10 +27,11 @@
         = @site.visits
         views
       %li.site_likes
-        %a{:href => '/'}
+        %a.likes{:href => 'javascript:void(0)'}
           %span.icon
-          = @site.likes
+          %span.number= @site.likes
           likes
+        #likes_config.hidden{:attr_link => increment_like_site_path}
       %li.site_share
         %a{:href => '/'}
           %span.icon

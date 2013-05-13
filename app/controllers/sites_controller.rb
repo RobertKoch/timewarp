@@ -93,6 +93,16 @@ class SitesController < ApplicationController
     end
   end
 
+  def increment_like
+    site = Site.find_by_token(params[:id])
+    likes = site.likes + 1
+    site.update_attribute :likes, likes
+
+    respond_to do |format|
+      format.json { render :json => likes.to_json }
+    end
+  end
+
 private
   def site_exists_and_not_published
     if @site = Site.find_by_token(params[:id])
