@@ -2,7 +2,7 @@
   %h1 
     %span warped site: 
     = @site.url
-  %iframe{:src => "#{Settings.host}/#{Settings.sites_folder}/#{@site.token}/current/index.html", :width => "100%"}
+  %iframe{:src => "#{Settings.host}/#{Settings.sites_folder}/#{@site.token}/current/#{@site.url.gsub(/http:\/\/||https:\/\//, '')}/index.html", :width => "100%"}
 
   = link_to "Weiter", "#archive_form", :class => "fancybox_inline button"
 
