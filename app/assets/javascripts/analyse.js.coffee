@@ -1,21 +1,22 @@
 $(window).load ->
-  frameContent = $('#crawled_site').contents().find('html');
+  # store in window element
+  window.frameContent = $('#crawled_site').contents().find('html');
 
-  defineAdditionalAddons(frameContent);
+  defineAdditionalAddons();
 
-  recursiveIterate(frameContent);
+  recursiveIterate(window.frameContent);
 
-  declareListener(frameContent); 
+  declareListener(); 
 
-  removeUnsolicitedTags(frameContent);
+  removeUnsolicitedTags();
 
-  validateNavigations(frameContent)
+  validateNavigations()
 
   # if everything has finished set opacity to 1
   $('#crawled_site').css opacity: 1
 
-removeUnsolicitedTags = (frameContent) ->
-  $(frameContent).find('a').removeAttr 'href';
+removeUnsolicitedTags = () ->
+  $(window.frameContent).find('a').removeAttr 'href';
 
   #regex = new Array(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/g, /<iframe\b[^<]*(?:(?!<\/iframe>)<[^<]*)*<\/iframe>/g);
   #i = 0;
@@ -25,19 +26,18 @@ removeUnsolicitedTags = (frameContent) ->
   #    frameContent = frameContent.replace(regex[i], ""); 
   #  i++;
 
-defineAdditionalAddons = (frameContent) ->
+defineAdditionalAddons = () ->
   $.ajax(
     url: "/assets/templates/overlay.html",
     async: false
   ).done (fileContent) ->
-    $(frameContent).find('body').append fileContent
+    $(window.frameContent).find('body').append fileContent
   
-  $(frameContent).find('body').append '<span class="tw_background_overlay"></span>'
+  $(window.frameContent).find('body').append '<span class="tw_background_overlay"></span>'
 
-  $(frameContent).find('.tw_background_overlay').css 'height': frameContent[0].offsetHeight
+  $(window.frameContent).find('.tw_background_overlay').css 'height': window.frameContent[0].offsetHeight
 
-
-  $(frameContent).find('head').append '<link rel="stylesheet" href="http://localhost:3000/assets/stylesheets/analyse.css" type="text/css" media="screen" />';
+  $(window.frameContent).find('head').append '<link rel="stylesheet" href="http://localhost:3000/assets/stylesheets/analyse.css" type="text/css" media="screen" />';
 
 # recursive iteration through every element
 recursiveIterate = (node) ->
@@ -120,11 +120,12 @@ generateOverlay = (node, value) ->
   $(node).append overlay;
 
   # chose parentNode if no height or width is available
-  if $(node)[0].offsetHeight > 0 && $(node)[0].offsetWidth > 0
-    attributes = $(node)[0];
-  else
-    attributes = $(node)[0].parentNode;  
-    #check for height otherwise usw default
+  #if $(node)[0].offsetHeight > 0 && $(node)[0].offsetWidth > 0
+  #  attributes = $(node)[0];
+  #else
+  #  attributes = $(node)[0].parentNode;  
+
+  attributes = $(node)[0];
 
   # set height if not available
   attributeHeight = (if (attributes.offsetHeight > 0) then attributes.offsetHeight else 20)  
@@ -140,40 +141,65 @@ generateOverlay = (node, value) ->
   # increase cnt for increasing z-index
   window.overlayCnt++;
 
-getBreadcrumbs = (frameContent, node) ->
+getBreadcrumbs = (node) ->
   path = ''
   pNodes = $(node).parents('*')
 
   $.each pNodes, (i) ->
     # get localName 'div' etc.
-    breadcrumb = $(this)[0].localName
+    breadcrumb = '<span class="tw_bc">'+$(this)[0].localName
 
     # add value of id if exists
     if ($(this)[0].id)
       breadcrumb += '#'+$(this)[0].id
 
     if (i > 0)
-      breadcrumb += ' > '  
+      breadcrumb += '</span> > '  
     
     # build breadcrumb navigation
     path = breadcrumb + path
 
-  $(frameContent).find('.tw_overlayBreadcrumbs').html(path)
+  $(window.frameContent).find('.tw_overlayBreadcrumbs').html(path)
 
-fadeOutOverlays = (frameContent, changeOverlay) ->
+fadeOutOverlays = (changeOverlay) ->
   $(changeOverlay).fadeOut 'slow', ->
-    $(frameContent).find('.tw_background_overlay').fadeOut() 
+    $(window.frameContent).find('.tw_background_overlay').fadeOut() 
 
-declareListener = (frameContent) ->
-  el = $(frameContent).find('.tw_navigation_change');
+declareListener = () ->
+  el = $(window.frameContent).find('.tw_navigation_change');
 
-  $(frameContent).click (e) ->
+  $(window.frameContent).click (e) ->
     switch e.target.className
+      when 'tw_bc'
+        #e = $(frameContent).find('#top-articles')
+        console.log 'click on breadcrumb'
+
+        # if overlay even exists, set value to create new to undefined
+        if e.parentNode.className.indexOf('overlay_wrap') >= 0
+          window.setOverlay = undefined;
+        else
+          window.setOverlay = 1;
+
+        # define breadcrumb navigation for current element
+        console.log e.parentNode
+        getBreadcrumbs(e)
+
+        $(el).css
+          'top': e.pageY,
+          'left': e.pageX;
+
+        # set current overlay
+        window.activeOverlay = e;
+
+        # show overlay
+        $(window.frameContent).find('.tw_background_overlay').fadeIn "slow", ->
+          $(el).fadeIn();
+
       when 'tw_overlayClose', 'tw_background_overlay'
-        fadeOutOverlays(frameContent, el)
+        fadeOutOverlays(el)
 
       when 'tw_overlayRemove'
-        fadeOutOverlays(frameContent, el)
+        fadeOutOverlays(el)
 
         # remove block
         clickedOverlay = window.activeOverlay.target.parentNode
@@ -190,7 +216,7 @@ declareListener = (frameContent) ->
           window.setOverlay = 1;
 
         # define breadcrumb navigation for current element
-        getBreadcrumbs(frameContent, e.target.parentNode)
+        getBreadcrumbs(e.target.parentNode)
 
         $(el).css
           'top': e.pageY,
@@ -200,10 +226,10 @@ declareListener = (frameContent) ->
         window.activeOverlay = e;
 
         # show overlay
-        $(frameContent).find('.tw_background_overlay').fadeIn "slow", ->
+        $(window.frameContent).find('.tw_background_overlay').fadeIn "slow", ->
           $(el).fadeIn();
 
-  $(frameContent).find('.tw_overlayDefinition').change (e) ->
+  $(window.frameContent).find('.tw_overlayDefinition').on 'change': (e) ->
     value         = e.currentTarget.value;
     overlayTarget = $(window.activeOverlay.target);
 
@@ -218,7 +244,6 @@ declareListener = (frameContent) ->
       else
         window.activeOverlay.target.nextSibling.innerText = value
     else
-      console.log 'doch da'
       # generate overlay
       generateOverlay(overlayTarget, value);
       # remove class highlighed 
@@ -230,9 +255,12 @@ declareListener = (frameContent) ->
     e.currentTarget.selectedIndex = 0
     
     #fadeOut overlays
-    fadeOutOverlays(frameContent, el)
+    fadeOutOverlays(el)
 
-  $(frameContent).mouseover (e) ->
+    # validate navigation to check if main navigation has changed
+    validateNavigations()
+
+  $(window.frameContent).mouseover (e) ->
     switch e.target.className 
       when 'tw_overlay_text' 
         # bring overlay to front -> z-index: 9999
@@ -245,13 +273,16 @@ declareListener = (frameContent) ->
           $(e.target.previousSibling).removeClass 'tw_overlay_hover';
       else
         # dont highlight overlay
-        if e.target.className != 'tw_overlay_text' && $(frameContent).find('.tw_navigation_change').is(':hidden')
+        if e.target.className != 'tw_overlay_text' && $(window.frameContent).find('.tw_navigation_change').is(':hidden')
           $(e.target).addClass 'tw_highlight';
           
           $(e.target).mouseout (e) ->
             $(e.target).removeClass 'tw_highlight';
 
-validateNavigations = (frameContent) -> 
+# every change of navigation must be validated
+validateNavigations = () -> 
+  # reset root navigation
+  $(window.frameContent).find('.tw_root_navigation').alterClass 'tw_root_navigation', 'tw_root_subnavigation'
   #navFooterValues = new Array('Kontakt', 'Impressum', 'Datenschutz')
 
   # array of elements
@@ -259,7 +290,7 @@ validateNavigations = (frameContent) ->
   # array which stores navigation points
   navCnt = new Array();
   # list that contains every subnavigation
-  subNav = $(frameContent).find('.tw_root_subnavigation')
+  subNav = $(window.frameContent).find('.tw_root_subnavigation')
   
   $.each subNav, (i) ->
     # first navigation will be rated better
