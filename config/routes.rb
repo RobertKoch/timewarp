@@ -20,6 +20,7 @@ Timewarp::Application.routes.draw do
   get "sites/:id/analyse" => "sites#analyse", :as => "sites_analyse"
   get "sites/:id/timeline" => "sites#timeline", :as => "sites_timeline"
   put "sites/:id/publish" => "sites#publish", :as => "sites_publish"
+  post "sites/rewrite_content" => "sites#rewrite_content"
 
   get "team"           => "pages#about", :as => "team"
   get "history_of_web" => "pages#history_of_web", :as => "history"

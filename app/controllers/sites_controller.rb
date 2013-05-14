@@ -103,6 +103,18 @@ class SitesController < ApplicationController
     end
   end
 
+  def rewrite_content
+    file_path = Rails.root.join "public/saved_sites/#{params[:token]}/#{params[:version]}/index.html"
+
+    file = File.open(file_path, "w")
+    state = file.write(params[:content])
+    file.close
+
+    respond_to do |format|
+      format.json { render :json => (state > 0) ? true : false}
+    end
+  end
+
 private
   def site_exists_and_not_published
     if @site = Site.find_by_token(params[:id])
