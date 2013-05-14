@@ -9,12 +9,3 @@
 
 %section#sidebar.grid.grid_5col_1n
   = render :partial => 'partials/archive_navigation'
-
-
-// hide for presentation on monday 15.04.
-%section#tags.grid.grid_5col_4n.hidden
-  %h1.margin-left 
-    Tag-Cloud
-  #tagcloud
-    #tagcloud_config.hidden{:tags => @tags.to_json}
-  %br
