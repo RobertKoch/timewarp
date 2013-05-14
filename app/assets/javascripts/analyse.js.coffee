@@ -257,6 +257,25 @@ declareListener = () ->
           $(e.target).mouseout (e) ->
             $(e.target).removeClass 'tw_highlight';
 
+  $('#sidebar a').click (e) ->
+    e.preventDefault()
+
+    token   = $('#analyse_token').attr('token')
+    content = $('#crawled_site').contents().find('html')[0].outerHTML
+
+    $.ajax(
+      type: 'POST',
+      dataType: 'json',
+      url: "/sites/rewrite_content",
+      data: {
+        token: token,
+        version: 'current',
+        content: content
+      }
+      async: false
+    ).done (data) ->
+      console.log data
+
 # every change of navigation must be validated
 validateNavigations = () -> 
   # reset root navigation
