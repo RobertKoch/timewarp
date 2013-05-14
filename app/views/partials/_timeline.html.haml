@@ -1,5 +1,6 @@
-%p 2013
-%p 2008
-%p 2003
-%p 1998
-%p 1994
+%nav#archive_navigation
+  %ul
+    - Settings.crawler.years.each do |year|
+      %li
+        %a{:href => 'javascript:void(0)', :class => "change_version", :attr_version => year} 
+          = year == 'current' ? 'aktuelle Version' : year
