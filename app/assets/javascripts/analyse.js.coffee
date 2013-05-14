@@ -73,7 +73,6 @@ exploreAttributes = (node) ->
       $(node).addClass objArr[$(this)[0].nodeValue][0]
       generateOverlay($(node), objArr[$(this)[0].nodeValue][1])
 
-
 exploreTagUl = (node) ->
   # reset variables
   window.cnt = 0;
@@ -173,27 +172,6 @@ declareListener = () ->
       when 'tw_bc'
         #e = $(frameContent).find('#top-articles')
         console.log 'click on breadcrumb'
-
-        # if overlay even exists, set value to create new to undefined
-        if e.parentNode.className.indexOf('overlay_wrap') >= 0
-          window.setOverlay = undefined;
-        else
-          window.setOverlay = 1;
-
-        # define breadcrumb navigation for current element
-        console.log e.parentNode
-        getBreadcrumbs(e)
-
-        $(el).css
-          'top': e.pageY,
-          'left': e.pageX;
-
-        # set current overlay
-        window.activeOverlay = e;
-
-        # show overlay
-        $(window.frameContent).find('.tw_background_overlay').fadeIn "slow", ->
-          $(el).fadeIn();
 
       when 'tw_overlayClose', 'tw_background_overlay'
         fadeOutOverlays(el)
