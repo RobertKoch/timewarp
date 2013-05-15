@@ -6,7 +6,7 @@ body, input, select, textarea {
 }
 body {
   background: {
-    color: $grey_light;
+    color: $grey_lighter;
   }
 }
 a {
@@ -15,6 +15,11 @@ a {
   &:hover {
     color: $blue;
   }
+}
+#header hgroup, #wrapper {
+  position: relative;
+  width: 94.11764705%; // 960px => 1020px
+  margin: 0 auto;
 }
 
 // some "useful" css classes
@@ -29,7 +34,6 @@ a {
   }
   overflow: hidden; 
 }
-
 
 // header 
 #header {
@@ -46,7 +50,7 @@ a {
      -moz-box-shadow: 0 0 10px rgba(0, 0, 0, .3);
           box-shadow: 0 0 10px rgba(0, 0, 0, .3);
   margin: {
-    bottom: 30px;
+    bottom: 40px;
   }
 
   #bg_light_gradient {
@@ -63,10 +67,7 @@ a {
   }
 
   hgroup {
-    position: relative;
-    width: 94.11764705%; // 960px => 1020px
     height: 100%;
-    margin: 0 auto;
     
     #bg_logo {
       position: absolute;
@@ -166,6 +167,10 @@ a {
       }
     }
   }
+}
+
+#wrapper {
+
 }
 
 

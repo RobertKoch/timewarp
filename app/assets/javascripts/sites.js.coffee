@@ -48,6 +48,8 @@ $(document).ready ->
           'bottom' : 0
           animationTimeFast
 
+  $('#sub_navigation a').append('<span></span>');
+
 $(window).load ->
   setArchiveArticleHeight();
 

@@ -16,15 +16,14 @@
   %body
     %header#header
       = render :partial => 'partials/header'
-    
 
     #wrapper
-      #navigation_rail
       
-      %section#content.grid.grid_4n
+      %section#content
         = yield
-    %footer#footer
-      = render :partial => 'partials/footer'
+
+      %footer#footer
+        = render :partial => 'partials/footer'
 
     = javascript_include_tag 'application'
     

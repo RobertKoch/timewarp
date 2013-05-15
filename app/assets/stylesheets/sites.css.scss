@@ -1,5 +1,71 @@
 @import 'variables';
 
+#sub_navigation {
+  float: left;
+  width: 100%;
+  border: {
+    bottom: 1px solid $grey_light;
+  }
+  -webkit-box-shadow: 0 1px 0 $white;
+     -moz-box-shadow: 0 1px 0 $white;
+          box-shadow: 0 1px 0 $white;
+  margin: {
+    bottom: 20px;
+  }
+
+  ul {
+    @include font_michroma;
+    font: {
+      size: $font_size_normal;
+    }
+
+    li {
+      
+      float: left;
+      margin: {
+        right: 14px;
+        bottom: 20px;
+      }
+
+      a {
+        position: relative;
+        padding: 2px 8px 6px 10px;
+        color: $grey;
+
+        &:hover, &.active {
+          color: $white;
+          background: {
+            color: $green;
+          }
+
+          span {
+            position: absolute;
+            top: 0;
+            right: -4px;
+            display: block;
+            width: 4px;
+            height: 28px;
+            background: {
+              image: url('curve-28.png');
+              position: 0 0;
+              repeat: no-repeat;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+
+
+
+
+
+
+
+
+
 /* #wrapper {
 
 }
