@@ -3,6 +3,10 @@
 // default settings
 body, input, select, textarea {
   @include font_default;
+  font: {
+    size: $font_size_small;
+  }
+  color: $grey;
 }
 body {
   background: {
@@ -170,9 +174,49 @@ a {
 }
 
 #wrapper {
+  color: $grey_light;
 
+  #footer {
+    margin: {
+      top: 40px;
+    }
+    padding: {
+      top: 15px;
+    }
+    border: {
+      top: 1px solid $white;
+    }
+    -webkit-box-shadow: 0 -1px 0 $grey_light;
+       -moz-box-shadow: 0 -1px 0 $grey_light;
+            box-shadow: 0 -1px 0 $grey_light;
+  }
+
+  p {
+    float: left;
+  }
+
+  #footer_navigation {
+    float: right;
+
+    ul {
+      
+      li {
+        float: left;
+        margin: {
+          left: 15px;
+        }
+
+        a {
+          color: $grey_medium;
+
+          &:hover {
+            color: $blue;
+          }
+        }
+      }
+    }
+  }
 }
-
 
 /* .icon {
   display: inline-block;
