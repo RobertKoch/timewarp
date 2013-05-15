@@ -67,11 +67,20 @@ exploreAttributes = (node) ->
   # get attributes of node reference
   attributes = node[0].attributes;
 
-  $.each attributes, (i) ->
-    if objArr[$(this)[0].nodeValue] != undefined
-      # add appropriated class to node element
-      $(node).addClass objArr[$(this)[0].nodeValue][0]
-      generateOverlay($(node), objArr[$(this)[0].nodeValue][1])
+  $.each attributes, (i, v) ->
+    nodeName = $(v)[0].nodeName
+
+    # continue if atribute is id or class
+    if nodeName == 'id' || nodeName == 'class'
+      # split to get every element of example multiple classes
+      splitValues = nodeName.split(' ')
+
+      $.each splitValues, (j, w) ->
+        param = w.toLowerCase()
+        # continue param is part of objArr
+        if objArr[param] != undefined
+          $(node).addClass objArr[param][0]
+          generateOverlay($(node), objArr[param][1])
 
 exploreTagUl = (node) ->
   # reset variables
