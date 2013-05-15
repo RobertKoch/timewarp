@@ -6,15 +6,170 @@ body, input, select, textarea {
 }
 body {
   background: {
-    color: $grey_dark;
+    color: $grey_light;
   }
 }
 a {
   color: $green;
+  text-decoration: none;
+  &:hover {
+    color: $blue;
+  }
 }
 
 // some "useful" css classes
-.icon {
+.hidden {display: none;}
+.clear {clear: both;}
+
+// text indents 
+#logo a, #lens {
+  display: block;
+  text: {
+    indent: -19999px;
+  }
+  overflow: hidden; 
+}
+
+
+// header 
+#header {
+  width: 100%;
+  height: 80px;
+  background: {
+    color: $black; 
+    image: -webkit-linear-gradient(top, $grey, $black); 
+    image:    -moz-linear-gradient(top, $grey, $black);
+    image:     -ms-linear-gradient(top, $grey, $black);
+    image:      -o-linear-gradient(top, $grey, $black);
+  }
+  -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, .3);
+     -moz-box-shadow: 0 0 10px rgba(0, 0, 0, .3);
+          box-shadow: 0 0 10px rgba(0, 0, 0, .3);
+  margin: {
+    bottom: 30px;
+  }
+
+  #bg_light_gradient {
+    position: absolute;
+    top: 0; 
+    left: 0;
+    width: 6%;
+    height: 100%;
+    background: {
+      image: url('bg-header-gradient.png');
+      position: 0 0;
+      repeat: repeat-x;
+    }
+  }
+
+  hgroup {
+    position: relative;
+    width: 94.11764705%; // 960px => 1020px
+    height: 100%;
+    margin: 0 auto;
+    
+    #bg_logo {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 228px;
+      height: 100%;
+      background: {
+        image: url('bg-logo.png');
+        position: right 0;
+        repeat: no-repeat;
+      }
+    }
+
+    #logo {
+      position: absolute;
+      top: 0;
+      left: -10px;
+
+      a {
+        width: 80px;
+        height: 80px;
+        background: {
+          image: url('logo.png');
+          position: 0 0;
+          repeat: no-repeat;
+        }
+      }
+    }
+
+    #navigation {
+      position: absolute;
+      top: 28px;
+      left: 85px;
+
+      ul {
+        @include font_michroma;
+        font: {
+          size: $font_size_medium;
+        }
+
+        li {
+          float: left;
+          margin: {
+            right: 30px;
+          }
+
+          a {
+            color: $white;
+            &:hover, &.active {
+              color: $green;
+            }
+          }
+        }
+      }
+    }
+
+    #search {
+      position: absolute;
+      top: 27px;
+      right: 0;
+
+      #search_input {
+        background: {
+          color: $black; 
+          image: -webkit-linear-gradient(bottom, $grey, $black); 
+          image:    -moz-linear-gradient(bottom, $grey, $black);
+          image:     -ms-linear-gradient(bottom, $grey, $black);
+          image:      -o-linear-gradient(bottom, $grey, $black);
+        }
+        border: {
+          width: 1px;
+          style: solid;
+          color: $black;
+          radius: 15px;
+        }
+        padding: 5px 10px 5px 25px;
+        color: $white;
+        width: 160px;
+      }
+
+      #lens {
+        position: absolute;
+        top: 7px;
+        left: 10px;
+        width: 12px;
+        height: 12px;
+        background: {
+          image: url('lens.png');
+          position: 0 0;
+          repeat: no-repeat;
+        }
+      }
+
+      #search_submit {
+        display: none;
+      }
+    }
+  }
+}
+
+
+/* .icon {
   display: inline-block;
   width: 14px;
   height: 14px;
@@ -29,7 +184,6 @@ a {
 }
 .hidden {display: none;}
 .clear {clear: both;}
-.margin-left {margin-left: $margin_default;}
 .button {
   background: {
     color: transparent !important;
@@ -56,59 +210,11 @@ a {
   }
   float: right;
   &.cancel {
-    margin-right: $margin_default;
   }
 }
 input.button {
   height: 35px;
   padding-top: 0 !important; 
-}
-
-// grid
-.grid {
-  float: left;
-  margin: 0 $margin_default;
-}
-.grid_padding {
-  float: left; 
-  padding: 0 $margin_default;
-}
-.grid_full {
-  float: left;
-  margin: 0;
-  padding: 0;
-}
-
-// 5 columns
-.grid_5col_5n {width: $width_5col_5n;}
-.grid_5col_4n {width: $width_5col_4n;}
-.grid_5col_4n_full {
-  width: $width_5col_4n_full;
-  margin-right: 0;
-}
-.grid_5col_3n {width: $width_5col_3n;}
-.grid_5col_2n {width: $width_5col_2n;}
-.grid_5col_1n {width: $width_5col_1n;}
-
-// 4 columns
-.grid_4n {width: $width_4n;}
-.grid_3n {width: $width_3n;}
-.grid_3n_full {
-  width: $width_3n_full;
-  margin-right: 0;
-}
-.grid_2n {width: $width_2n;}
-.grid_1n {width: $width_1n;}
-
-// 4 columns full width (without margin left and right)
-.grid_full.grid_4n {width: 100%;}
-
-// fancybox
-.fancybox-skin {
-  background: $green;
-  -webkit-border-radius: 0;
-     -moz-border-radius: 0;
-          border-radius: 0;
 }
 
 // layout
@@ -204,7 +310,7 @@ input.button {
   position: relative;
   /* width: 94.11764705%; 960px -> 1020px */
   /* width: 96.07843137%; 980px -> 1020px */
-  width: 100%;
+  /* width: 100%;
   margin: 0 auto;
 }
 #content {
@@ -237,7 +343,6 @@ input.button {
   bottom: 0;
   left: 0;
   width: 100%;
-  background-color: $grey_darker;
   clear: both;
   padding: 20px 0;
   border-top: 1px solid $green;
@@ -245,4 +350,4 @@ input.button {
 
 #chosen_tags span {
   padding: 3px;
-}
+} */

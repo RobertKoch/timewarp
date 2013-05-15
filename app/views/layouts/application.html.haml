@@ -14,10 +14,13 @@
     = stylesheet_link_tag 'http://fonts.googleapis.com/css?family=Michroma', :media => 'screen'
     
   %body
+    %header#header
+      = render :partial => 'partials/header'
+    
+
     #wrapper
       #navigation_rail
-      %header#header.grid.grid_4n
-        = render :partial => 'partials/header'
+      
       %section#content.grid.grid_4n
         = yield
     %footer#footer

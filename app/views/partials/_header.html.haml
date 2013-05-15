@@ -1,7 +1,16 @@
+#bg_light_gradient
+
 %hgroup
-  %nav#navigation.grid.grid_5col_4n
+  #bg_logo
+    %span
+  %h3#logo
+    %a{:href => root_path}
+      timewarp
+
+  %nav#navigation
     = render :partial => 'partials/navigation'
-  %h3#logo.grid.grid_5col_1n
-    %a{ :href => root_path } timewarp
-    %span.shadow
+
+  #search
+    = render :partial => 'partials/search_form'
+  
   

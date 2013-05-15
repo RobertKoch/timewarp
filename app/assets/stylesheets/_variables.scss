@@ -1,13 +1,15 @@
 /* colors */
 $white: #fff;
-$grey_darker: #585954;
-$grey_dark: #656560;
-$grey_dark_medium: #949492;
-$grey_medium: #c1c1bf;
-$grey_light: #e8e8e7;
+$black: #000;
+
 $green: #b6c02f;
 $blue: #34a6de;
 $red: #dd1717;
+
+$grey_light: #f4f4f4;
+$grey_medium: #6a6a6a;
+$grey: #484848;
+$grey_dark: #282828;
 
 /* fonts */
 $font_size_small: 12px;
@@ -21,7 +23,7 @@ $font_size_large: 24px;
     size: $font_size_small;
     weight: normal;
   }
-  color: $grey_medium;
+  color: $grey;
 }
 @mixin font_michroma {
   font: {
@@ -34,20 +36,3 @@ $font_size_large: 24px;
 }
 
 /* widths */
-$margin_default: 1.04166667%; /* 10px -> 960px */
-
-$width_5col_5n: 97.91666666%; /* 940px -> 960px */
-$width_5col_4n: 77.91666666%;
-$width_5col_4n_full: 78.95833333%;
-$width_5col_3n: 57.91666666%;
-$width_5col_2n: 37.91666666%;
-$width_5col_1n: 17.91666666%; /* 172px -> 960px */
-
-$width_4n: 97.91666666%; /* 940px -> 960px */
-$width_3n: 72.91666666%; /* 700px -> 960px */
-$width_3n_full: 73.95833333%; /* 710px -> 960px */
-$width_2n: 47.91666666%; /* 460px -> 960px */
-$width_1n: 22.91666666%; /* 220px -> 960px */
-
-$width_3column_1n: 31.25%;
-$width_2column_1n: 47.91666666%;
