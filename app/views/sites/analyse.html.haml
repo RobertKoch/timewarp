@@ -5,4 +5,7 @@
   %iframe{:src => "#{Settings.host}/#{Settings.sites_folder}/#{@site.token}/current/index.html", :width => "100%", :id => "crawled_site", :sandbox => "allow-same-origin allow-scripts" }
 
 %section#sidebar.grid.grid_5col_1n
-  %p= link_to "Zurück in die Zukunft! (oder einfach weiter zur Timeline)", sites_timeline_path(@site)
+  %p= link_to "Zurück in die Zukunft! (oder einfach weiter zur Timeline)", sites_timeline_path(@site), :class => "back_to_future"
+  %br
+
+  %p= link_to "Reset Analyse", '#', :class => "reset_analyse"

@@ -196,6 +196,12 @@ declareListener = () ->
         if e.target.className == 'tw_highlight'
           $(e.target).addClass 'highlight_current';
 
+        # if click element an overlay enable remove link, otherwise hide link
+        if e.target.className == 'tw_overlay_text' || e.target.className.indexOf('tw_overlay') >= 0
+          $(el).find('.tw_overlayRemove').show()
+        else
+          $(el).find('.tw_overlayRemove').hide()
+
         # if overlay even exists, set value to create new to undefined
         if e.target.parentNode.className.indexOf('overlay_wrap') >= 0
           window.setOverlay = undefined;
@@ -266,7 +272,7 @@ declareListener = () ->
           $(e.target).mouseout (e) ->
             $(e.target).removeClass 'tw_highlight';
 
-  $('#sidebar a').click (e) ->
+  $('.back_to_future').click (e) ->
     e.preventDefault()
 
     $(window.frameContent).find('.overlay_wrap').remove();
@@ -286,6 +292,14 @@ declareListener = () ->
       async: false
     ).done (data) ->
       console.log data
+
+  $('.reset_analyse').click (e) ->
+    e.preventDefault()
+
+    # reset all classes which start with tw_
+    $(window.frameContent).find('.overlay_wrap').parent().alterClass 'tw_*', ''
+    # remove all overlays
+    $(window.frameContent).find('.overlay_wrap').remove();
 
 # every change of navigation must be validated
 validateNavigations = () -> 
@@ -321,4 +335,4 @@ validateNavigations = () ->
 
   # change subnavigation to navigation
   $(elem).alterClass 'tw_*', 'tw_root_navigation'
-  $(elem).find('.tw_overlay_text').text 'Navigation'
+  $(elem).find('.tw_overlay_text').text 'Navigation'  
