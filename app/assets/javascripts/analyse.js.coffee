@@ -193,6 +193,10 @@ declareListener = () ->
         $(clickedOverlay).remove()
 
       else 
+        # if click on image, change e.target to parent element to prevent an overlay inside the image tag
+        if e.target.nodeName == 'IMG'
+          e.target = e.target.parentNode
+
         if e.target.className == 'tw_highlight'
           $(e.target).addClass 'highlight_current';
 
@@ -267,10 +271,15 @@ declareListener = () ->
       else
         # dont highlight overlay
         if e.target.className != 'tw_overlay_text' && $(window.frameContent).find('.tw_navigation_change').is(':hidden')
-          $(e.target).addClass 'tw_highlight';
+          if e.target.nodeName == 'IMG'
+            target = e.target.parentNode
+          else
+            target = e.target  
           
-          $(e.target).mouseout (e) ->
-            $(e.target).removeClass 'tw_highlight';
+          $(target).addClass 'tw_highlight';
+          
+          $(target).mouseout (e) ->
+            $(target).removeClass 'tw_highlight';
 
   $('.back_to_future').click (e) ->
     e.preventDefault()
@@ -290,8 +299,9 @@ declareListener = () ->
         content: content
       }
       async: false
-    ).done (data) ->
-      console.log data
+    ).done (bool) ->
+      if bool
+        window.location.replace(window.location.origin+'/sites/'+token+'/timeline');
 
   $('.reset_analyse').click (e) ->
     e.preventDefault()

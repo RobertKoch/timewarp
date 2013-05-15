@@ -76,3 +76,7 @@
 .tw_highlight {
   background-color: rgba(255, 0, 255, 0.2);
 }
+
+.tw_highlight img {
+  opacity: 0.5 !important;
+}
