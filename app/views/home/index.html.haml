@@ -8,15 +8,6 @@
     %h3
       Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et
 
-  // hide for presentation on monday 15.04.
-  .debug.hidden
-    %ul
-      - @sites.each do |site|
-        %li
-          = link_to site.url, sites_analyse_path(site.token)
-          = ' | '
-          = link_to 'löschen', site_path(site.token), :method => :delete, :confirm => 'Wirklich löschen?'
-
 %section#instructions.grid.grid_5col_5n
   #step_1.grid.grid_1n
     %a{:href => '/assets/home/symbol_1.png', :class => 'fancybox'}

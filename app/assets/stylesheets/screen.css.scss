@@ -14,17 +14,6 @@ a {
 }
 
 // some "useful" css classes
-.debug {
-  border: {
-    width: 1px;
-    style: dashed;
-    color: $red;
-  }
-  padding: 10px;
-  background: {
-    color: $grey_medium;
-  }
-}
 .icon {
   display: inline-block;
   width: 14px;
@@ -244,9 +233,14 @@ input.button {
   }
 }
 #footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: $grey_darker;
   clear: both;
-  padding: 15px 0 30px 0;
-  border-top: 1px solid $grey_dark_medium;
+  padding: 20px 0;
+  border-top: 1px solid $green;
 }
 
 #chosen_tags span {
