@@ -260,6 +260,8 @@ declareListener = () ->
   $('#sidebar a').click (e) ->
     e.preventDefault()
 
+    $(window.frameContent).find('.overlay_wrap').remove();
+
     token   = $('#analyse_token').attr('token')
     content = $('#crawled_site').contents().find('html')[0].outerHTML
 
