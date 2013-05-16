@@ -1,19 +1,29 @@
 $(window).load ->
+  setTimeout (->
+    startAnalyse()
+
+    # if everything has finished set opacity to 1
+    $('#crawled_site').css opacity: 1
+  ), 500
+
   # store in window element
   window.frameContent = $('#crawled_site').contents().find('html')
 
   defineAdditionalAddons()
 
-  recursiveIterate(window.frameContent)
-
   declareListener()
 
   removeUnsolicitedTags()
-
+  
+startAnalyse = () ->
+  recursiveIterate(window.frameContent)
   validateNavigations()
 
-  # if everything has finished set opacity to 1
-  $('#crawled_site').css opacity: 1
+resetAnalyse = () ->
+  # reset all classes which start with tw_
+  $(window.frameContent).find('.overlay_wrap').parent().alterClass 'tw_*', ''
+  # remove all overlays
+  $(window.frameContent).find('.overlay_wrap').remove()  
 
 removeUnsolicitedTags = () ->
   $(window.frameContent).find('a').removeAttr 'href'
@@ -390,12 +400,15 @@ declareListener = () ->
 
   $('.reset_analyse').click (e) ->
     e.preventDefault()
+    resetAnalyse()
 
-    # reset all classes which start with tw_
-    $(window.frameContent).find('.overlay_wrap').parent().alterClass 'tw_*', ''
-    # remove all overlays
-    $(window.frameContent).find('.overlay_wrap').remove()
-
+  $('.new_analyse').click (e) ->
+    e.preventDefault()
+    # remove overlays if some are existing
+    if $(window.frameContent).find('.overlay_wrap').length > 0
+      resetAnalyse()
+    startAnalyse()
+    
 # every change of navigation must be validated
 validateNavigations = () -> 
   # reset root navigation
