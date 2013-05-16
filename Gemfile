@@ -7,7 +7,7 @@ gem 'rvm-capistrano'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'mongoid'
-gem 'mongoid_token', :git => 'git://github.com/thetron/mongoid_token.git', :branch => 'patch/collisions-define-method'
+gem 'mongoid_token', :git => 'https://github.com/thetron/mongoid_token.git', :branch => 'patch/collisions-define-method'
 gem 'mongoid_taggable'
 gem 'rails_config'
 
