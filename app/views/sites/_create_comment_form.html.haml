@@ -2,6 +2,6 @@
   = simple_fields_for comment.site, :as => :site do |s|
     = s.input :token, :value => comment.site.token, :label => false, :input_html => {:hidden => true}
   = f.input :text, :as => :text, :label => false, :placeholder => 'Kommentar eingeben...', :input_html => {:class => 'grid_padding grid_4n'}
-  = f.input :name, :required => true, :label => 'Name:', :input_html => {:class => 'grid_padding grid_3n'}
-  = f.input :email, :as => :email, :label => 'E-Mail Adresse:', :required => true, :input_html => {:class => 'grid_padding grid_3n'}
+  = f.input :name, :required => true, :label => 'Name:', :input_html => {:class => 'grid_padding grid_3n'}, :placeholder => 'Dein Name'
+  = f.input :email, :as => :email, :label => 'E-Mail Adresse:', :required => true, :input_html => {:class => 'grid_padding grid_3n'}, :placeholder => 'Deine E-Mail Adresse'
   = f.button :submit, "Kommentar abschicken"

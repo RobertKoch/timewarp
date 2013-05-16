@@ -1,6 +1,5 @@
-%section#archive_detail.grid.grid_5col_4n_full
-
-  %h1.margin-left
+#archive_detail
+  %h1
     - if !@site.title.blank?
       = @site.title
     - else 
@@ -8,16 +7,17 @@
 
   - site_img = Rails.root.join("public/saved_sites/#{@site.token}/current.jpg")
   - if File.exist?(site_img)
-    - img_path = "#{Settings.host}/saved_sites/#{@site.token}/current.jpg"
-    - preview_img_path = "#{Settings.host}/saved_sites/#{@site.token}/current_preview.jpg"
+    - img_path = "#{Settings.host}/saved_sites/#{@site.token}/"
+    - preview_img_path = "#{Settings.host}/saved_sites/#{@site.token}/"
   - else
     - img_path = preview_img_path = 'dummy-img.png'
 
-  #site_images.grid.grid_3n
-    %a{:href => image_path(img_path), :class => 'fancybox'}
-      = image_tag(preview_img_path, :class => 'first')
-
-  #site_meta.grid.grid_1n
+  #site_images
+    - Settings.crawler.years.each do |year|
+      %a{:href => image_path(img_path + year + '.jpg'), :class => 'fancybox', :rel => 'site_images'}
+        = image_tag(preview_img_path + year + '_preview.jpg', :id => year)
+    
+  #site_meta
     %ul.meta
       %li.site_date
         %span.icon
@@ -29,13 +29,14 @@
       %li.site_likes
         %a.likes{:href => 'javascript:void(0)'}
           %span.icon
-          %span.number= @site.likes
+          %span.number
+            = @site.likes
           likes
         #likes_config.hidden{:attr_link => increment_like_site_path}
       %li.site_share
         %a{:href => '/'}
           %span.icon
-          Share
+          teilen
 
     %h5
       Tags
@@ -47,7 +48,7 @@
             %span
               = tag[1].to_i
 
-  #site_comments.grid.grid_3n
+  #site_comments
     %h3
       Kommentare
     #comment_list

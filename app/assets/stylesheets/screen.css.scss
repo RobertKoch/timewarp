@@ -6,7 +6,6 @@ body, input, select, textarea {
   font: {
     size: $font_size_small;
   }
-  color: $grey;
 }
 body {
   background: {
@@ -22,13 +21,26 @@ a {
 }
 #header hgroup, #wrapper {
   position: relative;
-  width: 94.11764705%; // 960px => 1020px
+  width: $width_960;
   margin: 0 auto;
 }
 
 // some "useful" css classes
 .hidden {display: none;}
 .clear {clear: both;}
+.icon {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  background: {
+    image: url('sprite-icons.png');
+    repeat: no-repeat;
+  }
+  margin: {
+    right: 3px;
+    bottom: -2px;
+  }
+}
 
 // text indents 
 #logo a, #lens {
@@ -54,7 +66,7 @@ a {
      -moz-box-shadow: 0 0 10px rgba(0, 0, 0, .3);
           box-shadow: 0 0 10px rgba(0, 0, 0, .3);
   margin: {
-    bottom: 40px;
+    bottom: 30px;
   }
 
   #bg_light_gradient {
@@ -174,15 +186,40 @@ a {
 }
 
 #wrapper {
-  color: $grey_light;
 
+  #content {
+    h1, h2, h3, h4, h5, h6 {
+      @include font_michroma;
+      color: $grey;
+      margin-bottom: 1em;
+    }
+
+    h1 {
+      font-size: $font_size_large;
+    }
+
+    h3 {
+      font-size: $font_size_medium;
+    }
+
+    h5 {
+      font-size: $font_size_normal;
+    }
+    
+    p, ul, ol {
+      line-height: 1.5em;
+    }
+  }
+    
   #footer {
     clear: both;
+    color: $grey_light;
     margin: {
       top: 40px;
     }
     padding: {
       top: 15px;
+      bottom: 30px;
     }
     border: {
       top: 1px solid $white;

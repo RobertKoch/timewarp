@@ -24,7 +24,7 @@ $font_size_large: 24px;
     size: $font_size_small;
     weight: normal;
   }
-  color: $grey;
+  color: $grey_medium;
 }
 @mixin font_michroma {
   font: {
@@ -36,4 +36,9 @@ $font_size_large: 24px;
   }
 }
 
-/* widths */
+/* widths outgoing from window-width 1020px */
+$width_960: 94.11764705%;
+$width_734: 76.45833333%;
+$width_230: 23.95833333%;
+$width_200: 20.83333333%;
+$width_13: 1.3541667%;

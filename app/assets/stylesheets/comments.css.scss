@@ -1,5 +1,44 @@
 @import 'variables';
 
+#site_comments {
+  clear: both;
+  float: left;
+  width: $width_734;
+  margin: {
+    bottom: 40px;
+  }
+
+  label {
+    display: none;
+  }
+
+  input, textarea {
+    outline: 1px solid $grey_light;
+    margin: {
+      bottom: 10px;
+    }
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.08) inset;
+  }
+
+  input {
+    float: left;
+    width: 47.5%;
+    padding: 0.6% 1%;
+
+    &#comment_name {
+      margin: {
+        right: 1%;
+      }
+    }
+  }
+
+  textarea {
+    width: 98%;
+    height: 60px;
+    padding: 1%;
+  }
+}
+
 /* #comment_form {
   margin: {
     bottom: 20px;
