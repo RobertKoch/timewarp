@@ -1,5 +1,6 @@
 @import 'variables';
 
+// archive navigation
 #sub_navigation {
   float: left;
   width: 100%;
@@ -57,9 +58,91 @@
   }
 }
 
+// archive overview (index)
+#archive_overview {
+  float: left;
+  width: 100%;
+  margin: {
+    bottom: 40px;
+  }
 
+  .site_preview {
+    position: relative;
+    width: 23.95833333%;
+    float: left;
+    margin: {
+      right: 1.3541667%;
+      bottom: 1.3541667%; 
+    }
 
+    &:nth-child(4n+4) {
+      margin: {
+        right: 0;
+      }
+    }
 
+    img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: auto;
+      z-index: 1;
+      &.hover {
+        display: none;
+        opacity: 0;
+      }
+    }
+
+    div {
+      position: absolute;
+      left: 0;
+      right: 0;
+      display: block;
+      padding: 10px;
+
+      &.site_title {
+        bottom: 0;
+        height: 15px;
+        background: {
+          color: $grey; 
+          image: -webkit-linear-gradient(top, $grey_medium, $grey); 
+          image:    -moz-linear-gradient(top, $grey_medium, $grey);
+          image:     -ms-linear-gradient(top, $grey_medium, $grey);
+          image:      -o-linear-gradient(top, $grey_medium, $grey);
+        }
+        @include font_michroma;
+        color: $white;
+        z-index: 10;
+      }
+
+      &.site_meta {
+        bottom: 0;
+        padding: {
+          top: 7px;
+          bottom: 7px;
+        }
+        background-color: $white;
+        color: $grey_medium;
+        z-index: 9;
+
+        .site_date {
+          float: left;
+          margin: {
+            top: 2px;
+          }
+        }
+        .site_likes {
+          float: right;
+
+          .icon {
+            background-position: 0 0; // !!!!
+          }
+        }
+      }
+    }
+  }
+}
 
 
 
@@ -86,55 +169,7 @@
     margin: {
       bottom: $margin_default * 2;
     }
-    img {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: auto;
-      z-index: 1;
-      &.hover {
-        display: none;
-        opacity: 0;
-      }
-    }
-    div {
-      position: absolute;
-      left: 0;
-      right: 0;
-      display: block;
-      padding: 10px;
-    }
-    .sites_title {
-      bottom: 0;
-      height: 15px;
-      background-color: $blue;
-      @include font_michroma;
-      color: $white;
-      z-index: 10;
-    }
-    .sites_meta {
-      bottom: 0;
-      padding: {
-        top: 7px;
-        bottom: 7px;
-      }
-      background-color: $white;
-      color: $grey_medium;
-      z-index: 9;
-      .sites_date {
-        float: left;
-        margin: {
-          top: 2px;
-        }
-      }
-      .sites_likes {
-          float: right;
-        .icon {
-          background-position: 0 0;
-        }
-      }
-    }
+    
   }
   .pagination {
     padding: 20px 0;

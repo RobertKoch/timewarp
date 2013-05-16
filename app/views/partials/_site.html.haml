@@ -6,18 +6,18 @@
   - preview_img_path = 'dummy-img-grey.png'
   - preview_img_path_hover = 'dummy-img.png'
 
-%article.grid.grid_1n
+%article.site_preview
   %a{:href => site_path(site.token)}
     = image_tag(preview_img_path)
     = image_tag(preview_img_path_hover, :class => 'hover')
-    %div.sites_title
+    %div.site_title
       - if !site.title.blank?
         = site.title
       - else 
         = site.url
-    %div.sites_meta
-      %span.sites_date
+    %div.site_meta
+      %span.site_date
         = to_german_date(site.created_at)
-      %strong.sites_likes
+      %strong.site_likes
         %span.icon
         = site.likes
