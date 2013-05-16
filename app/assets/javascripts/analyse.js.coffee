@@ -4,6 +4,8 @@ $(window).load ->
 
     # if everything has finished set opacity to 1
     $('#crawled_site').css opacity: 1
+
+    startValidation()
   ), 500
 
   # store in window element
@@ -17,13 +19,16 @@ $(window).load ->
   
 startAnalyse = () ->
   recursiveIterate(window.frameContent)
-  validateNavigations()
 
 resetAnalyse = () ->
   # reset all classes which start with tw_
   $(window.frameContent).find('.overlay_wrap').parent().alterClass 'tw_*', ''
   # remove all overlays
   $(window.frameContent).find('.overlay_wrap').remove()  
+
+startValidation = () ->
+  validateNavigations()
+  validateFooter()
 
 removeUnsolicitedTags = () ->
   $(window.frameContent).find('a').removeAttr 'href'
@@ -64,11 +69,14 @@ recursiveIterate = (node) ->
     if $(this)[0].localName == 'ul'
       exploreTagUl($(this))
 
+    if $(this)[0].innerText.indexOf('©') > 0
+      window.elemFooter = this
+
     recursiveIterate($(this));    
 
 exploreAttributes = (node) ->
   objArr = new Object(
-    navi: ["tw_navigation", "Navigation"], 
+    navigation: ["tw_navigation", "Navigation"], 
     header: ["tw_header", "Header"], 
     content: ["tw_content", "Content"],
     footer: ["tw_footer", "Footer"]
@@ -120,7 +128,7 @@ exploreTagUl = (node) ->
       generateOverlay($(node), 'Gallery')
 
 setRootClass = (node, value) ->
-  if node[0].className.indexOf 'tw_root' < 0
+  if node[0].className.indexOf('tw_root') < 0
     $(node).addClass 'tw_root_'+value
 
 generateOverlay = (node, value) -> 
@@ -175,7 +183,7 @@ getBreadcrumbs = (node) ->
   path = ''
   pNodes = $(node).parents('*')
   dataIDCnt = pNodes.length
-
+  console.log dataIDCnt
   if dataIDCnt < 2
     noBreadcrumbs()
   else
@@ -408,12 +416,16 @@ declareListener = () ->
     if $(window.frameContent).find('.overlay_wrap').length > 0
       resetAnalyse()
     startAnalyse()
+
+validateFooter = () ->
+  # element has no footer-overlay
+  if $(window.elemFooter)[0].className.indexOf('tw_') < 0
+    generateOverlay($(window.elemFooter), 'Footer')
     
 # every change of navigation must be validated
 validateNavigations = () -> 
   # reset root navigation
   $(window.frameContent).find('.tw_root_navigation').alterClass 'tw_root_navigation', 'tw_root_subnavigation'
-  #navFooterValues = new Array('Kontakt', 'Impressum', 'Datenschutz')
 
   # array of elements
   listMain = new Array('startseite', 'home', 'über uns')
