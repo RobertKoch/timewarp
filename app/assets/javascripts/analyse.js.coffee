@@ -1,14 +1,14 @@
 $(window).load ->
   # store in window element
-  window.frameContent = $('#crawled_site').contents().find('html');
+  window.frameContent = $('#crawled_site').contents().find('html')
 
-  defineAdditionalAddons();
+  defineAdditionalAddons()
 
-  recursiveIterate(window.frameContent);
+  recursiveIterate(window.frameContent)
 
-  declareListener(); 
+  declareListener()
 
-  removeUnsolicitedTags();
+  removeUnsolicitedTags()
 
   validateNavigations()
 
@@ -16,7 +16,7 @@ $(window).load ->
   $('#crawled_site').css opacity: 1
 
 removeUnsolicitedTags = () ->
-  $(window.frameContent).find('a').removeAttr 'href';
+  $(window.frameContent).find('a').removeAttr 'href'
 
   #regex = new Array(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/g, /<iframe\b[^<]*(?:(?!<\/iframe>)<[^<]*)*<\/iframe>/g);
   #i = 0;
@@ -37,7 +37,7 @@ defineAdditionalAddons = () ->
 
   $(window.frameContent).find('.tw_background_overlay').css 'height': window.frameContent[0].offsetHeight
 
-  $(window.frameContent).find('head').append '<link rel="stylesheet" href="http://localhost:3000/assets/stylesheets/analyse.css" type="text/css" media="screen" />';
+  $(window.frameContent).find('head').append '<link rel="stylesheet" href="http://localhost:3000/assets/stylesheets/analyse.css" type="text/css" media="screen" />'
 
 # recursive iteration through every element
 recursiveIterate = (node) ->
@@ -52,7 +52,7 @@ recursiveIterate = (node) ->
       #console.log($(this)[0].attributes)
 
     if $(this)[0].localName == 'ul'
-      exploreTagUl($(this));
+      exploreTagUl($(this))
 
     recursiveIterate($(this));    
 
@@ -86,31 +86,35 @@ exploreTagUl = (node) ->
   # reset variables
   window.cnt = 0;
   window.galleryCnt = 0;
-  length = $(node).children().length;
+  length = $(node).children().length
 
   $.each $(node).children(), (i) ->
-    el = $(this)[0].children[0];
+    el = $(this)[0].children[0]
 
     if el != undefined
       # element contains only one tag, spezially a link tag 
       if $(el).length == 1 && $(el)[0].localName == 'a'
         # increment navigation-count if the <a> tag doesnt contain an image tag
         if $(el)[0].innerHTML.indexOf('<img') < 0
-          window.cnt++;
+          window.cnt++
         else
-          window.galleryCnt++; 
+          window.galleryCnt++ 
 
   # additional increment to allow 1 extra element like span in navigation-block
   if window.cnt > 3 && (window.cnt == length || window.cnt+1 == length)
-    generateOverlay($(node), 'SubNavigation');
+    generateOverlay($(node), 'SubNavigation')
   else 
     if window.galleryCnt > 3
-      generateOverlay($(node), 'Gallery');
+      generateOverlay($(node), 'Gallery')
 
 setClass = (node, value) ->
   $(node).addClass 'tw_root_'+value
 
 generateOverlay = (node, value) -> 
+  # node will be empty when click at breadbrumb navigation
+  if node.length <= 0
+    node = window.activeOverlay
+
   classParam = value.toLowerCase()
   
   # set class to overlay root
@@ -119,13 +123,12 @@ generateOverlay = (node, value) ->
   # overlayCnt correlates to z-index
   window.overlayCnt = window.overlayCnt || 0
 
-  overlay    = '<div class="overlay_wrap">';
-  #overlay   += '<span class="tw_overlay tw_' + classParam + '"></span>';
-  overlay   += '<span class="tw_overlay"></span>';  
-  overlay   += '<span class="tw_overlay_text">' + value + '</span>';
-  overlay   += '</div>';
+  overlay    = '<div class="overlay_wrap">'
+  overlay   += '<span class="tw_overlay"></span>' 
+  overlay   += '<span class="tw_overlay_text">' + value + '</span>'
+  overlay   += '</div>'
 
-  $(node).append overlay;
+  $(node).append overlay
 
   # chose parentNode if no height or width is available
   #if $(node)[0].offsetHeight > 0 && $(node)[0].offsetWidth > 0
@@ -133,7 +136,7 @@ generateOverlay = (node, value) ->
   #else
   #  attributes = $(node)[0].parentNode;  
 
-  attributes = $(node)[0];
+  attributes = $(node)[0]
 
   # set height if not available
   attributeHeight = (if (attributes.offsetHeight > 0) then attributes.offsetHeight else 20)  
@@ -147,7 +150,7 @@ generateOverlay = (node, value) ->
       'top': attributes.offsetTop;
   
   # increase cnt for increasing z-index
-  window.overlayCnt++;
+  window.overlayCnt++
 
 getBreadcrumbs = (node) ->
   path = ''
@@ -178,9 +181,25 @@ declareListener = () ->
 
   $(window.frameContent).click (e) ->
     switch e.target.className
+      when 'tw_navigation_change'
+        #do nothing, prevent click only
+        nothing = true
+
       when 'tw_bc'
-        #e = $(frameContent).find('#top-articles')
-        console.log 'click on breadcrumb'
+        console.log e
+
+      when 'tw_bc_highlight'
+        # get current tag like span
+        tag = e.target.localName
+        # remove tag from innerText like span#id -> #id
+        accessElem = e.target.innerText.replace(tag, '')
+        # get element from DOM
+        elem = $(window.frameContent).find(accessElem)
+        
+        # set activeOverlay to pass new current element to breadcrumb and select-change function
+        window.activeOverlay = elem
+        # pass firstChild to get a correct new breadcrumb hierarchie
+        getBreadcrumbs($(elem[0].firstChild))
 
       when 'tw_overlayClose', 'tw_background_overlay'
         fadeOutOverlays(el)
@@ -226,7 +245,7 @@ declareListener = () ->
         $(window.frameContent).find('.tw_background_overlay').fadeIn "slow", ->
           $(el).fadeIn();
 
-  $(window.frameContent).find('.tw_overlayDefinition').on 'change': (e) ->
+  $(window.frameContent).find('.tw_overlayDefinition').change (e) ->
     value         = e.currentTarget.value;
     overlayTarget = $(window.activeOverlay.target);
 
@@ -244,9 +263,9 @@ declareListener = () ->
       # generate overlay
       generateOverlay(overlayTarget, value);
       # remove class highlighed 
-      overlayTarget.removeClass 'highlight_current';
+      overlayTarget.removeClass 'highlight_current'
       # add class of type like tw_navigation
-      overlayTarget.addClass 'tw_' + value.toLowerCase();
+      overlayTarget.addClass 'tw_' + value.toLowerCase()
 
     # reset select-box to first option
     e.currentTarget.selectedIndex = 0
@@ -259,6 +278,15 @@ declareListener = () ->
 
   $(window.frameContent).mouseover (e) ->
     switch e.target.className 
+      when 'tw_bc'
+        innerText = e.target.innerText
+        
+        if innerText.indexOf('#') > 0
+          $(e.target).alterClass 'tw_*', 'tw_bc_highlight'
+
+          $(e.target).mouseout (e) ->
+            $(e.target).alterClass 'tw_*', 'tw_bc'
+
       when 'tw_overlay_text' 
         # bring overlay to front -> z-index: 9999
         $(e.target.parentNode).addClass 'tw_overlay_warp_hover'
@@ -276,10 +304,10 @@ declareListener = () ->
           else
             target = e.target  
           
-          $(target).addClass 'tw_highlight';
+          $(target).addClass 'tw_highlight'
           
           $(target).mouseout (e) ->
-            $(target).removeClass 'tw_highlight';
+            $(target).removeClass 'tw_highlight'
 
   $('.back_to_future').click (e) ->
     e.preventDefault()
@@ -301,7 +329,7 @@ declareListener = () ->
       async: false
     ).done (bool) ->
       if bool
-        window.location.replace(window.location.origin+'/sites/'+token+'/timeline');
+        window.location.replace window.location.origin+'/sites/'+token+'/timeline'
 
   $('.reset_analyse').click (e) ->
     e.preventDefault()
@@ -309,7 +337,7 @@ declareListener = () ->
     # reset all classes which start with tw_
     $(window.frameContent).find('.overlay_wrap').parent().alterClass 'tw_*', ''
     # remove all overlays
-    $(window.frameContent).find('.overlay_wrap').remove();
+    $(window.frameContent).find('.overlay_wrap').remove()
 
 # every change of navigation must be validated
 validateNavigations = () -> 
@@ -336,9 +364,9 @@ validateNavigations = () ->
     navCnt.push(cnt)  
 
   # get max value of cnt array
-  maxCnt = Math.max.apply(Math, navCnt);
+  maxCnt = Math.max.apply(Math, navCnt)
   # get array index of max value
-  posOfMax = navCnt.indexOf(maxCnt);
+  posOfMax = navCnt.indexOf(maxCnt)
 
   # change subnavigation to main navigation
   elem = subNav[posOfMax]

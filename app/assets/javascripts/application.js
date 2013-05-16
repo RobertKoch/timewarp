@@ -19,7 +19,6 @@
 //= require screen
 //= require sites
 //= require autocomplete
-//= require timeline
 
 //= require ICanHaz
 //= require alterClass

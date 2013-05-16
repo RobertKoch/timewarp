@@ -32,6 +32,7 @@
 .tw_overlay_warp_hover {
   background-color: rgba(0, 255, 0, 0.2);
   z-index: 9999 !important;
+  width: 200px;
 }
 
 .tw_overlay_text {
@@ -79,4 +80,9 @@
 
 .tw_highlight img {
   opacity: 0.5 !important;
+}
+
+.tw_bc_highlight {
+  color: #ff0000;
+  cursor: pointer;
 }
