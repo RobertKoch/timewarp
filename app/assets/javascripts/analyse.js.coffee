@@ -72,15 +72,17 @@ exploreAttributes = (node) ->
 
     # continue if atribute is id or class
     if nodeName == 'id' || nodeName == 'class'
-      # split to get every element of example multiple classes
-      splitValues = nodeName.split(' ')
-
-      $.each splitValues, (j, w) ->
-        param = w.toLowerCase()
-        # continue param is part of objArr
-        if objArr[param] != undefined
-          $(node).addClass objArr[param][0]
-          generateOverlay($(node), objArr[param][1])
+      # impose timewarp generated classes
+      if $(v)[0].value.indexOf('tw_') < 0 && $(v)[0].value.indexOf('overlay_wrap') < 0
+        # split to get every element of example multiple classes
+        splitValues = $(v)[0].value.split(' ')
+        
+        $.each splitValues, (j, w) ->
+          param = w.toLowerCase()
+          # continue param is part of objArr
+          if objArr[param] != undefined
+            $(node).addClass objArr[param][0]
+            generateOverlay($(node), objArr[param][1])
 
 exploreTagUl = (node) ->
   # reset variables
@@ -108,7 +110,8 @@ exploreTagUl = (node) ->
       generateOverlay($(node), 'Gallery')
 
 setClass = (node, value) ->
-  $(node).addClass 'tw_root_'+value
+  if node[0].className.indexOf 'tw_root' < 0
+    $(node).addClass 'tw_root_'+value
 
 generateOverlay = (node, value) -> 
   # node will be empty when click at breadbrumb navigation
@@ -193,7 +196,7 @@ declareListener = () ->
   $(window.frameContent).click (e) ->
     switch e.target.className
       when 'tw_navigation_change'
-        #do nothing, prevent click only
+        # do nothing, prevent click only
         nothing = true
 
       when 'tw_bc'
@@ -212,6 +215,8 @@ declareListener = () ->
           # if element contains splitter, split at this position
           if arrBreadcrumbs[i].indexOf('#') >= 0
             nextElement = splitBreadcrumb(arrBreadcrumbs[i], '#')
+          else if arrBreadcrumbs[i].indexOf('.') >= 0
+            nextElement = splitBreadcrumb(arrBreadcrumbs[i], '.')  
           else
             nextElement = arrBreadcrumbs[i]  
           
