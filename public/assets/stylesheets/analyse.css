@@ -82,6 +82,11 @@
   opacity: 0.5 !important;
 }
 
+.tw_bc:hover {
+  color: #00ff00;
+  cursor: pointer;
+}
+
 .tw_bc_highlight {
   color: #ff0000;
   cursor: pointer;

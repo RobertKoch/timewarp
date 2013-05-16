@@ -155,10 +155,13 @@ generateOverlay = (node, value) ->
 getBreadcrumbs = (node) ->
   path = ''
   pNodes = $(node).parents('*')
+  dataIDCnt = pNodes.length
 
   $.each pNodes, (i) ->
-    # get localName 'div' etc.
-    breadcrumb = '<span class="tw_bc">'+$(this)[0].localName
+    setClass = (if (dataIDCnt > 2) then setClass = 'class="tw_bc"' else setClass = '') 
+
+    # get localName 'div' etc.   
+    breadcrumb = '<span '+setClass+' data-id="'+dataIDCnt+'">'+$(this)[0].localName   
 
     # add value of id if exists
     if ($(this)[0].id)
@@ -170,11 +173,19 @@ getBreadcrumbs = (node) ->
     # build breadcrumb navigation
     path = breadcrumb + path
 
+    dataIDCnt--
+
   $(window.frameContent).find('.tw_overlayBreadcrumbs').html(path)
 
 fadeOutOverlays = (changeOverlay) ->
   $(changeOverlay).fadeOut 'slow', ->
     $(window.frameContent).find('.tw_background_overlay').fadeOut() 
+
+splitBreadcrumb = (element, splitter) ->
+  splitPosition = element.indexOf(splitter)
+  accessElem = element.substring splitPosition, element.length
+
+  return accessElem
 
 declareListener = () ->
   el = $(window.frameContent).find('.tw_navigation_change');
@@ -186,7 +197,31 @@ declareListener = () ->
         nothing = true
 
       when 'tw_bc'
-        console.log e
+        # split path to get single elements
+        arrBreadcrumbs = $(el).find('.tw_overlayBreadcrumbs').text().split(' > ')
+
+        # get number of clicked element to break in for loop
+        elementPosition = $(e.target).attr('data-id')
+        
+        # start at body tag
+        pathLoop = $(window.frameContent).find('body')
+        
+        # start at 2 because body is element 2
+        for i in [2...elementPosition]
+          
+          # if element contains splitter, split at this position
+          if arrBreadcrumbs[i].indexOf('#') >= 0
+            nextElement = splitBreadcrumb(arrBreadcrumbs[i], '#')
+          else
+            nextElement = arrBreadcrumbs[i]  
+          
+          # find next element in hierarchie
+          pathLoop = $(pathLoop).children(nextElement)
+
+        # set activeOverlay to pass new current element to breadcrumb and select-change function
+        window.activeOverlay = pathLoop
+        # pass firstChild to get a correct new breadcrumb hierarchie
+        getBreadcrumbs($(pathLoop[0].firstChild))
 
       when 'tw_bc_highlight'
         # get current tag like span
