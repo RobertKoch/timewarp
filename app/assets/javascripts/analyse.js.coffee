@@ -61,11 +61,6 @@ recursiveIterate = (node) ->
     if $(this)[0].attributes.length != 0
       exploreAttributes($(this));
 
-    #console.log $(this);
-    #if $(this)[0].attributes.length != 0
-      #exploreAttributes($(this))
-      #console.log($(this)[0].attributes)
-
     if $(this)[0].localName == 'ul'
       exploreTagUl($(this))
 
@@ -76,7 +71,7 @@ recursiveIterate = (node) ->
 
 exploreAttributes = (node) ->
   objArr = new Object(
-    navigation: ["tw_navigation", "Navigation"], 
+    #navi: ["tw_navigation", "Navigation"], 
     header: ["tw_header", "Header"], 
     content: ["tw_content", "Content"],
     footer: ["tw_footer", "Footer"]
@@ -151,16 +146,10 @@ generateOverlay = (node, value) ->
 
   $(node).append overlay
 
-  # chose parentNode if no height or width is available
-  #if $(node)[0].offsetHeight > 0 && $(node)[0].offsetWidth > 0
-  #  attributes = $(node)[0];
-  #else
-  #  attributes = $(node)[0].parentNode;  
-
   attributes = $(node)[0]
 
   # set height if not available
-  attributeHeight = (if (attributes.offsetHeight > 0) then attributes.offsetHeight else 20)  
+  attributeHeight = (if (attributes.offsetHeight > 0) then attributes.offsetHeight else 30)  
 
   $(node).find('.overlay_wrap')
     .css
@@ -168,7 +157,7 @@ generateOverlay = (node, value) ->
       'height': attributeHeight,
       'z-index': window.overlayCnt,
       'left': attributes.offsetLeft,
-      'top': attributes.offsetTop;
+      'top': attributes.offsetTop
   
   # increase cnt for increasing z-index
   window.overlayCnt++
@@ -218,7 +207,7 @@ splitBreadcrumb = (element, splitter) ->
   return accessElem
 
 declareListener = () ->
-  el = $(window.frameContent).find('.tw_navigation_change');
+  el = $(window.frameContent).find('.tw_navigation_change')
 
   $(window.frameContent).click (e) ->
     switch e.target.className
@@ -303,17 +292,17 @@ declareListener = () ->
         if e.target.parentNode.className.indexOf('overlay_wrap') >= 0
           window.setOverlay = undefined;
         else
-          window.setOverlay = 1;
+          window.setOverlay = 1
 
         # define breadcrumb navigation for current element
         getBreadcrumbs(e.target.firstChild)
 
         $(el).css
           'top': e.pageY,
-          'left': e.pageX;
+          'left': e.pageX
 
         # set current overlay
-        window.activeOverlay = e;
+        window.activeOverlay = e
 
         # show overlay
         $(window.frameContent).find('.tw_background_overlay').fadeIn "slow", ->
