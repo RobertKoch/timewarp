@@ -109,7 +109,7 @@ exploreTagUl = (node) ->
     if window.galleryCnt > 3
       generateOverlay($(node), 'Gallery')
 
-setClass = (node, value) ->
+setRootClass = (node, value) ->
   if node[0].className.indexOf 'tw_root' < 0
     $(node).addClass 'tw_root_'+value
 
@@ -119,9 +119,9 @@ generateOverlay = (node, value) ->
     node = window.activeOverlay
 
   classParam = value.toLowerCase()
-  
+
   # set class to overlay root
-  setClass(node, classParam)
+  setRootClass(node, classParam)
 
   # overlayCnt correlates to z-index
   window.overlayCnt = window.overlayCnt || 0
@@ -155,30 +155,39 @@ generateOverlay = (node, value) ->
   # increase cnt for increasing z-index
   window.overlayCnt++
 
+noBreadcrumbs = () ->
+  # show info message
+  $(window.frameContent).find('.tw_overlayBreadcrumbs').html('no HTML structure found! Try again')
+  # hide select box to force user to use close button
+  $(window.frameContent).find('.tw_overlayDefinition').hide()
+
 getBreadcrumbs = (node) ->
   path = ''
   pNodes = $(node).parents('*')
   dataIDCnt = pNodes.length
 
-  $.each pNodes, (i) ->
-    setClass = (if (dataIDCnt > 2) then setClass = 'class="tw_bc"' else setClass = '') 
+  if dataIDCnt < 2
+    noBreadcrumbs()
+  else
+    $.each pNodes, (i) ->
+      setClass = (if (dataIDCnt > 2) then setClass = 'class="tw_bc"' else setClass = '') 
 
-    # get localName 'div' etc.   
-    breadcrumb = '<span '+setClass+' data-id="'+dataIDCnt+'">'+$(this)[0].localName   
+      # get localName 'div' etc.   
+      breadcrumb = '<span '+setClass+' data-id="'+dataIDCnt+'">'+$(this)[0].localName   
 
-    # add value of id if exists
-    if ($(this)[0].id)
-      breadcrumb += '#'+$(this)[0].id
+      # add value of id if exists
+      if ($(this)[0].id)
+        breadcrumb += '#'+$(this)[0].id
 
-    if (i > 0)
-      breadcrumb += '</span> > '  
-    
-    # build breadcrumb navigation
-    path = breadcrumb + path
+      if (i > 0)
+        breadcrumb += '</span> > '  
+      
+      # build breadcrumb navigation
+      path = breadcrumb + path
 
-    dataIDCnt--
+      dataIDCnt--
 
-  $(window.frameContent).find('.tw_overlayBreadcrumbs').html(path)
+    $(window.frameContent).find('.tw_overlayBreadcrumbs').html(path)
 
 fadeOutOverlays = (changeOverlay) ->
   $(changeOverlay).fadeOut 'slow', ->
@@ -247,9 +256,16 @@ declareListener = () ->
       when 'tw_overlayRemove'
         fadeOutOverlays(el)
 
-        # remove block
+        # remove class
+        $(window.activeOverlay.target.parentNode.parentNode).alterClass 'tw_*', ''
+
+        # remove overlay block
         clickedOverlay = window.activeOverlay.target.parentNode
         $(clickedOverlay).remove()
+
+        # if navigation is removed, validate new if possible
+        if window.activeOverlay.target.innerText == 'Navigation'
+          validateNavigations()
 
       else 
         # if click on image, change e.target to parent element to prevent an overlay inside the image tag
@@ -272,7 +288,7 @@ declareListener = () ->
           window.setOverlay = 1;
 
         # define breadcrumb navigation for current element
-        getBreadcrumbs(e.target.parentNode)
+        getBreadcrumbs(e.target.firstChild)
 
         $(el).css
           'top': e.pageY,
@@ -314,7 +330,8 @@ declareListener = () ->
     fadeOutOverlays(el)
 
     # validate navigation to check if main navigation has changed
-    validateNavigations()
+    if value == 'SubNavigation'
+      validateNavigations()
 
   $(window.frameContent).mouseover (e) ->
     switch e.target.className 
