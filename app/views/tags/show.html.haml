@@ -1,5 +1,5 @@
-%section#archive.grid.grid_5col_4n_full
-  %h1.margin-left
+%section#archive_overview
+  %h1
     = "Alle '#{@tag}' Websites"
   -if @sites.count > 0
     - @sites.each do |site|
@@ -8,6 +8,3 @@
     %p= "Keine Seiten gefunden."
 
   = will_paginate @sites, :previous_label => '&laquo;', :next_label => '&raquo;'
-
-%section#sidebar.grid.grid_5col_1n
-  = render :partial => 'partials/archive_navigation'
