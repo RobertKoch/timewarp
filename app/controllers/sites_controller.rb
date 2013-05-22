@@ -115,6 +115,15 @@ class SitesController < ApplicationController
     end
   end
 
+  def get_css_content
+    file = open(params[:path])
+    contents = file.read
+
+    respond_to do |format|
+      format.json { render :text => contents}
+    end
+  end  
+
 private
   def site_exists_and_not_published
     if @site = Site.find_by_token(params[:id])

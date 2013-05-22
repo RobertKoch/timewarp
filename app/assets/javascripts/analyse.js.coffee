@@ -1,13 +1,4 @@
 $(window).load ->
-  setTimeout (->
-    startAnalyse()
-
-    # if everything has finished set opacity to 1
-    $('#crawled_site').css opacity: 1
-
-    startValidation()
-  ), 500
-
   # store in window element
   window.frameContent = $('#crawled_site').contents().find('html')
 
@@ -16,6 +7,13 @@ $(window).load ->
   declareListener()
 
   removeUnsolicitedTags()
+
+  startAnalyse()
+
+  startValidation()
+
+  # if everything has finished set opacity to 1
+  $('#crawled_site').css opacity: 1
   
 startAnalyse = () ->
   recursiveIterate(window.frameContent)
@@ -172,7 +170,7 @@ getBreadcrumbs = (node) ->
   path = ''
   pNodes = $(node).parents('*')
   dataIDCnt = pNodes.length
-  console.log dataIDCnt
+
   if dataIDCnt < 2
     noBreadcrumbs()
   else
@@ -405,6 +403,7 @@ declareListener = () ->
     if $(window.frameContent).find('.overlay_wrap').length > 0
       resetAnalyse()
     startAnalyse()
+    startValidation()
 
 validateFooter = () ->
   # element has no footer-overlay
