@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 require "RMagick"
 
 class Site
@@ -26,7 +27,8 @@ class Site
   
   attr_accessible :url, :title
   
-  validates :url, :presence => true, :format => {:with => /^(http(?:s)?\:\/\/[a-zA-Z0-9\-]+(?:\.[a-zA-Z0-9\-]+)*\.[a-zA-Z]{2,6}(?:\/?|(?:\/[\w\-]+)*)(?:\/?|\/\w+\.[a-zA-Z]{2,4}(?:\?[\w]+\=[\w\-]+)?)?(?:\&[\w]+\=[\w\-]+)*)$/}
+  validates_presence_of :url, :message => "muss angegeben werden" 
+  validates :url, :format => {:with => /^(http(?:s)?\:\/\/[a-zA-Z0-9\-]+(?:\.[a-zA-Z0-9\-]+)*\.[a-zA-Z]{2,6}(?:\/?|(?:\/[\w\-]+)*)(?:\/?|\/\w+\.[a-zA-Z]{2,4}(?:\?[\w]+\=[\w\-]+)?)?(?:\&[\w]+\=[\w\-]+)*)$/, :message => "ist ungültig"}
 
   def take_snapshots
     pics_path = Rails.root.join("public/saved_sites/#{self.token}")
