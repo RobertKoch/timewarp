@@ -53,7 +53,7 @@ em, i {font-style: italic;}
 }
 
 // text indents 
-#logo a, #lens {
+#logo a, #lens, #fh_logo {
   display: block;
   text: {
     indent: -19999px;
@@ -212,6 +212,10 @@ em, i {font-style: italic;}
       font-size: $font_size_medium;
     }
 
+    h4 {
+      font-size: $font_size_normal;
+    }
+
     h5 {
       font-size: $font_size_normal;
     }
@@ -233,28 +237,28 @@ em, i {font-style: italic;}
     -webkit-box-shadow: 0 -1px 0 $grey_light;
        -moz-box-shadow: 0 -1px 0 $grey_light;
             box-shadow: 0 -1px 0 $grey_light;
-  }
 
-  p {
-    float: left;
-  }
+    p {
+      float: left;
+    }
 
-  #footer_navigation {
-    float: right;
+    #footer_navigation {
+      float: right;
 
-    ul {
-      
-      li {
-        float: left;
-        margin: {
-          left: 15px;
-        }
+      ul {
+        
+        li {
+          float: left;
+          margin: {
+            left: 15px;
+          }
 
-        a {
-          color: $grey_medium;
+          a {
+            color: $grey_medium;
 
-          &:hover {
-            color: $blue;
+            &:hover {
+              color: $blue;
+            }
           }
         }
       }

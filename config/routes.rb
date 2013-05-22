@@ -26,5 +26,4 @@ Timewarp::Application.routes.draw do
   get "team"           => "pages#about", :as => "team"
   get "history_of_web" => "pages#history_of_web", :as => "history"
   get "imprint"        => "pages#imprint", :as => "imprint"
-  get "agb"            => "pages#general_terms", :as => "terms"
 end

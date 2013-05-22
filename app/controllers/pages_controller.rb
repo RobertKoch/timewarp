@@ -7,7 +7,4 @@ class PagesController < ApplicationController
 
   def imprint
   end
-
-  def general_terms
-  end
 end

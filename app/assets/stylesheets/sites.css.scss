@@ -59,7 +59,7 @@
 }
 
 // archive overview (index)
-#archive_overview {
+#archive_overview, #archive_search {
   float: left;
   width: 100%;
   margin: {
@@ -161,9 +161,9 @@
     img {
       float: right;
       clear: right;
-      -webkit-box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
-         -moz-box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
-              box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
+      -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+         -moz-box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+              box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
       width: 19.1504178%; // 137,5px => 718px;
       margin: {
         bottom: 0.6963788%; // 5px => 718px;
