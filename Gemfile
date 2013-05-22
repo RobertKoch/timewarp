@@ -1,6 +1,7 @@
 source 'http://rubygems.org'
 
 gem 'rails', '3.2.12'
+gem 'capistrano'
 gem 'rvm-capistrano'
 
 # Bundle edge Rails instead:

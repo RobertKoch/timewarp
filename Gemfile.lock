@@ -168,6 +168,7 @@ PLATFORMS
   x86-mingw32
 
 DEPENDENCIES
+  capistrano
   coffee-rails (~> 3.2.1)
   fancybox2-rails (~> 0.2.4)
   haml-rails
