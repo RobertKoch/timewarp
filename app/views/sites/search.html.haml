@@ -2,16 +2,18 @@
 
 %h1= "Suchergebnisse für '#{@term}'"
 
-%p= "Kleine Erklärung vielleicht?"
+%p
+  = "Eine Erklärung! ^^"
+
 %br
 %br
 %br
 %section#archive
-  %h3= "Titel-Suche"
+  %h3= "Titel"
   - @sites_title.each do |site|
     = render :partial => 'partials/site', :locals => {:site => site}
 
 %section#archive
-  %h3= "Tag-Suche"
+  %h3= "Tags"
   - @sites_tags.each do |site|
     = render :partial => 'partials/site', :locals => {:site => site}
