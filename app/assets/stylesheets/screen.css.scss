@@ -6,6 +6,10 @@ body, input, select, textarea {
   font: {
     size: $font_size_small;
   }
+  -webkit-hyphens: auto;
+     -moz-hyphens: auto;
+      -ms-hyphens: auto;
+          hyphens: auto;
 }
 body {
   background: {
@@ -19,6 +23,9 @@ a {
     color: $blue;
   }
 }
+strong, b {font-weight: bold;}
+em, i {font-style: italic;}
+
 #header hgroup, #wrapper {
   position: relative;
   width: $width_960;
@@ -40,6 +47,9 @@ a {
     right: 3px;
     bottom: -2px;
   }
+}
+.timewarp {
+  @include font_michroma;
 }
 
 // text indents 
@@ -192,6 +202,10 @@ a {
 
     h1 {
       font-size: $font_size_large;
+    }
+
+    h2 {
+      font-size: 16px;
     }
 
     h3 {

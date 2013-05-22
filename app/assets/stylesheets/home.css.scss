@@ -1,5 +1,115 @@
 @import 'variables';
 
+#timewarp {
+  padding: {
+    top: 2em;
+    bottom: 5em;
+  }
+
+  h1, h2 {
+    text: {
+      align: center;
+    }
+  }
+
+  h1 {
+    font: {
+      size: $font_size_larger !important;
+    }
+    margin: {
+      bottom: .5em !important;
+    }
+  }
+
+  .timewarp_form {
+    width: 65%;
+    margin: 0 auto;
+    padding: {
+      top: 2em;
+    }
+    
+    input {
+      &#site_url {
+        font: {
+          size: $font_size_large !important;
+          weight: lighter;
+        }
+        padding: 0 2%;
+        outline: 1px solid $grey_light;
+        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.08) inset;
+        width: 72%;
+        height: 50px;
+      }
+      
+      &#submit {
+        float: right;
+        width: 22%;
+        height: 56px;
+        background: {
+          image: url('bg-button.png');
+          color: transparent;
+          position: right 4px;
+          repeat: no-repeat;
+        }
+        margin-top: -5px;
+        @include font_michroma;
+        font: {
+          size: $font_size_large;
+        }
+        color: #fff;
+        cursor: pointer;
+        &:hover {
+          background: {
+            image: url('bg-button-blue.png');
+          }
+        }
+      }
+    }
+  }
+}
+
+#instructions {
+  float: left;
+  width: 100%;
+  padding: {
+    top: 3em;
+    bottom: 3em;
+  }
+  border: {
+      top: 1px solid $white;
+    }
+    -webkit-box-shadow: 0 -1px 0 $grey_light;
+       -moz-box-shadow: 0 -1px 0 $grey_light;
+            box-shadow: 0 -1px 0 $grey_light;
+
+  .step {
+    width: $width_220;
+    float: left;
+    margin: {
+      right: $width_13 * 2;
+    }
+    text: {
+      align: center;
+    }
+  
+    &:nth-child(4n+4) {
+      margin: {
+        right: 0;
+      }
+    }
+
+    p {
+      line-height: 1.4em;
+    }
+
+    img {
+      margin: {
+        bottom: 20px;
+      }
+    }
+  }
+}
+
 /* #timewarp {
   background: {
     image: url('shadow.png');

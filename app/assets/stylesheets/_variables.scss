@@ -17,6 +17,7 @@ $font_size_small: 12px;
 $font_size_normal: 14px;
 $font_size_medium: 18px;
 $font_size_large: 24px;
+$font_size_larger: 28px;
 
 @mixin font_default {
   font: {
@@ -40,5 +41,6 @@ $font_size_large: 24px;
 $width_960: 94.11764705%;
 $width_734: 76.45833333%;
 $width_230: 23.95833333%;
+$width_220: 22.91666666%;
 $width_200: 20.83333333%;
 $width_13: 1.3541667%;

@@ -1,41 +1,50 @@
-%section#timewarp.grid.grid_5col_5n
+%section#timewarp
+  %h1
+    Früher war alles besser! Auch das Web-Design?
+  %h2
+    Reise mit 
+    %span timewarp 
+    in die Vergangenheit und finde es selbst heraus!
+
   .timewarp_form
     = simple_form_for @site do |f|
-      = f.input_field :url, :placeholder => 'http://www.timewarp.com'
-      = f.submit 'Warp!'
-    %p= error_helper @site
-    %h3
-    %h3
-      Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et
+      = f.input_field :url, :placeholder => 'http://www.beispiel-seite.com'
+      = f.submit 'warp !', :id => 'submit'
+    %p
+      = error_helper @site
 
-%section#instructions.grid.grid_5col_5n
-  #step_1.grid.grid_1n
-    %a{:href => '/assets/home/symbol_1.png', :class => 'fancybox'}
-      %img{ :src => '/assets/home/symbol_1.png', :width => 'auto', :height => '200', :alt => ' ' }
+%section#instructions
+  #step_1.step
+    %img{ :src => '/assets/home/symbol_1.png', :width => 'auto', :height => '180', :alt => 'Schritt 1: Analyse' }
     %h3
       Analyse
     %p
-      Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
+      Gib die gewünschte URL ein und betätige den warp!-Button. 
+      %span.timewarp timewarp 
+      analysiert die angegebene Website und erkennt automatisch die wichtigsten Elemente.
       
-  #step_2.grid.grid_1n
-    %a{:href => '/assets/home/symbol_2.png', :class => 'fancybox'}
-      %img{ :src => '/assets/home/symbol_2.png', :width => 'auto', :height => '200', :alt => ' ' }
+  #step_2.step
+    %img{ :src => '/assets/home/symbol_2.png', :width => 'auto', :height => '180', :alt => 'Schritt 2: Kontrolle' }
     %h3
-      Edit
+      Kontrolle
     %p
-      Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
-  #step_3.grid.grid_1n
-    %a{:href => '/assets/home/symbol_3.png', :class => 'fancybox'}
-      %img{ :src => '/assets/home/symbol_3.png', :width => 'auto', :height => '200', :alt => ' ' }
+      %span.timewarp timewarp 
+      zeigt dir die gefundenen Elemente an, welche du - falls gewünscht - individuell ergänzen und verändern kannst. 
+  #step_3.step
+    %img{ :src => '/assets/home/symbol_3.png', :width => 'auto', :height => '180', :alt => 'Schritt 3: Verwandlung' }
     %h3
-      Magic happens
+      Verwandlung
     %p
-      Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
-  #step_4.grid.grid_1n
-    %a{:href => '/assets/home/symbol_4.png', :class => 'fancybox'}
-      %img{ :src => '/assets/home/symbol_4.png', :width => 'auto', :height => '200', :alt => ' ' }
+      This is where the magic happens!
+      %br
+      %span.timewarp timewarp 
+      verwandelt die angegebene Website basierend auf sorgfältig ausgewählten Design-Trends vergangener Jahre.
+  #step_4.step
+    %img{ :src => '/assets/home/symbol_4.png', :width => 'auto', :height => '180', :alt => 'Schritt 4: Zeitreise' }
     %h3
-      View
+      Zeitreise
     %p
-      Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
+      Jetzt kannst du mit 
+      %span.timewarp timewarp 
+      in die Vergangenheit reisen! Wähle in der Zeitleiste das gewünschte Jahr aus und betrachte das Resultat.
 
