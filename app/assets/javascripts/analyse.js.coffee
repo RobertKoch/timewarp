@@ -162,6 +162,15 @@ generateOverlay = (node, value) ->
   # increase cnt for increasing z-index
   window.overlayCnt++
 
+changeOverlayAndClass = (value) ->
+  parentElement = window.activeOverlay.target.parentNode.parentNode
+  $(parentElement).alterClass 'tw_*', 'tw_root_'+value.toLowerCase()
+
+  if window.activeOverlay.target.className == 'tw_overlay_text'
+    window.activeOverlay.target.innerText = value
+  else
+    window.activeOverlay.target.nextSibling.innerText = value
+
 noBreadcrumbs = () ->
   # show info message
   $(window.frameContent).find('.tw_overlayBreadcrumbs').html('no HTML structure found! Try again')
@@ -245,6 +254,7 @@ declareListener = () ->
 
         # set activeOverlay to pass new current element to breadcrumb and select-change function
         window.activeOverlay = pathLoop
+
         # pass firstChild to get a correct new breadcrumb hierarchie
         getBreadcrumbs($(pathLoop[0].firstChild))
 
@@ -255,6 +265,14 @@ declareListener = () ->
         accessElem = e.target.innerText.replace(tag, '')
         # get element from DOM
         elem = $(window.frameContent).find(accessElem)
+
+        # set overlay by default
+        window.setOverlay = 1;
+
+        $.each elem[0].children, (i, v) ->
+          # dont set overlay if its still generated
+          if v.classList.contains 'overlay_wrap'
+            window.setOverlay = undefined
         
         # set activeOverlay to pass new current element to breadcrumb and select-change function
         window.activeOverlay = elem
@@ -314,16 +332,26 @@ declareListener = () ->
     overlayTarget = $(window.activeOverlay.target);
 
     if window.setOverlay == undefined
-      # change class of parent element
-      parentElement = window.activeOverlay.target.parentNode.parentNode
-      $(parentElement).alterClass 'tw_*', 'tw_root_'+value.toLowerCase()
+      # change overlay via breadcrumb navigation
+      if window.activeOverlay.selector != undefined
+        $(window.activeOverlay).alterClass 'tw_*', 'tw_root_'+value.toLowerCase()
+        window.activeOverlay[0].lastChild.lastChild.innerText = value
 
-      # change field value
-      if window.activeOverlay.target.className == 'tw_overlay_text'
-        window.activeOverlay.target.innerText = value
+      # change overlay by clicking at once
       else
-        window.activeOverlay.target.nextSibling.innerText = value
-    else
+        changeOverlayAndClass(value)
+
+    # set new overlay
+    else if window.activeOverlay.target
+      changeOverlayAndClass(value)
+
+      # generate overlay
+      generateOverlay(overlayTarget, value);
+      # add class of type like tw_navigation
+      overlayTarget.addClass 'tw_' + value.toLowerCase()    
+
+    # set overlay via breadcrumb navigation
+    else 
       # generate overlay
       generateOverlay(overlayTarget, value);
       # add class of type like tw_navigation
