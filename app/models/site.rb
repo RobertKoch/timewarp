@@ -70,6 +70,10 @@ class Site
     where(:published => true)
   end
 
+  def self.unpublished
+    where(:published => false)
+  end
+
 private
   def add_http
     self.url = "http://" + self.url if (self.url && self.url.match(/^https?\:\/\/.+$/).nil?)
