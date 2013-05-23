@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require jquery.ui.autocomplete
 //= require fancybox
+//= require jquery.stellar.min
 
 //= require screen
 //= require sites
