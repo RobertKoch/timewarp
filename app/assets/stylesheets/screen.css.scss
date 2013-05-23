@@ -48,6 +48,26 @@ em, i {font-style: italic;}
     bottom: -2px;
   }
 }
+.button {
+  display: inline-block;
+  @include font_michroma;
+  font: {
+    size: $font_size_medium;
+  }
+  color: $white !important;
+  background: {
+    image: url('bg-button.png');
+    position: right 50%;
+    repeat: no-repeat;
+  }
+  padding: .5em 1.5em .7em 1.2em;
+
+  &:hover {
+    background: {
+      image: url('bg-button-blue.png');
+    }
+  }
+}
 .timewarp {
   @include font_michroma;
 }

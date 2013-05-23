@@ -5,46 +5,51 @@
     = @site.url
 
   #analyse_frame
-    %iframe{:src => "#{Settings.host}/#{Settings.sites_folder}/#{@site.token}/current/index.html", :width => "100%", :id => "crawled_site", :sandbox => "allow-same-origin allow-scripts" }
+    %iframe{:src => "#{Settings.host}/#{Settings.sites_folder}/#{@site.token}/current/index.html", :width => "100%", :height => 600, :id => "crawled_site", :sandbox => "allow-same-origin allow-scripts" }
 
   %section#sidebar
+
     %h4
-      legende
-    %ul.legend
-      %li 
-        %span.color.yellow
-        Header
-      %li 
-        %span.color.orange
-        Logo
-      %li 
-        %span.color.rosa
-        Hauptnavigation
-      %li 
-        %span.color.red
-        Sub-Navigation(en)
-      %li
-        %span.color.light_green
-        Content
-      %li
-        %span.color.dark_green
-        Footer
-      %li
-        %span.color.light_blue
-        Sidebar(s)
-      %li
-        %span.color.dark_blue
-        diverse Box(en)
+      Analyse
+    %ul.analyse
+      %li= link_to "zurücksetzen", '#', :class => "reset_analyse"
+      %li= link_to "erneut starten", '#', :class => "new_analyse"
 
-    %p= link_to "Zurück in die Zukunft! (oder einfach weiter zur Timeline)", sites_timeline_path(@site), :class => "back_to_future"
-    %br
-
-    %p= link_to "Reset Analyse", '#', :class => "reset_analyse"
-    %br
-
-    %p= link_to "Start new Analyse", '#', :class => "new_analyse"
-    
-    %br
+    %h4
+      Farben der Website
     #colorBar
       .span{:id => 'colorBarInfo'}
 
+    %p
+      = link_to "weiter", sites_timeline_path(@site), :class => "back_to_future button"
+   
+  
+
+    #legend
+      %h4
+        Legende
+      %ul
+        %li 
+          %span.color.yellow
+          Header
+        %li 
+          %span.color.orange
+          Logo
+        %li 
+          %span.color.rosa
+          Hauptnavigation
+        %li 
+          %span.color.red
+          Sub-Navigation(en)
+        %li
+          %span.color.light_green
+          Content
+        %li
+          %span.color.dark_green
+          Footer
+        %li
+          %span.color.light_blue
+          Sidebar(s)
+        %li
+          %span.color.dark_blue
+          diverse Box(en)
