@@ -1,20 +1,9 @@
-setNavigationWidth = () ->
-  headerWidth = $('#header').width();
-  $('#navigation').css
-    'width' : headerWidth - 130
-
-setNarrowWrapperWidth = () ->
-  wrapperWidth = $('#wrapper').width();
-  $('#wrapper section').css
-    'width' : wrapperWidth - 124
-
 $(document).ready ->
-  # setNavigationWidth();
-  # setNarrowWrapperWidth();
-
+  
+  # fancybox
   $('a.fancybox').fancybox();
 
-  $("a.fancybox_inline").fancybox({
+  $('a.fancybox_inline').fancybox({
     fitToView : false,
     width   : 500,
     height    : 320,
@@ -29,10 +18,5 @@ $(document).ready ->
     }
   });
 
-$(window).load ->
-  # setNavigationWidth();
-  # setNarrowWrapperWidth();
-
-$(window).resize ->
-  # setNavigationWidth();
-  # setNarrowWrapperWidth();
+  # timewarp form on front page
+  $('.errors').append '<span class="arrow"></span>'

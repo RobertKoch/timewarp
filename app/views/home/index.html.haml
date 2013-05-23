@@ -10,8 +10,8 @@
     = simple_form_for @site do |f|
       = f.input_field :url, :placeholder => 'http://www.beispiel-seite.com'
       = f.submit 'warp !', :id => 'submit'
-    %p
-      = error_helper @site
+
+    = error_helper @site
 
 %section#instructions
   #step_1.step

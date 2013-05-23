@@ -22,6 +22,7 @@
   }
 
   .timewarp_form {
+    position: relative;
     width: 65%;
     margin: 0 auto;
     padding: {
@@ -63,6 +64,36 @@
             image: url('bg-button-blue.png');
           }
         }
+      }
+    }
+    .errors {
+      position: absolute;
+      bottom: -28px;
+      left: 5%;
+      background: {
+        color: rgba(160, 17, 17, .6);
+      }
+      padding: .8em 1em;
+      color: $white;
+      border: 1px solid $red;
+      -webkit-border-radius: 5px; 
+         -moz-border-radius: 5px; 
+              border-radius: 5px;
+      -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, .4);
+         -moz-box-shadow: 0 2px 4px rgba(0, 0, 0, .4);
+              box-shadow: 0 2px 4px rgba(0, 0, 0, .4);
+
+      .arrow {
+        position: absolute;
+        top: -6px;
+        left: 8px;
+        background: {
+          image: url('error-arrow.png');
+          position: 0 0;
+          repeat: no-repeat;
+        }
+        width: 12px;
+        height: 6px;
       }
     }
   }
