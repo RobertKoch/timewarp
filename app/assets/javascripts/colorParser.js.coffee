@@ -73,11 +73,7 @@ validateColors = (css) ->
 
   $('#colorBar').prepend colorBar
 
-$(window).load ->
-  css = getCssContent()
-
-  validateColors(css)
-
+userInteraction = () ->
   $('#colorBar span').mouseover (e) ->
     # get values of color and count
     color = e.target.attributes[1].nodeValue
@@ -88,8 +84,8 @@ $(window).load ->
       color += color.replace '#', ''
 
     # move box from left border
-    # alternative use: e.target.offsetLeft
-    $('#colorBarInfo').css 'margin-left': (e.pageX - 75)
+    # alternative use: (e.pageX - 75)
+    $('#colorBarInfo').css 'margin-left': e.target.offsetLeft
 
     $('#colorBarInfo').html(cnt+'x '+color)
 
@@ -99,3 +95,10 @@ $(window).load ->
     # fadeOut infobox
     $('#colorBar').mouseleave (e) ->
       $('#colorBarInfo').fadeOut()
+
+$(window).load ->
+  css = getCssContent()
+
+  if css
+    validateColors(css)
+    userInteraction()

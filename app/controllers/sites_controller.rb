@@ -121,6 +121,8 @@ class SitesController < ApplicationController
   end
 
   def get_css_content
+    require 'open-uri'
+    
     file = open(params[:path])
     contents = file.read
 

@@ -62,8 +62,10 @@ recursiveIterate = (node) ->
     if $(this)[0].localName == 'ul'
       exploreTagUl($(this))
 
-    if $(this)[0].innerText.indexOf('©') > 0
-      window.elemFooter = this
+    # firefox forces check for null value
+    if $(this)[0].nodeValue != null
+      if $(this)[0].nodeValue.indexOf('©') >= 0
+        window.elemFooter = $(this)
 
     recursiveIterate($(this));    
 
@@ -134,8 +136,8 @@ generateOverlay = (node, value) ->
   # set class to overlay root
   setRootClass(node, classParam)
 
-  # overlayCnt correlates to z-index
-  window.overlayCnt = window.overlayCnt || 0
+  # overlayCnt correlates to z-index, start with value 1000
+  window.overlayCnt = window.overlayCnt || 1000
 
   overlay    = '<div class="overlay_wrap">'
   overlay   += '<span class="tw_overlay"></span>' 
@@ -166,7 +168,7 @@ noBreadcrumbs = () ->
   # hide select box to force user to use close button
   $(window.frameContent).find('.tw_overlayDefinition').hide()
 
-getBreadcrumbs = (node) ->
+getBreadcrumbs = (node) -> 
   path = ''
   pNodes = $(node).parents('*')
   dataIDCnt = pNodes.length
@@ -174,6 +176,10 @@ getBreadcrumbs = (node) ->
   if dataIDCnt < 2
     noBreadcrumbs()
   else
+    # check visibility of select box
+    if $(window.frameContent).find('.tw_overlayDefinition').is(':hidden')
+      $(window.frameContent).find('.tw_overlayDefinition').show()
+
     $.each pNodes, (i) ->
       setClass = (if (dataIDCnt > 2) then setClass = 'class="tw_bc"' else setClass = '') 
 
@@ -277,9 +283,6 @@ declareListener = () ->
         if e.target.nodeName == 'IMG'
           e.target = e.target.parentNode
 
-        if e.target.className == 'tw_highlight'
-          $(e.target).addClass 'highlight_current';
-
         # if click element an overlay enable remove link, otherwise hide link
         if e.target.className == 'tw_overlay_text' || e.target.className.indexOf('tw_overlay') >= 0
           $(el).find('.tw_overlayRemove').show()
@@ -292,15 +295,15 @@ declareListener = () ->
         else
           window.setOverlay = 1
 
-        # define breadcrumb navigation for current element
-        getBreadcrumbs(e.target.firstChild)
-
         $(el).css
           'top': e.pageY,
           'left': e.pageX
 
         # set current overlay
         window.activeOverlay = e
+
+        # define breadcrumb navigation for current element
+        getBreadcrumbs(e.target.parentNode)
 
         # show overlay
         $(window.frameContent).find('.tw_background_overlay').fadeIn "slow", ->
@@ -323,8 +326,6 @@ declareListener = () ->
     else
       # generate overlay
       generateOverlay(overlayTarget, value);
-      # remove class highlighed 
-      overlayTarget.removeClass 'highlight_current'
       # add class of type like tw_navigation
       overlayTarget.addClass 'tw_' + value.toLowerCase()
 
@@ -357,7 +358,8 @@ declareListener = () ->
 
         $(e.target).mouseout (e) ->
           $(e.target.parentNode).removeClass 'tw_overlay_warp_hover'
-          $(e.target.previousSibling).removeClass 'tw_overlay_hover';
+          $(e.target.previousSibling).removeClass 'tw_overlay_hover'
+
       else
         # dont highlight overlay
         if e.target.className != 'tw_overlay_text' && $(window.frameContent).find('.tw_navigation_change').is(':hidden')
@@ -407,8 +409,9 @@ declareListener = () ->
 
 validateFooter = () ->
   # element has no footer-overlay
-  if $(window.elemFooter)[0].className.indexOf('tw_') < 0
-    generateOverlay($(window.elemFooter), 'Footer')
+  if window.elemFooter != undefined
+    if $(window.elemFooter)[0].className.indexOf('tw_') < 0
+      generateOverlay($(window.elemFooter), 'Footer')
     
 # every change of navigation must be validated
 validateNavigations = () -> 
