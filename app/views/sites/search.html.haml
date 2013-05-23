@@ -1,6 +1,6 @@
 //seems the backend-developer needs a designerin here ^^
-
-%h1= "Suchergebnisse für '#{@term}'"
+- found = (@sites_title + @sites_tags).uniq.count
+%h1= "#{found} Suchergebnis#{found > 1 || found == 0 ? 'se' : ''} für '#{@term}'"
 
 %p
   = "Eine Erklärung! ^^"
@@ -9,10 +9,10 @@
 %br
 %br
 %section#archive_search
-  %h3= "Titel"
+  %h3= "Titel (#{@sites_title.count})"
   - @sites_title.each do |site|
     = render :partial => 'partials/site', :locals => {:site => site}
 
-  %h3= "Tags"
+  %h3= "Tags (#{@sites_tags.count})"
   - @sites_tags.each do |site|
     = render :partial => 'partials/site', :locals => {:site => site}
