@@ -8,9 +8,14 @@
       timewarp
 
   %nav#navigation
-    = render :partial => 'partials/navigation'
+    - if admin_signed_in?
+      = render :partial => 'partials/navigation_admin'
+    - else
+      = render :partial => 'partials/navigation'
 
   #search
     = render :partial => 'partials/search_form'
   
-  
+- if admin_signed_in?
+  %p 
+    = "Your logged in as #{current_admin.email}" 
