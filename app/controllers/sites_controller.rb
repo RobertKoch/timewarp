@@ -30,14 +30,19 @@ class SitesController < ApplicationController
     url = params[:site][:url]
     @site = Site.new(:url => url)
 
-    #todo: if entry already exist, redirect to archive
-    unless existing_entry = Site.find_by(url: @site.url)
+    #if url ok and site doesnt exists, save it
+    url = url.gsub /http:\/\/||https:\/\//, ''
+
+    unless existing_entry = Site.published.find_by(url: /#{url}/)
       if @site.save
-        redirect_to sites_analyse_path(@site.token)
-      else
-        #only for debugging
-        @sites = Site.all
-        
+        #check if crawler succeeded
+        unless @site.site_crawled
+          @site.errors.add :base, Settings.crawler.errors.wget_failed
+          render 'home/index'
+        else
+          redirect_to sites_analyse_path(@site.token)
+        end
+      else     
         render 'home/index'
       end
     else
