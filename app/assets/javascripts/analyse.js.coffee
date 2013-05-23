@@ -151,7 +151,7 @@ generateOverlay = (node, value) ->
   # set height if not available
   attributeHeight = (if (attributes.offsetHeight > 0) then attributes.offsetHeight else 30)  
 
-  $(node).find('.overlay_wrap')
+  $(node).children('.overlay_wrap')
     .css
       'width': attributes.offsetWidth,
       'height': attributeHeight,
@@ -169,6 +169,7 @@ changeOverlayAndClass = (value) ->
   if window.activeOverlay.target.className == 'tw_overlay_text'
     window.activeOverlay.target.innerText = value
   else
+    console.log window.activeOverlay
     window.activeOverlay.target.nextSibling.innerText = value
 
 noBreadcrumbs = () ->
@@ -331,6 +332,10 @@ declareListener = () ->
     value         = e.currentTarget.value;
     overlayTarget = $(window.activeOverlay.target);
 
+    # change value if navigation element is choosen
+    if value == 'Navigation'
+      value == 'SubNavigation'
+
     if window.setOverlay == undefined
       # change overlay via breadcrumb navigation
       if window.activeOverlay.selector != undefined
@@ -343,7 +348,7 @@ declareListener = () ->
 
     # set new overlay
     else if window.activeOverlay.target
-      changeOverlayAndClass(value)
+      #changeOverlayAndClass(value)
 
       # generate overlay
       generateOverlay(overlayTarget, value);
