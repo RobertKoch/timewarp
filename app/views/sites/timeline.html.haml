@@ -1,8 +1,8 @@
 #timeline_config.hidden{:sites_path => Settings.host+"/saved_sites/#{@site.token}"}
-%section#site_show.grid.grid_5col_4n
-  %h1 
-    %span warped site: 
-    = @site.url
+
+= render :partial => 'partials/timeline'
+
+%section#site_show
   %iframe{:id => 'version_frame', :src => "#{Settings.host}/#{Settings.sites_folder}/#{@site.token}/current/index.html", :width => "100%", :height => 600}
 
   = link_to "Ins Archiv speichern", "#archive_form", :class => "fancybox_inline button"
@@ -10,7 +10,3 @@
 
   #archive_form
     = render :partial => 'partials/archive_form', :locals => {:site => @site}
-
-%section#sidebar.grid.grid_5col_1n
-  %p
-    = render :partial => 'partials/timeline'

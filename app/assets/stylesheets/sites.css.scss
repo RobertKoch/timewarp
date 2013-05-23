@@ -25,32 +25,21 @@
       float: left;
       margin: {
         right: 14px;
-        bottom: 20px;
+        bottom: 10px;
       }
 
       a {
         position: relative;
-        padding: 2px 8px 6px 10px;
+        padding: 7px 12px 10px 10px;
         color: $grey;
+        display: block;
 
         &:hover, &.active {
           color: $white;
           background: {
-            color: $green;
-          }
-
-          span {
-            position: absolute;
-            top: 0;
-            right: -4px;
-            display: block;
-            width: 4px;
-            height: 28px;
-            background: {
-              image: url('curve-28.png');
-              position: 0 0;
-              repeat: no-repeat;
-            }
+            image: url('bg-button.png');
+            position: right 50%;
+            repeat: no-repeat;
           }
         }
       }
