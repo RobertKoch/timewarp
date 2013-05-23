@@ -17,7 +17,6 @@ gem 'haml-rails'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'simple_form'
-gem 'jqcloud-rails'
 gem 'fancybox2-rails', '~> 0.2.4'
 gem 'will_paginate_mongoid'
 
