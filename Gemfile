@@ -23,6 +23,8 @@ gem 'will_paginate_mongoid'
 gem 'imgkit'
 gem "rmagick", "~> 2.13.2"
 
+gem 'devise'
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
