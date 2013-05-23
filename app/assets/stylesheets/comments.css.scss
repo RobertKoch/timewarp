@@ -39,47 +39,7 @@
   }
 }
 
-/* #comment_form {
-  margin: {
-    bottom: 20px;
-  }
-  label {
-    float: left;
-    width: $width_1n;
-    margin: {
-      right: $margin_default * 2;
-    }
-    font: {
-      size: $font_size_normal;
-    }
-    padding: {
-      top: $margin_default;
-    }
-    display:block;
-  }
-  input, textarea {
-    background: {
-      color: $grey_darker;
-    }
-    font: {
-      size: $font_size_normal;
-    }
-    padding: {
-      top: $margin_default;
-      bottom: $margin_default;
-    }
-    margin: {
-      bottom: 10px;
-    }
-  }
-  textarea {
-    height: 100px;
-  }
-  .required abbr {
-    color: $red;
-    float: right
-  }
-}
+/* 
 #comment_list {
   float: left;
   padding-bottom: 20px;

@@ -21,3 +21,4 @@
 
 //= require ICanHaz
 //= require alterClass
+//= require cssParser

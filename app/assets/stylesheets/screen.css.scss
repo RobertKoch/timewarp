@@ -53,7 +53,7 @@ em, i {font-style: italic;}
 }
 
 // text indents 
-#logo a, #lens {
+#logo a, #lens, #fh_logo {
   display: block;
   text: {
     indent: -19999px;
@@ -212,6 +212,10 @@ em, i {font-style: italic;}
       font-size: $font_size_medium;
     }
 
+    h4 {
+      font-size: $font_size_normal;
+    }
+
     h5 {
       font-size: $font_size_normal;
     }
@@ -233,214 +237,31 @@ em, i {font-style: italic;}
     -webkit-box-shadow: 0 -1px 0 $grey_light;
        -moz-box-shadow: 0 -1px 0 $grey_light;
             box-shadow: 0 -1px 0 $grey_light;
-  }
 
-  p {
-    float: left;
-  }
+    p {
+      float: left;
+    }
 
-  #footer_navigation {
-    float: right;
+    #footer_navigation {
+      float: right;
 
-    ul {
-      
-      li {
-        float: left;
-        margin: {
-          left: 15px;
-        }
+      ul {
+        
+        li {
+          float: left;
+          margin: {
+            left: 15px;
+          }
 
-        a {
-          color: $grey_medium;
+          a {
+            color: $grey_medium;
 
-          &:hover {
-            color: $blue;
+            &:hover {
+              color: $blue;
+            }
           }
         }
       }
     }
   }
 }
-
-/* .icon {
-  display: inline-block;
-  width: 14px;
-  height: 14px;
-  background: {
-    image: url('sprite-icons.png');
-    repeat: no-repeat;
-  }
-  margin: {
-    right: 3px;
-    bottom: -2px;
-  }
-}
-.hidden {display: none;}
-.clear {clear: both;}
-.button {
-  background: {
-    color: transparent !important;
-    image: url('bg-button.png');
-    position: right top;
-    repeat: no-repeat;
-  }
-  display: block;
-  height: 25px;
-  color: $grey_dark;
-  @include font_michroma;
-  font: {
-    size: $font_size_small !important;
-  }
-  margin-top: 10px;
-  padding: 10px 15px 0 10px !important;
-  cursor: pointer;
-  text-decoration: none;
-  &:hover {
-    background: {
-      image: url('bg-button-blue.png');
-    }
-    color: $grey_light;
-  }
-  float: right;
-  &.cancel {
-  }
-}
-input.button {
-  height: 35px;
-  padding-top: 0 !important; 
-}
-
-// layout
-#header {
-  position: relative;
-  height: 320px;
-}
-#logo {
-  position: relative;
-  a, .shadow {
-    display: block;
-    text-indent: -19999px;
-    overflow: hidden;
-    width: 320px;
-    height: 320px;
-    background: {
-      position: 0 0;
-      repeat: no-repeat;
-    }
-  }
-  a {
-    position: relative;
-    margin: 0 auto;
-    background: {
-      image: url('logo-large.png');
-    }
-    z-index: 2;
-  }
-  .shadow {
-    display: none;
-    position: absolute;
-    top: 0;
-    left: 50%;
-    margin-left: -75px;
-    background: {
-      image: url('logo-shadow.png');
-    }
-    z-index: 1;
-  }
-}
-#navigation_rail {
-  position: absolute;
-  top: 140px;
-  left: 0;
-  display: block;
-  width: 50%;
-  height: 40px;
-  background: {
-    color: $green;
-  }
-}
-#navigation {
-  position: relative;
-  @include font_michroma;
-  background: {
-    color: $green;
-  }
-  font: {
-    size: $font_size_medium;
-  }
-  height: 18px;
-  padding: 9px 0 13px 0;
-  margin-top: 140px;
-  li {
-    float: right; 
-    margin-left: 30px;
-    &:first-child {
-      margin-right: 30px;
-    }
-  }
-  a {
-    color: $grey_dark;
-    text-decoration: none;
-    &:hover, &.active {
-      color: $white;
-    }
-  }
-  .curve {
-    position: absolute;
-    top: 0;
-    right: -6px;
-    display: block;
-    width: 6px;
-    height: 40px;
-    background: {
-      image: url('curve-green-large.png');
-      position: 0 0;
-      repeat: no-repeat;
-    }
-  }
-}
-#wrapper {
-  position: relative;
-  /* width: 94.11764705%; 960px -> 1020px */
-  /* width: 96.07843137%; 980px -> 1020px */
-  /* width: 100%;
-  margin: 0 auto;
-}
-#content {
-  h1, h2, h3, h4, h5, h6 {
-    @include font_michroma;
-    color: $grey_light;
-    margin-bottom: 1em;
-  }
-  h1 {
-    font-size: $font_size_large;
-  }
-  h3 {
-    font-size: $font_size_medium;
-  }
-  h5 {
-    font-size: $font_size_normal;
-  }
-  p, ul, ol {
-    line-height: 1.5em;
-  }
-  ul {
-    list-style: {
-      type: circle;
-    }
-    margin-left: 15px;
-  }
-}
-#footer {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  clear: both;
-  padding: 20px 0;
-  border-top: 1px solid $green;
-}
-
-#chosen_tags span {
-  padding: 3px;
-} */

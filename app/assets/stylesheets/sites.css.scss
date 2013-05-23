@@ -59,7 +59,7 @@
 }
 
 // archive overview (index)
-#archive_overview {
+#archive_overview, #archive_search {
   float: left;
   width: 100%;
   margin: {
@@ -161,9 +161,9 @@
     img {
       float: right;
       clear: right;
-      -webkit-box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
-         -moz-box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
-              box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
+      -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+         -moz-box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+              box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
       width: 19.1504178%; // 137,5px => 718px;
       margin: {
         bottom: 0.6963788%; // 5px => 718px;
@@ -262,164 +262,3 @@
     // styles in comments.css.scss
   }
 }
-
-
-
-
-/* 
-#crawled_site {
-  opacity: 0.2;
-  margin: {
-    bottom: 20px;
-  }
-}
-
-  .pagination {
-    padding: 20px 0;
-    border-top: 1px solid $grey_dark_medium;
-    display: block;
-    clear: both;
-    margin: 0 $margin_default 50px;
-    @include font_michroma;
-    font: {
-      size: $font_size_small;
-    }
-    a, span, em {
-      display: block;
-      float: left;
-      margin-right: 6px;
-      padding: 3px 6px 4px;
-      border: {
-        width: 1px 0;
-        style: solid;
-        color: $grey_medium;
-      }
-      color: $grey_medium;
-    }
-    a {
-      text-decoration: none;
-      &:hover {
-        border: {
-          color: $green;
-        }
-        color: $green;
-      }
-    }
-    .previous_page {}
-    .next_page {}
-    .current {
-      border: {
-        color: $blue;
-      }
-      color: $blue;
-    }
-    .disabled {
-      border: {
-        color: $grey_dark_medium;
-      }
-      color: $grey_dark_medium;
-    }
-  }
-}
-
-  #site_comments {
-    margin-bottom: 40px;
-    h3 {
-      border-bottom: 1px solid $grey_dark_medium;
-      padding-bottom: 6px;
-    }
-  }
-}
-
-#archive_form {
-  display: none;
-  background: {
-    color: $grey_dark;
-  }
-  width: 460px;
-  height: 280px;
-  padding: 20px;
-
-  h3 {
-    @include font_michroma;
-    font: {
-      size: $font_size_medium;
-    }
-    color: $grey_light;
-    border: {
-      bottom: 1px solid $grey_medium;
-    }
-    padding-bottom: 6px;
-    margin: {
-      bottom: 1em;
-    }
-  }
-  label {
-    float: left;
-    width: $width_1n;
-    margin: {
-      right: $margin_default * 2;
-    }
-    font: {
-      size: $font_size_normal;
-    }
-    color: $grey_medium;
-    padding: {
-      top: $margin_default;
-    }
-    display:block;
-  }
-  input, textarea {
-    background: {
-      color: $grey_darker;
-    }
-    font: {
-      size: $font_size_normal;
-    }
-    padding: {
-      top: $margin_default;
-      bottom: $margin_default;
-    }
-    margin: {
-      bottom: 10px;
-    }
-  }
-  .button {
-    margin: 0 0 10px 0;
-    &.cancel_form {
-      float: left;
-    }
-  }
-  #chosen_tags {
-    color: $grey_dark_medium;
-    border: {
-      width: 1px 0;
-      style: solid;
-      color: $grey_medium;
-    }
-    padding: 10px 0;
-    margin: {
-      bottom: 10px;
-    }
-    line-height: 2em;
-    span {
-      font: {
-        size: $font_size_normal;
-      }
-      color: $grey_medium;
-      margin-right: 15px;
-      a {
-        display: inline-block;
-        text-indent: -19999px;
-        overflow: hidden;
-        background: url('close.png') 0 0 no-repeat;
-        width: 20px;
-        height: 20px;
-        margin: 0 0 -6px 2px;
-      }
-    }
-  }
-} */
-
-
-

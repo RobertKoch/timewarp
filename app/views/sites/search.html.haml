@@ -8,12 +8,11 @@
 %br
 %br
 %br
-%section#archive
+%section#archive_search
   %h3= "Titel"
   - @sites_title.each do |site|
     = render :partial => 'partials/site', :locals => {:site => site}
 
-%section#archive
   %h3= "Tags"
   - @sites_tags.each do |site|
     = render :partial => 'partials/site', :locals => {:site => site}

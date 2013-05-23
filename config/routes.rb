@@ -21,9 +21,9 @@ Timewarp::Application.routes.draw do
   get "sites/:id/timeline" => "sites#timeline", :as => "sites_timeline"
   put "sites/:id/publish" => "sites#publish", :as => "sites_publish"
   post "sites/rewrite_content" => "sites#rewrite_content"
+  post "sites/get_css_content" => "sites#get_css_content"
 
   get "team"           => "pages#about", :as => "team"
   get "history_of_web" => "pages#history_of_web", :as => "history"
   get "imprint"        => "pages#imprint", :as => "imprint"
-  get "agb"            => "pages#general_terms", :as => "terms"
 end

@@ -2,8 +2,8 @@ animationTimeSlow = 500;
 animationTimeFast = 300;
 
 setArchiveArticleHeight = () ->
-  archiveImageHeight = $('#archive_overview article img').height();
-  $('#archive_overview article').css
+  archiveImageHeight = $('.site_preview img').height();
+  $('.site_preview').css
     'height' : archiveImageHeight + 35
 
 addLikeListener = () ->
@@ -26,7 +26,7 @@ $(document).ready ->
 
   setArchiveArticleHeight();
 
-  $.each $('#archive_overview article'), (i) ->
+  $.each $('.site_preview'), (i) ->
     $(this).mouseenter ->
       $(this).find('.hover')
         .css
