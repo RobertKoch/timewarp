@@ -117,7 +117,7 @@ exploreTagUl = (node) ->
 
   # additional increment to allow 1 extra element like span in navigation-block
   if window.cnt > 3 && (window.cnt == length || window.cnt+1 == length)
-    generateOverlay($(node), 'SubNavigation')
+    generateOverlay($(node), 'Unternavigation')
   else 
     if window.galleryCnt > 3
       generateOverlay($(node), 'Gallery')
@@ -294,7 +294,7 @@ declareListener = () ->
         $(clickedOverlay).remove()
 
         # if navigation is removed, validate new if possible
-        if window.activeOverlay.target.innerText == 'Navigation'
+        if window.activeOverlay.target.innerText == 'Hauptnavigation'
           validateNavigations()
 
       else 
@@ -334,7 +334,7 @@ declareListener = () ->
 
     # change value if navigation element is choosen
     if value == 'Navigation'
-      value == 'SubNavigation'
+      value = 'Unternavigation'
 
     if window.setOverlay == undefined
       # change overlay via breadcrumb navigation
@@ -365,11 +365,11 @@ declareListener = () ->
     # reset select-box to first option
     e.currentTarget.selectedIndex = 0
     
-    #fadeOut overlays
+    # fadeOut overlays
     fadeOutOverlays(el)
 
     # validate navigation to check if main navigation has changed
-    if value == 'SubNavigation'
+    if value == 'Unternavigation'
       validateNavigations()
 
   $(window.frameContent).mouseover (e) ->
@@ -449,25 +449,29 @@ validateFooter = () ->
 # every change of navigation must be validated
 validateNavigations = () -> 
   # reset root navigation
-  $(window.frameContent).find('.tw_root_navigation').alterClass 'tw_root_navigation', 'tw_root_subnavigation'
+  $(window.frameContent).find('.tw_root_navigation').alterClass 'tw_root_hauptnavigation', 'tw_root_unternavigation'
 
   # array of elements
   listMain = new Array('startseite', 'home', 'über uns')
   # array which stores navigation points
   navCnt = new Array();
   # list that contains every subnavigation
-  subNav = $(window.frameContent).find('.tw_root_subnavigation')
-  
+  subNav = $(window.frameContent).find('.tw_root_unternavigation')
+
   $.each subNav, (i) ->
-    # first navigation will be rated better
-    if i == 0 then cnt = 2 else cnt = 0
-    $.each this.children, (j) ->
-      if this.innerText && this.innerText != 'SubNavigation'
-        # is current value part of array
-        if this.innerText.toLowerCase() in listMain
-          cnt++
-    # push final points to array      
-    navCnt.push(cnt)  
+    # navigation must be visible
+    if $(this).css('opacity') == 0 || $(this).css('display').indexOf('block') < 0
+      navCnt.push(-1)
+    else   
+      # first navigation will be rated better
+      if i == 0 then cnt = 2 else cnt = 0
+      $.each this.children, (j) ->
+        if this.innerText && this.innerText != 'Unternavigation'
+          # is current value part of array
+          if this.innerText.toLowerCase() in listMain
+            cnt++
+      # push final points to array    
+      navCnt.push(cnt)  
 
   # get max value of cnt array
   maxCnt = Math.max.apply(Math, navCnt)
@@ -478,5 +482,5 @@ validateNavigations = () ->
   elem = subNav[posOfMax]
 
   # change subnavigation to navigation
-  $(elem).alterClass 'tw_*', 'tw_root_navigation'
-  $(elem).find('.tw_overlay_text').text 'Navigation'  
+  $(elem).alterClass 'tw_*', 'tw_root_hauptnavigation'
+  $(elem).find('.tw_overlay_text').text 'Hauptnavigation'  

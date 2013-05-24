@@ -3,7 +3,7 @@ getCssContent = () ->
   cssContent = ''
 
   $.each linkTags, (i, elem) ->
-    if $(elem)[0].type == 'text/css' && $(elem)[0].href.indexOf('.css') >= 0 && $(elem)[0].href.indexOf('localhost') == -1
+    if $(elem)[0].href.indexOf('.css') >= 0 && $(elem)[0].href.indexOf('localhost') == -1
       # get content from current css file
       $.ajax(
         type: 'POST',
@@ -58,6 +58,7 @@ validateColors = (css) ->
 
   # fill array with color und count value of frequency
   for color, cnt of colorsIndex
+
     if color.indexOf '#' >= 0
       if color.charAt(0) == '#'
         sum += cnt
@@ -98,6 +99,8 @@ userInteraction = () ->
 
 $(window).load ->
   css = getCssContent()
+
+
 
   if css
     validateColors(css)
