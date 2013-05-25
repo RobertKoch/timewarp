@@ -422,7 +422,7 @@ declareListener = () ->
         token: token,
         version: 'current',
         content: content
-      }
+      },
       async: false
     ).done (bool) ->
       if bool
