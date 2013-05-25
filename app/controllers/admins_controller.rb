@@ -9,6 +9,11 @@ class AdminsController < ApplicationController
     @admin = Admin.find(params[:id])
   end
 
+  def edit
+    @resource = Admin.find(params[:id])
+    render 'devise/registrations/edit'
+  end
+
   def dashboard
     @admins = Admin.all 
   end

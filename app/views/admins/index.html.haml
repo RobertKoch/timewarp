@@ -1,1 +1,13 @@
 %h1 Admins
+
+%table
+  %tr
+    %td ID
+    %td E-Mail
+    %td Actions
+  - @admins.each do |admin|
+    %tr
+      %td= admin.id
+      %td= admin.email 
+      %td
+        = link_to "edit", edit_admin_path(admin) 

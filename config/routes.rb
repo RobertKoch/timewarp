@@ -4,7 +4,7 @@ Timewarp::Application.routes.draw do
   get "home/index"
 
   #admin paths
-  devise_for :admins, :path => "admin", :path_names => { :sign_in => 'login', :sign_out => 'logout'}, :controllers => {:sessions => "sessions" }
+  devise_for :admins, :path => "admin", :path_names => { :sign_in => 'login', :sign_out => 'logout'}, :controllers => {:sessions => "sessions", :registrations => "registrations" }
   resources :admins
 
   devise_scope :admin do
@@ -12,6 +12,7 @@ Timewarp::Application.routes.draw do
     get "admin/dashboard" => "admins#dashboard", :as => "admin_dashboard"
     get "admin/sites" => "admins#sites", :as => "admin_sites"
     get "admin/users" => "admins#index", :as => "admins"
+    get "admin/users/:id/edit" => "admins#edit", :as => "admin_edit"
   end
 
   #site paths and their relations
