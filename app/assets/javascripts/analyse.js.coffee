@@ -139,7 +139,7 @@ generateOverlay = (node, value) ->
   # overlayCnt correlates to z-index, start with value 1000
   window.overlayCnt = window.overlayCnt || 1000
 
-  overlay    = '<div class="overlay_wrap">'
+  overlay    = '<div class="overlay_wrap ' + value.toLowerCase() + '">'
   overlay   += '<span class="tw_overlay"></span>' 
   overlay   += '<span class="tw_overlay_text">' + value + '</span>'
   overlay   += '</div>'
