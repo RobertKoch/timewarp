@@ -52,7 +52,7 @@ em, i {font-style: italic;}
   display: inline-block;
   @include font_michroma;
   font: {
-    size: $font_size_medium;
+    size: $font_size_normal;
   }
   color: $white !important;
   background: {
