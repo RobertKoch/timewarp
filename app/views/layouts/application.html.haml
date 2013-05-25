@@ -34,3 +34,6 @@
 
     - if (controller.controller_name == 'sites' && (controller.action_name == 'timeline'))
       = javascript_include_tag "timeline"
+
+    - if (controller.controller_name == 'sites' && (controller.action_name == 'show'))
+      = javascript_include_tag "archive"
