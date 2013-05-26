@@ -3,11 +3,13 @@ reloadVersion = (version) ->
   $('#version_frame').attr( 'src', version_path)
 
 saveVersion = (version) ->
+  host = $('#app_config').attr 'host'
+  
   # possibility 2: switch css files
-  #href = 'http://localhost:3000/assets/stylesheets/'+version+'.css'
+  #href = host+'/assets/stylesheets/'+version+'.css'
   #$(window.frameContent).find('#cssVersion').attr href: href
 
-  css = '<link class="cssVersion" rel="stylesheet" href="http://localhost:3000/assets/stylesheets/'+version+'.css" type="text/css" media="screen" />'
+  css = '<link class="cssVersion" rel="stylesheet" href="'+host+'/assets/stylesheets/'+version+'.css" type="text/css" media="screen" />'
   $(window.frameContent).find('head').append css
 
   # get path information

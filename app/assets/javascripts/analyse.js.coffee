@@ -40,6 +40,7 @@ removeUnsolicitedTags = () ->
   #  i++;
 
 defineAdditionalAddons = () ->
+  host = $('#app_config').attr 'host'
   $.ajax(
     url: "/assets/templates/overlay.html",
     async: false
@@ -50,7 +51,7 @@ defineAdditionalAddons = () ->
 
   $(window.frameContent).find('.tw_background_overlay').css 'height': window.frameContent[0].offsetHeight
 
-  $(window.frameContent).find('head').append '<link rel="stylesheet" href="http://localhost:3000/assets/stylesheets/analyse.css" type="text/css" media="screen" />'
+  $(window.frameContent).find('head').append "<link rel='stylesheet' href='#{host}/assets/stylesheets/analyse.css' type='text/css' media='screen' />"
 
 # recursive iteration through every element
 recursiveIterate = (node) ->

@@ -24,6 +24,8 @@
 
       %footer#footer
         = render :partial => 'partials/footer'
+    
+    #app_config.hidden{:host => Settings.host}
 
     = javascript_include_tag 'application'
     
