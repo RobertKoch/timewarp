@@ -1,12 +1,10 @@
 %nav#sub_navigation
   = render :partial => 'partials/archive_navigation'
 
-%section#archive.grid.grid_5col_4n_full
-  %h1.margin-left 
-    Tags
-  #letter_lists 
-    - ('A'..'Z').to_a.each do |letter|
-      .letter_list.grid.grid_1n
+#letter_lists 
+  - ('A'..'Z').to_a.each do |letter|
+    .letter_list_wrap
+      .letter_list
         %h3
           = letter
         %ul.tags
