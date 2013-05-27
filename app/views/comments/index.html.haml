@@ -1,0 +1,16 @@
+%h1= "comments of site '#{@site.title}'"
+
+%p= "URL: #{@site.url}"
+
+%table
+  %tr
+    %td Created at
+    %td Name
+    %td text
+    %td Actions
+  - @site.comments.reverse.each do |comment|
+    %tr
+      %td= to_german_date comment.created_at
+      %td= "#{comment.name} (#{comment.email})"
+      %td= comment.text
+      %td= link_to "delete", site_comment_path(@site, comment), :method => :delete, :confirm => "Are you sure?"

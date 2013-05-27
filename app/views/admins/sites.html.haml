@@ -7,15 +7,17 @@
       %td Title
       %td Url
       %td Token
+      %td Comments
       %td Actions
     - @unpublished.each do |site|
       %tr
         %td= site.title ? site.title : '-'
         %td= site.url
-        %td= site.token 
+        %td= site.token
+        %td= link_to "comments", site_comments_path(site)
         %td
-          = link_to "preview", sites_preview_path(site) 
-          = link_to "edit", edit_site_path(site) 
+          = link_to "preview", sites_preview_path(site)
+          = link_to "edit", edit_site_path(site)
           = link_to "delete", site_path(site), :method => :delete
   = will_paginate @unpublished, :param_name => 'unpublished_page', :previous_label => '&laquo;', :next_label => '&raquo;'
   %br
@@ -29,12 +31,14 @@
       %td Title
       %td Url
       %td Token
+      %td Comments
       %td Actions
     - @published.each do |site|
       %tr
-        %td= site.title 
+        %td= site.title
         %td= site.url
-        %td= site.token 
+        %td= site.token
+        %td= link_to "comments", site_comments_path(site)
         %td
           = link_to "view", site_path(site)  
           = link_to "edit", edit_site_path(site) 

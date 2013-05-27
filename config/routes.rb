@@ -17,7 +17,7 @@ Timewarp::Application.routes.draw do
 
   #site paths and their relations
   resources :sites do 
-    resources :comments, :only => [:create, :destroy] 
+    resources :comments, :only => [:index, :create, :destroy] 
     member do
       post :create_comment
       get :increment_like
