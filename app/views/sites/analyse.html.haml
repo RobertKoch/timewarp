@@ -5,25 +5,27 @@
     = @site.url
 
   #analyse_frame
-    %iframe{:src => "#{Settings.host}/#{Settings.sites_folder}/#{@site.token}/current/index.html", :width => "100%", :height => 600, :id => "crawled_site", :sandbox => "allow-same-origin allow-scripts" }
+    %iframe{:src => "#{Settings.host}/#{Settings.sites_folder}/#{@site.token}/current/index.html", :width => "100%", :height => 600, :id => "crawled_site", :sandbox => "allow-same-origin allow-scripts"}
+    %span.overlay
 
   %section#sidebar
-
-    %h4
-      Analyse
-    %ul.analyse
-      %li= link_to "zurücksetzen", '#', :class => "reset_analyse"
-      %li= link_to "erneut starten", '#', :class => "new_analyse"
-
-    %h4
-      Farben der Website
-    #colorBar
-      .span{:id => 'colorBarInfo'}
+    %div{:"data-step" => "1", :"data-intro" => "Dummy Text", :"data-position" => "left", :style => "float: left; width:100%;"}
+      %h4
+        Analyse
+      %ul.analyse
+        %li= link_to "zurücksetzen", '#', :class => "reset_analyse"
+        %li= link_to "erneut starten", '#', :class => "new_analyse"
+    
+    %div{:"data-step" => "2", :"data-intro" => "Dummy Text ColorBar", :"data-position" => "left", :style => "float: left; width:100%;"}
+      %h4
+        Farben der Website
+      #colorBar
+        .span{:id => 'colorBarInfo'}
 
     %p
       = link_to "weiter", sites_timeline_path(@site), :class => "back_to_future button"
    
-    #legend
+    #legend{:"data-step" => "3", :"data-intro" => "Dummy Text Legende", :"data-position" => "left"}
       %h4
         Legende
       %ul

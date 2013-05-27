@@ -3,6 +3,7 @@
 #site_analyse {
 
   #analyse_frame {
+    position: relative;
     float: left;
     width: $width_734;
     margin: {
@@ -14,6 +15,18 @@
       -webkit-box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
          -moz-box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
               box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .overlay {
+      position: absolute;
+      top: 0; 
+      right: 0;
+      bottom: 0;
+      left: 0;
+      display: block;
+      background: {
+        color: rgba(0, 0, 0, .5);
+      }
     }
   }
 
@@ -152,4 +165,9 @@
       height: inherit;
     }
   }
+}
+
+.introjs-helperNumberLayer {
+  left: auto !important;
+  right: -16px !important;
 }
