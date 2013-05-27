@@ -1,5 +1,5 @@
 class SitesController < ApplicationController
-  before_filter :authenticate_admin!, :only => [:edit, :update, :destroy]
+  before_filter :authenticate_admin!, :only => [:edit, :update, :destroy, :preview]
   before_filter :site_exists_and_not_published, :only => [:analyse, :timeline]
   
   def index
@@ -96,6 +96,14 @@ class SitesController < ApplicationController
     else
       render 'sites/publish'
     end
+  end
+
+  def preview
+    @site = Site.find_by_token(params[:id])
+    @tags = get_tags_with_weight @site
+    @comment = @site.comments.build
+
+    render 'show'
   end
 
   def search 
