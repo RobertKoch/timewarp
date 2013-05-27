@@ -1,5 +1,7 @@
 - unless object.errors.blank?
   .errors
     - object.errors.full_messages.each do |error|
+      - idx = error.index ' '
+      - error[0..idx] = error[0..idx].upcase
       = error
       %br
