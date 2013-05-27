@@ -15,7 +15,12 @@ class AdminsController < ApplicationController
   end
 
   def dashboard
-    @admins = Admin.all 
+    @sites = Site.all
+    @tags = Site.tags_with_weight
+    @sysinfo = SysInfo.new
+    @pageviews = 0
+
+    @sites.each { |site| @pageviews += site.visits }
   end
 
   def sites 

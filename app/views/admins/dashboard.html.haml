@@ -1,3 +1,23 @@
 %h1 Dashboard
 
-Hier stehen dann voooll viele nützliche Dinge und so! ;)
+%h2 Sites
+.sites_info
+  = "Published: #{@sites.published.count}"
+  = "Unpublished: #{@sites.unpublished.count}"
+  = "Overall page views: #{@pageviews}"
+
+
+%h2 Tags
+.tags_info
+  = "Number of tags: #{@tags.count}"
+  = "most recent tags:"
+  - @tags[0..4].each do |tag|
+    = link_to "#{tag[0]} (#{tag[1].to_i})", tag_path(tag[0])
+
+%h2 Server Information
+.server_info
+  = "Host: #{@sysinfo.hostname}"
+  = "IP: #{@sysinfo.ipaddress_internal}"
+  = "Platform: #{@sysinfo.platform}"
+  = "Ruby-Version: #{@sysinfo.ruby.join '.'}"
+  = "Uptime: #{@sysinfo.uptime} hours"
