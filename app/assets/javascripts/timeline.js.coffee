@@ -39,6 +39,15 @@ initNavigation = () ->
       reloadVersion $(this).attr 'attr_version'
       $(this).addClass 'active'
 
+getValueFromSessionStorage = () ->
+  if sessionStorage
+    topColors = sessionStorage.getItem 'timewarp_colorPicker'
+
+    if topColors != null
+      # save topColors globally
+      # access with window.topColors[i].color
+      window.topColors = JSON.parse(topColors)
+
 $(window).load ->
   # get current frame id to load frame-content
   frameID = $('iframe').attr('id')
@@ -54,3 +63,5 @@ $(window).load ->
 
   # init navigation
   initNavigation()
+
+  getValueFromSessionStorage()

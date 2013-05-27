@@ -68,11 +68,29 @@ validateColors = (css) ->
   colorArr = colorArr.sort (a, b) ->
     b[1] - a[1]
 
+  topColorArr = []
+
   $.each colorArr, (i, v) ->
     percent = v[1] * 100 / sum
     colorBar += '<span data-cnt="'+v[1]+'" data-color="'+v[0]+'" style="width:'+percent+'%;background-color:'+v[0]+';"></span>'
 
+    # push top 5 colors to array
+    if i < 5
+      # usw json for array input
+      topColorArr.push( { 'color': v[0] } )
+
   $('#colorBar').prepend colorBar
+
+  saveColorToStorage(topColorArr)  
+
+saveColorToStorage = (topColorArr) ->
+  if sessionStorage
+    # convert array to string
+    topColors = JSON.stringify(topColorArr)
+
+    try
+      sessionStorage.setItem 'timewarp_colorPicker', topColors
+    catch e
 
 userInteraction = () ->
   $('#colorBar span').mouseover (e) ->
