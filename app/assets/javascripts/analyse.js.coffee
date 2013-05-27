@@ -11,6 +11,24 @@ $(window).load ->
   startAnalyse()
 
   startValidation()
+
+  initIntroJs()
+
+initIntroJs = () ->
+  introJs()
+    .setOptions
+      skipLabel: "Abbrechen",
+      nextLabel: "Weiter",
+      prevLabel: "Zurück",
+      doneLabel: "Schließen"
+    .start()
+    .oncomplete ->
+      introJs().exit()
+      $('#analyse_frame span').hide()
+    .onexit ->
+      introJs().exit()
+      $('#analyse_frame span').hide()
+    
   
 startAnalyse = () ->
   recursiveIterate(window.frameContent)
