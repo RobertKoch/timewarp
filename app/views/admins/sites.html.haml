@@ -4,6 +4,7 @@
 - if @unpublished.count > 0
   %table
     %tr
+      %td Created at
       %td Title
       %td Url
       %td Token
@@ -11,6 +12,7 @@
       %td Actions
     - @unpublished.each do |site|
       %tr
+        %td= to_german_date site.created_at
         %td= site.title ? site.title : '-'
         %td= site.url
         %td= site.token
@@ -28,6 +30,7 @@
 - if @published.count > 0
   %table
     %tr
+      %td Created_at
       %td Title
       %td Url
       %td Token
@@ -35,6 +38,7 @@
       %td Actions
     - @published.each do |site|
       %tr
+        %td= to_german_date site.created_at
         %td= site.title
         %td= site.url
         %td= site.token
