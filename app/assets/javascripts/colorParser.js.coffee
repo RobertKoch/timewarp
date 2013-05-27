@@ -78,7 +78,6 @@ userInteraction = () ->
   $('#colorBar span').mouseover (e) ->
     # get values of color and count
     color = $(e.target).attr('data-color')
-    cnt   = $(e.target).attr('data-cnt')
 
     # show every color with 6 digits
     if color.length < 5
@@ -88,7 +87,7 @@ userInteraction = () ->
     # alternative use: (e.pageX - 75)
     $('#colorBarInfo').css 'margin-left': e.target.offsetLeft
 
-    $('#colorBarInfo').html(cnt+'x '+color)
+    $('#colorBarInfo').html(color)
 
     if $('#colorBarInfo').is(':hidden')
       $('#colorBarInfo').fadeIn()

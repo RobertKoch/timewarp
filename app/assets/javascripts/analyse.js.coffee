@@ -11,9 +11,6 @@ $(window).load ->
   startAnalyse()
 
   startValidation()
-
-  # if everything has finished set opacity to 1
-  $('#crawled_site').css opacity: 1
   
 startAnalyse = () ->
   recursiveIterate(window.frameContent)
@@ -332,12 +329,17 @@ declareListener = () ->
   $(window.frameContent).find('.tw_overlayDefinition').change (e) ->
     value         = e.currentTarget.value;
     overlayTarget = $(window.activeOverlay.target);
-
-    # change value if navigation element is choosen
+    
     if value == 'Navigation'
       value = 'Unternavigation'
 
+    # change value if navigation element is choosen
     if window.setOverlay == undefined
+
+      # change highlighting class
+      oldValue = overlayTarget[0].innerText.toLowerCase()
+      $(overlayTarget[0].parentNode).alterClass oldValue, value.toLowerCase()
+
       # change overlay via breadcrumb navigation
       if window.activeOverlay.selector != undefined
         $(window.activeOverlay).alterClass 'tw_*', 'tw_root_'+value.toLowerCase()
@@ -346,6 +348,8 @@ declareListener = () ->
       # change overlay by clicking at once
       else
         changeOverlayAndClass(value)
+
+
 
     # set new overlay
     else if window.activeOverlay.target
@@ -484,4 +488,7 @@ validateNavigations = () ->
 
   # change subnavigation to navigation
   $(elem).alterClass 'tw_*', 'tw_root_hauptnavigation'
-  $(elem).find('.tw_overlay_text').text 'Hauptnavigation'  
+  $(elem).find('.tw_overlay_text').text 'Hauptnavigation' 
+
+  # change highlighting class
+  $(elem).find('.overlay_wrap').alterClass 'unternavigation', 'hauptnavigation'
