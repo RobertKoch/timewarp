@@ -11,7 +11,6 @@
      -moz-box-shadow: 0 1px 0 $white;
           box-shadow: 0 1px 0 $white;
   margin: {
-    top: 10px;
     bottom: 20px;
   }
 
@@ -25,32 +24,21 @@
       float: left;
       margin: {
         right: 14px;
-        bottom: 20px;
+        bottom: 10px;
       }
 
       a {
         position: relative;
-        padding: 2px 8px 6px 10px;
+        padding: 7px 12px 10px 10px;
         color: $grey;
+        display: block;
 
         &:hover, &.active {
           color: $white;
           background: {
-            color: $green;
-          }
-
-          span {
-            position: absolute;
-            top: 0;
-            right: -4px;
-            display: block;
-            width: 4px;
-            height: 28px;
-            background: {
-              image: url('curve-28.png');
-              position: 0 0;
-              repeat: no-repeat;
-            }
+            image: url('bg-button.png');
+            position: right 50%;
+            repeat: no-repeat;
           }
         }
       }
@@ -143,6 +131,46 @@
           }
         }
       }
+    }
+  }
+}
+
+// pagination 
+.pagination {
+  clear: both;
+  a, em, span {
+    display: inline-block;
+    background: {
+      color: $white;
+    }
+    color: $grey_medium;
+    border: 1px solid $grey_light;
+    padding: .5em .7em;
+    -webkit-border-radius: 5px; 
+       -moz-border-radius: 5px; 
+            border-radius: 5px;
+    text-align: center;
+    font-style: normal;
+    -webkit-box-shadow: 0 0 2px rgba(0, 0, 0, 0.1);
+       -moz-box-shadow: 0 0 2px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 0 2px rgba(0, 0, 0, 0.1);
+
+    &.current {
+      background-color: $grey_lighter;
+      -webkit-box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
+         -moz-box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
+              box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
+    }
+
+    &.disabled {
+      color: $grey_light;
+    }
+  }
+
+  a {
+    
+    &:hover {
+      color: $blue;
     }
   }
 }

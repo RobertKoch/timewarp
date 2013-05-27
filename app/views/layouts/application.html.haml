@@ -24,12 +24,18 @@
 
       %footer#footer
         = render :partial => 'partials/footer'
+    
+    #app_config.hidden{:host => Settings.host}
 
     = javascript_include_tag 'application'
     
     - if (controller.controller_name == 'sites' && (controller.action_name == 'analyse'))
       = javascript_include_tag "analyse"
       = javascript_include_tag "colorParser"
+      = javascript_include_tag "legend"
 
     - if (controller.controller_name == 'sites' && (controller.action_name == 'timeline'))
       = javascript_include_tag "timeline"
+
+    - if (controller.controller_name == 'sites' && (controller.action_name == 'show'))
+      = javascript_include_tag "archive"

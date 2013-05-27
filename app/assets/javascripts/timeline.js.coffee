@@ -1,8 +1,35 @@
 reloadVersion = (version) ->
   version_path = $('#timeline_config').attr('sites_path') + '/' + version + '/index.html'
-  $('#version_frame').attr( 'src', version_path);
+  $('#version_frame').attr( 'src', version_path)
 
-navigation = () ->
+saveVersion = (version) ->
+  host = $('#app_config').attr 'host'
+  
+  # possibility 2: switch css files
+  #href = host+'/assets/stylesheets/'+version+'.css'
+  #$(window.frameContent).find('#cssVersion').attr href: href
+
+  css = '<link class="cssVersion" rel="stylesheet" href="'+host+'/assets/stylesheets/'+version+'.css" type="text/css" media="screen" />'
+  $(window.frameContent).find('head').append css
+
+  # get path information
+  token   = $('#timeline_token').attr('token')
+  content = $('#version_frame').contents().find('html')[0].outerHTML
+
+  # save new index at considering year
+  $.ajax(
+    type: 'POST',
+    dataType: 'json',
+    url: "/sites/rewrite_content",
+    data: {
+      token: token,
+      version: version,
+      content: content
+    },
+    async: false
+  )
+
+initNavigation = () ->
   # on timeline path? Let's do some magic now ;)
   if $('#timeline_config').length != 0
     $('a.change_version').first().addClass 'active'
@@ -12,16 +39,18 @@ navigation = () ->
       reloadVersion $(this).attr 'attr_version'
       $(this).addClass 'active'
 
-defineAdditionalAddons = () ->
-  $(window.frameContent).find('head').append '<link rel="stylesheet" href="http://localhost:3000/assets/stylesheets/timeline.css" type="text/css" media="screen" />';
-
 $(window).load ->
   # get current frame id to load frame-content
   frameID = $('iframe').attr('id')
   window.frameContent = $('#'+frameID).contents().find('html')
 
-  # init navigation
-  navigation()
+  # save individual versions
+  warpSteps = [2008, 2003, 1998, 1994]
+  $.each warpSteps, (i, version) ->
+    saveVersion(version)
 
-  # load addons like css files
-  defineAdditionalAddons()
+  # remove all additional css files to show current version
+  $(window.frameContent).find('head').find('.cssVersion').remove()
+
+  # init navigation
+  initNavigation()

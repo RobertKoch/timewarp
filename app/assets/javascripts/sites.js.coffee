@@ -16,10 +16,6 @@ addLikeListener = () ->
         $('a.likes').off 'click'
 
 $(document).ready ->
-  if $('#site_analyse, #site_show').length != 0
-    $('#crawled_site, #version_frame').attr
-      'height' : 500
-      #$(window).height() - 350 
 
   if $('#site_meta').length != 0
     addLikeListener()

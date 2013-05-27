@@ -1,0 +1,24 @@
+body {
+  background-image: none;
+  background-color: #fff;
+}
+
+.tw_root_header {
+  background-color: #ff0000;
+}
+
+.tw_root_navigation {
+  background-color: #00ffff;
+}
+
+.tw_root_subnavigation {
+  background-color: #ffff00;
+}
+
+.tw_root_content {
+  background-color: #00ff00;
+}
+
+.tw_root_footer {
+  background-color: #0000ff;
+}

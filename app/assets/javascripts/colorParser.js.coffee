@@ -3,7 +3,7 @@ getCssContent = () ->
   cssContent = ''
 
   $.each linkTags, (i, elem) ->
-    if $(elem)[0].type == 'text/css' && $(elem)[0].href.indexOf('.css') >= 0 && $(elem)[0].href.indexOf('localhost') == -1
+    if $(elem)[0].href.indexOf('.css') >= 0 && $(elem)[0].href.indexOf('localhost') == -1
       # get content from current css file
       $.ajax(
         type: 'POST',
@@ -58,6 +58,7 @@ validateColors = (css) ->
 
   # fill array with color und count value of frequency
   for color, cnt of colorsIndex
+
     if color.indexOf '#' >= 0
       if color.charAt(0) == '#'
         sum += cnt
@@ -69,15 +70,15 @@ validateColors = (css) ->
 
   $.each colorArr, (i, v) ->
     percent = v[1] * 100 / sum
-    colorBar += '<span data-cnt="'+v[1]+'" data-color="'+v[0]+'" style="width:'+percent+'%;background-color:'+v[0]+'"></span>'
+    colorBar += '<span data-cnt="'+v[1]+'" data-color="'+v[0]+'" style="width:'+percent+'%;background-color:'+v[0]+';"></span>'
 
   $('#colorBar').prepend colorBar
 
 userInteraction = () ->
   $('#colorBar span').mouseover (e) ->
     # get values of color and count
-    color = e.target.attributes[1].nodeValue
-    cnt = e.target.attributes[0].nodeValue
+    color = $(e.target).attr('data-color')
+    cnt   = $(e.target).attr('data-cnt')
 
     # show every color with 6 digits
     if color.length < 5

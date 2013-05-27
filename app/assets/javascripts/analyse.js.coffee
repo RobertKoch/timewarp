@@ -40,6 +40,7 @@ removeUnsolicitedTags = () ->
   #  i++;
 
 defineAdditionalAddons = () ->
+  host = $('#app_config').attr 'host'
   $.ajax(
     url: "/assets/templates/overlay.html",
     async: false
@@ -50,7 +51,7 @@ defineAdditionalAddons = () ->
 
   $(window.frameContent).find('.tw_background_overlay').css 'height': window.frameContent[0].offsetHeight
 
-  $(window.frameContent).find('head').append '<link rel="stylesheet" href="http://localhost:3000/assets/stylesheets/analyse.css" type="text/css" media="screen" />'
+  $(window.frameContent).find('head').append "<link rel='stylesheet' href='#{host}/assets/stylesheets/analyse.css' type='text/css' media='screen' />"
 
 # recursive iteration through every element
 recursiveIterate = (node) ->
@@ -117,7 +118,7 @@ exploreTagUl = (node) ->
 
   # additional increment to allow 1 extra element like span in navigation-block
   if window.cnt > 3 && (window.cnt == length || window.cnt+1 == length)
-    generateOverlay($(node), 'SubNavigation')
+    generateOverlay($(node), 'Unternavigation')
   else 
     if window.galleryCnt > 3
       generateOverlay($(node), 'Gallery')
@@ -139,7 +140,7 @@ generateOverlay = (node, value) ->
   # overlayCnt correlates to z-index, start with value 1000
   window.overlayCnt = window.overlayCnt || 1000
 
-  overlay    = '<div class="overlay_wrap">'
+  overlay    = '<div class="overlay_wrap ' + value.toLowerCase() + '">'
   overlay   += '<span class="tw_overlay"></span>' 
   overlay   += '<span class="tw_overlay_text">' + value + '</span>'
   overlay   += '</div>'
@@ -151,7 +152,7 @@ generateOverlay = (node, value) ->
   # set height if not available
   attributeHeight = (if (attributes.offsetHeight > 0) then attributes.offsetHeight else 30)  
 
-  $(node).find('.overlay_wrap')
+  $(node).children('.overlay_wrap')
     .css
       'width': attributes.offsetWidth,
       'height': attributeHeight,
@@ -161,6 +162,16 @@ generateOverlay = (node, value) ->
   
   # increase cnt for increasing z-index
   window.overlayCnt++
+
+changeOverlayAndClass = (value) ->
+  parentElement = window.activeOverlay.target.parentNode.parentNode
+  $(parentElement).alterClass 'tw_*', 'tw_root_'+value.toLowerCase()
+
+  if window.activeOverlay.target.className == 'tw_overlay_text'
+    window.activeOverlay.target.innerText = value
+  else
+    console.log window.activeOverlay
+    window.activeOverlay.target.nextSibling.innerText = value
 
 noBreadcrumbs = () ->
   # show info message
@@ -245,6 +256,7 @@ declareListener = () ->
 
         # set activeOverlay to pass new current element to breadcrumb and select-change function
         window.activeOverlay = pathLoop
+
         # pass firstChild to get a correct new breadcrumb hierarchie
         getBreadcrumbs($(pathLoop[0].firstChild))
 
@@ -255,6 +267,14 @@ declareListener = () ->
         accessElem = e.target.innerText.replace(tag, '')
         # get element from DOM
         elem = $(window.frameContent).find(accessElem)
+
+        # set overlay by default
+        window.setOverlay = 1;
+
+        $.each elem[0].children, (i, v) ->
+          # dont set overlay if its still generated
+          if v.classList.contains 'overlay_wrap'
+            window.setOverlay = undefined
         
         # set activeOverlay to pass new current element to breadcrumb and select-change function
         window.activeOverlay = elem
@@ -275,7 +295,7 @@ declareListener = () ->
         $(clickedOverlay).remove()
 
         # if navigation is removed, validate new if possible
-        if window.activeOverlay.target.innerText == 'Navigation'
+        if window.activeOverlay.target.innerText == 'Hauptnavigation'
           validateNavigations()
 
       else 
@@ -313,17 +333,31 @@ declareListener = () ->
     value         = e.currentTarget.value;
     overlayTarget = $(window.activeOverlay.target);
 
-    if window.setOverlay == undefined
-      # change class of parent element
-      parentElement = window.activeOverlay.target.parentNode.parentNode
-      $(parentElement).alterClass 'tw_*', 'tw_root_'+value.toLowerCase()
+    # change value if navigation element is choosen
+    if value == 'Navigation'
+      value = 'Unternavigation'
 
-      # change field value
-      if window.activeOverlay.target.className == 'tw_overlay_text'
-        window.activeOverlay.target.innerText = value
+    if window.setOverlay == undefined
+      # change overlay via breadcrumb navigation
+      if window.activeOverlay.selector != undefined
+        $(window.activeOverlay).alterClass 'tw_*', 'tw_root_'+value.toLowerCase()
+        window.activeOverlay[0].lastChild.lastChild.innerText = value
+
+      # change overlay by clicking at once
       else
-        window.activeOverlay.target.nextSibling.innerText = value
-    else
+        changeOverlayAndClass(value)
+
+    # set new overlay
+    else if window.activeOverlay.target
+      #changeOverlayAndClass(value)
+
+      # generate overlay
+      generateOverlay(overlayTarget, value);
+      # add class of type like tw_navigation
+      overlayTarget.addClass 'tw_' + value.toLowerCase()    
+
+    # set overlay via breadcrumb navigation
+    else 
       # generate overlay
       generateOverlay(overlayTarget, value);
       # add class of type like tw_navigation
@@ -332,11 +366,11 @@ declareListener = () ->
     # reset select-box to first option
     e.currentTarget.selectedIndex = 0
     
-    #fadeOut overlays
+    # fadeOut overlays
     fadeOutOverlays(el)
 
     # validate navigation to check if main navigation has changed
-    if value == 'SubNavigation'
+    if value == 'Unternavigation'
       validateNavigations()
 
   $(window.frameContent).mouseover (e) ->
@@ -389,7 +423,7 @@ declareListener = () ->
         token: token,
         version: 'current',
         content: content
-      }
+      },
       async: false
     ).done (bool) ->
       if bool
@@ -416,25 +450,29 @@ validateFooter = () ->
 # every change of navigation must be validated
 validateNavigations = () -> 
   # reset root navigation
-  $(window.frameContent).find('.tw_root_navigation').alterClass 'tw_root_navigation', 'tw_root_subnavigation'
+  $(window.frameContent).find('.tw_root_navigation').alterClass 'tw_root_hauptnavigation', 'tw_root_unternavigation'
 
   # array of elements
   listMain = new Array('startseite', 'home', 'über uns')
   # array which stores navigation points
   navCnt = new Array();
   # list that contains every subnavigation
-  subNav = $(window.frameContent).find('.tw_root_subnavigation')
-  
+  subNav = $(window.frameContent).find('.tw_root_unternavigation')
+
   $.each subNav, (i) ->
-    # first navigation will be rated better
-    if i == 0 then cnt = 2 else cnt = 0
-    $.each this.children, (j) ->
-      if this.innerText && this.innerText != 'SubNavigation'
-        # is current value part of array
-        if this.innerText.toLowerCase() in listMain
-          cnt++
-    # push final points to array      
-    navCnt.push(cnt)  
+    # navigation must be visible
+    if $(this).css('opacity') == 0 || $(this).css('display').indexOf('block') < 0
+      navCnt.push(-1)
+    else   
+      # first navigation will be rated better
+      if i == 0 then cnt = 2 else cnt = 0
+      $.each this.children, (j) ->
+        if this.innerText && this.innerText != 'Unternavigation'
+          # is current value part of array
+          if this.innerText.toLowerCase() in listMain
+            cnt++
+      # push final points to array    
+      navCnt.push(cnt)  
 
   # get max value of cnt array
   maxCnt = Math.max.apply(Math, navCnt)
@@ -445,5 +483,5 @@ validateNavigations = () ->
   elem = subNav[posOfMax]
 
   # change subnavigation to navigation
-  $(elem).alterClass 'tw_*', 'tw_root_navigation'
-  $(elem).find('.tw_overlay_text').text 'Navigation'  
+  $(elem).alterClass 'tw_*', 'tw_root_hauptnavigation'
+  $(elem).find('.tw_overlay_text').text 'Hauptnavigation'  
