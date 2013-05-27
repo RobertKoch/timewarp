@@ -185,7 +185,6 @@ changeOverlayAndClass = (value) ->
   if window.activeOverlay.target.className == 'tw_overlay_text'
     window.activeOverlay.target.innerText = value
   else
-    console.log window.activeOverlay
     window.activeOverlay.target.nextSibling.innerText = value
 
 noBreadcrumbs = () ->
@@ -367,12 +366,8 @@ declareListener = () ->
       else
         changeOverlayAndClass(value)
 
-
-
     # set new overlay
     else if window.activeOverlay.target
-      #changeOverlayAndClass(value)
-
       # generate overlay
       generateOverlay(overlayTarget, value);
       # add class of type like tw_navigation
@@ -472,7 +467,7 @@ validateFooter = () ->
 # every change of navigation must be validated
 validateNavigations = () -> 
   # reset root navigation
-  $(window.frameContent).find('.tw_root_navigation').alterClass 'tw_root_hauptnavigation', 'tw_root_unternavigation'
+  $(window.frameContent).find('.tw_root_hauptnavigation').alterClass 'tw_root_hauptnavigation', 'tw_root_unternavigation'
 
   # array of elements
   listMain = new Array('startseite', 'home', 'über uns')

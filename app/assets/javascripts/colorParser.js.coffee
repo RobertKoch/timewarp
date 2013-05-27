@@ -120,3 +120,5 @@ $(window).load ->
   if css
     validateColors(css)
     userInteraction()
+  else
+    $('#colorBar').html '<em>Keine Farbwerte vorhanden</em>'
