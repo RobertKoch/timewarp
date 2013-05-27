@@ -25,6 +25,7 @@ gem 'imgkit'
 gem "rmagick", "~> 2.13.2"
 
 gem 'devise'
+gem 'sysinfo'
 
 # Gems used only for assets and not required
 # in production environments by default.
