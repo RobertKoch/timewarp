@@ -47,7 +47,7 @@
   background-color: rgba(1, 161, 221, .2);
   outline-color: #01a1dd;
 }
-.overlay_wrap.box {
+.overlay_wrap.bildergalerie {
   background-color: rgba(0, 39, 255, .2);
   outline-color: #0027ff;
 }
@@ -114,7 +114,7 @@
 .sidebar .tw_overlay_text {
   background-color: #01a1dd;
 }
-.box .tw_overlay_text {
+.bildergalerie .tw_overlay_text {
   background-color: #0027ff;
   color: #fff;
 }
