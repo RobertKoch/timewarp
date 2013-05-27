@@ -13,7 +13,7 @@ class Site
 
   store_in collection: 'sites'
 
-  has_many :comments
+  has_many :comments, dependent: :delete
 
   after_initialize :add_http
   after_save :crawl_site_if_possible
