@@ -11,7 +11,7 @@ class Comment
   field :name, type: String
   field :text, type: String
 
-  validates :email, :presence => true, :format => {:with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i, :message => "ist ungültig" }
+  validates :email, :presence => {:message => "muss angegeben werden"}, :format => {:with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i, :message => "ist ungültig" }
   validates :text, :name, :presence => {:message => "muss angegeben werden"}
 
   attr_accessible :email, :name, :text

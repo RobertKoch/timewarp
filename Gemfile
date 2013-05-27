@@ -21,6 +21,7 @@ gem 'fancybox2-rails', '~> 0.2.4'
 gem 'will_paginate_mongoid'
 gem "stellar-js-rails", "~> 0.6.1"
 gem "introjs-rails"
+gem "galetahub-simple_captcha", :require => "simple_captcha"
 
 gem 'imgkit'
 gem "rmagick", "~> 2.13.2"

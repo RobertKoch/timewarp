@@ -1,6 +1,7 @@
 class SitesController < ApplicationController
+  include SimpleCaptcha::ControllerHelpers
   before_filter :site_exists_and_not_published, :only => [:analyse, :timeline]
-  
+
   def index
     case @sort = params[:sort]
       when 'mostviewed'
@@ -87,9 +88,10 @@ class SitesController < ApplicationController
   def create_comment
     @site = Site.find_by_token(params[:site][:token])
     @comment = @site.comments.build(params[:comment])
+    @captcha_invalid = !simple_captcha_valid?
 
-
-    if @comment.save
+    if !@captcha_invalid && @comment.save
+      @comment = @site.comments.build
       @comments = @site.comments.reject {|c| !c.created_at}
       render :reload_comments
     else

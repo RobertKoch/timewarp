@@ -1,6 +1,8 @@
 - comments = @comments.reverse.to_json
+- html = render :partial => 'create_comment_form', :locals => { :comment => @comment}
 
 :plain
+
   $('#new_comment')[0].reset();
   $('#comment_list').empty();
   comments = JSON.parse('#{comments}');
@@ -10,3 +12,7 @@
     comment.created_at = date.toLocaleDateString("de");
     $('#comment_list').append( ich.comment_container(comment) );
   });
+  
+  $('#comment_form').hide();
+  $('#comment_form').html('#{escape_javascript html}');
+  $('#comment_form').show();
