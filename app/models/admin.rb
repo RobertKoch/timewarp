@@ -4,7 +4,7 @@ class Admin
   # :token_authenticatable, :confirmable,
   # :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :recoverable, :rememberable, 
-          :trackable, :validatable
+          :trackable, :validatable, :registerable
 
   ## Database authenticatable
   field :email,              :type => String, :default => ""
