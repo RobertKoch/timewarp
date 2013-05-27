@@ -17,6 +17,39 @@
   position: absolute;
   top: 0;
   left: 0;
+  outline: 2px solid #cdcdcd;
+}
+.overlay_wrap.header {
+  background-color: rgba(242, 203, 1, .2); 
+  outline-color: #f2cb01;
+}
+.overlay_wrap.logo {
+  background-color: rgba(255, 106, 23, .2);
+  outline-color: #ff6a17;
+}
+.overlay_wrap.hauptnavigation {
+  background-color: rgba(249, 0, 180, .2);
+  outline-color: #f900b4;
+}
+.overlay_wrap.unternavigation {
+  background-color: rgba(222, 0, 0, .2);
+  outline-color: #de0000;
+}
+.overlay_wrap.content {
+  background-color: rgba(171, 185, 1, .2);
+  outline-color: #abb901;
+}
+.overlay_wrap.footer {
+  background-color: rgba(1, 100, 54, .2);
+  outline-color: #016436;
+}
+.overlay_wrap.sidebar {
+  background-color: rgba(1, 161, 221, .2);
+  outline-color: #01a1dd;
+}
+.overlay_wrap.box {
+  background-color: rgba(0, 39, 255, .2);
+  outline-color: #0027ff;
 }
 
 .tw_overlay {
@@ -37,8 +70,8 @@
 
 .tw_overlay_text {
   position: absolute;
-  top: 0;
-  left: 0;
+  top: 5px;
+  left: 5px;
   display: block;
   width: auto !important;
   height: auto !important;
@@ -50,7 +83,6 @@
   text-transform: none;
   color: #000;
   background-color: #fff;
-  border: 2px solid #cdcdcd; /* grey light */
   padding: .8em 1em;
   -webkit-border-radius: 5px; 
      -moz-border-radius: 5px; 
@@ -60,48 +92,46 @@
           box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
 }
 .header .tw_overlay_text {
-  background-color: rgba(242, 203, 1, .8); 
-  border-color: #f2cb01; 
+  background-color: #f2cb01;
 }
 .logo .tw_overlay_text {
-  background-color: rgba(255, 106, 23, .8);
-  border-color: #ff6a17;
+  background-color: #ff6a17;
 }
 .hauptnavigation .tw_overlay_text {
-  background-color: rgba(249, 0, 180, .8);
-  border-color: #f900b4;
+  background-color: #f900b4;
 }
 .unternavigation .tw_overlay_text {
-  background-color: rgba(222, 0, 0, .8);
-  border-color: #de0000;
+  background-color: #de0000;
   color: #fff;
 }
 .content .tw_overlay_text {
-  background-color: rgba(171, 185, 1, .8);
-  border-color: #abb901;
+  background-color: #abb901;
 }
 .footer .tw_overlay_text {
-  background-color: rgba(1, 100, 54, .8);
-  border-color: #016436;
+  background-color: #016436;
   color: #fff;
 }
 .sidebar .tw_overlay_text {
-  background-color: rgba(1, 161, 221, .8);
-  border-color: #01a1dd;
+  background-color: #01a1dd;
 }
 .box .tw_overlay_text {
-  background-color: rgba(0, 39, 255, .8);
-  border-color: #0027ff;
+  background-color: #0027ff;
   color: #fff;
 }
 
 .tw_navigation_change {
   position: absolute;
   display: none;
-  background-color: #ccc;
-  padding: 5px;
+  background-color: #f4f4f4; /* grey lighter */
+  padding: 10px;
   z-index: 9999;
-  color: #000;
+  color: #484848; /* grey */
+  -webkit-border-radius: 5px; 
+     -moz-border-radius: 5px; 
+          border-radius: 5px;
+  -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.8);
+     -moz-box-shadow: 0 0 5px rgba(0, 0, 0, 0.8);
+          box-shadow: 0 0 5px rgba(0, 0, 0, 0.8);
 }
 
 .tw_navigation_change ul {
