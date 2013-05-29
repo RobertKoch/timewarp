@@ -122,16 +122,19 @@
 .tw_navigation_change {
   position: absolute;
   display: none;
-  background-color: #f4f4f4; /* grey lighter */
+  background-color: #fff;
   padding: 10px;
   z-index: 9999;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 12px;
+  font-weight: normal;
   color: #484848; /* grey */
   -webkit-border-radius: 5px; 
      -moz-border-radius: 5px; 
           border-radius: 5px;
-  -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.8);
-     -moz-box-shadow: 0 0 5px rgba(0, 0, 0, 0.8);
-          box-shadow: 0 0 5px rgba(0, 0, 0, 0.8);
+  -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+     -moz-box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
 .tw_navigation_change ul {
