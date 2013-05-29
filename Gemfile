@@ -29,6 +29,19 @@ gem "rmagick", "~> 2.13.2"
 gem 'devise'
 gem 'sysinfo'
 
+group :test do
+  gem 'database_cleaner'
+  gem 'factory_girl_rails'
+  gem 'capybara'
+  gem 'shoulda-matchers'
+  gem 'email_spec'
+end
+
+group :development, :test do
+  gem 'rspec-rails'
+  gem 'mongoid-rspec'
+end
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
