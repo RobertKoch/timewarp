@@ -60,7 +60,7 @@ class SitesController < ApplicationController
   def update
     @site = Site.find_by_token(params[:id])
 
-    if @site.update_attributes params[:site]
+    if @site.update_attributes params[:site], :as => :admin
       redirect_to admin_sites_path
     else
       render 'sites/edit'
