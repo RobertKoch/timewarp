@@ -54,7 +54,7 @@ saveVersion = (version) ->
 addCssClasses = (version) ->
   host = $('#app_config').attr 'host'
 
-  css = '<link class="cssVersion" rel="stylesheet" href="'+host+'/assets/stylesheets/'+version+'.css" type="text/css" media="screen" />'
+  css = '<link class="cssVersion" rel="stylesheet" href="'+host+'/tw_assets/stylesheets/'+version+'.css" type="text/css" media="screen" />'
   $(window.frameContent).find('head').append css
 
 initNavigation = () ->
@@ -99,7 +99,7 @@ warpVersion = (version) ->
       when 1998
         # get table structure
         $.ajax(
-          url: "/assets/templates/tableStructure.html",
+          url: "/tw_assets/templates/tableStructure.html",
           async: false
         ).done (fileContent) ->
           # insert new structure in site

@@ -9,7 +9,7 @@ set :scm, :git
 set :branch, "master"
 set :port, 5412
 
-set :shared_children, shared_children + %w{public/saved_sites}
+set :shared_children, shared_children + %w{public/tw_assets public/saved_sites}
 
 default_run_options[:pty] = true
 ssh_options[:forward_agent] = true
