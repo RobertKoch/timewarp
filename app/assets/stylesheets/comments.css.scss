@@ -101,7 +101,6 @@
     width: 100%;
     margin: {
       top: 10px;
-      bottom: 10px;
     }
 
     p {
@@ -114,12 +113,14 @@
       float: left;
       outline: 1px solid $grey_light;
       width: 18%;
+      height: 30px !important;
       background: {
         color: $white;
       }
       margin: {
         right: 1%;
       }
+      overflow: hidden;
     
       img {
         display: block;

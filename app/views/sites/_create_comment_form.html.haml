@@ -4,7 +4,7 @@
   = f.input :text, :as => :text, :label => false, :placeholder => 'Kommentar eingeben...', :input_html => {:class => 'grid_padding grid_4n'}
   = f.input :name, :required => true, :label => 'Name:', :input_html => {:class => 'grid_padding grid_3n'}, :placeholder => 'Dein Name'
   = f.input :email, :as => :email, :label => 'E-Mail Adresse:', :required => true, :input_html => {:class => 'grid_padding grid_3n'}, :placeholder => 'Deine E-Mail Adresse'
-  = show_simple_captcha :label => "Bitte Code eingeben...", :placeholder => ''
+  = show_simple_captcha :placeholder => 'Bitte Zeichenfolge eingeben...'
   - if @captcha_invalid
     %span.error Code falsch, bitte erneut eingeben
   %br
