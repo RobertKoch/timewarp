@@ -4,13 +4,6 @@ reloadVersion = (version) ->
 
 saveVersion = (version) ->
   host = $('#app_config').attr 'host'
-  
-  # possibility 2: switch css files
-  #href = host+'/assets/stylesheets/'+version+'.css'
-  #$(window.frameContent).find('#cssVersion').attr href: href
-
-  css = '<link class="cssVersion" rel="stylesheet" href="'+host+'/assets/stylesheets/'+version+'.css" type="text/css" media="screen" />'
-  $(window.frameContent).find('head').append css
 
   # get path information
   token   = $('#timeline_token').attr('token')
@@ -28,6 +21,12 @@ saveVersion = (version) ->
     },
     async: false
   )
+
+addCssClasses = (version) ->
+  host = $('#app_config').attr 'host'
+
+  css = '<link class="cssVersion" rel="stylesheet" href="'+host+'/assets/stylesheets/'+version+'.css" type="text/css" media="screen" />'
+  $(window.frameContent).find('head').append css
 
 initNavigation = () ->
   # on timeline path? Let's do some magic now ;)
@@ -48,14 +47,76 @@ getValueFromSessionStorage = () ->
       # access with window.topColors[i].color
       window.topColors = JSON.parse(topColors)
 
+warpVersion = (version) ->
+  #'unternavigation',
+  warpClasses = ['header', 'hauptnavigation', 'content', 'footer']
+
+  switch version
+      when 2008
+        $.each warpClasses, (i, v) ->
+          height = $(window.frameContent).find('.tw_root_'+v).css 'height'
+
+          # if navigation element has no height, set background-color to including a tags
+          if parseInt(height) < 1 && v.indexOf('navigation') >= 0
+            aTags = $(window.frameContent).find('.tw_root_'+v+' > li > a')
+            $(aTags).attr('style', 'background-color: '+window.topColors[i].color+' !important')
+          else
+            $(window.frameContent).find('.tw_root_'+v)
+              .attr('style', 'background-color: '+window.topColors[i].color+' !important') 
+
+      #when 2003
+        
+
+      when 1998
+        # get table structure
+        $.ajax(
+          url: "/assets/templates/tableStructure.html",
+          async: false
+        ).done (fileContent) ->
+          # insert new structure in site
+          $(window.frameContent).find('body').after fileContent
+
+          $.each warpClasses, (i, v) ->
+            content = $(window.frameContent).find('.tw_root_'+v)
+
+            $(window.frameContent).find('#tableStructure').find('#'+v).html content[0].innerHTML
+
+        # remove remaining content of body
+        $(window.frameContent).find('body').children().remove()
+
+      when 1994
+        $.each warpClasses, (i, v) ->
+          content = $(window.frameContent).find('#'+v)
+          content = content[0].innerHTML + '<br><hr></br>'
+
+          $(window.frameContent).find('body').append content
+
+        # remove link tags
+        $(window.frameContent).find('link:not(:last)').remove()
+        # remove script tags
+        $(window.frameContent).find('script').remove()
+        # remove timewarp generated elements
+        $(window.frameContent).find('.tw_navigation_change').remove()
+        $(window.frameContent).find('#tableStructure').remove()
+        # remove inline styles
+        $(window.frameContent).find('*[style]').removeAttr 'style'
+        # define image sizes
+        $(window.frameContent).find('img').attr( {width: '200px', height: 'auto'} )
+
 $(window).load ->
   # get current frame id to load frame-content
   frameID = $('iframe').attr('id')
   window.frameContent = $('#'+frameID).contents().find('html')
 
+  # get top used colors of website
+  getValueFromSessionStorage()
+
   # save individual versions
+  # starting with 1994 enables css inline styles in following years
   warpSteps = [2008, 2003, 1998, 1994]
   $.each warpSteps, (i, version) ->
+    addCssClasses(version)
+    warpVersion(version)
     saveVersion(version)
 
   # remove all additional css files to show current version
@@ -64,4 +125,5 @@ $(window).load ->
   # init navigation
   initNavigation()
 
-  getValueFromSessionStorage()
+  # display current version
+  reloadVersion('current')

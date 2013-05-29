@@ -1,24 +1,10 @@
 body {
-  background-image: none;
-  background-color: #FF0000;
+  font-family: "Times New Roman";
+
+  background-color: #c0c0c0;
 }
 
-.tw_root_header {
-  background-color: #ffff00;
-}
-
-.tw_root_navigation {
-  background-color: #00ffff;
-}
-
-.tw_root_subnavigation {
-  background-color: #0000ff;
-}
-
-.tw_root_content {
-  background-color: #0000ff;
-}
-
-.tw_root_footer {
-  background-color: #ff0000;
+a {
+  color: #0000FF;
+  text-decoration: underline;
 }
