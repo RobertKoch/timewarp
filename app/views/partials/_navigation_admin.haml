@@ -1,0 +1,12 @@
+%ul
+  %li
+    %a{:href => root_path, :class => (current_page?(root_path) ? 'active' : '')} timewarp
+  %li
+    %a{:href => admin_dashboard_path, :class => (current_page?(admin_dashboard_path) ? 'active' : '')} dashboard
+  %li
+    %a{:href => admin_sites_path, :class => (current_page?(admin_sites_path) ? 'active' : '')} sites
+  %li
+    %a{:href => admins_path, :class => (current_page?(admins_path) ? 'active' : '')} admins
+  %li
+    = link_to "Logout", destroy_admin_session_path, :method => :delete
+  %span{:class => 'curve'}

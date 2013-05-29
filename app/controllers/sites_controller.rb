@@ -1,5 +1,7 @@
 class SitesController < ApplicationController
   include SimpleCaptcha::ControllerHelpers
+
+  before_filter :authenticate_admin!, :only => [:edit, :update, :destroy, :preview]
   before_filter :site_exists_and_not_published, :only => [:analyse, :timeline]
 
   def index
@@ -51,10 +53,29 @@ class SitesController < ApplicationController
     end
   end
 
+  def edit
+    @site = Site.find_by_token(params[:id])
+  end
+
+  def update
+    @site = Site.find_by_token(params[:id])
+
+    if @site.update_attributes params[:site]
+      redirect_to admin_sites_path
+    else
+      render 'sites/edit'
+    end
+  end
+
   def destroy
     site = Site.find_by_token(params[:id])
+    token = site.token
     if site.destroy
-      redirect_to root_path
+      #delete all files with force (second param = true)
+      dir_path = Rails.root.join "public/saved_sites/#{token}"
+      FileUtils.remove_dir dir_path, true
+      
+      redirect_to admin_sites_path
     end
   end
 
@@ -77,6 +98,14 @@ class SitesController < ApplicationController
     else
       render 'sites/publish'
     end
+  end
+
+  def preview
+    @site = Site.find_by_token(params[:id])
+    @tags = get_tags_with_weight @site
+    @comment = @site.comments.build
+
+    render 'show'
   end
 
   def search 

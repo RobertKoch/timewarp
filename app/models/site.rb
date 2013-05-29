@@ -29,7 +29,7 @@ class Site
 
   token :length => 6, :contains => :alphanumeric
   
-  attr_accessible :url, :title
+  attr_accessible :url, :title, :tags, :published
   
   validate :url_valid_and_exists
 
@@ -67,7 +67,11 @@ class Site
   end
 
   def self.published
-    where(:published => true)
+    where(:published => true).order_by('created_at DESC')
+  end
+
+  def self.unpublished
+    where(:published => false).order_by('created_at DESC')
   end
 
 private
