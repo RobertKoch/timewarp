@@ -1,3 +1,32 @@
+getWebSafeColor = (color) ->
+  # convert color to RGB
+  colorRGB = tinycolor(color).toRgb()
+  # webSafe colors in RGB values
+  webSafeArr = [0, 51, 102, 153, 204, 255]
+
+  # get array position of every color
+  red = webSafeArr[Math.round(colorRGB.r / 51)]
+  green = webSafeArr[Math.round(colorRGB.g / 51)]
+  blue = webSafeArr[Math.round(colorRGB.b / 51)]
+  
+  # return hex value
+  return tinycolor("rgb (" + red + "," + green + "," + blue + ")").toHex()
+
+getColorName = (color) ->
+  colorHexArr = []
+  # convert color to RGB
+  colorRGB = tinycolor(color).toRgb()
+
+  $.each colorRGB, (index, value) ->
+    # lower than 128 -> 0, higher than 128 -> 255
+    if value < 128
+      colorHexArr.push 0
+    else
+      colorHexArr.push 255
+
+  # return color name
+  return tinycolor("rgb (" + colorHexArr[0] + "," + colorHexArr[1] + "," + colorHexArr[2] + ")").toName()
+
 reloadVersion = (version) ->
   version_path = $('#timeline_config').attr('sites_path') + '/' + version + '/index.html'
   $('#version_frame').attr( 'src', version_path)

@@ -24,3 +24,4 @@
 //= require alterClass
 //= require cssParser
 //= require introjs
+//= require tinycolor-min.js

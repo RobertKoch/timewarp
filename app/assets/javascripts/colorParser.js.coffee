@@ -59,7 +59,11 @@ validateColors = (css) ->
   # fill array with color und count value of frequency
   for color, cnt of colorsIndex
 
-    if color.indexOf '#' >= 0
+    # transform rgb to hex color
+    if color.indexOf('rgb') >= 0 && color.substring(0, 4) != 'rgba'
+      color = '#'+tinycolor(color).toHex()
+
+    if color.indexOf('#') >= 0
       if color.charAt(0) == '#'
         sum += cnt
         colorArr.push([color, cnt])
