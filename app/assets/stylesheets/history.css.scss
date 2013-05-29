@@ -1,0 +1,567 @@
+@import 'variables';
+
+#header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  margin: {
+    bottom: 0;
+  }
+  z-index: 1000;
+
+  #logo {
+
+    a {}
+
+    .pendulum {
+      position: absolute;
+      top: 65px;
+      display: block;
+      width: 25px;
+      background: {
+        image: url('history/pendulum.png');
+        position: 0 bottom;
+        repeat: no-repeat;
+      }
+
+      &.up {
+        left: 13px;
+        height: 200px;
+      }
+
+      &.down {
+        left: 42px;
+        height: 350px;
+        background: {
+          position: -25px bottom;
+        }
+      }
+    }
+  }
+}
+
+#wrapper {
+  width: 100%;
+
+  #footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    margin: 0;
+    padding: {
+      top: 10px;
+      bottom: 10px;
+    }
+    background: {
+      color: rgba(0, 0, 0, .8);
+    }
+    border: 0;
+    -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, .3);
+       -moz-box-shadow: 0 0 10px rgba(0, 0, 0, .3);
+            box-shadow: 0 0 10px rgba(0, 0, 0, .3);
+    font: {
+      size: 11px;
+    }
+    z-index: 1000;
+  }
+
+  p {
+    padding: {
+      left: 2.941176475%;
+    }
+  }
+
+  #footer_navigation {
+    padding: {
+      right: 2.941176475%;
+    }
+    ul {
+      li {
+        a {
+          color: $grey_light !important;
+        }
+      }
+    }
+  }
+}
+
+#history {
+  padding: {
+    top: 80px;
+  }
+
+  #desk {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 33%;
+    background: {
+      color: $grey_light;
+    }
+    -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, .3) inset;
+       -moz-box-shadow: 0 0 10px rgba(0, 0, 0, .3) inset;
+            box-shadow: 0 0 10px rgba(0, 0, 0, .3) inset;
+    z-index: 1;
+  }
+
+  .period {
+    position: relative;
+    display: none;
+    opacity: 0;
+    overflow: hidden;
+    z-index: 5;
+
+    &:nth-child(even) {background-color: rgba(255, 0, 0, .05);}
+    &:nth-child(odd) {background-color: rgba(255, 255, 0, .05);}
+  
+    .year {
+      position: absolute;
+      top: 1.5em;
+      right: 2.941176475%;
+      font: {
+        size: $font_size_large !important;
+      }
+    }
+
+    .element {
+      position: absolute;
+      background: {
+        position: 0 0;
+        repeat: no-repeat;
+        size: 100% 100%;
+      }
+
+      &.monitor {
+        bottom: 80px;
+        left: 150px;
+      }
+
+      &.keyboard {
+        bottom: 100px;
+        right: 650px;
+      }
+
+      &.hand {
+        bottom: 150px;
+        right: 0;
+      }
+    }
+
+    .info {
+      position: absolute;
+      top: 70px;
+      left: 45%;
+      background: {
+        color: $white;
+      }
+      -webkit-box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+         -moz-box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+              box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+      width: $width_230;
+      padding: $width_13; 
+
+      p {
+        line-height: 1.5em;
+      }
+    }
+
+    &#year_1950-1983 {
+      .element {
+        &.monitor {
+          width: 642px;
+          height: 783px;
+          background: {
+            image: url('history/1983_screen.png');
+          }
+        }
+
+        &.keyboard {
+          width: 351px;
+          height: 210px;
+          background: {
+            image: url('history/1983_keyboard.png');
+          }
+        }
+
+        &.hand {
+          width: 838px;
+          height: 247px;
+          background: {
+            image: url('history/1983_hand.png');
+          }
+        }
+      }
+    }
+
+    &#year_1989-1990 {
+
+      .element {
+
+        &.monitor {
+          width: 329px;
+          height: 423px;
+          background: {
+            image: url('history/1989_screen.png');
+          }
+        }
+
+        &.keyboard {
+          width: 173px;
+          height: 77px;
+          background: {
+            image: url('history/1989_keyboard.png');
+          }
+        }
+
+        &.hand {
+          width: 419px;
+          height: 114px;
+          background: {
+            image: url('history/1989_hand.png');
+          }
+        }
+      }
+    }
+
+    &#year_1991 {
+
+      .element {
+
+        &.monitor {
+          width: 329px;
+          height: 423px;
+          background: {
+            image: url('history/1991_screen.png');
+          }
+        }
+
+        &.keyboard {
+          width: 173px;
+          height: 77px;
+          background: {
+            image: url('history/1991_keyboard.png');
+          }
+        }
+
+        &.hand {
+          width: 419px;
+          height: 114px;
+          background: {
+            image: url('history/1991_hand.png');
+          }
+        }
+      }
+    } 
+
+    &#year_1993 {
+
+      .element {
+
+        &.monitor {
+          width: 329px;
+          height: 423px;
+          background: {
+            image: url('history/1993_screen.png');
+          }
+        }
+
+        &.keyboard {
+          width: 173px;
+          height: 77px;
+          background: {
+            image: url('history/1993_keyboard.png');
+          }
+        }
+
+        &.hand {
+          width: 419px;
+          height: 114px;
+          background: {
+            image: url('history/1993_hand.png');
+          }
+        }
+      }
+    } 
+
+    &#year_1995 {
+
+      .element {
+
+        &.monitor {
+          width: 329px;
+          height: 423px;
+          background: {
+            image: url('history/1995_screen.png');
+          }
+        }
+
+        &.keyboard {
+          width: 173px;
+          height: 77px;
+          background: {
+            image: url('history/1995_keyboard.png');
+          }
+        }
+
+        &.hand {
+          width: 419px;
+          height: 114px;
+          background: {
+            image: url('history/1995_hand.png');
+          }
+        }
+      }
+    } 
+
+    &#year_1997 {
+
+      .element {
+
+        &.monitor {
+          width: 329px;
+          height: 423px;
+          background: {
+            image: url('history/1997_screen.png');
+          }
+        }
+
+        &.keyboard {
+          width: 173px;
+          height: 77px;
+          background: {
+            image: url('history/1997_keyboard.png');
+          }
+        }
+
+        &.hand {
+          width: 419px;
+          height: 114px;
+          background: {
+            image: url('history/1997_hand.png');
+          }
+        }
+      }
+    } 
+
+    &#year_1998 {
+
+      .element {
+
+        &.monitor {
+          width: 329px;
+          height: 423px;
+          background: {
+            image: url('history/1998_screen.png');
+          }
+        }
+
+        &.keyboard {
+          width: 173px;
+          height: 77px;
+          background: {
+            image: url('history/1998_keyboard.png');
+          }
+        }
+
+        &.hand {
+          width: 419px;
+          height: 114px;
+          background: {
+            image: url('history/1998_hand.png');
+          }
+        }
+      }
+    }
+
+    &#year_1999 {
+
+      .element {
+
+        &.keyboard {
+          width: 173px;
+          height: 77px;
+          background: {
+            image: url('history/1999_keyboard.png');
+          }
+        }
+
+        &.hand {
+          width: 419px;
+          height: 114px;
+          background: {
+            image: url('history/1999_hand.png');
+          }
+        }
+      }
+    }  
+
+    &#year_2000 {
+
+      .element {
+
+        &.monitor {
+          width: 329px;
+          height: 423px;
+          background: {
+            image: url('history/2000_screen.png');
+          }
+        }
+
+        &.keyboard {
+          width: 173px;
+          height: 77px;
+          background: {
+            image: url('history/2000_keyboard.png');
+          }
+        }
+
+        &.hand {
+          width: 419px;
+          height: 114px;
+          background: {
+            image: url('history/2000_hand.png');
+          }
+        }
+      }
+    } 
+
+
+    &#year_2003 {
+
+      .element {
+
+        &.monitor {
+          width: 329px;
+          height: 423px;
+          background: {
+            image: url('history/2003_screen.png');
+          }
+        }
+
+        &.keyboard {
+          width: 173px;
+          height: 77px;
+          background: {
+            image: url('history/2003_keyboard.png');
+          }
+        }
+
+        &.hand {
+          width: 419px;
+          height: 114px;
+          background: {
+            image: url('history/2003_hand.png');
+          }
+        }
+      }
+    } 
+
+    &#year_2006 {
+
+      .element {
+
+        &.monitor {
+          width: 329px;
+          height: 423px;
+          background: {
+            image: url('history/2006_screen.png');
+          }
+        }
+
+        &.keyboard {
+          width: 173px;
+          height: 77px;
+          background: {
+            image: url('history/2006_keyboard.png');
+          }
+        }
+
+        &.hand {
+          width: 419px;
+          height: 114px;
+          background: {
+            image: url('history/2006_hand.png');
+          }
+        }
+      }
+    } 
+
+    &#year_2008 {
+
+      .element {
+
+        &.keyboard {
+          width: 173px;
+          height: 77px;
+          background: {
+            image: url('history/2008_keyboard.png');
+          }
+        }
+
+        &.hand {
+          width: 419px;
+          height: 114px;
+          background: {
+            image: url('history/2008_hand.png');
+          }
+        }
+      }
+    } 
+
+    &#year_2009 {
+
+      .element {
+
+        &.keyboard {
+          width: 173px;
+          height: 77px;
+          background: {
+            image: url('history/2009_keyboard.png');
+          }
+        }
+
+        &.hand {
+          width: 419px;
+          height: 114px;
+          background: {
+            image: url('history/2009_hand.png');
+          }
+        }
+      }
+    } 
+
+    &#year_2012 {
+
+      .element {
+
+        &.monitor {
+          width: 329px;
+          height: 423px;
+          background: {
+            image: url('history/2012_screen.png');
+          }
+        }
+
+        &.keyboard {
+          width: 173px;
+          height: 77px;
+          background: {
+            image: url('history/2012_keyboard.png');
+          }
+        }
+
+        &.hand {
+          width: 419px;
+          height: 114px;
+          background: {
+            image: url('history/2012_hand.png');
+          }
+        }
+      }
+    } 
+
+
+  }
+}

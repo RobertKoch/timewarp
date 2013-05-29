@@ -6,6 +6,10 @@
   %h3#logo
     %a{:href => root_path}
       timewarp
+      
+    - if (controller.controller_name == 'pages' && (controller.action_name == 'history_of_web'))
+      %span.pendulum.up
+      %span.pendulum.down
 
   %nav#navigation
     = render :partial => 'partials/navigation'
