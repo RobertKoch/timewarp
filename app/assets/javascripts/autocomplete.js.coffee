@@ -2,7 +2,7 @@ chosen_tags = []
 
 $(document).ready ->
 
-  if $("form#edit_site").length > 0
+  if $(".autocomplete").length > 0
     $(".autocomplete").autocomplete {
       source: tag_search_url,
       minLength: 3,

@@ -1,12 +1,13 @@
 %h1 Admins
 
-= link_to "Edit my Account", edit_admin_path(current_admin)
+%p.admin_edit= link_to "Edit my Account", edit_admin_path(current_admin)
 
-
+%br
+%br
 %h3 All System-Admins
-%table
-  %tr
-    %td ID
+%table.admin_users
+  %tr.head
+    %td.id ID
     %td E-Mail
   - @admins.each do |admin|
     %tr

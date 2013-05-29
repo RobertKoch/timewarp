@@ -17,5 +17,5 @@
     = render :partial => 'partials/search_form'
   
 - if admin_signed_in?
-  %p 
+  %p.admin_logged_in_info 
     = "You are logged in as #{current_admin.email}" 

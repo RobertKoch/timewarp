@@ -2,14 +2,14 @@
 
 %h3= "unpublished (#{@unpublished.count})"
 - if @unpublished.count > 0
-  %table
-    %tr
-      %td Created at
-      %td Title
-      %td Url
-      %td Token
-      %td Comments
-      %td Actions
+  %table.admin_sites
+    %tr.head
+      %td.created Created at
+      %td.title Title
+      %td.url Url
+      %td.token Token
+      %td.comment Comments
+      %td.actions Actions
     - @unpublished.each do |site|
       %tr
         %td= to_german_date site.created_at
@@ -28,14 +28,14 @@
 
 %h3= "published (#{@published.count})"
 - if @published.count > 0
-  %table
-    %tr
-      %td Created_at
-      %td Title
-      %td Url
-      %td Token
-      %td Comments
-      %td Actions
+  %table.admin_sites
+    %tr.head
+      %td.created Created at
+      %td.title Title
+      %td.url Url
+      %td.token Token
+      %td.comment Comments
+      %td.actions Actions
     - @published.each do |site|
       %tr
         %td= to_german_date site.created_at

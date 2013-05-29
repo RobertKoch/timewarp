@@ -29,7 +29,7 @@ class Site
 
   token :length => 6, :contains => :alphanumeric
   
-  attr_accessible :url, :title
+  attr_accessible :url, :title, :tags, :published
   
   validate :url_valid_and_exists
 

@@ -1,23 +1,48 @@
 %h1 Dashboard
+%br
+%br
 
-%h2 Sites
-.sites_info
-  = "Published: #{@sites.published.count}"
-  = "Unpublished: #{@sites.unpublished.count}"
-  = "Overall page views: #{@pageviews}"
+.admin_info
+  %h2 Sites
+  %p
+    %span Published:
+    = @sites.published.count
+  %p
+    %span Unpublished:
+    = @sites.unpublished.count
+  %p
+    %span Overall page views:
+    = @pageviews
 
+.admin_info
+  %h2 Tags
+  %p
+    %span Number of tags: 
+    = @tags.count
+  %p
+    %span Most recent tags:
+    - @tags[0..4].each_with_index do |tag, idx|
+      - if idx != 0
+        %p
+          %span.notext .
+          = link_to "#{tag[0]} (#{tag[1].to_i})", tag_path(tag[0])
+      - else
+        = link_to "#{tag[0]} (#{tag[1].to_i})", tag_path(tag[0])
 
-%h2 Tags
-.tags_info
-  = "Number of tags: #{@tags.count}"
-  = "most recent tags:"
-  - @tags[0..4].each do |tag|
-    = link_to "#{tag[0]} (#{tag[1].to_i})", tag_path(tag[0])
-
-%h2 Server Information
-.server_info
-  = "Host: #{@sysinfo.hostname}"
-  = "IP: #{@sysinfo.ipaddress_internal}"
-  = "Platform: #{@sysinfo.platform}"
-  = "Ruby-Version: #{@sysinfo.ruby.join '.'}"
-  = "Uptime: #{@sysinfo.uptime} hours"
+.admin_info
+  %h2 Server Information
+  %p
+    %span Host:
+    = @sysinfo.hostname
+  %p
+    %span IP:
+    = @sysinfo.ipaddress_internal
+  %p
+    %span Platform:
+    = @sysinfo.platform
+  %p
+    %span Ruby-Version:
+    = @sysinfo.ruby.join '.'
+  %p
+    %span Uptime:
+    = "#{@sysinfo.uptime} hours"

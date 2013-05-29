@@ -1,3 +1,64 @@
-// Place all the styles related to the Admins controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+@import 'variables';
+
+table.admin_sites, table.admin_users, table.admin_comments {
+  width: 80%;
+  border: 1px solid $grey;
+  padding: 5px;
+  td {line-height: 25px;}
+  tr.head td {background-color: $grey_light;}
+  td.created {width: 9%;}
+  td.title {width: 20%;}
+  td.url {width: 35%;}
+  td.token {width: 10%;}
+  td.comment {width: 10%;}
+  td.actions {width: 16%;}
+  td.id {width: 25%;}
+}
+
+.admin_logged_in_info {margin: 2px;}
+
+.admin_edit a {font-size: 16px;}
+
+
+form#edit_site, form#new_admin, form#edit_admin {
+  div.input {
+    margin-bottom: 10px;
+  }
+  input {
+    line-height: 25px;
+    margin-right: 5px;
+  }
+  label {
+    display: block;
+    width: 150px;
+    float: left;
+    line-height: 25px;
+  }
+  .button {
+    margin-top: 20px;
+  }
+}
+
+.admin_info {
+  width: 35%;
+  min-height: 160px;
+  float: left;
+  margin-right: 40px;
+  border: 1px solid $grey;
+  padding: 5px;
+  margin-bottom: 40px;
+  h2 {
+    background-color: $grey_light;
+    padding: 5px 0 10px 5px;
+  }
+  p {
+    line-height: 18px;
+  }
+  span {
+    display: block;
+    width: 30%;
+    float: left;
+    font-weight: bold;
+  }
+  .notext {color: $grey_lighter;}
+}

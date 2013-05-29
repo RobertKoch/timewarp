@@ -1,11 +1,16 @@
 %h1
   = "edit site '#{@site.title}'"
 
+= error_helper @site
+%br
+%br
 = simple_form_for @site, :as => :site do |f|
   = f.input :title
   = f.input :url
   = f.input :tags, :hint => "seperate tags with a comma"
   = f.input :published, :as => :boolean
   = f.button :submit
-
+%br
+%br
+%br
 = link_to "Back", :back
