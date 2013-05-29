@@ -6,4 +6,4 @@
   %li 
     = link_to "top bewertet", archive_path(:sort => 'toprated'), :class => (@sort == 'toprated') ? 'active' : ''
   %li
-    = link_to "tag suchen", tags_path, :class => (current_page?(tags_path) || controller.controller_name == 'tags') ? 'active' : ''
+    = link_to "tag-liste", tags_path, :class => (current_page?(tags_path) || controller.controller_name == 'tags') ? 'active' : ''
