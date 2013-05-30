@@ -37,9 +37,24 @@ RSpec.configure do |config|
 
   config.before(:suite) do
     DatabaseCleaner.clean_with(:truncation)
+    destroy_crawler_folders
+  end
+
+  config.after(:suite) do
+    destroy_crawler_folders
   end
 
   config.before(:each) do
     Rails.cache.clear
   end
+
+end
+
+def call_action
+  send *default_params
+end
+
+def destroy_crawler_folders
+  dir_path = Rails.root.join Settings.crawler.sites_folder_path
+  FileUtils.remove_dir dir_path, true
 end

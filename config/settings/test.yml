@@ -1,0 +1,3 @@
+sites_folder: 'saved_sites_test'
+crawler:
+  sites_folder_path: 'public/saved_sites_test'
