@@ -2,16 +2,15 @@
   = render :partial => 'partials/archive_navigation'
 
 #letter_lists 
-  - ('A'..'Z').to_a.each do |letter|
-    .letter_list_wrap
-      .letter_list
-        %h3
-          = letter
-        %ul.tags
-          -(@taglist.reject {|t| t[0][0] != letter.downcase}).each do |tag|
-            -if Site.published.tagged_with(tag[0]).count > 0
-              %li
-                %a{:href => tag_path(tag[0])}
-                  = tag[0]
-                  %span
-                    = tag[1].to_i
+  .column
+    - ('A'..'F').to_a.each do |letter|
+      = render :partial => 'partials/letter_list', :locals => {:letter => letter}
+  .column
+    - ('G'..'M').to_a.each do |letter|
+      = render :partial => 'partials/letter_list', :locals => {:letter => letter}
+  .column
+    - ('N'..'T').to_a.each do |letter|
+      = render :partial => 'partials/letter_list', :locals => {:letter => letter}
+  .column
+    - ('U'..'Z').to_a.each do |letter|
+      = render :partial => 'partials/letter_list', :locals => {:letter => letter}

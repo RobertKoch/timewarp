@@ -2,20 +2,11 @@
 
 #letter_lists {
 
-  .letter_list_wrap {
-    position: relative;
-    width: $width_230;
-    min-height: 100px;
+  .column {
     float: left;
+    width: $width_230;
     margin: {
       right: $width_13;
-      bottom: $width_13;
-    }
-    -webkit-box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
-       -moz-box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
-            box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
-    background: {
-      color: $white;
     }
 
     &:nth-child(4n+4) {
@@ -23,43 +14,58 @@
         right: 0;
       }
     }
-
-    .letter_list {
-      padding: 5.652173913043%;
-
-      h3 {
-        border: {
-          right: 1px solid $grey_light;
-        }
-        width: 10.434782608696%; /* 24px => 230px */
-        height: 100px;
-        float: left;
+    .letter_list_wrap {
+      position: relative;
+      width: 100%;
+      float: left;
+      margin: {
+        bottom: 5.652173913043%;
+      }
+      -webkit-box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+         -moz-box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+              box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+      background: {
+        color: $white;
       }
 
-      ul {
+      .letter_list {
         float: left;
-        width: 83.478260869566%; /* 192px => 230px */
-        padding: {
-          left: 5.652173913043%; /* 13px => 230px */
+        width: 88.695652173914%;
+        padding: 5.652173913043%;
+
+        h3 {
+          width: 10.434782608696%; /* 24px => 230px */
+          float: left;
         }
-        line-height: 1.5em;
 
-        li {
+        ul {
+          border: {
+            left: 1px solid $grey_light;
+          }
+          float: left;
+          width: 83.478260869566%; /* 192px => 230px */
+          padding: {
+            left: 5.652173913043%; /* 13px => 230px */
+          }
+          line-height: 1.5em;
 
-          a {
-            display: block;
-            padding: 3px 10px;
-            color: $grey_medium;
+          li {
 
-            &:hover {
-              color: $grey_lighter;
-              background-color: $grey_medium;
-              -webkit-border-radius: 10px; 
-                 -moz-border-radius: 10px; 
-                      border-radius: 10px;
+            a {
+              display: block;
+              padding: 3px 10px;
+              color: $grey_medium;
+
+              &:hover {
+                color: $grey_lighter;
+                background-color: $grey_medium;
+                -webkit-border-radius: 10px; 
+                   -moz-border-radius: 10px; 
+                        border-radius: 10px;
+              }
+
+              span {float: right;}
             }
-
-            span {float: right;}
           }
         }
       }
