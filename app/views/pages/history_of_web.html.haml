@@ -5,7 +5,8 @@
     %div{:id => 'year_' + year, :class => 'period'}
       %h4.year 
         = year
-      .element.monitor{:'data-stellar-ratio' => '3'}
+      - if (year != '1999') && (year != '2003') && (year != '2008') && (year != '2009')
+        .element.monitor{:'data-stellar-ratio' => '3'}
       .element.keyboard{:'data-stellar-ratio' => '4'}
       .element.hand{:'data-stellar-ratio' => '2'}
       .info
