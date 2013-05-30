@@ -118,10 +118,10 @@
   
     .year {
       position: absolute;
-      top: 1.5em;
+      top: 1em;
       right: 2.941176475%;
       font: {
-        size: $font_size_large !important;
+        size: $font_size_large * 2 !important;
       }
     }
 
@@ -170,24 +170,24 @@
     &#year_1950-1983 {
       .element {
         &.monitor {
-          width: 642px;
-          height: 783px;
+          width: 567px;
+          height: 691px;
           background: {
             image: url('history/1983_screen.png');
           }
         }
 
         &.keyboard {
-          width: 351px;
-          height: 210px;
+          width: 310px;
+          height: 186px;
           background: {
             image: url('history/1983_keyboard.png');
           }
         }
 
         &.hand {
-          width: 838px;
-          height: 247px;
+          width: 740px;
+          height: 218px;
           background: {
             image: url('history/1983_hand.png');
           }
@@ -200,24 +200,24 @@
       .element {
 
         &.monitor {
-          width: 329px;
-          height: 423px;
+          width: 580px;
+          height: 746px;
           background: {
             image: url('history/1989_screen.png');
           }
         }
 
         &.keyboard {
-          width: 173px;
-          height: 77px;
+          width: 306px;
+          height: 136px;
           background: {
             image: url('history/1989_keyboard.png');
           }
         }
 
         &.hand {
-          width: 419px;
-          height: 114px;
+          width: 740px;
+          height: 201px;
           background: {
             image: url('history/1989_hand.png');
           }
@@ -230,24 +230,24 @@
       .element {
 
         &.monitor {
-          width: 329px;
-          height: 423px;
+          width: 475px;
+          height: 738px;
           background: {
             image: url('history/1991_screen.png');
           }
         }
 
         &.keyboard {
-          width: 173px;
-          height: 77px;
+          width: 274px;
+          height: 121px;
           background: {
             image: url('history/1991_keyboard.png');
           }
         }
 
         &.hand {
-          width: 419px;
-          height: 114px;
+          width: 662px;
+          height: 180px;
           background: {
             image: url('history/1991_hand.png');
           }
@@ -260,24 +260,24 @@
       .element {
 
         &.monitor {
-          width: 329px;
-          height: 423px;
+          width: 454px;
+          height: 672px;
           background: {
             image: url('history/1993_screen.png');
           }
         }
 
         &.keyboard {
-          width: 173px;
-          height: 77px;
+          width: 318px;
+          height: 182px;
           background: {
             image: url('history/1993_keyboard.png');
           }
         }
 
         &.hand {
-          width: 419px;
-          height: 114px;
+          width: 735px;
+          height: 236px;
           background: {
             image: url('history/1993_hand.png');
           }
@@ -290,24 +290,24 @@
       .element {
 
         &.monitor {
-          width: 329px;
-          height: 423px;
+          width: 464px;
+          height: 732px;
           background: {
             image: url('history/1995_screen.png');
           }
         }
 
         &.keyboard {
-          width: 173px;
-          height: 77px;
+          width: 265px;
+          height: 133px;
           background: {
             image: url('history/1995_keyboard.png');
           }
         }
 
         &.hand {
-          width: 419px;
-          height: 114px;
+          width: 662px;
+          height: 253px;
           background: {
             image: url('history/1995_hand.png');
           }
@@ -320,24 +320,24 @@
       .element {
 
         &.monitor {
-          width: 329px;
-          height: 423px;
+          width: 486px;
+          height: 805px;
           background: {
             image: url('history/1997_screen.png');
           }
         }
 
         &.keyboard {
-          width: 173px;
-          height: 77px;
+          width: 311px;
+          height: 203px;
           background: {
             image: url('history/1997_keyboard.png');
           }
         }
 
         &.hand {
-          width: 419px;
-          height: 114px;
+          width: 656px;
+          height: 220px;
           background: {
             image: url('history/1997_hand.png');
           }
@@ -350,24 +350,24 @@
       .element {
 
         &.monitor {
-          width: 329px;
-          height: 423px;
+          width: 511px;
+          height: 674px;
           background: {
             image: url('history/1998_screen.png');
           }
         }
 
         &.keyboard {
-          width: 173px;
-          height: 77px;
+          width: 274px;
+          height: 172px;
           background: {
             image: url('history/1998_keyboard.png');
           }
         }
 
         &.hand {
-          width: 419px;
-          height: 114px;
+          width: 673px;
+          height: 179px;
           background: {
             image: url('history/1998_hand.png');
           }
@@ -380,16 +380,16 @@
       .element {
 
         &.keyboard {
-          width: 173px;
-          height: 77px;
+          width: 736px;
+          height: 581px;
           background: {
             image: url('history/1999_keyboard.png');
           }
         }
 
         &.hand {
-          width: 419px;
-          height: 114px;
+          width: 741px;
+          height: 219px;
           background: {
             image: url('history/1999_hand.png');
           }
@@ -402,24 +402,24 @@
       .element {
 
         &.monitor {
-          width: 329px;
-          height: 423px;
+          width: 604px;
+          height: 639px;
           background: {
             image: url('history/2000_screen.png');
           }
         }
 
         &.keyboard {
-          width: 173px;
-          height: 77px;
+          width: 365px;
+          height: 170px;
           background: {
             image: url('history/2000_keyboard.png');
           }
         }
 
         &.hand {
-          width: 419px;
-          height: 114px;
+          width: 740px;
+          height: 207px;
           background: {
             image: url('history/2000_hand.png');
           }
@@ -432,25 +432,17 @@
 
       .element {
 
-        &.monitor {
-          width: 329px;
-          height: 423px;
-          background: {
-            image: url('history/2003_screen.png');
-          }
-        }
-
         &.keyboard {
-          width: 173px;
-          height: 77px;
+          width: 962px;
+          height: 643px;
           background: {
             image: url('history/2003_keyboard.png');
           }
         }
 
         &.hand {
-          width: 419px;
-          height: 114px;
+          width: 751px;
+          height: 185px;
           background: {
             image: url('history/2003_hand.png');
           }
@@ -463,24 +455,24 @@
       .element {
 
         &.monitor {
-          width: 329px;
-          height: 423px;
+          width: 407px;
+          height: 680px;
           background: {
             image: url('history/2006_screen.png');
           }
         }
 
         &.keyboard {
-          width: 173px;
-          height: 77px;
+          width: 362px;
+          height: 136px;
           background: {
             image: url('history/2006_keyboard.png');
           }
         }
 
         &.hand {
-          width: 419px;
-          height: 114px;
+          width: 771px;
+          height: 201px;
           background: {
             image: url('history/2006_hand.png');
           }
@@ -493,16 +485,16 @@
       .element {
 
         &.keyboard {
-          width: 173px;
-          height: 77px;
+          width: 805px;
+          height: 160px;
           background: {
             image: url('history/2008_keyboard.png');
           }
         }
 
         &.hand {
-          width: 419px;
-          height: 114px;
+          width: 747px;
+          height: 185px;
           background: {
             image: url('history/2008_hand.png');
           }
@@ -515,16 +507,16 @@
       .element {
 
         &.keyboard {
-          width: 173px;
-          height: 77px;
+          width: 357px;
+          height: 84px;
           background: {
             image: url('history/2009_keyboard.png');
           }
         }
 
         &.hand {
-          width: 419px;
-          height: 114px;
+          width: 740px;
+          height: 210px;
           background: {
             image: url('history/2009_hand.png');
           }
@@ -537,24 +529,24 @@
       .element {
 
         &.monitor {
-          width: 329px;
-          height: 423px;
+          width: 1180px;
+          height: 774px;
           background: {
             image: url('history/2012_screen.png');
           }
         }
 
         &.keyboard {
-          width: 173px;
-          height: 77px;
+          width: 301px;
+          height: 113px;
           background: {
             image: url('history/2012_keyboard.png');
           }
         }
 
         &.hand {
-          width: 419px;
-          height: 114px;
+          width: 645px;
+          height: 200px;
           background: {
             image: url('history/2012_hand.png');
           }
