@@ -240,6 +240,31 @@ em, i {font-style: italic;}
     h5 {
       font-size: $font_size_normal;
     }
+
+    #error-404 {
+
+      padding: {
+        top: 5%;
+        bottom: 5%;
+      }
+
+      h1, h2, p {
+        text-align: center;
+      }
+
+      h1 {
+        font-size: $font_size_larger;
+        margin: {
+          bottom: .5em;
+        }
+      }
+
+      h2 {
+        margin: {
+          bottom: 1.5em;
+        }
+      }
+    }
   }
     
   #footer {
