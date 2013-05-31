@@ -32,9 +32,9 @@ gem 'sysinfo'
 group :test do
   gem 'database_cleaner'
   gem 'factory_girl_rails'
+  gem 'capybara-webkit'
   gem 'capybara'
   gem 'shoulda-matchers'
-  gem 'email_spec'
 end
 
 group :development, :test do
