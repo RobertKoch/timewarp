@@ -8,5 +8,5 @@
   %li
     %a{:href => admins_path, :class => (current_page?(admins_path) ? 'active' : '')} admins
   %li
-    = link_to "Logout", destroy_admin_session_path, :method => :delete
+    = link_to "logout", destroy_admin_session_path, :method => :delete, :id => 'logout_link'
   %span{:class => 'curve'}
