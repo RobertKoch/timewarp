@@ -1,50 +1,51 @@
-%h1 Sites
+%section#admins
+  %h1 Sites
 
-%h3= "unpublished (#{@unpublished.count})"
-- if @unpublished.count > 0
-  %table.admin_sites
-    %tr.head
-      %td.created Created at
-      %td.title Title
-      %td.url Url
-      %td.token Token
-      %td.comment Comments
-      %td.actions Actions
-    - @unpublished.each do |site|
-      %tr
-        %td= to_german_date site.created_at
-        %td= site.title ? site.title : '-'
-        %td= site.url
-        %td= site.token
-        %td= link_to "comments", site_comments_path(site)
-        %td
-          = link_to "preview", sites_preview_path(site)
-          = link_to "edit", edit_site_path(site)
-          = link_to "delete", site_path(site), :method => :delete
-  = will_paginate @unpublished, :param_name => 'unpublished_page', :previous_label => '&laquo;', :next_label => '&raquo;'
-  %br
-  %br
-  %br
+  %h3= "unpublished (#{@unpublished.count})"
+  - if @unpublished.count > 0
+    %table.admin_sites
+      %tr.head
+        %td.created Created at
+        %td.title Title
+        %td.url Url
+        %td.token Token
+        %td.comment Comments
+        %td.actions Actions
+      - @unpublished.each do |site|
+        %tr
+          %td= to_german_date site.created_at
+          %td= site.title ? site.title : '-'
+          %td= site.url
+          %td= site.token
+          %td= link_to "comments", site_comments_path(site)
+          %td
+            = link_to "preview", sites_preview_path(site)
+            = link_to "edit", edit_site_path(site)
+            = link_to "delete", site_path(site), :method => :delete
+    = will_paginate @unpublished, :param_name => 'unpublished_page', :previous_label => '&laquo;', :next_label => '&raquo;'
+    %br
+    %br
+    %br
 
-%h3= "published (#{@published.count})"
-- if @published.count > 0
-  %table.admin_sites
-    %tr.head
-      %td.created Created at
-      %td.title Title
-      %td.url Url
-      %td.token Token
-      %td.comment Comments
-      %td.actions Actions
-    - @published.each do |site|
-      %tr
-        %td= to_german_date site.created_at
-        %td= site.title
-        %td= site.url
-        %td= site.token
-        %td= link_to "comments", site_comments_path(site)
-        %td
-          = link_to "view", site_path(site)  
-          = link_to "edit", edit_site_path(site) 
-          = link_to "delete", site_path(site), :method => :delete, :confirm => "Are you sure?"
-  = will_paginate @published, :param_name => 'published_page', :previous_label => '&laquo;', :next_label => '&raquo;'
+  %h3= "published (#{@published.count})"
+  - if @published.count > 0
+    %table.admin_sites
+      %tr.head
+        %td.created Created at
+        %td.title Title
+        %td.url Url
+        %td.token Token
+        %td.comment Comments
+        %td.actions Actions
+      - @published.each do |site|
+        %tr
+          %td= to_german_date site.created_at
+          %td= site.title
+          %td= site.url
+          %td= site.token
+          %td= link_to "comments", site_comments_path(site)
+          %td
+            = link_to "view", site_path(site)  
+            = link_to "edit", edit_site_path(site) 
+            = link_to "delete", site_path(site), :method => :delete, :confirm => "Are you sure?"
+    = will_paginate @published, :param_name => 'published_page', :previous_label => '&laquo;', :next_label => '&raquo;'
