@@ -110,8 +110,8 @@ class SitesController < ApplicationController
 
   def search 
     @term = params[:term]
-    @sites_title = Site.published.where(title: /#{@term}/i)
-    @sites_tags = Site.published.tagged_with(/#{@term}/i)
+    @sites_title = Site.published.where(title: /#{@term}/i).order_by("likes DESC")
+    @sites_tags = Site.published.tagged_with(/#{@term}/i).order_by("likes DESC")
   end
 
   def create_comment
