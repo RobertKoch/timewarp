@@ -1,24 +1,16 @@
 body {
-  background-image: none;
-  background-color: #fff;
+  line-height: 24px;
 }
 
-.tw_root_header {
-  background-color: #ff0000;
+@-webkit-keyframes 'blink' {
+  0% { opacity: 1; }
+  50% { opacity: 0; }
+  100% { opacity: 1; }
 }
 
-.tw_root_navigation {
-  background-color: #00ffff;
-}
-
-.tw_root_subnavigation {
-  background-color: #ffff00;
-}
-
-.tw_root_content {
-  background-color: #00ff00;
-}
-
-.tw_root_footer {
-  background-color: #0000ff;
+.animation_blink {
+  -webkit-animation-direction: normal;
+  -webkit-animation-duration: 1s;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-name: blink;  
 }

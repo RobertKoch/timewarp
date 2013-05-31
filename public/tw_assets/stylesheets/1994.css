@@ -4,6 +4,10 @@ body {
   background-color: #c0c0c0;
 }
 
+.tw_hide {
+  display: block !important;
+}
+
 a {
   color: #0000FF;
   text-decoration: underline;
