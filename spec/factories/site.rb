@@ -23,3 +23,8 @@ FactoryGirl.define do
     published true
   end
 end
+
+FactoryGirl.define do
+  factory :empty_site, :class => Site do
+  end
+end
