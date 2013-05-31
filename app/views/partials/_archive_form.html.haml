@@ -1,16 +1,16 @@
-%h3.grid.grid_4n
+%h3
   Website im Archiv speichern
 
 = simple_form_for site, :as => :site, :url => sites_publish_path do |f|
-  %ul.grid.grid_4n
+  %ul
     %li
-      = f.input :title, :label => 'Website-Titel:', :input_html => {:class => 'grid_padding grid_3n'}
-    %li
+      = f.input :title, :label => 'Website-Titel:', :input_html => {:placeholder => 'Website-Titel eingeben'}
+    %li.tags
       :javascript
         tag_search_url = "#{tag_search_url(:format => :json)}";
       = f.simple_fields_for :ac do |a|
-        = a.input :tags_input, :label => 'Tag:', :required => false, :input_html => {:class => 'autocomplete grid_padding grid_3n'}
-        = link_to "Tag hinzufügen", "javascript:void(0)", :class => 'add_tag button'
+        = a.input :tags_input, :label => 'Tag:', :required => false, :input_html => {:class => 'autocomplete', :placeholder => 'Tag eingeben'}
+        = link_to "Tag hinzufügen", "javascript:void(0)", :class => 'add_tag'
       =f.input :tags, :label => false, :readonly => true, :input_html => {:class => 'taglist hidden'}
     %li#chosen_tags.clear
       = "Keine Tags hinzugefügt"
