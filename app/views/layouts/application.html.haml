@@ -8,6 +8,7 @@
     %meta{:name => 'description', :content => 'Hier steht später eine schlaue Beschreibung von dem, was wir hier eigentlich tun.'} 
     
     %link{:href => '/favicon.ico', :rel => 'shortcut icon'}/
+    %link{:href => "#{request.protocol}#{request.host_with_port}#{request.fullpath}", :rel => 'canonical'}
     
     = csrf_meta_tag
     = stylesheet_link_tag 'application', :media => 'screen'
