@@ -12,7 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require jquery.ui.autocomplete
+//= require jquery-ui
 //= require fancybox
 //= require jquery.stellar.min
 
@@ -25,3 +25,4 @@
 //= require cssParser
 //= require introjs
 //= require tinycolor-min.js
+//= require marquee

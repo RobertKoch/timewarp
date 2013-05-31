@@ -20,6 +20,12 @@ $(document).ready ->
   if $('#site_meta').length != 0
     addLikeListener()
 
+    $('#social_media_buttons').hide()
+
+    $('.site_share a').click ->
+      $(this).toggleClass('closed')
+      $('#social_media_buttons').slideToggle()
+
   setArchiveArticleHeight();
 
   $.each $('.site_preview'), (i) ->
@@ -43,8 +49,6 @@ $(document).ready ->
         .animate
           'bottom' : 0
           animationTimeFast
-
-  $('#sub_navigation a').append('<span></span>');
 
 $(window).load ->
   setArchiveArticleHeight();

@@ -239,10 +239,10 @@
             color: $grey_medium;
 
             &:hover {
-              color: $blue;
+              color: $blue !important;
 
               .icon {
-                background-image: url('sprite-icons-blue.png');
+                background-image: url('sprite-icons-blue.png') !important;
               }
             }
           }
@@ -260,8 +260,36 @@
           }
 
           &.site_share {
-            .icon {
-              background-position: -14px -14px;
+            a {
+              color: $blue;
+
+              &.closed {
+                color: $grey_medium;
+
+                .icon {
+                  background-image: url('sprite-icons.png');
+                }
+              }
+
+              .icon {
+                background-image: url('sprite-icons-blue.png');
+                background-position: -14px -14px;
+              }
+            }
+
+            #social_media_buttons {
+              padding: {
+                top: 8px;
+                left: 20px;
+              }
+
+              div, a {
+                display: block;
+                margin: {
+                  top: 3px;
+                  bottom: 3px;
+                }
+              }
             }
           }
         }
