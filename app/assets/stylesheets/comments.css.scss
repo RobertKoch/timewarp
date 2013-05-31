@@ -8,50 +8,95 @@
     bottom: 40px;
   }
 
-  label {
-    display: none;
-  }
-
-  input, textarea {
-    outline: 1px solid $grey_light;
-    margin: {
-      bottom: 10px;
-    }
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.08) inset;
-  }
-
-  input {
+  form {
+    position: relative;
     float: left;
-    width: 47.5%;
-    padding: 0.7% 1%;
+    width: 100%;
 
-    &#comment_name {
+    .input {
+      position: relative;
+      float: left;
+      width: 100%;
+
+      &.comment_name, &.comment_email {
+        width: 49.5%;
+      }
+
+      &.comment_name {
+        margin: {
+          right: 1%;
+        }
+      }
+
+      .error {
+        top: -28px;
+        bottom: auto;
+        right: 5%;
+      }
+    }
+
+    label {
+      display: none;
+    }
+
+    input, textarea {
+      outline: 1px solid $grey_light;
       margin: {
-        right: 1%;
+        bottom: 10px;
+      }
+      box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.08) inset;
+    }
+
+    input {
+      float: left;
+      width: 97%;
+      padding: 1.5% 1.5%;
+
+      &#comment_name {
+        
+      }
+
+      &.button {
+        clear: both;
+        background: {
+          color: transparent;
+        }
+        width: auto;
+        outline: 0;
+        box-shadow: none;
+        font: {
+          size: $font_size_normal;
+        }
+        padding: {
+          top: 3px; 
+          bottom: 6px;
+        }
       }
     }
 
-    &.button {
-      clear: both;
+    textarea {
+      width: 98%;
+      height: 60px;
+      padding: 1%;
+    }
+
+    .error {
+      position: absolute;
+      bottom: 30px;
+      right: 30%;
       background: {
-        color: transparent;
+        color: rgba(160, 17, 17, .6);
       }
-      width: auto;
-      outline: 0;
-      box-shadow: none;
-      font: {
-        size: $font_size_normal;
-      }
-      padding: {
-        top: 3px; 
-      }
+      padding: .8em 1em;
+      color: $white;
+      border: 1px solid $red;
+      -webkit-border-radius: 5px; 
+         -moz-border-radius: 5px; 
+              border-radius: 5px;
+      -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, .4);
+         -moz-box-shadow: 0 2px 4px rgba(0, 0, 0, .4);
+              box-shadow: 0 2px 4px rgba(0, 0, 0, .4);
     }
-  }
-
-  textarea {
-    width: 98%;
-    height: 60px;
-    padding: 1%;
   }
 
   #comment_list {
