@@ -24,7 +24,7 @@ class AdminsController < ApplicationController
   end
 
   def sites 
-    @published = Site.published.paginate(:page => params[:published_page], :per_page => 10)
-    @unpublished = Site.unpublished.paginate(:page => params[:unpublished_page], :per_page => 10)
+    @published = Site.published.order_by("created_at DESC").paginate(:page => params[:published_page], :per_page => 10)
+    @unpublished = Site.unpublished.order_by("created_at DESC").paginate(:page => params[:unpublished_page], :per_page => 10)
   end
 end

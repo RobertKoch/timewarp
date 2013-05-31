@@ -68,11 +68,11 @@ class Site
   end
 
   def self.published
-    where(:published => true).order_by('created_at DESC')
+    where(:published => true)
   end
 
   def self.unpublished
-    where(:published => false).order_by('created_at DESC')
+    where(:published => false)
   end
 
 private
