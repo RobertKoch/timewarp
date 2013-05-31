@@ -19,3 +19,27 @@ $(window).load ->
   $.stellar
     horizontalScrolling: false
     verticalOffset: 80
+
+s = $('.period')
+curr = 18
+node = undefined
+$(document).keydown (e) ->
+  switch e.keyCode
+    when 40
+      e.preventDefault();
+      node = s[++curr]
+      if node
+        $('html, body').animate
+          scrollTop: $(node).offset().top - 80
+        , 2000
+      else
+        curr = s.length - 1
+    when 38
+      e.preventDefault();
+      node = s[--curr]
+      if node
+        $('html, body').animate
+          scrollTop: $(node).offset().top - 80
+        , 2000
+      else
+        curr = 18
