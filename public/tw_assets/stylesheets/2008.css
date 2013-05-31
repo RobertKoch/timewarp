@@ -1,72 +1,69 @@
+/*** general ***/
 body {
   background-image: none;
-
-  font-family: arial;
+  font-family: Arial, Verdana, sans-serif;
 }
-
 div {
-  background-color: auto;
+  background-color: transparent;
   float: left;
 }
-
-h1, h2, h3, h4, h5, h6 {
-  font-family: Georgia;
-}
-
-img {
-  opacity: 1;
-}
-
+h1, h2, h3, h4, h5, h6 {font-family: Georgia, 'Times New Roman', serif;}
+img {opacity: 1;}
 a {
+  text-decoration: underline;
   cursor: pointer;
 }
+a:hover {text-decoration: none;}
 
-a:hover {
-  color: #000;
-}
-
-ul {
-  height: auto;
-  display: block;
-}
-
-li {
-  display: inline-block;
-  padding: 10px;
-}
-
-li > ul {
-  display: none;
-}  
-
-li:hover > ul {
-  display: block;
-  opacity: 1 !important;
-  position: absolute;
-}
-
+/*** wrapper ***/
 #divStructure {
   width: 1024px;
 }
 
-#header {
-  width: 100%;
+/*** header ***/
+#header {width: 100%;}
+#logo {}
+
+/*** navigations ***/
+#hauptnavigation ul, #unternavigation ul {
+  display: block;
+  height: auto;
+}
+#hauptnavigation li, #unternavigation li {
+  display: block;
+  float: left;
+}
+#hauptnavigation li > ul, #unternavigation li > ul {display: none;}  
+#hauptnavigation li:hover > ul, #unternavigation li:hover > ul {
+  position: absolute;
+  display: block;
+  opacity: 1 !important;
 }
 
-#logo {/* width & height of logo? */}
-
-#hauptnavigation {
-  width: 100%;
+/** main navigation **/
+#hauptnavigation {width: 100%;}
+#hauptnavigation li {
+  padding: 10px;
 }
 
-#unternavigation, #sidebar {
-  width: 20%;
+/** sub navigations **/
+#unternavigation {width: 20%;}
+#unternavigation li {
+  float: none;
+  margin-bottom: 10px;
 }
 
+/*** content ***/
 #content {
   width: 60%;
 }
 
+/*** sidebars ***/
+#sidebar {
+  width: 20%;
+}
+
+/*** footer ***/
 #footer {
   clear: both;
   width: 100%;
