@@ -22,25 +22,30 @@ describe SitesController do
         site.stub(:site_crawled?).and_return(true)
       end
 
-      it "assigns @site" do
+      it "should assign @site" do
         call_action
         assigns[:site].should == site
       end
 
-      it "calls find_by_token on Site" do
+      it "should call find_by_token on Site" do
         Site.should_receive(:find_by_token)
         call_action
       end
 
-      it "calls published? on site" do
+      it "should call published? on site" do
         site.should_receive(:published?)
         call_action
       end
 
-      it "increments site visits" do
+      it "should increment site visits" do
         visits_after = site.visits + 1
         call_action
         site.visits.should == visits_after
+      end
+
+      it "should assign @tags" do
+        call_action
+        assigns[:tags].should == Site.tags_with_weight
       end
     end
 
@@ -52,19 +57,24 @@ describe SitesController do
         site.stub(:site_crawled?).and_return(true)
       end
       
-      it "assigns @site" do
+      it "should assign @site" do
         call_action
         assigns[:site].should == site
       end
       
-      it "calls find_by_token on Site" do
+      it "should calls find_by_token on Site" do
         Site.should_receive(:find_by_token)
         call_action
       end
 
-      it "calls published? on site" do
+      it "should call published? on site" do
         site.should_receive(:published?)
         call_action
+      end
+
+      it "should redirect to root path" do
+        call_action
+        response.should redirect_to(root_path)
       end
     end
   end
