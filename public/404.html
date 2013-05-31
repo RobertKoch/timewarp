@@ -1,26 +1,72 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <title>The page you were looking for doesn't exist (404)</title>
-  <style type="text/css">
-    body { background-color: #fff; color: #666; text-align: center; font-family: arial, sans-serif; }
-    div.dialog {
-      width: 25em;
-      padding: 0 4em;
-      margin: 4em auto 0 auto;
-      border: 1px solid #ccc;
-      border-right-color: #999;
-      border-bottom-color: #999;
-    }
-    h1 { font-size: 100%; color: #f00; line-height: 1.5em; }
-  </style>
-</head>
+<html lang='de' xml:lang='de'>
+  <head>
+    <meta charset='utf-8'>
+    <title>error 404 | timewarp</title>
+    <meta content='timewarp, history, webdesign, trends' name='keywords'>
+    <meta content='Hier steht später eine schlaue Beschreibung von dem, was wir hier eigentlich tun.' name='description'>
+    <link href='/favicon.ico' rel='shortcut icon'>
+    <link href="/assets/reset.css?body=1" media="screen" rel="stylesheet" type="text/css" />
+    <link href="/assets/screen.css?body=1" media="screen" rel="stylesheet" type="text/css" />
+    <link href="http://fonts.googleapis.com/css?family=Michroma" media="screen" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <header id='header'>
+      <div id='bg_light_gradient'></div>
+      <hgroup>
+        <div id='bg_logo'>
+          <span></span>
+        </div>
+        <h3 id='logo'>
+          <a href='/'>
+            timewarp
+          </a>
+        </h3>
+        <nav id='navigation'>
+          <ul>
+            <li>
+              <a class='active' href='/'>timewarp</a>
+            </li>
+            <li>
+              <a class='' href='/archive'>archiv</a>
+            </li>
+            <li>
+              <a class='' href='/history_of_web'>geschichte</a>
+            </li>
+            <li>
+              <a class='' href='/team'>team</a>
+            </li>
+            <span class='curve'></span>
+          </ul>
+        </nav>
+        <div id='search'>
+          <form action='search' controller='sites' method='get'>
+            <label class='hidden' for='search_input'>Suche:</label>
+            <input id='search_input' name='term' type='text'>
+            <span id='lens'></span>
+          </form>
+        </div>
+      </hgroup>
+    </header>
+    <div id='wrapper'>
+      <section id='content'>
+        <section id='error-404'>
+          <h1>Error 404 - Seite nicht gefunden</h1>
+          <h2>Diese Seite existiert nicht oder nicht mehr.</h2>
+          <p>Bitte verwende oben die Navigation oder das Suchfeld, um die richtige Seite zu finden.</p>
+        </section>
+      </section>
+      <footer id='footer'>
+        <p>&copy 2013 by timewarp</p>
+        <nav id='footer_navigation'>
+          <ul>
+            <li>
+              <a href='/imprint'>Impressum</a>
+            </li>
+          </ul>
+        </nav>
+      </footer>
+    </div>
 
-<body>
-  <!-- This file lives in public/404.html -->
-  <div class="dialog">
-    <h1>The page you were looking for doesn't exist.</h1>
-    <p>You may have mistyped the address or the page may have moved.</p>
-  </div>
-</body>
+  </body>
 </html>
