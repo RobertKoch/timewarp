@@ -5,6 +5,8 @@ FactoryGirl.define do
     title "A test page"
     url "http://timewarp.mediacube.at"
     tags "test,tag,system"
+    visits 0
+    likes 0
     site_crawled false
     published true
   end
@@ -15,6 +17,8 @@ FactoryGirl.define do
     title "A test page"
     url "http://timewarp.mediacube.at"
     tags "test,tag,system"
+    visits 0
+    likes 0
     site_crawled true
     published true
   end

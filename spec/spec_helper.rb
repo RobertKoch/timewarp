@@ -58,3 +58,13 @@ def destroy_crawler_folders
   dir_path = Rails.root.join Settings.crawler.sites_folder_path
   FileUtils.remove_dir dir_path, true
 end
+
+def get_tags_with_weight(record = nil)
+  taglist = Site.tags_with_weight
+  
+  if record
+    record_tags = record.tags.split(',')
+    taglist = taglist.reject {|tag| !record_tags.include? tag[0] }
+  end
+  taglist
+end
