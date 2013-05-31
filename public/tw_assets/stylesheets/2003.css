@@ -1,16 +1,30 @@
+/*** general ***/
 body {
-  line-height: 24px;
+  line-height: 2em !important;
 }
 
+/*** blinking text ***/
 @-webkit-keyframes 'blink' {
   0% { opacity: 1; }
   50% { opacity: 0; }
   100% { opacity: 1; }
 }
-
 .animation_blink {
   -webkit-animation-direction: normal;
   -webkit-animation-duration: 1s;
   -webkit-animation-iteration-count: infinite;
   -webkit-animation-name: blink;  
+}
+
+/*** navigations ***/
+#hauptnavigation, #unternavigation {}
+
+/** main navigation **/
+#hauptnavigation {}
+
+/** sub navigations **/
+#unternavigation li a {
+  background: url('http://www.gifarchiv.net/grafiken/gifs/tiere/huehner/huhn05.gif') 0 0 no-repeat;
+  background-size: 20px;
+  padding-left: 30px;
 }
