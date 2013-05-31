@@ -1,0 +1,44 @@
+@import 'variables';
+
+#archive_search {
+
+  .result_type {
+    width: 48.6458333%;
+    float: left;
+    margin: {
+      right: $width_13 * 2;
+    }
+    
+    &#found_tag {
+      margin: {
+        right: 0;
+      }
+    }
+
+    h3 {
+      border: {
+          bottom: 1px solid $grey_light;
+        }
+        -webkit-box-shadow: 0 1px 0 $white;
+           -moz-box-shadow: 0 1px 0 $white;
+                box-shadow: 0 1px 0 $white;
+      padding: {
+        bottom: .5em;
+      }
+    }
+
+    .site_preview {
+      width: 48.608137%; /* 227px => 467px */
+      margin: {
+        right: 2.7837259%; /* 13px => 467px */
+        bottom: 2.7837259%;
+      }
+
+      &:nth-child(2n+2) {
+        margin: {
+          right: 0;
+        }
+      }
+    }
+  }
+}
