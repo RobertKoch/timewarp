@@ -25,7 +25,7 @@
   #site_images
     - Settings.crawler.years.each do |year|
       %a{:href => image_path(img_path + year + '.jpg'), :class => 'fancybox', :rel => 'site_images'}
-        = image_tag(preview_img_path + year + '_preview.jpg', :id => year)
+        = image_tag(preview_img_path + year + '_preview.jpg', :class => 'year_' + year)
     
   #site_meta
     %ul.meta

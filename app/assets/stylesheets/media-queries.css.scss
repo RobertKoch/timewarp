@@ -1,90 +1,58 @@
 @import 'variables';
 
 /* "normal" screens */
-/*@media only screen and (max-width : 1600px) {
-  #header {height: 220px;}
-  #navigation_rail {
-    top: 90px;
-  }
-  #navigation {
-    margin: {
-      top: 90px;
-    }
-    .curve {
-      background: {
-        image: url('curve-green-medium.png');
+@media only screen and (max-width : 1280px) {
+  
+  #archive_overview {
+
+    .site_preview {
+      width: 32.4305556%; /* ca. 311px => 960px */
+
+      &:nth-child(3n+3) {
+        margin: {
+          right: 0;
+        }
+      }
+
+      &:nth-child(4n+4) {
+        margin: {
+          right: $width_13;
+        }
       }
     }
   }
-  #logo {
-    a, .shadow {
-      width: 220px;
-      height: 220px;
-    }
-    a {
-      background: {
-        image: url('logo-medium.png');
-      }
-    }
-  }
-  #archive {
-    .grid_1n {
-      width: $width_3column_1n;
-    }
-  }
-  #archive_navigation {
-    ul {
-      width: 220px;
-      li {
-        width: 162px;
-      }
-    }
-  }
-} */
+}
 
 /* small screens */
-/*@media only screen and (max-width : 1100px) {
-  #header {height: 140px;}
-  #navigation_rail {
-    top: 50px;
-  }
-  #navigation {
-    margin: {
-      top: 50px;
-    }
-    .curve {
-      background: {
-        image: url('curve-green-small.png');
-      }
-    }
-  }
-  #logo {
-    a, .shadow {
-      width: 140px;
-      height: 140px;
-    }
-    a {
-      background: {
-        image: url('logo-small.png');
-      }
-    }
-  }
-  #archive {
-    .grid_1n {
-      width: $width_2column_1n;
-    }
-  }
-  #archive_navigation {
-    ul {
-      width: 140px;
-      li {
-        width: 104px;
-      }
-    }
-  }
-} */
+@media only screen and (max-width : 1024px) {
+ 
+  #archive_detail {
+    
+    #site_images {
 
+      img {
+        float: left;
+        width: 24.4891008%;
+        margin: {
+          right: 0.6811989%; // 5px => 718px;
+        }
 
+        &.year_current {
+          width: 100%;
+          margin: {
+            right: 0;
+          }
+        }
+
+        &.year_1994 {
+          margin: {
+            right: 0;
+          }
+        }
+      }
+    }
+  }
+}
 
 /* Smartphones (portrait and landscape) */
 @media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
@@ -115,12 +83,6 @@
 @media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : portrait) {
 
 }
-
-/* Desktops and laptops */
-
-
-/* Large screens */
-
 
 /* iPhone 4 */
 @media only screen and (-webkit-min-device-pixel-ratio : 1.5), only screen and (min-device-pixel-ratio : 1.5) {
