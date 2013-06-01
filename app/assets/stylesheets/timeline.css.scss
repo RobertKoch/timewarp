@@ -1,6 +1,56 @@
 @import 'variables';
 
 #site_show {
+  float: left; 
+  width: 100%;
+
+  #browser {
+    position: relative;
+    margin: 0 auto;
+    background: {
+      image: url('browser/1998_ie.png');
+      position: 0 0;
+      repeat: no-repeat;
+    }
+  
+    &.browser_1994 {
+      width: 640px;
+      height: 480px;
+      background: {
+        image: url('browser/1994_ie.png');
+      }
+      padding: 95px 18px 20px 2px;
+    }
+
+    &.browser_1998 {
+      width: 800px;
+      height: 600px;
+      background: {
+        image: url('browser/1998_ie.png');
+      }
+      padding: 120px 22px 26px 6px;
+    }
+
+    &.browser_2003 {
+      width: 1024px;
+      height: 768px;
+      background: {
+        image: url('browser/2003_ff.png');
+      }
+      padding: 126px 20px 4px 1px;
+    }
+
+    &.browser_2008 {
+      background: {
+        image: url('browser/2008_chrome.png');
+      }
+      padding: 61px 2px 3px 2px;
+    }
+
+    &.browser_current {
+
+    }
+  }
   
   .button {
     float: right;
