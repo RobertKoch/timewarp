@@ -32,7 +32,7 @@ gem 'sysinfo'
 group :test do
   gem 'database_cleaner'
   gem 'factory_girl_rails'
-  gem 'capybara-webkit'
+  # gem 'capybara-webkit'
   gem 'capybara'
   gem 'shoulda-matchers'
 end
