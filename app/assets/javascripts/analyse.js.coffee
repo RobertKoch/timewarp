@@ -1,3 +1,12 @@
+$(document).ready ->
+  # set iframe height
+  if ($(window).height() > 768)
+    dynamicFrameHeight = $(window).height() - 255
+    $('#crawled_site').attr('height', dynamicFrameHeight)
+    $('#sidebar').css('height', dynamicFrameHeight)
+  else
+    $('#crawled_site').attr('height', 500)
+
 $(window).load ->
   # store in window element
   window.frameContent = $('#crawled_site').contents().find('html')
