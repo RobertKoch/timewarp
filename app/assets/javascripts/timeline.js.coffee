@@ -29,7 +29,31 @@ getColorName = (color) ->
 
 reloadVersion = (version) ->
   version_path = $('#timeline_config').attr('sites_path') + '/' + version + '/index.html'
-  $('#version_frame').attr( 'src', version_path)
+  frame = $('#version_frame')
+
+  $(frame).attr( 'src', version_path)
+
+  if (version == '1994')
+    $(frame).attr({
+      'width': 640,
+      'height': 480
+    })
+  else if (version == '1998')
+    $(frame).attr({
+      'width': 800,
+      'height': 600
+    })
+  else if (version == '2003' || version == '2008')
+    $(frame).attr({
+      'width': 1024,
+      'height': 768
+    })
+  else 
+    $(frame).attr( 'width', '100%')
+    if ($(window).height() > 768)
+      $(frame).attr( 'height', $(window).height() - 295)
+    else
+      $(frame).attr( 'height', 450)
 
 saveVersion = (version) ->
   host = $('#app_config').attr 'host'
