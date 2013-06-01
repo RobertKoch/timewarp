@@ -312,6 +312,28 @@
         }
       }
     }
+
+    #back_to_timeline {
+      display: block;
+      background: {
+        color: $white;
+      }
+      color: $grey_medium;
+      border: 1px solid $grey_light;
+      padding: .8em 0;
+      margin: 0 10px;
+      -webkit-border-radius: 5px; 
+         -moz-border-radius: 5px; 
+              border-radius: 5px;
+      text-align: center;
+      -webkit-box-shadow: 0 0 2px rgba(0, 0, 0, 0.1);
+         -moz-box-shadow: 0 0 2px rgba(0, 0, 0, 0.1);
+              box-shadow: 0 0 2px rgba(0, 0, 0, 0.1);
+
+      &:hover {
+        color: $blue;
+      }
+    }
   }
 
   #site_comments {
