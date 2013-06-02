@@ -6,10 +6,14 @@
     %span timewarp 
     in die Vergangenheit und finde es selbst heraus!
 
-  .timewarp_form
-    = simple_form_for @site do |f|
-      = f.input_field :url, :placeholder => 'http://www.beispiel-seite.com'
-      = f.submit 'warp !', :id => 'submit'
+  - if mobile_device?
+    %h2
+      Mit Mobiles Devices kann leider keine neue Seite angelegt werden.
+  - else
+    .timewarp_form
+      = simple_form_for @site do |f|
+        = f.input_field :url, :placeholder => 'http://www.beispiel-seite.com'
+        = f.submit 'warp !', :id => 'submit'
 
     = error_helper @site
 
