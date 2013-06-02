@@ -333,29 +333,33 @@ warpVersion = (version) ->
         $(window.frameContent).find('.tw_image').remove()
 
 $(window).load ->
-  # get current frame id to load frame-content
-  frameID = $('iframe').attr('id')
-  window.frameContent = $('#'+frameID).contents().find('html')
+  if $('#timeline_config').attr('site_published') == "false"
+    # get current frame id to load frame-content
+    frameID = $('iframe').attr('id')
+    window.frameContent = $('#'+frameID).contents().find('html')
 
-  # get top used colors of website
-  getValueFromSessionStorage()
+    # get top used colors of website
+    getValueFromSessionStorage()
 
-  # save not founded areas
-  window.twNotFound = []
+    # save not founded areas
+    window.twNotFound = []
 
-  # save individual versions
-  # starting with 1994 enables css inline styles in following years
-  warpSteps = [2008, 2003, 1998, 1994]
-  $.each warpSteps, (i, version) ->
-    addCssClasses(version)
-    warpVersion(version)
-    saveVersion(version)
+    # save individual versions
+    # starting with 1994 enables css inline styles in following years
+    warpSteps = [2008, 2003, 1998, 1994]
+    $.each warpSteps, (i, version) ->
+      addCssClasses(version)
+      warpVersion(version)
+      saveVersion(version)
 
-  # remove all additional css files to show current version
-  $(window.frameContent).find('head').find('.cssVersion').remove()
+    # remove all additional css files to show current version
+    $(window.frameContent).find('head').find('.cssVersion').remove()
 
-  # init navigation
-  initNavigation()
+    # init navigation
+    initNavigation()
 
-  # display current version
-  reloadVersion('current')
+    # display current version
+    reloadVersion('current')
+  else
+    initNavigation()
+    reloadVersion('current')

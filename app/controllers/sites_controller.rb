@@ -2,7 +2,7 @@ class SitesController < ApplicationController
   include SimpleCaptcha::ControllerHelpers
 
   before_filter :authenticate_admin!, :only => [:edit, :update, :destroy, :preview]
-  before_filter :site_exists_and_not_published, :only => [:analyse, :timeline]
+  before_filter :site_exists_and_not_published, :only => [:analyse]
 
   def index
     case @sort = params[:sort]
@@ -83,6 +83,7 @@ class SitesController < ApplicationController
   end
 
   def timeline
+    @site = Site.find_by_token(params[:id])
   end
 
   def publish
@@ -141,7 +142,7 @@ class SitesController < ApplicationController
 
   def rewrite_content
     file_path = Rails.root.join "public/saved_sites/#{params[:token]}/#{params[:version]}/index.html"
-
+    
     file = File.open(file_path, "w")
     state = file.write(params[:content])
     file.close

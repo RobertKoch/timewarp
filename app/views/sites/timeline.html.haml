@@ -1,4 +1,4 @@
-#timeline_config.hidden{:sites_path => Settings.host+"/saved_sites/#{@site.token}"}
+#timeline_config.hidden{:sites_path => Settings.host+"/saved_sites/#{@site.token}", :site_published => "#{@site.published?}"}
 #timeline_token.hidden{:token => "#{@site.token}"}
 
 = render :partial => 'partials/timeline'
@@ -7,8 +7,12 @@
   #browser
     %iframe{:id => 'version_frame', :src => "#{Settings.host}/#{Settings.sites_folder}/#{@site.token}/current/index.html", :width => "100%", :height => 500}
 
-  = link_to "Ins Archiv speichern", "#archive_form", :class => "fancybox_inline button"
-  = link_to "Abbrechen", root_path, :confirm => "Bist du sicher?", :class => "cancel button"
+  - if @site.published?
+    = link_to "Zurück ins Archiv", site_path(@site), :class => "button"
+  - else
+    = link_to "Ins Archiv speichern", "#archive_form", :class => "fancybox_inline button"
+    = link_to "Abbrechen", root_path, :confirm => "Bist du sicher?", :class => "cancel button"
 
-#archive_form
-  = render :partial => 'partials/archive_form', :locals => {:site => @site}
+- unless @site.published?
+  #archive_form
+    = render :partial => 'partials/archive_form', :locals => {:site => @site}
