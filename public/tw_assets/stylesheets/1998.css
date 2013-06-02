@@ -38,6 +38,11 @@ h6 {
   display: none !important;
 }
 
+.tw_image {
+  border: none !important;
+  margin-right: 10px;
+}
+
 #unternavigation, #sidebar {
   vertical-align: top;
 }  

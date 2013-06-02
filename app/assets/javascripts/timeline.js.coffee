@@ -158,23 +158,31 @@ changePageStructure = (structure, prefix, warpClasses) ->
   $(window.frameContent).find('body').children().remove()
 
 setColors = (warpClasses, prefix, webSafe) ->
-  $.each warpClasses, (i, v) ->
-    height = $(window.frameContent).find(prefix+v).css 'height'
+  # break if there are no colors available
+  if window.topColors isnt undefined
+    i = 0
 
-    # get color from global element
-    color = window.topColors[i].color
+    $.each warpClasses, (j, v) ->
+      elem = $(window.frameContent).find(prefix+v)
+      
+      if elem.length > 0 and i < window.topColors.length
+        height = $(elem).css 'height'
 
-    # if color should be websafe edit color varibale
-    if webSafe
-      color = getWebSafeColor(color)
+        # get color from global element
+        color = window.topColors[i].color
 
-    # if navigation element has no height, set background-color to including a tags
-    if parseInt(height) < 1 and v.indexOf('navigation') >= 0
-      aTags = $(window.frameContent).find(prefix+v+' > li > a')
-      $(aTags).attr('style', 'background-color: '+color+' !important')
-    else
-      $(window.frameContent).find(prefix+v)
-        .attr('style', 'background-color: '+color+' !important')
+        # if color should be websafe edit color varibale
+        if webSafe
+          color = getWebSafeColor(color)
+
+        # if navigation element has no height, set background-color to including a tags
+        if parseInt(height) < 1 and v.indexOf('navigation') >= 0
+          aTags = $(window.frameContent).find(prefix+v+' > li > a')
+          $(aTags).attr('style', 'background-color: '+color+' !important')
+        else
+          $(elem).attr('style', 'background-color: '+color+' !important')
+
+        i++
 
 getPath = () ->
   host = $('#app_config').attr 'host'
@@ -210,7 +218,7 @@ warpVersion = (version) ->
 
       when 2003
         # find all headlines in content
-        headlines = $(window.frameContent).find('#content').find('h1, h2, h3, h4, h5, h6')
+        headlines = $(window.frameContent).find('#content').find(':header')
   
         $.each headlines, (i, headline) ->
           random = Math.random()
@@ -246,15 +254,55 @@ warpVersion = (version) ->
         $.each mails, (i, mail) ->
           $(mail).html getImageTag('email', 10)+'<span class="tw_hide">'+$(mail).html()+'</span>'
 
+        # find possibile urls
+        urls = $(window.frameContent).find('a:contains(".")').not('a:contains("@")')
+        # compare urls with domain-regex
+        regex = new RegExp(/[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi)
+        $.each urls, (i, url) ->
+          txt = $(url).text()
+          # add gif if url matches with regex
+          if txt.match(regex)
+            $(url).prepend getImageTag('weltkugel', 3)
+
         # insert counter
-        $(window.frameContent).find('#content').append getImageTag('counter', 5)
+        $(window.frameContent).find('#content').append 'Besucher: '+getImageTag('counter', 5)
 
         # add gif to navigation elements
-        path = getPath()+'/images/navigation_'+getRandomNumer(2)+'.gif'
+        path = getPath()+'/images/navigation_'+getRandomNumer(4)+'.gif'
         $(window.frameContent).find('#unternavigation li a').css 'background', 'url('+path+') 0 0 no-repeat'
 
         # set webSafe colors
         setColors(warpClasses, '#', true)
+
+        # prepend alarm to first headline
+        $(window.frameContent).find('#content').find(':header:first').prepend getImageTag('alarm', 6)
+
+        # add gifs to main navigation
+        mainNavCnt = $(window.frameContent).find('#hauptnavigation > li').length
+        # array of gif animations
+        symbols = ['pfeil_links', 'pfeil_rechts', 'neu']
+        for i in [0...2]
+          # random element of main navigation
+          randNum = Math.floor (Math.random() * mainNavCnt) + 1
+          # choose random symbol
+          randSym = Math.floor (Math.random() * 3)
+
+          # find navigation element at position randNum
+          randomElement = $(window.frameContent).find('#hauptnavigation > li').eq(randNum)
+
+          # left array after element
+          if randSym is 0
+            $(randomElement).append getImageTag(symbols[randSym], 6)
+          else
+            $(randomElement).prepend getImageTag(symbols[randSym], 6)
+
+        # addons to sidebar
+        if 'sidebar' not in window.twNotFound
+          $(window.frameContent).find('#sidebar').prepend getImageTag('computer', 9)
+
+        # addons to subnavigation
+        if 'unternavigation' not in window.twNotFound
+          $(window.frameContent).find('#unternavigation').append getImageTag('anti_ie', 3)
 
       when 1994
         # seperate content from structure
