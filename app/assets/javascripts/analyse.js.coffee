@@ -1,4 +1,6 @@
 $(document).ready ->
+  initIntroJs()
+  
   # set iframe height
   if ($(window).height() > 768)
     dynamicFrameHeight = $(window).height() - 255
@@ -22,7 +24,6 @@ $(window).load ->
 
   startValidation()
 
-  initIntroJs()
 
 initIntroJs = () ->
   introJs()
@@ -39,7 +40,6 @@ initIntroJs = () ->
       introJs().exit()
       $('#analyse_frame span').hide()
     
-  
 startAnalyse = () ->
   recursiveIterate(window.frameContent)
 
