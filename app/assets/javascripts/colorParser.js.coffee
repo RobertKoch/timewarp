@@ -3,7 +3,7 @@ getCssContent = () ->
   cssContent = ''
 
   $.each linkTags, (i, elem) ->
-    if $(elem)[0].href.indexOf('.css') >= 0 && $(elem)[0].href.indexOf('localhost') == -1
+    if $(elem)[0].href.indexOf('.css') >= 0 and $(elem)[0].href.indexOf('localhost') is -1
       # get content from current css file
       $.ajax(
         type: 'POST',
@@ -34,7 +34,7 @@ validateColors = (css) ->
     'background-color': true
   );
 
-  if parseCss && parseCss.cssRules
+  if parseCss and parseCss.cssRules
     for i in [0...parseCss.cssRules.length]
       rule = parseCss.cssRules[i];
 
@@ -48,7 +48,7 @@ validateColors = (css) ->
           continue
 
         # should element be counted
-        if objArr[declarations[j].property] != undefined
+        if objArr[declarations[j].property] isnt undefined
           color = declarations[j].valueText.toLowerCase()
 
           if colorsIndex[color]
@@ -60,11 +60,11 @@ validateColors = (css) ->
   for color, cnt of colorsIndex
 
     # transform rgb to hex color
-    if color.indexOf('rgb') >= 0 && color.substring(0, 4) != 'rgba'
+    if color.indexOf('rgb') >= 0 and color.substring(0, 4) isnt 'rgba'
       color = '#'+tinycolor(color).toHex()
 
     if color.indexOf('#') >= 0
-      if color.charAt(0) == '#'
+      if color.charAt(0) is '#'
         sum += cnt
         colorArr.push([color, cnt])
   

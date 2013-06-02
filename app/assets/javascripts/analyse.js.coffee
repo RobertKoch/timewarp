@@ -82,14 +82,14 @@ defineAdditionalAddons = () ->
 recursiveIterate = (node) ->
   $.each $(node).children(), (i) ->
 
-    if $(this)[0].attributes.length != 0
+    if $(this)[0].attributes.length isnt 0
       exploreAttributes($(this));
 
-    if $(this)[0].localName == 'ul'
+    if $(this)[0].localName is 'ul'
       exploreTagUl($(this))
 
     # firefox forces check for null value
-    if $(this)[0].nodeValue != null
+    if $(this)[0].nodeValue isnt null
       if $(this)[0].nodeValue.indexOf('©') >= 0
         window.elemFooter = $(this)
 
@@ -110,16 +110,16 @@ exploreAttributes = (node) ->
     nodeName = $(v)[0].nodeName
 
     # continue if atribute is id or class
-    if nodeName == 'id' || nodeName == 'class'
+    if nodeName and 'id' or nodeName and 'class'
       # impose timewarp generated classes
-      if $(v)[0].value.indexOf('tw_') < 0 && $(v)[0].value.indexOf('overlay_wrap') < 0
+      if $(v)[0].value.indexOf('tw_') < 0 and $(v)[0].value.indexOf('overlay_wrap') < 0
         # split to get every element of example multiple classes
         splitValues = $(v)[0].value.split(' ')
         
         $.each splitValues, (j, w) ->
           param = w.toLowerCase()
           # continue param is part of objArr
-          if objArr[param] != undefined
+          if objArr[param] isnt undefined
             $(node).addClass objArr[param][0]
             generateOverlay($(node), objArr[param][1])
 
@@ -132,9 +132,9 @@ exploreTagUl = (node) ->
   $.each $(node).children(), (i) ->
     el = $(this)[0].children[0]
 
-    if el != undefined
+    if el isnt undefined
       # element contains only one tag, spezially a link tag 
-      if $(el).length == 1 && $(el)[0].localName == 'a'
+      if $(el).length is 1 and $(el)[0].localName is 'a'
         # increment navigation-count if the <a> tag doesnt contain an image tag
         if $(el)[0].innerHTML.indexOf('<img') < 0
           window.cnt++
@@ -142,7 +142,7 @@ exploreTagUl = (node) ->
           window.galleryCnt++ 
 
   # additional increment to allow 1 extra element like span in navigation-block
-  if window.cnt > 3 && (window.cnt == length || window.cnt+1 == length)
+  if window.cnt > 3 and (window.cnt is length or window.cnt+1 is length)
     generateOverlay($(node), 'Unternavigation')
   else 
     if window.galleryCnt > 3
@@ -163,7 +163,7 @@ generateOverlay = (node, value) ->
   setRootClass(node, classParam)
 
   # overlayCnt correlates to z-index, start with value 1000
-  window.overlayCnt = window.overlayCnt || 1000
+  window.overlayCnt = window.overlayCnt or 1000
 
   overlay    = '<div class="overlay_wrap ' + value.toLowerCase() + '">'
   overlay   += '<span class="tw_overlay"></span>' 
@@ -192,7 +192,7 @@ changeOverlayAndClass = (value) ->
   parentElement = window.activeOverlay.target.parentNode.parentNode
   $(parentElement).alterClass 'tw_*', 'tw_root_'+value.toLowerCase()
 
-  if window.activeOverlay.target.className == 'tw_overlay_text'
+  if window.activeOverlay.target.className is 'tw_overlay_text'
     window.activeOverlay.target.innerText = value
   else
     window.activeOverlay.target.nextSibling.innerText = value
@@ -319,16 +319,16 @@ declareListener = () ->
         $(clickedOverlay).remove()
 
         # if navigation is removed, validate new if possible
-        if window.activeOverlay.target.innerText == 'Hauptnavigation'
+        if window.activeOverlay.target.innerText is 'Hauptnavigation'
           validateNavigations()
 
       else 
         # if click on image, change e.target to parent element to prevent an overlay inside the image tag
-        if e.target.nodeName == 'IMG'
+        if e.target.nodeName is 'IMG'
           e.target = e.target.parentNode
 
         # if click element an overlay enable remove link, otherwise hide link
-        if e.target.className == 'tw_overlay_text' || e.target.className.indexOf('tw_overlay') >= 0
+        if e.target.className is 'tw_overlay_text' or e.target.className.indexOf('tw_overlay') >= 0
           $(el).find('.tw_overlayRemove').show()
         else
           $(el).find('.tw_overlayRemove').hide()
@@ -361,14 +361,14 @@ declareListener = () ->
       value = 'Unternavigation'
 
     # change value if navigation element is choosen
-    if window.setOverlay == undefined
+    if window.setOverlay is undefined
 
       # change highlighting class
       oldValue = overlayTarget[0].innerText.toLowerCase()
       $(overlayTarget[0].parentNode).alterClass oldValue, value.toLowerCase()
 
       # change overlay via breadcrumb navigation
-      if window.activeOverlay.selector != undefined
+      if window.activeOverlay.selector isnt undefined
         $(window.activeOverlay).alterClass 'tw_*', 'tw_root_'+value.toLowerCase()
         window.activeOverlay[0].lastChild.lastChild.innerText = value
 
@@ -397,7 +397,7 @@ declareListener = () ->
     fadeOutOverlays(el)
 
     # validate navigation to check if main navigation has changed
-    if value == 'Unternavigation'
+    if value is 'Unternavigation'
       validateNavigations()
 
   $(window.frameContent).mouseover (e) ->
@@ -423,8 +423,8 @@ declareListener = () ->
 
       else
         # dont highlight overlay
-        if e.target.className != 'tw_overlay_text' && $(window.frameContent).find('.tw_navigation_change').is(':hidden')
-          if e.target.nodeName == 'IMG'
+        if e.target.className isnt 'tw_overlay_text' and $(window.frameContent).find('.tw_navigation_change').is(':hidden')
+          if e.target.nodeName is 'IMG'
             target = e.target.parentNode
           else
             target = e.target  
@@ -470,7 +470,7 @@ declareListener = () ->
 
 validateFooter = () ->
   # element has no footer-overlay
-  if window.elemFooter != undefined
+  if window.elemFooter isnt undefined
     if $(window.elemFooter)[0].className.indexOf('tw_') < 0
       generateOverlay($(window.elemFooter), 'Footer')
     
@@ -488,13 +488,13 @@ validateNavigations = () ->
 
   $.each subNav, (i) ->
     # navigation must be visible
-    if $(this).css('opacity') == 0 || $(this).css('display').indexOf('block') < 0
+    if $(this).css('opacity') is 0 or $(this).css('display').indexOf('block') < 0
       navCnt.push(-1)
     else   
       # first navigation will be rated better
       if i == 0 then cnt = 2 else cnt = 0
       $.each this.children, (j) ->
-        if this.innerText && this.innerText != 'Unternavigation'
+        if this.innerText and this.innerText isnt 'Unternavigation'
           # is current value part of array
           if this.innerText.toLowerCase() in listMain
             cnt++
