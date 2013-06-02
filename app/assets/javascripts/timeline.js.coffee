@@ -132,7 +132,7 @@ changePageStructure = (structure, prefix, warpClasses) ->
         
         else  
           # if header contains main navigation, remove ist from header part
-          if v == 'header'
+          if v is 'header'
             if $(window.frameContent).find('.tw_root_header').has('.tw_root_hauptnavigation').length > 0
               $(window.frameContent).find('.tw_root_header').find('.tw_root_hauptnavigation').remove()
 
@@ -176,11 +176,16 @@ setColors = (warpClasses, prefix, webSafe) ->
       $(window.frameContent).find(prefix+v)
         .attr('style', 'background-color: '+color+' !important')
 
-addImage = (name, max) ->
+getPath = () ->
   host = $('#app_config').attr 'host'
 
-  random = Math.floor (Math.random() * max) + 1
-  return '<img src="'+host+'/tw_assets/images/'+name+'_'+random+'.gif" class="tw_image" />'
+  return host+'/tw_assets'
+
+getRandomNumer = (max) ->
+  return Math.floor (Math.random() * max) + 1
+
+getImageTag = (name, max) ->
+  return '<img src="'+getPath()+'/images/'+name+'_'+getRandomNumer(max)+'.gif" class="tw_image" />'
 
 warpVersion = (version) ->
   #'unternavigation',
@@ -197,6 +202,12 @@ warpVersion = (version) ->
         # remove facebook like-box plugin
         $(window.frameContent).find('iframe[src*="facebook"]').remove()
 
+        removeElements = ['slider', 'facebook', 'twitter', 'rss', 'social', 'socialmedia', 'gplus', 'googleplus']
+        $.each removeElements, (i, element) ->
+          # try removing slider
+          $(window.frameContent).find('*[id*="'+element+'"]').remove()
+          $(window.frameContent).find('*[class*="'+element+'"]').remove()
+
       when 2003
         # find all headlines in content
         headlines = $(window.frameContent).find('#content').find('h1, h2, h3, h4, h5, h6')
@@ -212,6 +223,9 @@ warpVersion = (version) ->
             $(headline).html '<span class="tw_animation animation_blink">'+$(headline).text()+'</span>'
 
       when 1998
+        # add additional css class - bootstrap geo cities
+        addCssClasses('bootstrap_geo')
+
         # rebuild site with table structure
         changePageStructure('tableStructure', '#divStructure > #', warpClasses)
 
@@ -223,13 +237,21 @@ warpVersion = (version) ->
         $.each animationBlocks, (i, animationBlock) ->
           $(animationBlock)[0].outerHTML = $(animationBlock).text()
 
+        # set background image
+        path = getPath()+'/images/background_'+getRandomNumer(10)+'.png'
+        $(window.frameContent).find('body').css 'background', 'url('+path+') 0 0 repeat'
+
         # insert animated email gif
         mails = $(window.frameContent).find('a:contains("@")')
         $.each mails, (i, mail) ->
-          $(mail).html addImage('email', 10)+'<span class="tw_hide">'+$(mail).html()+'</span>'
+          $(mail).html getImageTag('email', 10)+'<span class="tw_hide">'+$(mail).html()+'</span>'
 
         # insert counter
-        $(window.frameContent).find('#content').append addImage('counter', 5)
+        $(window.frameContent).find('#content').append getImageTag('counter', 5)
+
+        # add gif to navigation elements
+        path = getPath()+'/images/navigation_'+getRandomNumer(2)+'.gif'
+        $(window.frameContent).find('#unternavigation li a').css 'background', 'url('+path+') 0 0 no-repeat'
 
         # set webSafe colors
         setColors(warpClasses, '#', true)
