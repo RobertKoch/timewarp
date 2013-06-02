@@ -39,7 +39,8 @@ class Site
 
     #snapshots for all versions
     Settings.crawler.years.each do |year|
-      kit = IMGKit.new(File.new(pics_path + "#{year}/index.html"), :quality => 85, :width => 1400)
+      kit = IMGKit.new(File.new(pics_path + "#{year}/index.html"), :quality => 85, :width => Settings.crawler.widths["y_#{year}"]
+)
       kit.to_file pics_path + "#{year}.jpg"
 
       #create small version of pic

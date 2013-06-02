@@ -9,6 +9,12 @@ crawler:
     - '1994'
   errors:
     wget_failed: "Diese Seite kann leider nicht gespeichert werden, da dies der Betreiber nicht erlaubt. Wir bitten um dein Verständnis!"
+  widths:
+    y_current: 1400
+    y_2008: 1024
+    y_2003: 1024
+    y_1998: 800
+    y_1994: 600
 history:
   years:
     - '2012'
