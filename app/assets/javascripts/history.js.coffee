@@ -14,6 +14,10 @@ $(document).ready ->
     scrollTop: $(document).height()
   , 100
 
+
+  $('#introduction h1').css
+    'margin-top': $(window).height() - ($(window).height() / 1.3)
+
 $(window).load ->
 
   $.stellar
@@ -21,7 +25,7 @@ $(window).load ->
     verticalOffset: 80
 
 s = $('.period')
-curr = 18
+curr = $('.period').length - 1
 node = undefined
 $(document).keydown (e) ->
   switch e.keyCode
@@ -42,4 +46,4 @@ $(document).keydown (e) ->
           scrollTop: $(node).offset().top - 80
         , 2000
       else
-        curr = 18
+        curr = $('.period').length - 1

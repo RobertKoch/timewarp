@@ -3,18 +3,24 @@
 
   - Settings.history.years.each_with_index do |year, idx|
     %div{:id => 'year_' + year, :class => 'period'}
-      %h4.year 
+      %h4.year{:'data-stellar-ratio' => '2'}
         = year
-      - if (year != '1999') && (year != '2003') && (year != '2008') && (year != '2009')
-        .element.monitor{:'data-stellar-ratio' => '3'}
-      .element.keyboard{:'data-stellar-ratio' => '4'}
-      .element.hand{:'data-stellar-ratio' => '2'}
-      .info
+      .info{:'data-stellar-ratio' => '4'}
         %p
           = text[idx]
-
+      - if (year != '1999') && (year != '2003') && (year != '2008') && (year != '2009')
+        .element.monitor{:'data-stellar-ratio' => '3'}
+      .element.keyboard{:'data-stellar-ratio' => '2'}
+      .element.hand{:'data-stellar-ratio' => '1.5'}
+      
   #introduction.period
     %h1
-      Nach oben scrollen und alles über die Geschichte des Web-Designs erfahren!
+      Du kennst die Geschichte des Internets!
+      %br
+      Ganz sicher?
+    %h2
+      Navigiere mit den Pfeiltasten der Tastatur nach oben 
+      %br
+      und erfahre wichtige Details der Geschichte des Web-Design.
 
   #desk
