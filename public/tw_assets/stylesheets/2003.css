@@ -1,6 +1,8 @@
 /*** general ***/
 body {
   line-height: 2em !important;
+
+  cursor: url(http://timewarp.mediacube.at/tw_assets/images/cursor.png), default;
 }
 
 /*** blinking text ***/

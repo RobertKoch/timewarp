@@ -2,7 +2,7 @@ getValue = (e) ->
   value = e.target.innerText.toLowerCase()
 
   # return false is ( is found or choosen element (-class) doesnt exist in frame
-  if value.indexOf('(') >= 0 || !$(window.frameContent).find('.tw_root_'+value).text()
+  if value.indexOf('(') >= 0 or !$(window.frameContent).find('.tw_root_'+value).text()
     return false
 
   return value  

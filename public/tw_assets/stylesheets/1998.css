@@ -34,6 +34,10 @@ h6 {
   font-size: 13.6px;
 }
 
+#tableStructure {
+  margin-left: 10px;
+}
+
 .tw_hide {
   display: none !important;
 }
@@ -49,6 +53,14 @@ h6 {
 
 .tw_gif_earth {
   width: 20px;
+}
+
+.tw_bar {
+  position: absolute;
+  width: 10px;
+  top: 0;
+  bottom: 0;
+  background-color: #b8c000;
 }
 
 #unternavigation, #sidebar {

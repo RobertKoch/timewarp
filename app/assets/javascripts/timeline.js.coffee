@@ -32,39 +32,41 @@ reloadVersion = (version) ->
   frame = $('#version_frame')
   browser = $('#browser')
 
-  $(frame).attr( 'src', version_path)
+  $(frame).attr('src', version_path)
 
-  if (version == '1994')
-    $(frame).attr({
-      'width': 640,
-      'height': 480
-    })
-    $(browser).attr('class', 'browser_1994')
+  switch version
+    when '1994'
+      $(frame).attr
+        width: 640
+        height: 480
+      $(browser).attr 'class', 'browser_1994'
 
-  else if (version == '1998')
-    $(frame).attr({
-      'width': 800,
-      'height': 600
-    })
-    $(browser).attr('class', 'browser_1998')
+    when '1998'
+      $(frame).attr
+        width: 800
+        height: 600
 
-  else if (version == '2003' || version == '2008')
-    $(frame).attr({
-      'width': 1024,
-      'height': 768
-    })
-    $(browser).attr('class', 'browser_2003')
-    if (version == '2008')
-      $(browser).addClass('browser_2008')
+      $(browser).attr 'class', 'browser_1998'
 
-  else 
-    $(frame).attr( 'width', '100%')
-    if ($(window).height() > 768)
-      $(frame).attr( 'height', $(window).height() - 295)
-    else
-      $(frame).attr( 'height', 450)
-    $(browser).attr('class', 'browser_current')
+    when '2003', '2008'
+      $(frame).attr
+        width: 1024
+        height: 768
 
+      $(browser).attr 'class', 'browser_2003' 
+
+      if version is '2008'
+        $(browser).addClass 'browser_2008'
+
+    else 
+      $(frame).attr('width', '100%')
+      $(browser).attr 'class', 'browser_current'
+
+      if $(window).height() > 768
+        $(frame).attr 'height', $(window).height() - 295
+      else
+        $(frame).attr 'height', 450 
+      
 saveVersion = (version) ->
   host = $('#app_config').attr 'host'
 
@@ -199,8 +201,8 @@ getImageTag = (name, max, additionalClass) ->
   return '<img src="'+getPath()+'/images/'+name+'_'+getRandomNumer(max)+'.gif" class="tw_image '+additionalClass+'" />'
 
 warpVersion = (version) ->
-  #'unternavigation',
-  warpClasses = ['hauptnavigation', 'header', 'sidebar', 'content', 'footer', 'unternavigation']
+  # note: hauptnavigation has to be before header
+  warpClasses = ['hauptnavigation', 'header', 'sidebar', 'content', 'footer', 'unternavigation', 'logo']
 
   switch version
       when 2008
@@ -327,6 +329,8 @@ warpVersion = (version) ->
         $(window.frameContent).find('#tableStructure').remove()
         # remove inline styles
         $(window.frameContent).find('*[style]').removeAttr 'style'
+        # remove onload attribute
+        $(window.frameContent).find('*[onload]').removeAttr 'onload'
         # define image sizes
         $(window.frameContent).find('img').attr( {width: '200px', height: 'auto'} )
         # remove gifs
