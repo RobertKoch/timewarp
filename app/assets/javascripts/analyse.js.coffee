@@ -5,7 +5,8 @@ $(document).ready ->
     $('#crawled_site').attr('height', dynamicFrameHeight)
     $('#sidebar').css('height', dynamicFrameHeight)
   else
-    $('#crawled_site').attr('height', 500)
+    $('#crawled_site').attr('height', 600)
+    $('#sidebar').css('height', 600)
 
 $(window).load ->
   # store in window element
