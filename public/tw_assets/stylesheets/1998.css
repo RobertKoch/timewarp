@@ -43,6 +43,14 @@ h6 {
   margin-right: 10px;
 }
 
+.tw_gif_mainNavigation {
+  width: 30px;
+}
+
+.tw_gif_earth {
+  width: 20px;
+}
+
 #unternavigation, #sidebar {
   vertical-align: top;
 }  

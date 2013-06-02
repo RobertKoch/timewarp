@@ -192,8 +192,11 @@ getPath = () ->
 getRandomNumer = (max) ->
   return Math.floor (Math.random() * max) + 1
 
-getImageTag = (name, max) ->
-  return '<img src="'+getPath()+'/images/'+name+'_'+getRandomNumer(max)+'.gif" class="tw_image" />'
+getImageTag = (name, max, additionalClass) ->
+  if additionalClass is undefined
+    additionalClass = ''
+
+  return '<img src="'+getPath()+'/images/'+name+'_'+getRandomNumer(max)+'.gif" class="tw_image '+additionalClass+'" />'
 
 warpVersion = (version) ->
   #'unternavigation',
@@ -262,7 +265,7 @@ warpVersion = (version) ->
           txt = $(url).text()
           # add gif if url matches with regex
           if txt.match(regex)
-            $(url).prepend getImageTag('weltkugel', 3)
+            $(url).prepend getImageTag('weltkugel', 3, 'tw_gif_earth')
 
         # insert counter
         $(window.frameContent).find('#content').append 'Besucher: '+getImageTag('counter', 5)
@@ -292,9 +295,9 @@ warpVersion = (version) ->
 
           # left array after element
           if randSym is 0
-            $(randomElement).append getImageTag(symbols[randSym], 6)
+            $(randomElement).append getImageTag(symbols[randSym], 6, 'tw_gif_mainNavigation')
           else
-            $(randomElement).prepend getImageTag(symbols[randSym], 6)
+            $(randomElement).prepend getImageTag(symbols[randSym], 6, 'tw_gif_mainNavigation')
 
         # addons to sidebar
         if 'sidebar' not in window.twNotFound
