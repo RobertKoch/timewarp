@@ -1,19 +1,272 @@
 @import 'variables';
 
+/* small history elements */
+@media only screen and (max-width : 1400px) {
+  #header {
+    #logo {
+      .pendulum {
+        &.up {
+          height: 200px;
+        }
+        &.down {
+          height: 350px;
+        }
+      }
+    }
+  }
+  #history {
+    .period {
+      .year {
+        font: {
+          size: $font_size_large !important;
+        }
+      }
+      .info {
+        left: 48%;
+        p {
+          font: {
+            size: $font_size_small;
+          }
+        }
+      }
+      &#year_1950-1983 {
+        .element {
+          &.monitor {
+            width: 333px;
+            height: 406px;
+          }
+
+          &.keyboard {
+            right: 320px;
+            width: 182px;
+            height: 109px;
+          }
+
+          &.hand {
+            width: 435px;
+            height: 128px;
+          }
+        }
+      }
+      &#year_1989-1990 {
+        .element {
+          &.monitor {
+            width: 341px;
+            height: 438px;
+          }
+          &.keyboard {
+            right: 330px;
+            width: 180px;
+            height: 80px;
+          }
+          &.hand {
+            width: 435px;
+            height: 118px;
+          }
+        }
+      }
+      &#year_1991 {
+        .element {
+          &.monitor {
+            width: 279px;
+            height: 410px;
+          }
+          &.keyboard {
+            right: 290px;
+            width: 161px;
+            height: 71px;
+          }
+          &.hand {
+            width: 389px;
+            height: 105px;
+          }
+        }
+      }
+      &#year_1993-1994 {
+        .element {
+          &.monitor {
+            width: 267px;
+            height: 395px;
+          }
+          &.keyboard {
+            right: 320px;
+            width: 187px;
+            height: 107px;
+          }
+          &.hand {
+            width: 432px;
+            height: 138px;
+          }
+        }
+      }
+      &#year_1995 {
+        .element {
+          &.monitor {
+            width: 272px;
+            height: 430px;
+          }
+          &.keyboard {
+            right: 285px;
+            width: 155px;
+            height: 78px;
+          }
+          &.hand {
+            width: 389px;
+            height: 148px;
+          }
+        }
+      } 
+      &#year_1996 {
+        .element {
+          &.monitor {
+            width: 285px;
+            height: 473px;
+          }
+          &.keyboard {
+            right: 300px;
+            width: 182px;
+            height: 119px;
+          }
+          &.hand {
+            width: 385px;
+            height: 129px;
+          }
+        }
+      }
+      &#year_1998 {
+        .element {
+          &.monitor {
+            width: 300px;
+            height: 396px;
+          }
+          &.keyboard {
+            right: 300px;
+            width: 161px;
+            height: 101px;
+          }
+          &.hand {
+            width: 395px;
+            height: 105px;
+          }
+        }
+      }
+      &#year_1999 {
+        .element {
+          &.keyboard {
+            right: 340px;
+            width: 432px;
+            height: 341px;
+          }
+          &.hand {
+            width: 435px;
+            height: 128px;
+          }
+        }
+      }
+      &#year_2000-2002 {
+        .element {
+          &.monitor {
+            width: 355px;
+            height: 375px;
+          }
+          &.keyboard {
+            right: 300px;
+            width: 214px;
+            height: 100px;
+          }
+          &.hand {
+            width: 435px;
+            height: 121px;
+          }
+        }
+      }
+      &#year_2003-2004 {
+        .element {
+          &.keyboard {
+            right: 240px;
+            width: 565px;
+            height: 378px;
+          }
+          &.hand {
+            width: 441px;
+            height: 108px;
+          }
+        }
+      } 
+      &#year_2006 {
+        .element {
+          &.monitor {
+            width: 239px;
+            height: 400px;
+          }
+          &.keyboard {
+            right: 320px;
+            width: 212px;
+            height: 80px;
+          }
+          &.hand {
+            width: 453px;
+            height: 118px;
+          }
+        }
+      }
+      &#year_2008 {
+        .element {
+          &.keyboard {
+            right: 250px;
+            width: 473px;
+            height: 94px;
+          }
+          &.hand {
+            width: 439px;
+            height: 108px;
+          }
+        }
+      }
+      &#year_2009 {
+        .element {
+          &.keyboard {
+            right: 300px;
+            width: 210px;
+            height: 49px;
+          }
+          &.hand {
+            width: 435px;
+            height: 123px;
+          }
+        }
+      } 
+       &#year_2012 {
+        .element {
+          &.monitor {
+            width: 745px;
+            height: 455px;
+          }
+          &.keyboard {
+            right: 300px;
+            width: 177px;
+            height: 66px;
+          }
+          &.hand {
+            width: 379px;
+            height: 117px;
+          }
+        }
+      } 
+    }    
+  }
+}
+
 /* "normal" screens */
 @media only screen and (max-width : 1280px) {
-  
   #archive_overview {
-
     .site_preview {
       width: 32.4305556%; /* ca. 311px => 960px */
-
       &:nth-child(3n+3) {
         margin: {
           right: 0;
         }
       }
-
       &:nth-child(4n+4) {
         margin: {
           right: $width_13;
