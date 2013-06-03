@@ -7,8 +7,12 @@
     in die Vergangenheit und finde es selbst heraus!
 
   - if mobile_device?
-    %h2
-      Mit Mobiles Devices kann leider keine neue Seite angelegt werden.
+    %p.mobile_info
+      Um 
+      %span.timewarp timewarp 
+      optimal erleben zu können brauchst du Platz! 
+      %br
+      Daher ist es nicht möglich, mit mobilen Devices neue Websites hinzuzufügen.
   - else
     .timewarp_form
       = simple_form_for @site do |f|
