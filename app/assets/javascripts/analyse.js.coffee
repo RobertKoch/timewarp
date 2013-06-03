@@ -20,10 +20,12 @@ $(window).load ->
 
   removeUnsolicitedTags()
 
-  startAnalyse()
+  # prevent position bug
+  setTimeout (->
+    startAnalyse()
 
-  startValidation()
-
+    startValidation() 
+  ), 500
 
 initIntroJs = () ->
   introJs()
