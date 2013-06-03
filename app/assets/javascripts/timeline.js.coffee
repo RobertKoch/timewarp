@@ -237,7 +237,7 @@ warpVersion = (version) ->
 
       when 1998
         # add additional css class - bootstrap geo cities
-        addCssClasses('bootstrap_geo')
+        #addCssClasses('bootstrap_geo')
 
         # rebuild site with table structure
         changePageStructure('tableStructure', '#divStructure > #', warpClasses)
@@ -334,7 +334,7 @@ warpVersion = (version) ->
         # define image sizes
         $(window.frameContent).find('img').attr( {width: '200px', height: 'auto'} )
         # remove gifs
-        $(window.frameContent).find('.tw_image').remove()
+        $(window.frameContent).find('.tw_image').remove() 
 
 $(window).load ->
   if $('#timeline_config').attr('site_published') == "false"
@@ -364,6 +364,14 @@ $(window).load ->
 
     # display current version
     reloadVersion('current')
+
+    #add listener for saving site to archive / loading screen
+    $('form#edit_site a.submit_form').on 'click', ->
+      $('#loading_screen.saving').fadeIn();
+
+    #remove loading screen
+    setTimeout('$("#loading_screen.working").fadeOut()', 4000);
+
   else
     initNavigation()
     reloadVersion('current')

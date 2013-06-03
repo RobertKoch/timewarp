@@ -1,3 +1,7 @@
+= render :partial => 'partials/loading_screen', :locals => {:screen_name => 'working', :text => "Die Seite wird umgebaut, bitte warten...", :hidden => false}
+
+= render :partial => 'partials/loading_screen', :locals => {:screen_name => 'saving', :text => "Die Seite wird gespeichert und Screenshots werden erstellt, bitte warten...", :hidden => true}
+
 #timeline_config.hidden{:sites_path => Settings.host+"/saved_sites/#{@site.token}", :site_published => "#{@site.published?}"}
 #timeline_token.hidden{:token => "#{@site.token}"}
 
