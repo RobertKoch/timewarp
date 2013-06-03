@@ -20,10 +20,12 @@ $(window).load ->
 
   removeUnsolicitedTags()
 
-  startAnalyse()
+  # prevent position bug
+  setTimeout (->
+    startAnalyse()
 
-  startValidation()
-
+    startValidation() 
+  ), 500
 
 initIntroJs = () ->
   introJs()
@@ -378,6 +380,10 @@ declareListener = () ->
 
     # set new overlay
     else if window.activeOverlay.target
+      # if a tag - assume that it is an navigation element and go tree up to ul element
+      if overlayTarget[0].localName is 'a'
+        overlayTarget = $(overlayTarget).parent().parent()
+
       # generate overlay
       generateOverlay(overlayTarget, value);
       # add class of type like tw_navigation
