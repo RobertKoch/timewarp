@@ -36,7 +36,7 @@ class SitesController < ApplicationController
     #if url ok and site doesnt exists, save it
     url = url.gsub /http:\/\/||https:\/\//, ''
 
-    unless existing_entry = Site.published.find_by(url: /#{url}/)
+    unless !url.blank? && existing_entry = Site.published.find_by(url: /#{url}/)
       if @site.save
         #check if crawler succeeded
         unless @site.site_crawled
