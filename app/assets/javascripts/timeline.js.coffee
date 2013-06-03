@@ -224,16 +224,22 @@ warpVersion = (version) ->
       when 2003
         # find all headlines in content
         headlines = $(window.frameContent).find('#content').find(':header')
-  
+        
+        # animate headlines
         $.each headlines, (i, headline) ->
           random = Math.random()
-
           if random < 0.5
             # marquee tag
             $(headline).html '<marquee class="tw_animation" scrollamount="5" behavior="alternate" direction="left">'+$(headline).text()+'</marquee>'
           else
             # blink tag
             $(headline).html '<span class="tw_animation animation_blink">'+$(headline).text()+'</span>'
+
+        # background gradient
+        $(window.frameContent).find('body').addClass 'bgGrandient_'+getRandomNumer(3)
+
+        # add shadow to buttons
+        $(window.frameContent).find('[type="submit"]').addClass 'tw_button'
 
       when 1998
         # add additional css class - bootstrap geo cities
@@ -308,6 +314,26 @@ warpVersion = (version) ->
         # addons to subnavigation
         if 'unternavigation' not in window.twNotFound
           $(window.frameContent).find('#unternavigation').append getImageTag('anti_ie', 3)
+ 
+        # add additional button class btn
+        buttonclass = ['btn', 'btn-primary', 'btn-info', 'btn-success', 'btn-warning', 'btn-danger', 'btn-inverse']
+        randClassNum = getRandomNumer(7) - 1
+        $(window.frameContent).find('button, [type="submit"]').addClass buttonclass[randClassNum]
+
+        # add banner after tw_bar to keep bar on left side
+        $(window.frameContent).find('.tw_bar').after getImageTag('banner', 4, 'tw_banner')
+
+        # bar at left side
+        siteHeight = $(window.frameContent).find('body').css 'height'
+        # are colors available
+        if window.topColors isnt undefined
+          sidecolor = window.topColors[0].color
+        else
+          sidecolor = '#b2c400'
+
+        $(window.frameContent).find('.tw_bar').css 
+          'height': siteHeight
+          'background-color': sidecolor
 
       when 1994
         # seperate content from structure

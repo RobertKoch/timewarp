@@ -58,9 +58,12 @@ h6 {
 .tw_bar {
   position: absolute;
   width: 10px;
-  top: 0;
-  bottom: 0;
-  background-color: #b8c000;
+}
+
+.tw_banner {
+  margin: 0 auto;
+  display: block;
+  margin-bottom: 30px;
 }
 
 #unternavigation, #sidebar {
