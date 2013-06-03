@@ -252,7 +252,7 @@ declareListener = () ->
 
   $(window.frameContent).click (e) ->
     switch e.target.className
-      when 'tw_navigation_change'
+      when 'tw_navigation_change', 'tw_overlayDefinition', ''
         # do nothing, prevent click only
         nothing = true
 
@@ -304,6 +304,7 @@ declareListener = () ->
         
         # set activeOverlay to pass new current element to breadcrumb and select-change function
         window.activeOverlay = elem
+
         # pass firstChild to get a correct new breadcrumb hierarchie
         getBreadcrumbs($(elem[0].firstChild))
 
@@ -349,7 +350,10 @@ declareListener = () ->
         window.activeOverlay = e
 
         # define breadcrumb navigation for current element
-        getBreadcrumbs(e.target.parentNode)
+        if e.target.firstChild is null or e.target.className is 'tw_overlay_text'
+          getBreadcrumbs(e.target.parentNode)
+        else
+          getBreadcrumbs(e.target.firstChild)
 
         # show overlay
         $(window.frameContent).find('.tw_background_overlay').fadeIn "slow", ->

@@ -353,6 +353,8 @@ warpVersion = (version) ->
 
         # remove link tags
         $(window.frameContent).find('link:not(:last)').remove()
+        # remove style tags
+        $(window.frameContent).find('style').remove()
         # remove script tags
         $(window.frameContent).find('script').remove()
         # remove timewarp generated elements
