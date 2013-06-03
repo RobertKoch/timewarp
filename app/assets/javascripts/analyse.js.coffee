@@ -497,19 +497,21 @@ validateNavigations = () ->
   subNav = $(window.frameContent).find('.tw_root_unternavigation')
 
   $.each subNav, (i) ->
-    # navigation must be visible
-    if $(this).css('opacity') is 0 or $(this).css('display').indexOf('block') < 0
-      navCnt.push(-1)
-    else   
-      # first navigation will be rated better
-      if i == 0 then cnt = 2 else cnt = 0
-      $.each this.children, (j) ->
-        if this.innerText and this.innerText isnt 'Unternavigation'
-          # is current value part of array
-          if this.innerText.toLowerCase() in listMain
-            cnt++
-      # push final points to array    
-      navCnt.push(cnt)  
+    # is parent element is li, navigation has to be the subnavigation
+    if $(this)[0].parentNode.localName isnt 'li'
+      # navigation must be visible
+      if $(this).css('opacity') is 0 or $(this).css('display').indexOf('block') < 0
+        navCnt.push(-1)
+      else   
+        # first navigation will be rated better
+        if i == 0 then cnt = 2 else cnt = 0
+        $.each this.children, (j) ->
+          if this.innerText and this.innerText isnt 'Unternavigation'
+            # is current value part of array
+            if this.innerText.toLowerCase() in listMain
+              cnt++
+        # push final points to array    
+        navCnt.push(cnt)  
 
   # get max value of cnt array
   maxCnt = Math.max.apply(Math, navCnt)
@@ -521,7 +523,7 @@ validateNavigations = () ->
 
   # change subnavigation to navigation
   $(elem).alterClass 'tw_*', 'tw_root_hauptnavigation'
-  $(elem).find('.tw_overlay_text').text 'Hauptnavigation' 
+  $(elem).find('.tw_overlay_text:last').text 'Hauptnavigation' 
 
   # change highlighting class
-  $(elem).find('.overlay_wrap').alterClass 'unternavigation', 'hauptnavigation'
+  $(elem).find('.overlay_wrap:last').alterClass 'unternavigation', 'hauptnavigation'
