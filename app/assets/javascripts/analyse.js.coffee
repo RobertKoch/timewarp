@@ -24,7 +24,7 @@ $(window).load ->
   setTimeout (->
     startAnalyse()
 
-    startValidation() 
+    startValidation()
   ), 500
 
 initIntroJs = () ->
@@ -43,6 +43,10 @@ initIntroJs = () ->
       $('#analyse_frame span').hide()
     
 startAnalyse = () ->
+  # declare object for tagged fields (by customer and application)
+  # reset it in case of new calculation
+  resetTaggedFields()
+
   recursiveIterate(window.frameContent)
 
 resetAnalyse = () ->
@@ -50,6 +54,9 @@ resetAnalyse = () ->
   $(window.frameContent).find('.overlay_wrap').parent().alterClass 'tw_*', ''
   # remove all overlays
   $(window.frameContent).find('.overlay_wrap').remove()  
+
+  # reset it in case of new calculation
+  resetTaggedFields()
 
 startValidation = () ->
   validateNavigations()
@@ -190,7 +197,13 @@ generateOverlay = (node, value) ->
   # increase cnt for increasing z-index
   window.overlayCnt++
 
+  # increment tagged field in json object
+  incrementTaggedFields(value)
+
 changeOverlayAndClass = (value) ->
+  # update tagged fields before changing values
+  changeTaggedFields(window.activeOverlay.target.innerText, value)
+
   parentElement = window.activeOverlay.target.parentNode.parentNode
   $(parentElement).alterClass 'tw_*', 'tw_root_'+value.toLowerCase()
 
@@ -246,6 +259,58 @@ splitBreadcrumb = (element, splitter) ->
   accessElem = element.substring splitPosition, element.length
 
   return accessElem
+
+resetTaggedFields = () ->
+  window.taggedFields = {}
+  $('.twl_set').removeClass 'twl_set'
+    
+decrementTaggedFields = (value) ->
+  if value is 'Hauptnavigation'
+    value = 'Unternavigation'
+
+    # decrement unternavigation field in json object
+    window.taggedFields[value]--
+
+    if window.taggedFields[value] is 1
+      $('.twl_unternavigation').removeClass 'twl_set'
+
+    if window.taggedFields[value] is 0
+      $('.twl_hauptnavigation').removeClass 'twl_set'
+
+  else
+    # decrement tagged field in json object
+    window.taggedFields[value]--
+
+    if window.taggedFields[value] <= 0
+      # remove class from element in legend
+      $('.twl_'+value.toLowerCase()).removeClass 'twl_set'
+
+incrementTaggedFields = (value) ->
+  # set tagged field to 1 if it isnt in taggedFields object
+  if window.taggedFields[value] is undefined or window.taggedFields[value] is 0
+    window.taggedFields[value] = 1
+
+    # if first navigation is declared set value to main navigation
+    if value is 'Unternavigation'
+      value = 'hauptnavigation'
+
+    # add class to element in legend
+    $('.twl_'+value.toLowerCase()).addClass 'twl_set'
+
+  # increment number of tagged element
+  else
+    window.taggedFields[value]++
+
+    # if value of Unternavigation is 2, set class to unternavigation in legend
+    if value is 'Unternavigation' and window.taggedFields[value] is 2
+      $('.twl_unternavigation').addClass 'twl_set'
+
+changeTaggedFields = (oldValue, newValue) ->
+  # decrement number of "current" overlay
+  decrementTaggedFields(oldValue)
+
+  # increment number of set overlay 
+  incrementTaggedFields(newValue)
 
 declareListener = () ->
   el = $(window.frameContent).find('.tw_navigation_change')
@@ -314,6 +379,10 @@ declareListener = () ->
       when 'tw_overlayRemove'
         fadeOutOverlays(el)
 
+        # innerText of overlay box
+        # if innertext from target element is empty go for next sibling
+        value = window.activeOverlay.target.innerText or window.activeOverlay.target.nextSibling.innerText
+
         # remove class
         $(window.activeOverlay.target.parentNode.parentNode).alterClass 'tw_*', ''
 
@@ -321,8 +390,11 @@ declareListener = () ->
         clickedOverlay = window.activeOverlay.target.parentNode
         $(clickedOverlay).remove()
 
+        # decrement tagged Field
+        decrementTaggedFields(value)
+
         # if navigation is removed, validate new if possible
-        if window.activeOverlay.target.innerText is 'Hauptnavigation'
+        if value is 'Hauptnavigation'
           validateNavigations()
 
       else 
@@ -447,24 +519,35 @@ declareListener = () ->
   $('.back_to_future').click (e) ->
     e.preventDefault()
 
-    $(window.frameContent).find('.overlay_wrap').remove();
+    mandatoryFields = ['Header', 'Content', 'Hauptnavigation', 'Footer']
+    missingFields = []
 
-    token   = $('#analyse_token').attr('token')
-    content = $('#crawled_site').contents().find('html')[0].outerHTML
+    $.each mandatoryFields, (i, mandatoryField) ->
+      if window.taggedFields[mandatoryField] <= 0
+        missingFields.push mandatoryField
 
-    $.ajax(
-      type: 'POST',
-      dataType: 'json',
-      url: "/sites/rewrite_content",
-      data: {
-        token: token,
-        version: 'current',
-        content: content
-      },
-      async: false
-    ).done (bool) ->
-      if bool
-        window.location.replace window.location.origin+'/sites/'+token+'/timeline'
+    if missingFields.length is 0
+      $(window.frameContent).find('.overlay_wrap').remove();
+
+      token   = $('#analyse_token').attr('token')
+      content = $('#crawled_site').contents().find('html')[0].outerHTML
+
+      $.ajax(
+        type: 'POST',
+        dataType: 'json',
+        url: "/sites/rewrite_content",
+        data: {
+          token: token,
+          version: 'current',
+          content: content
+        },
+        async: false
+      ).done (bool) ->
+        if bool
+          window.location.replace window.location.origin+'/sites/'+token+'/timeline'
+
+    else
+      alert('Missing Fields: '+missingFields.join(', '))
 
   $('.reset_analyse').click (e) ->
     e.preventDefault()
@@ -485,45 +568,54 @@ validateFooter = () ->
       generateOverlay($(window.elemFooter), 'Footer')
     
 # every change of navigation must be validated
-validateNavigations = () -> 
+validateNavigations = (nesting) ->
   # reset root navigation
   $(window.frameContent).find('.tw_root_hauptnavigation').alterClass 'tw_root_hauptnavigation', 'tw_root_unternavigation'
 
-  # array of elements
-  listMain = new Array('startseite', 'home', 'über uns')
-  # array which stores navigation points
-  navCnt = new Array();
-  # list that contains every subnavigation
-  subNav = $(window.frameContent).find('.tw_root_unternavigation')
+  # stop is no navigation can be found
+  if $(window.frameContent).find('.tw_root_unternavigation').length > 0
 
-  $.each subNav, (i) ->
-    # is parent element is li, navigation has to be the subnavigation
-    if $(this)[0].parentNode.localName isnt 'li'
-      # navigation must be visible
-      if $(this).css('opacity') is 0 or $(this).css('display').indexOf('block') < 0
-        navCnt.push(-1)
-      else   
-        # first navigation will be rated better
-        if i == 0 then cnt = 2 else cnt = 0
-        $.each this.children, (j) ->
-          if this.innerText and this.innerText isnt 'Unternavigation'
-            # is current value part of array
-            if this.innerText.toLowerCase() in listMain
-              cnt++
-        # push final points to array    
-        navCnt.push(cnt)  
+    nesting = nesting or false
 
-  # get max value of cnt array
-  maxCnt = Math.max.apply(Math, navCnt)
-  # get array index of max value
-  posOfMax = navCnt.indexOf(maxCnt)
+    # array of elements
+    listMain = new Array('startseite', 'home', 'über uns')
+    # array which stores navigation points
+    navCnt = new Array();
+    # list that contains every subnavigation
+    subNav = $(window.frameContent).find('.tw_root_unternavigation')
 
-  # change subnavigation to main navigation
-  elem = subNav[posOfMax]
+    $.each subNav, (i) ->
+      # is parent element is li, navigation has to be the subnavigation
+      if $(this)[0].parentNode.localName isnt 'li' or nesting
+        # navigation must be visible
+        if $(this).css('opacity') is 0 or $(this).css('display').indexOf('block') < 0
+          navCnt.push(-1)
+        else   
+          # first navigation will be rated better
+          if i == 0 then cnt = 2 else cnt = 0
+          $.each this.children, (j) ->
+            if this.innerText and this.innerText isnt 'Unternavigation'
+              # is current value part of array
+              if this.innerText.toLowerCase() in listMain
+                cnt++
+          # push final points to array    
+          navCnt.push(cnt)  
 
-  # change subnavigation to navigation
-  $(elem).alterClass 'tw_*', 'tw_root_hauptnavigation'
-  $(elem).find('.tw_overlay_text:last').text 'Hauptnavigation' 
+    # get max value of cnt array
+    maxCnt = Math.max.apply(Math, navCnt)
+    # get array index of max value
+    posOfMax = navCnt.indexOf(maxCnt)
 
-  # change highlighting class
-  $(elem).find('.overlay_wrap:last').alterClass 'unternavigation', 'hauptnavigation'
+    # change subnavigation to main navigation
+    elem = subNav[posOfMax]
+
+    # is no main navigation could be found, retry with nested navigations
+    if elem is undefined
+      validateNavigations(true)
+
+    # change subnavigation to navigation
+    $(elem).alterClass 'tw_*', 'tw_root_hauptnavigation'
+    $(elem).find('.tw_overlay_text:last').text 'Hauptnavigation' 
+
+    # change highlighting class
+    $(elem).find('.overlay_wrap:last').alterClass 'unternavigation', 'hauptnavigation'

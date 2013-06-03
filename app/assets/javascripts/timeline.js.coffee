@@ -140,10 +140,19 @@ changePageStructure = (structure, prefix, warpClasses) ->
 
           try
             # get content - usw prefix to find right container to access
-            content = $(window.frameContent).find(prefix+v)
+            area = $(window.frameContent).find(prefix+v)
+            # prevent 'undefined' at beginning of sting
+            content = ''
 
+            # if more than 1 element is found for an area, go through each object
+            if area.length > 1
+              for i in [0...area.length]
+                content += area[i].innerHTML
+            else
+              content = area[0].innerHTML
+            
             # insert content to new structure
-            $(window.frameContent).find('#'+structure).find('#'+v).html content[0].innerHTML
+            $(window.frameContent).find('#'+structure).find('#'+v).html content
           catch e
 
       else
