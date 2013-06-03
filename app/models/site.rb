@@ -13,7 +13,7 @@ class Site
 
   store_in collection: 'sites'
 
-  has_many :comments, dependent: :delete
+  has_many :comments, :dependent => :delete
 
   after_initialize :add_http
   after_save :crawl_site_if_possible
@@ -38,15 +38,15 @@ class Site
     pics_path = Rails.root.join("public/saved_sites/#{self.token}")
 
     #snapshots for all versions
+    # IMGKit defaults in config/initializers/imgkit.rb
     Settings.crawler.years.each do |year|
-      kit = IMGKit.new(File.new(pics_path + "#{year}/index.html"), :quality => 85, :width => Settings.crawler.widths["y_#{year}"]
-)
+      kit = IMGKit.new(File.new(pics_path + "#{year}/index.html"), :width => Settings.crawler.widths["y_#{year}"].to_i)
+      p kit
       kit.to_file pics_path + "#{year}.jpg"
 
       #create small version of pic
       img = Magick::ImageList.new(pics_path + "#{year}.jpg")
-
-      small_img = img.minify.crop 0, 0, 700, 400
+      small_img = resize_by_width_and_crop_by_height(img, 700, 400)
       small_img.write(pics_path + "#{year}_preview.jpg"){self.quality = 100}
 
       if year == 'current'
@@ -92,6 +92,13 @@ private
     end
   end
 
+  def resize_by_width_and_crop_by_height(image, new_width, crop_height)
+    new_height = new_width / (image.columns.to_f / image.rows.to_f)
+    new_image = image.scale(new_width, new_height.to_i)
+    final_image = new_image.crop 0, 0, new_width, crop_height
+    return final_image
+  end
+
   def url_valid_and_exists
     valid = true
     if self.url != '' && URL_REGEX.match(self.url)
@@ -121,7 +128,7 @@ private
       if response.kind_of?(Net::HTTPSuccess) && response.code == '200'
         self.url = uri.to_s
       else
-        errors.add :url, "existiert nicht" if !errors.messages[:url].include? "existiert nicht"
+        errors.add :url, "existiert nicht" if !errors.messages[:url] || !errors.messages[:url].include?("existiert nicht")
         valid = false
       end
     else
