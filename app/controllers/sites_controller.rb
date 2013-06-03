@@ -84,6 +84,7 @@ class SitesController < ApplicationController
 
   def timeline
     @site = Site.find_by_token(params[:id])
+    @render_loading_screen = !@site.published?
   end
 
   def publish
