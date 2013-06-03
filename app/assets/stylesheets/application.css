@@ -18,7 +18,6 @@
  *= require imprint
  *= require tags
  *= require comments
- *= require media-queries
  *= require analyse
  *= require timeline
  *= require introjs

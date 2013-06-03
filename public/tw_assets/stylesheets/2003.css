@@ -30,3 +30,42 @@ body {
   background-size: 20px;
   padding-left: 30px;
 }
+
+.bgGrandient_1 {
+  background: #d0e4f7; 
+  background: -moz-linear-gradient(top, #d0e4f7 0%, #73b1e7 24%, #0a77d5 50%, #539fe1 79%, #87bcea 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#d0e4f7), color-stop(24%,#73b1e7), color-stop(50%,#0a77d5), color-stop(79%,#539fe1), color-stop(100%,#87bcea)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, #d0e4f7 0%,#73b1e7 24%,#0a77d5 50%,#539fe1 79%,#87bcea 100%);
+  background: -o-linear-gradient(top, #d0e4f7 0%,#73b1e7 24%,#0a77d5 50%,#539fe1 79%,#87bcea 100%); 
+  background: -ms-linear-gradient(top, #d0e4f7 0%,#73b1e7 24%,#0a77d5 50%,#539fe1 79%,#87bcea 100%); 
+  background: linear-gradient(to bottom, #d0e4f7 0%,#73b1e7 24%,#0a77d5 50%,#539fe1 79%,#87bcea 100%); 
+}
+
+.bgGrandient_2 {
+  background: #b4e391;
+  background: -moz-linear-gradient(top, #b4e391 0%, #61c419 50%, #b4e391 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#b4e391), color-stop(50%,#61c419), color-stop(100%,#b4e391)); 
+  background: -webkit-linear-gradient(top, #b4e391 0%,#61c419 50%,#b4e391 100%); 
+  background: -o-linear-gradient(top, #b4e391 0%,#61c419 50%,#b4e391 100%); 
+  background: -ms-linear-gradient(top, #b4e391 0%,#61c419 50%,#b4e391 100%);
+  background: linear-gradient(to bottom, #b4e391 0%,#61c419 50%,#b4e391 100%);
+}
+
+.bgGrandient_3 {
+  background: #f3c5bd; 
+  background: -moz-linear-gradient(top, #f3c5bd 0%, #e86c57 50%, #ff6600 99%, #c72200 100%); 
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f3c5bd), color-stop(50%,#e86c57), color-stop(99%,#ff6600), color-stop(100%,#c72200)); 
+  background: -webkit-linear-gradient(top, #f3c5bd 0%,#e86c57 50%,#ff6600 99%,#c72200 100%);
+  background: -o-linear-gradient(top, #f3c5bd 0%,#e86c57 50%,#ff6600 99%,#c72200 100%); 
+  background: -ms-linear-gradient(top, #f3c5bd 0%,#e86c57 50%,#ff6600 99%,#c72200 100%);
+  background: linear-gradient(to bottom, #f3c5bd 0%,#e86c57 50%,#ff6600 99%,#c72200 100%); 
+}
+
+button, .tw_button {
+  -moz-box-shadow: 1px 3px 10px 2px #ccc;
+  -webkit-box-shadow: 1px 3px 10px 2px #ccc;
+  -o-box-shadow: 1px 3px 10px 2px #ccc;
+  -ms-box-shadow: 1px 3px 10px 2px #ccc;
+  box-shadow: 1px 3px 10px 2px #ccc
+  background: transparent;
+}
