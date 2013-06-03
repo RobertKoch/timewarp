@@ -324,7 +324,7 @@ warpVersion = (version) ->
         $(window.frameContent).find('.tw_bar').after getImageTag('banner', 4, 'tw_banner')
 
         # bar at left side
-        siteHeight = $(window.frameContent).find('body').css 'height'
+        siteHeight = $(window.frameContent).height()
         # are colors available
         if window.topColors isnt undefined
           sidecolor = window.topColors[0].color
@@ -334,6 +334,11 @@ warpVersion = (version) ->
         $(window.frameContent).find('.tw_bar').css 
           'height': siteHeight
           'background-color': sidecolor
+
+        # add watermark to images in content
+        wImages = $(window.frameContent).find('#content').find('img').not('[class*="tw_"]')
+        $.each wImages, (i, img) ->
+          $(img).wrap '<span class="tw_watermark"></span>'
 
       when 1994
         # seperate content from structure
