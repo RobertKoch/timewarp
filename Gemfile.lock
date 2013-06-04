@@ -52,6 +52,9 @@ GEM
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
       xpath (~> 2.0)
+    capybara-webkit (1.0.0)
+      capybara (~> 2.0, >= 2.0.2)
+      json
     coffee-rails (3.2.2)
       coffee-script (>= 2.2.0)
       railties (~> 3.2.0)
@@ -228,6 +231,7 @@ PLATFORMS
 DEPENDENCIES
   capistrano
   capybara
+  capybara-webkit
   coffee-rails (~> 3.2.1)
   database_cleaner
   devise
