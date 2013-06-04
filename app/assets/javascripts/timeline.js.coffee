@@ -246,6 +246,9 @@ warpVersion = (version) ->
 
   switch version
       when 2008
+        # remove script tags
+        $(window.frameContent).find('script').remove()
+
         # rebuild site with div structure
         changePageStructure('divStructure', '.tw_root_', warpClasses)
 
@@ -376,8 +379,8 @@ warpVersion = (version) ->
         # bar at left side
         siteHeight = $(window.frameContent).height()
         # are colors available
-        if window.topColors isnt undefined
-          sidecolor = window.topColors[0].color
+        if window.topColors isnt undefined && window.topColors.length > 0
+          sidecolor = window.topColors[1].color
         else
           sidecolor = '#b2c400'
 
@@ -405,8 +408,6 @@ warpVersion = (version) ->
         $(window.frameContent).find('link:not(:last)').remove()
         # remove style tags
         $(window.frameContent).find('style').remove()
-        # remove script tags
-        $(window.frameContent).find('script').remove()
         # remove timewarp generated elements
         $(window.frameContent).find('.tw_navigation_change').remove()
         $(window.frameContent).find('#tableStructure').remove()
