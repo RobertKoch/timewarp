@@ -238,6 +238,8 @@
 .introjs-helperNumberLayer {
   left: auto !important;
   right: -16px !important;
+  background-image: none !important;
+  background-color: $blue !important;
 }
 
 .introjs-tooltip {
