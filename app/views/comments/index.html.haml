@@ -1,21 +1,22 @@
-%h1= "comments of site '#{@site.title}'"
+%section#admins
+  %h1= "comments of site '#{@site.title}'"
 
-%p= "URL: #{@site.url}"
-%br
-%table.admin_comments
-  %tr.head
-    %td.created Created at
-    %td.id Name
-    %td text
-    %td.actions Actions
-  - @site.comments.reverse.each do |comment|
-    %tr
-      %td= to_german_date comment.created_at
-      %td= "#{comment.name} (#{comment.email})"
-      %td= comment.text
-      %td= link_to "delete", site_comment_path(@site, comment), :method => :delete, :confirm => "Are you sure?"
+  %p= "URL: #{@site.url}"
+  %br
+  %table.admin_comments
+    %tr.head
+      %td.created Created at
+      %td.id Name
+      %td text
+      %td.actions Actions
+    - @site.comments.reverse.each do |comment|
+      %tr
+        %td= to_german_date comment.created_at
+        %td= "#{comment.name} (#{comment.email})"
+        %td= comment.text
+        %td= link_to "delete", site_comment_path(@site, comment), :method => :delete, :confirm => "Are you sure?"
 
-%br
-%br
-%br
-= link_to "back", :back
+  %br
+  %br
+  %br
+  = link_to "back", :back
