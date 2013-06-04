@@ -128,7 +128,7 @@ private
       if response.kind_of?(Net::HTTPSuccess) && response.code == '200'
         self.url = uri.to_s
       else
-        errors.add :url, "existiert nicht" if !errors.messages[:url] || !errors.messages[:url].include?("existiert nicht")
+        errors.add :url, "existiert nicht oder darf nicht geladen werden" if !errors.messages[:url] || !errors.messages[:url].include?("existiert nicht")
         valid = false
       end
     else
