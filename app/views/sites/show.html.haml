@@ -8,6 +8,9 @@
       fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));
 
+%nav#sub_navigation
+  = render :partial => 'partials/archive_navigation'
+
 #archive_detail
   %h1
     - if !@site.title.blank?
