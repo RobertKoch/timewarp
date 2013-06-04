@@ -6,7 +6,7 @@ class ElementsController < ApplicationController
     elements.each do |el|
       label = el.keys[0]
       value = el.values[0]
-      unless exists = Element.find_by(label: label)
+      unless exists = Element.find_by(value: value)
         new_elem = Element.create(:label => label, :value => value)
         teached_me_count += 1
       end
