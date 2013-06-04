@@ -1,5 +1,5 @@
 GIT
-  remote: git://github.com/galetahub/simple-captcha.git
+  remote: https://github.com/galetahub/simple-captcha.git
   revision: e99cc7e8bf6b8cf8f03878c657ae7d1e6efe7c58
   specs:
     simple_captcha (0.1.5)
