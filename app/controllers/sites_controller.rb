@@ -1,5 +1,5 @@
 class SitesController < ApplicationController
-  include SimpleCaptcha::ControllerHelpers
+  #include SimpleCaptcha::ControllerHelpers
 
   before_filter :authenticate_admin!, :only => [:edit, :update, :destroy, :preview]
   before_filter :site_exists_and_not_published, :only => [:analyse]
@@ -119,9 +119,9 @@ class SitesController < ApplicationController
   def create_comment
     @site = Site.find_by_token(params[:site][:token])
     @comment = @site.comments.build(params[:comment])
-    @captcha_invalid = !simple_captcha_valid?
+    #@captcha_invalid = !simple_captcha_valid?
 
-    if !@captcha_invalid && @comment.save
+    if @comment.save #!@captcha_invalid && @comment.save
       @comment = @site.comments.build
       @comments = @site.comments.reject {|c| !c.created_at}
       render :reload_comments
