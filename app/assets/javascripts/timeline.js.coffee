@@ -78,7 +78,12 @@ reloadVersion = (version) ->
         $(frame).attr 'height', $(window).height() - 295
       else
         $(frame).attr 'height', 450 
-      
+
+  # set narrow sidebar on smaller screens
+  if $(frame).width() > $('#site_show').width()
+    $('#sidebar_2003, #sidebar_2008').css
+      width: $('#timeline').width() - $(frame).width() - 30
+
 saveVersion = (version) ->
   host = $('#app_config').attr 'host'
 
