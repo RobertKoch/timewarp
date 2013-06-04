@@ -181,7 +181,7 @@
   }
 }
 
-.missing_fields {
+.missing_fields, .crawling_impossible {
   position: fixed;
   top: 0;
   left: 0;
@@ -190,6 +190,49 @@
   background-color: rgba(0, 0, 0, .5);
   display: none;
   z-index: 9998;
+
+  &.crawling_impossible {
+    background-color: rgba(0, 0, 0, .9);
+
+    .missing {
+      margin: {
+        top: -200px;
+      }
+      height: auto;
+
+      .skull {
+        display: block;
+        width: 220px;
+        height: 252px;
+        background: {
+          image: url('skull.png');
+          position: 0 0;
+          repeat: no-repeat;
+        }
+        margin: 0 auto 20px;
+      }
+
+      h5 {
+        text-align: center;
+        font: {
+          size: $font_size_medium !important;
+        }
+      }
+
+      p {
+        text-align: center;
+        line-height: 1.5em;
+      }
+
+      .close_ok {
+        display: inline-block;
+        float: none;
+        margin: {
+          top: 1em;
+        }
+      }
+    }
+  }
 
   .missing {
     position: absolute;
@@ -241,8 +284,8 @@
     }
 
     .close_ok {
-      background: url('/tw_assets/images/overlay/continue.png') right 0 no-repeat;
-      padding: 4px 20px 0 0;
+      background: url('arrow-right.png') right 100% no-repeat;
+      padding: 4px 25px 0 0;
       height: 16px;
       cursor: pointer;
       margin-top: 15px;
@@ -251,7 +294,7 @@
 
     .close_ok:hover {
       color: #a01111;
-      background-image: url('/tw_assets/images/overlay/continue-hover.png');
+      background-image: url('arrow-right-hover.png');
     }
   }
 }

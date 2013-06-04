@@ -53,8 +53,8 @@ initIntroJs = () ->
 showFeasibilityFail = () ->
   $('.crawling_impossible').fadeIn()
 
-  $('.crawling_impossible .close, .crawling_impossible .close_ok').click (e) ->
-    $('.crawling_impossible').fadeOut()
+  $('.crawling_impossible .close_ok').click (e) ->
+    window.location.replace window.location.origin
 
 checkFeasibility = () ->
   if $(window.frameContent).find('body').length is 0
