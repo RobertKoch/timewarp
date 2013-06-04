@@ -137,6 +137,7 @@
   color: #000;
   background-color: #fff;
   padding: .8em 1em;
+  cursor: pointer;
   -webkit-border-radius: 5px; 
      -moz-border-radius: 5px; 
           border-radius: 5px;

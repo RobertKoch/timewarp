@@ -12,6 +12,12 @@ getWebSafeColor = (color) ->
   # return hex value
   return '#' + tinycolor("rgb (" + red + "," + green + "," + blue + ")").toHex()
 
+getOpacityColor = (color, opacity) ->
+  colorRGB = tinycolor(color).toRgb()
+  colorRGB.a = opacity
+  colorRGB = tinycolor(colorRGB).toRgbString()
+  return colorRGB
+
 getColorName = (color) ->
   colorHexArr = []
   # convert color to RGB
@@ -185,13 +191,18 @@ changePageStructure = (structure, prefix, warpClasses) ->
   # remove remaining content of body
   $(window.frameContent).find('body').children().remove()
 
-setColors = (warpClasses, prefix, webSafe) ->
+setColors = (warpClasses, webSafe, opacity, sort) ->
   # break if there are no colors available
   if window.topColors isnt undefined
+    # shuffle colors
+    if sort
+      window.topColors = window.topColors.sort (a, b) ->
+        Math.random() - 0.5
+
     i = 0
 
     $.each warpClasses, (j, v) ->
-      elem = $(window.frameContent).find(prefix+v)
+      elem = $(window.frameContent).find('#'+v)
       
       if elem.length > 0 and i < window.topColors.length
         height = $(elem).css 'height'
@@ -203,9 +214,12 @@ setColors = (warpClasses, prefix, webSafe) ->
         if webSafe
           color = getWebSafeColor(color)
 
+        if opacity < 1
+          color = getOpacityColor(color, opacity)
+
         # if navigation element has no height, set background-color to including a tags
         if parseInt(height) < 1 and v.indexOf('navigation') >= 0
-          aTags = $(window.frameContent).find(prefix+v+' > li > a')
+          aTags = $(window.frameContent).find('#'+v+' > li > a')
           $(aTags).attr('style', 'background-color: '+color+' !important')
         else
           $(elem).attr('style', 'background-color: '+color+' !important')
@@ -232,11 +246,11 @@ warpVersion = (version) ->
 
   switch version
       when 2008
-        # set most commen color to different areas
-        setColors(warpClasses, '.tw_root_', false)
-
         # rebuild site with div structure
         changePageStructure('divStructure', '.tw_root_', warpClasses)
+
+        # set most commen color to different areas
+        setColors(warpClasses, false, 0.7, false)
 
         # remove facebook like-box plugin
         $(window.frameContent).find('iframe[src*="facebook"]').remove()
@@ -264,18 +278,28 @@ warpVersion = (version) ->
         # background gradient
         $(window.frameContent).find('body').addClass 'bgGrandient_'+getRandomNumer(3)
 
+        # set most commen color to different areas
+        setColors(warpClasses, false, 1, true)
+
         # add shadow to buttons
         $(window.frameContent).find('[type="submit"]').addClass 'tw_button'
 
+        # add audio
+        audioTag = '<audio src="'+getPath()+'/audio/audio_'+getRandomNumer(3)+'.mp3" preload="auto" controls autoplay></audio>'
+        $(window.frameContent).find('#header').before audioTag
+
       when 1998
         # add additional css class - bootstrap geo cities
-        #addCssClasses('bootstrap_geo')
+        addCssClasses('bootstrap_geo')
 
         # rebuild site with table structure
         changePageStructure('tableStructure', '#divStructure > #', warpClasses)
 
         # remove remaining div structure
         $(window.frameContent).find('#divStructure').remove()
+
+        # remove audio
+        $(window.frameContent).find('audio').remove()
 
         # remove headline animations
         animationBlocks = $(window.frameContent).find('.tw_animation')
@@ -309,7 +333,7 @@ warpVersion = (version) ->
         $(window.frameContent).find('#unternavigation li a').css 'background', 'url('+path+') 0 0 no-repeat'
 
         # set webSafe colors
-        setColors(warpClasses, '#', true)
+        setColors(warpClasses, true, 1, false)
 
         # prepend alarm to first headline
         $(window.frameContent).find('#content').find(':header:first').prepend getImageTag('alarm', 6)
