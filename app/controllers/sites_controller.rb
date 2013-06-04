@@ -144,7 +144,7 @@ class SitesController < ApplicationController
   def rewrite_content
     file_path = Rails.root.join "public/saved_sites/#{params[:token]}/#{params[:version]}/index.html"
     
-    file = File.open(file_path, "w")
+    file = File.open(file_path, "w:UTF-8")
     state = file.write(params[:content])
     file.close
 
