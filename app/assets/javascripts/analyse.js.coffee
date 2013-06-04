@@ -1,6 +1,4 @@
 $(document).ready ->
-  initIntroJs()
-  
   # set iframe height
   if ($(window).height() > 768)
     dynamicFrameHeight = $(window).height() - 255
@@ -14,23 +12,28 @@ $(window).load ->
   # store in window element
   window.frameContent = $('#crawled_site').contents().find('html')
 
-  # store new id's and save it at end to database
-  window.fieldsToLearn = []
+  if checkFeasibility()
+    initIntroJs()
 
-  getDatabaseAttributes()
+    # store new id's and save it at end to database
+    window.fieldsToLearn = []
 
-  defineAdditionalAddons()
+    getDatabaseAttributes()
 
-  declareListener()
+    defineAdditionalAddons()
 
-  removeUnsolicitedTags()
+    declareListener()
 
-  # prevent position bug
-  setTimeout (->
-    startAnalyse()
+    removeUnsolicitedTags()
 
-    startValidation()
-  ), 500
+    # prevent position bug
+    setTimeout (->
+      startAnalyse()
+
+      startValidation()
+    ), 500
+  else
+    showFeasibilityFail()
 
 initIntroJs = () ->
   introJs()
@@ -46,6 +49,18 @@ initIntroJs = () ->
     .onexit ->
       introJs().exit()
       $('#analyse_frame span').hide()
+
+showFeasibilityFail = () ->
+  $('.crawling_impossible').fadeIn()
+
+  $('.crawling_impossible .close, .crawling_impossible .close_ok').click (e) ->
+    $('.crawling_impossible').fadeOut()
+
+checkFeasibility = () ->
+  if $(window.frameContent).find('body').length is 0
+    false
+  else
+    true
     
 startAnalyse = () ->
   # declare object for tagged fields (by customer and application)
@@ -69,14 +84,6 @@ startValidation = () ->
 
 removeUnsolicitedTags = () ->
   $(window.frameContent).find('a').removeAttr 'href'
-
-  #regex = new Array(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/g, /<iframe\b[^<]*(?:(?!<\/iframe>)<[^<]*)*<\/iframe>/g);
-  #i = 0;
-
-  #while i < regex.length
-  #  while regex[i].test(frameContent)
-  #    frameContent = frameContent.replace(regex[i], ""); 
-  #  i++;
 
 defineAdditionalAddons = () ->
   host = $('#app_config').attr 'host'
@@ -583,10 +590,6 @@ declareListener = () ->
       saveAnalysedPage()
 
     else
-      console.log e.pageY
-      $('.missing_fields').css
-        'top': e.pageY - 120
-
       $('.missing_fields .fields').html missingFields.join(', ')
       $('.missing_fields').fadeIn()
 
