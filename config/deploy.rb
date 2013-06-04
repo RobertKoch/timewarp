@@ -42,4 +42,4 @@ set :rvm_ruby_string, "ruby-1.9.3-p392" # use the same ruby as used locally for 
 set :rvm_autolibs_flag, "read-only" 
 before 'deploy:setup', 'rvm:create_gemset'
 
-after "deploy:update_code", "deploy:copy_config"
+after "deploy:update_code", "deploy:copy_config", "deploy:seed"
