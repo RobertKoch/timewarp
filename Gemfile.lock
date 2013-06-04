@@ -1,10 +1,4 @@
 GIT
-  remote: https://github.com/galetahub/simple-captcha.git
-  revision: e99cc7e8bf6b8cf8f03878c657ae7d1e6efe7c58
-  specs:
-    simple_captcha (0.1.5)
-
-GIT
   remote: https://github.com/thetron/mongoid_token.git
   revision: 70049745cc4baa4136601368033d06a955225dc3
   branch: patch/collisions-define-method
@@ -58,8 +52,6 @@ GEM
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
       xpath (~> 2.0)
-    client_side_validations (3.0.5)
-      activesupport
     coffee-rails (3.2.2)
       coffee-script (>= 2.2.0)
       railties (~> 3.2.0)
@@ -68,7 +60,7 @@ GEM
       execjs
     coffee-script-source (1.6.2)
     database_cleaner (1.0.1)
-    devise (2.2.3)
+    devise (2.2.4)
       bcrypt-ruby (~> 3.0)
       orm_adapter (~> 0.1)
       railties (~> 3.1)
@@ -85,9 +77,7 @@ GEM
       railties (>= 3.0.0)
     fancybox2-rails (0.2.4)
       railties (>= 3.1.0)
-    formtastic (2.2.1)
-      actionpack (>= 3.0)
-    haml (4.0.2)
+    haml (4.0.3)
       tilt
     haml-rails (0.4)
       actionpack (>= 3.1, < 4.1)
@@ -102,22 +92,22 @@ GEM
       sass-rails (>= 3.2)
       thor (~> 0.14)
     journey (1.0.4)
-    jquery-rails (2.2.1)
+    jquery-rails (2.3.0)
       railties (>= 3.0, < 5.0)
       thor (>= 0.14, < 2.0)
-    jquery-ui-rails (4.0.2)
+    jquery-ui-rails (4.0.3)
       jquery-rails
       railties (>= 3.1.0)
-    json (1.7.7)
+    json (1.8.0)
     libv8 (3.11.8.17)
     mail (2.4.4)
       i18n (>= 0.4.0)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
     mime-types (1.23)
-    mongoid (3.1.3)
+    mongoid (3.1.4)
       activemodel (~> 3.2)
-      moped (~> 1.4.2)
+      moped (~> 1.4)
       origin (~> 1.0)
       tzinfo (~> 0.3.22)
     mongoid-rspec (1.8.2)
@@ -127,8 +117,8 @@ GEM
     mongoid_taggable (1.1.1)
       mongoid (>= 3)
       rake
-    moped (1.4.5)
-    multi_json (1.7.3)
+    moped (1.5.0)
+    multi_json (1.7.5)
     net-scp (1.1.1)
       net-ssh (>= 2.6.5)
     net-sftp (2.1.2)
@@ -168,7 +158,7 @@ GEM
     rake (10.0.4)
     rdoc (3.12.2)
       json (~> 1.4)
-    ref (1.0.4)
+    ref (1.0.5)
     rmagick (2.13.2)
     rspec (2.13.0)
       rspec-core (~> 2.13.0)
@@ -219,7 +209,7 @@ GEM
       polyglot
       polyglot (>= 0.3.1)
     tzinfo (0.3.37)
-    uglifier (2.1.0)
+    uglifier (2.1.1)
       execjs (>= 0.3.0)
       multi_json (~> 1.0, >= 1.0.2)
     warden (1.2.1)
@@ -238,13 +228,11 @@ PLATFORMS
 DEPENDENCIES
   capistrano
   capybara
-  client_side_validations (= 3.0.5)
   coffee-rails (~> 3.2.1)
   database_cleaner
   devise
   factory_girl_rails
   fancybox2-rails (~> 0.2.4)
-  formtastic
   haml-rails
   imgkit
   introjs-rails
@@ -261,7 +249,6 @@ DEPENDENCIES
   rvm-capistrano
   sass-rails
   shoulda-matchers
-  simple_captcha!
   simple_form
   stellar-js-rails (~> 0.6.1)
   sysinfo
