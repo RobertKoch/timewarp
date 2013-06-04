@@ -1,4 +1,10 @@
 GIT
+  remote: git://github.com/galetahub/simple-captcha.git
+  revision: e99cc7e8bf6b8cf8f03878c657ae7d1e6efe7c58
+  specs:
+    simple_captcha (0.1.5)
+
+GIT
   remote: https://github.com/thetron/mongoid_token.git
   revision: 70049745cc4baa4136601368033d06a955225dc3
   branch: patch/collisions-define-method
@@ -77,7 +83,8 @@ GEM
       railties (>= 3.0.0)
     fancybox2-rails (0.2.4)
       railties (>= 3.1.0)
-    galetahub-simple_captcha (0.1.5)
+    formtastic (2.2.1)
+      actionpack (>= 3.0)
     haml (4.0.2)
       tilt
     haml-rails (0.4)
@@ -234,7 +241,7 @@ DEPENDENCIES
   devise
   factory_girl_rails
   fancybox2-rails (~> 0.2.4)
-  galetahub-simple_captcha
+  formtastic
   haml-rails
   imgkit
   introjs-rails
@@ -251,6 +258,7 @@ DEPENDENCIES
   rvm-capistrano
   sass-rails
   shoulda-matchers
+  simple_captcha!
   simple_form
   stellar-js-rails (~> 0.6.1)
   sysinfo
