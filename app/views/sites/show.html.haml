@@ -34,14 +34,15 @@
         = to_german_date(@site.created_at)
       %li.site_views
         %span.icon
-        = @site.visits
-        views
+        - views = "#{@site.visits} x"
+        = views
+        &nbsp;gesehen
       %li.site_likes
         %a.likes{:href => 'javascript:void(0)'}
           %span.icon
           %span.number
             = @site.likes
-          likes
+          &nbsp;„ gefällt mir “
         #likes_config.hidden{:attr_link => increment_like_site_path}
       %li.site_share
         %a.closed{:href => 'javascript:void(0)'}
