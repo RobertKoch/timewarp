@@ -33,10 +33,10 @@ a:hover {text-decoration: none;}
   display: block;
   float: left;
 }
-#hauptnavigation li > ul, #unternavigation li > ul {display: none;}  
+#hauptnavigation li > ul, #unternavigation li > ul {display: none !important;}  
 #hauptnavigation li:hover > ul, #unternavigation li:hover > ul {
   position: absolute;
-  display: block;
+  display: none;
   opacity: 1 !important;
 }
 

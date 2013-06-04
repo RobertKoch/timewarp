@@ -167,9 +167,15 @@ changePageStructure = (structure, prefix, warpClasses) ->
             # prevent 'undefined' at beginning of sting
             content = ''
 
+            # if subnavigation stop after two loops
+            if v is 'unternavigation'
+              length = 2
+            else
+              length = area.length
+
             # if more than 1 element is found for an area, go through each object
             if area.length > 1
-              for i in [0...area.length]
+              for i in [0...length]
                 content += area[i].innerHTML
             else
               content = area[0].innerHTML

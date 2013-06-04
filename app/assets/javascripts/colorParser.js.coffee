@@ -63,10 +63,15 @@ validateColors = (css) ->
     if color.indexOf('rgb') >= 0 and color.substring(0, 4) isnt 'rgba'
       color = '#'+tinycolor(color).toHex()
 
-    if color.indexOf('#') >= 0
+    # length has to be greather than 5
+    if color.indexOf('#') >= 0 and color.length > 5 
       if color.charAt(0) is '#'
-        sum += cnt
-        colorArr.push([color, cnt])
+        # remove hash
+        colorStr = color.substring 1, color.length
+        # check for grey scale
+        if colorStr.substring(0, 2) isnt colorStr.substring(2, 4)
+          sum += cnt
+          colorArr.push([color, cnt])
   
   # sort array like DESC
   colorArr = colorArr.sort (a, b) ->

@@ -124,7 +124,7 @@ getDatabaseAttributes = () ->
     type: 'GET',
     dataType: 'json',
     url: "/elements/teach",
-    async: true
+    async: false
   ).done (data) ->
     if data
       window.jsonData = data
