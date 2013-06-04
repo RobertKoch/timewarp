@@ -31,6 +31,7 @@ reloadVersion = (version) ->
   version_path = $('#timeline_config').attr('sites_path') + '/' + version + '/index.html'
   frame = $('#version_frame')
   browser = $('#browser')
+  sidebar = $('.sidebar')
 
   $(frame).attr('src', version_path)
 
@@ -39,7 +40,10 @@ reloadVersion = (version) ->
       $(frame).attr
         width: 640
         height: 480
+
       $(browser).attr 'class', 'browser_1994'
+      $(sidebar).hide()
+      $('#sidebar_1994').show()
 
     when '1998'
       $(frame).attr
@@ -47,20 +51,28 @@ reloadVersion = (version) ->
         height: 600
 
       $(browser).attr 'class', 'browser_1998'
+      $(sidebar).hide()
+      $('#sidebar_1998').show()
 
     when '2003', '2008'
       $(frame).attr
         width: 1024
         height: 768
 
-      $(browser).attr 'class', 'browser_2003' 
+      $(browser).attr 'class', 'browser_2003'
+      $(sidebar).hide()
+      $('#sidebar_2003').show()
 
       if version is '2008'
         $(browser).addClass 'browser_2008'
+        $(sidebar).hide()
+        $('#sidebar_2008').show()
 
     else 
       $(frame).attr('width', '100%')
       $(browser).attr 'class', 'browser_current'
+      $(sidebar).hide()
+      $('#sidebar_current').show()
 
       if $(window).height() > 768
         $(frame).attr 'height', $(window).height() - 295
