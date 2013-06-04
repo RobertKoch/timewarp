@@ -171,6 +171,45 @@
   }
 }
 
+.missing_fields {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: {
+    top: -100px;
+    left: -150px;
+  }
+  display: none;
+  background-color: $white;
+  padding: 20px;
+  width: 300px;
+  height: 200px;
+  z-index: 9999;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 12px;
+  font-weight: normal;
+  color: $grey;
+  -webkit-border-radius: 5px; 
+     -moz-border-radius: 5px; 
+          border-radius: 5px;
+  -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+     -moz-box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+
+  .close {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background: url('close-large.png') 0 0 no-repeat;
+    width: 20px;
+    height: 20px;
+    display: block;
+    text-indent: -19999px;
+    overflow: hidden;
+    cursor: pointer;
+  }
+}
+
 .introjs-helperNumberLayer {
   left: auto !important;
   right: -16px !important;

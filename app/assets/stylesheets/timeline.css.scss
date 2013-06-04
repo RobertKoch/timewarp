@@ -1,58 +1,97 @@
 @import 'variables';
 
-#site_show {
-  float: left; 
+#timeline {
+  float: left;
   width: 100%;
 
-  #browser {
-    position: relative;
-    margin: 0 auto;
-    background: {
-      image: url('browser/1998_ie.png');
-      position: 0 0;
-      repeat: no-repeat;
-    }
-  
-    &.browser_1994 {
-      width: 640px;
-      height: 480px;
-      background: {
-        image: url('browser/1994_ie.png');
-      }
-      padding: 95px 2px 20px 2px;
+  #site_show {
+    float: left;
+    width: $width_734;
+    margin: {
+      right: $width_13 * 2;
     }
 
-    &.browser_1998 {
-      width: 800px;
-      height: 600px;
+    #browser {
+      position: relative;
       background: {
         image: url('browser/1998_ie.png');
+        position: 0 0;
+        repeat: no-repeat;
       }
-      padding: 120px 6px 26px 6px;
-    }
-
-    &.browser_2003 {
-      width: 1024px;
-      height: 768px;
-      background: {
-        image: url('browser/2003_ff.png');
+    
+      &.browser_1994 {
+        width: 640px;
+        height: 480px;
+        background: {
+          image: url('browser/1994_mosaic.png');
+        }
+        padding: 138px 4px 23px 5px;
       }
-      padding: 126px 4px 4px 1px;
-    }
 
-    &.browser_2008 {
-      background: {
-        image: url('browser/2008_chrome.png');
+      &.browser_1998 {
+        width: 800px;
+        height: 600px;
+        background: {
+          image: url('browser/1998_ie.png');
+        }
+        padding: 120px 6px 26px 6px;
       }
-      padding: 61px 2px 3px 2px;
-    }
 
-    &.browser_current {
+      &.browser_2003 {
+        width: 1024px;
+        height: 768px;
+        background: {
+          image: url('browser/2003_safari.png');
+        }
+        padding: 74px 1px 4px 1px;
+      }
 
+      &.browser_2008 {
+        background: {
+          image: url('browser/2008_chrome.png');
+        }
+        padding: 61px 2px 3px 2px;
+      }
+
+      &.browser_current {
+        background: {
+          image: url('browser/2013_ff_left.png');
+        }
+        padding: 87px 0 0 0;
+
+        .browser_header_right {
+          position: absolute;
+          top: 0;
+          right: 0;
+          display: block;
+          width: 506px;
+          height: 87px;
+          background: {
+            image: url('browser/2013_ff_right.png');
+          }
+        }
+      }
     }
   }
-  
+
+  .sidebar {
+    position: relative;
+    float: left;
+    width: $width_200;
+    display: none;
+
+    h4 {}
+
+    p {
+      line-height: 1.5em;
+      margin: {
+        bottom: 3em;
+      }
+    }
+  }
+
   .button {
+    clear: both;
     float: right;
     margin: {
       top: 1em;
@@ -61,6 +100,7 @@
     }
   }  
 }
+
 
 #archive_form {
   display: none;
