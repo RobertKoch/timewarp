@@ -1,0 +1,21 @@
+%section#admins
+  %h1 elements
+
+  %br
+  %table.admin_elements
+    %tr.head
+      %td.id Label
+      %td Value
+      %td.created Created at
+      %td.actions Actions
+    - @elements.each do |el|
+      %tr
+        %td= el.label
+        %td= el.value
+        %td= to_german_date el.created_at
+        %td= link_to "delete", element_path(el), :method => :delete, :confirm => "Are you sure?"
+
+  %br
+  %br
+  %br
+  = link_to "back", :back

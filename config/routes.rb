@@ -13,6 +13,7 @@ Timewarp::Application.routes.draw do
     get "admin/sites"          => "admins#sites", :as => "admin_sites"
     get "admin/users"          => "admins#index", :as => "admins"
     get "admin/users/:id/edit" => "admins#edit", :as => "admin_edit"
+    get "admin/elements"       => "elements#index", :as => "admin_elements"
   end
 
   #site paths and their relations
@@ -25,6 +26,7 @@ Timewarp::Application.routes.draw do
   end
   
   resources :tags
+  resources :elements, :only => [:index, :destroy]
 
   get "search"     => "sites#search", :as => "search"
   get "tag_search" => "tags#search", :as => "tag_search"

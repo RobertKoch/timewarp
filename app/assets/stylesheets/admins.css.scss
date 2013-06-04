@@ -1,7 +1,7 @@
 @import 'variables';
 
 #admins {
-  table.admin_sites, table.admin_users, table.admin_comments {
+  table.admin_sites, table.admin_users, table.admin_comments, table.admin_elements {
     width: 80%;
     border: 1px solid $grey;
     padding: 5px;

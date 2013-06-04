@@ -1,4 +1,16 @@
 class ElementsController < ApplicationController
+  before_filter :authenticate_admin!, :only => [:index, :destroy]
+
+  def index
+    @elements = Element.all.order_by("label ASC").paginate(:page => params[:page], :per_page => 20)
+  end
+
+  def destroy
+    el = Element.find(params[:id])
+    el.destroy
+    redirect_to admin_elements_path
+  end
+
   def learn
     teached_me_count = 0
     elements = JSON.load params["elements"]

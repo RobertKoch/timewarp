@@ -6,6 +6,8 @@
   %li
     %a{:href => admin_sites_path, :class => (current_page?(admin_sites_path) ? 'active' : '')} sites
   %li
+    %a{:href => admin_elements_path, :class => (current_page?(admin_elements_path) ? 'active' : '')} elements
+  %li
     %a{:href => admins_path, :class => (current_page?(admins_path) ? 'active' : '')} admins
   %li
     = link_to "logout", destroy_admin_session_path, :method => :delete, :id => 'logout_link'
