@@ -452,8 +452,13 @@ declareListener = () ->
         else
           window.setOverlay = 1
 
+        # move overlay box down from top of page
+        movementTop = e.pageY - 80
+        if movementTop < 10
+          movementTop = 10
+
         $(el).css
-          'top': e.pageY - 80,
+          'top': movementTop,
           'left': '270px'
 
         # set current overlay
