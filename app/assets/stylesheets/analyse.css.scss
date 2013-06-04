@@ -85,8 +85,18 @@
           }
         }
 
-        .twl_set {
-          background-color: #b9c400;
+        .twl_header, .twl_hauptnavigation, .twl_unternavigation, .twl_content, .twl_footer {
+          background: {
+            image: url('questionmark.png');
+            position: 100% 50%;
+            repeat: no-repeat;
+          }
+
+          &.twl_set {
+            background: {
+              image: url('ok.png');
+            } 
+          }
         }
 
         .scrollTo {
@@ -172,66 +182,77 @@
 }
 
 .missing_fields {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  margin: {
-    top: -50px;
-    left: -150px;
-  }
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, .5);
   display: none;
-  background-color: $white;
-  padding: 20px;
-  width: 300px;
-  height: 100px;
-  z-index: 9999;
-  font-family: Helvetica, Arial, sans-serif;
-  font-size: 12px;
-  font-weight: normal;
-  color: $grey;
-  -webkit-border-radius: 5px; 
-     -moz-border-radius: 5px; 
-          border-radius: 5px;
-  -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-     -moz-box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-          box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  z-index: 9998;
 
-  .close {
+  .missing {
     position: absolute;
-    top: -10px;
-    right: -10px;
-    background: url('close-large.png') 0 0 no-repeat;
-    width: 20px;
-    height: 20px;
-    display: block;
-    text-indent: -19999px;
-    overflow: hidden;
-    cursor: pointer;
-  }
+    top: 50%;
+    left: 50%;
+    margin: {
+      top: -70px;
+      left: -150px;
+    }
+    //display: none;
+    background-color: $white;
+    padding: 20px;
+    width: 300px;
+    height: 100px;
+    z-index: 9999;
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 12px;
+    font-weight: normal;
+    color: $grey;
+    -webkit-border-radius: 5px; 
+       -moz-border-radius: 5px; 
+            border-radius: 5px;
+    -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+       -moz-box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 
-  .fields {
-    font-family: Monaco, monospace;
-    line-height: 1.5em;
-    margin-bottom: 10px;
-    display: block;
-    outline: 1px solid #cdcdcd;
-    background-color: #f4f4f4;
-    padding: 5px 10px;
-    color: #484848;
-  }
+    .close {
+      position: absolute;
+      top: -10px;
+      right: -10px;
+      background: url('close-large.png') 0 0 no-repeat;
+      width: 20px;
+      height: 20px;
+      display: block;
+      text-indent: -19999px;
+      overflow: hidden;
+      cursor: pointer;
+    }
 
-  .close_ok {
-    background: url('/tw_assets/images/overlay/continue.png') right 0 no-repeat;
-    padding: 4px 20px 0 0;
-    height: 16px;
-    cursor: pointer;
-    margin-top: 15px;
-    float: right;
-  }
+    .fields {
+      font-family: Monaco, monospace;
+      line-height: 1.5em;
+      margin-bottom: 10px;
+      display: block;
+      outline: 1px solid #cdcdcd;
+      background-color: #f4f4f4;
+      padding: 5px 10px;
+      color: #484848;
+    }
 
-  .close_ok:hover {
-    color: #a01111;
-    background-image: url('/tw_assets/images/overlay/continue-hover.png');
+    .close_ok {
+      background: url('/tw_assets/images/overlay/continue.png') right 0 no-repeat;
+      padding: 4px 20px 0 0;
+      height: 16px;
+      cursor: pointer;
+      margin-top: 15px;
+      float: right;
+    }
+
+    .close_ok:hover {
+      color: #a01111;
+      background-image: url('/tw_assets/images/overlay/continue-hover.png');
+    }
   }
 }
 
