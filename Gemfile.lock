@@ -58,6 +58,8 @@ GEM
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
       xpath (~> 2.0)
+    client_side_validations (3.0.5)
+      activesupport
     coffee-rails (3.2.2)
       coffee-script (>= 2.2.0)
       railties (~> 3.2.0)
@@ -236,6 +238,7 @@ PLATFORMS
 DEPENDENCIES
   capistrano
   capybara
+  client_side_validations (= 3.0.5)
   coffee-rails (~> 3.2.1)
   database_cleaner
   devise
