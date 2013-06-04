@@ -85,18 +85,20 @@
           }
         }
 
-        .twl_header, .twl_hauptnavigation, .twl_unternavigation, .twl_content, .twl_footer {
+        .twl_header, .twl_hauptnavigation, .twl_content, .twl_footer {
           background: {
             image: url('questionmark.png');
             position: 100% 50%;
             repeat: no-repeat;
           }
+        }
 
-          &.twl_set {
-            background: {
-              image: url('ok.png');
-            } 
-          }
+        .twl_set {
+          background: {
+            image: url('ok.png');
+            position: 100% 50%;
+            repeat: no-repeat;
+          } 
         }
 
         .scrollTo {
