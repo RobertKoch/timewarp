@@ -3,7 +3,7 @@ class Element
   include Mongoid::Document
   include Mongoid::Timestamps
 
-  LABELS = %w/Header Logo Navigation Content Sidebar Bildergalerie Footer/
+  LABELS = %w/Header Logo Unternavigation Content Sidebar Bildergalerie Footer/
 
   field :label, type: String
   field :value, type: String

@@ -17,6 +17,8 @@ $(window).load ->
   # store new id's and save it at end to database
   window.fieldsToLearn = []
 
+  getDatabaseAttributes()
+
   defineAdditionalAddons()
 
   declareListener()
@@ -107,14 +109,20 @@ recursiveIterate = (node) ->
 
     recursiveIterate($(this));    
 
-exploreAttributes = (node) ->
-  objArr = new Object(
-    #navi: ["tw_navigation", "Navigation"], 
-    header: ["tw_header", "Header"], 
-    content: ["tw_content", "Content"],
-    footer: ["tw_footer", "Footer"]
-  );
+getDatabaseAttributes = () ->
+  window.jsonData = ''
 
+  # get stored id's
+  $.ajax(
+    type: 'GET',
+    dataType: 'json',
+    url: "/elements/teach",
+    async: true
+  ).done (data) ->
+    if data
+      window.jsonData = data
+
+exploreAttributes = (node) ->
   # get attributes of node reference
   attributes = node[0].attributes;
 
@@ -130,10 +138,13 @@ exploreAttributes = (node) ->
         
         $.each splitValues, (j, w) ->
           param = w.toLowerCase()
-          # continue param is part of objArr
-          if objArr[param] isnt undefined
-            $(node).addClass objArr[param][0]
-            generateOverlay($(node), objArr[param][1])
+
+          # go through id's
+          $.each window.jsonData, (key, value) ->
+            # add class and generate overlay if value of an element contains param
+            if param in value
+              $(node).addClass 'tw_'+key.toLowerCase()
+              generateOverlay($(node), key)
 
 exploreTagUl = (node) ->
   # reset variables
@@ -442,8 +453,8 @@ declareListener = () ->
           window.setOverlay = 1
 
         $(el).css
-          'top': e.pageY,
-          'left': e.pageX
+          'top': e.pageY - 80,
+          'left': '270px'
 
         # set current overlay
         window.activeOverlay = e
@@ -467,7 +478,6 @@ declareListener = () ->
 
     # change value if navigation element is choosen
     if window.setOverlay is undefined
-
       # change highlighting class
       oldValue = overlayTarget[0].innerText.toLowerCase()
       $(overlayTarget[0].parentNode).alterClass oldValue, value.toLowerCase()
@@ -546,11 +556,12 @@ declareListener = () ->
   $('.back_to_future').click (e) ->
     e.preventDefault()
 
-    mandatoryFields = ['Header', 'Content', 'Hauptnavigation', 'Footer']
+    mandatoryFields = ['Header', 'Content', 'Unternavigation', 'Footer']
     missingFields = []
 
     $.each mandatoryFields, (i, mandatoryField) ->
-      if window.taggedFields[mandatoryField] <= 0
+      # add missing element to array if its undefined or count is zero
+      if window.taggedFields[mandatoryField] is undefined or window.taggedFields[mandatoryField] <= 0
         missingFields.push mandatoryField
 
     if missingFields.length is 0
@@ -567,10 +578,14 @@ declareListener = () ->
       saveAnalysedPage()
 
     else
-      $('.missing_fields .msg').html 'Missing Fields: '+missingFields.join(', ')
+      console.log e.pageY
+      $('.missing_fields').css
+        'top': e.pageY - 120
+
+      $('.missing_fields .fields').html missingFields.join(', ')
       $('.missing_fields').fadeIn()
 
-      $('.missing_fields .close').click (e) ->
+      $('.missing_fields .close, .missing_fields .close_ok').click (e) ->
         $('.missing_fields').fadeOut()
 
   $('.reset_analyse').click (e) ->
