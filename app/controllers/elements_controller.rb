@@ -1,9 +1,11 @@
 class ElementsController < ApplicationController
   def learn
     teached_me_count = 0
-    elements = JSON.load params[:elements]
+    elements = JSON.load params["elements"]
 
-    elements.each do |label, value|
+    elements.each do |el|
+      label = el.keys[0]
+      value = el.values[0]
       unless exists = Element.find_by(label: label)
         new_elem = Element.create(:label => label, :value => value)
         teached_me_count += 1
