@@ -3,7 +3,7 @@ getCssContent = () ->
   cssContent = ''
 
   $.each linkTags, (i, elem) ->
-    if $(elem)[0].href.indexOf('.css') >= 0 and $(elem)[0].href.indexOf('localhost') is -1
+    if $(elem)[0].href.indexOf('.css') >= 0 and $(elem)[0].href.indexOf('timewarp') is -1
       # get content from current css file
       $.ajax(
         type: 'POST',

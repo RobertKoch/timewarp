@@ -386,7 +386,7 @@ warpVersion = (version) ->
         siteHeight = $(window.frameContent).height()
         # are colors available
         if window.topColors isnt undefined && window.topColors.length > 0
-          sidecolor = window.topColors[1].color
+          sidecolor = window.topColors[0].color
         else
           sidecolor = '#b2c400'
 
